@@ -6,3 +6,28 @@
 //
 
 import Foundation
+import SwiftUI
+
+struct BtnUnderlineComponent: View {
+    
+    var btnTextColor: Color = .gray
+    var btnText: String = "Button"
+    var btnTextSize: CGFloat = 16
+    var destinationView: AnyView
+    
+    var body: some View{
+        NavigationLink{
+            destinationView
+                .navigationBarHidden(true)
+                
+        }label:{
+            
+            Text(btnText)
+                .foregroundStyle(btnTextColor)
+                .font(.system(size: btnTextSize))
+                .underline()
+            
+        }
+        
+    }
+}

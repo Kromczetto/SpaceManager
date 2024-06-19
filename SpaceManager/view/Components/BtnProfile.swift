@@ -8,11 +8,23 @@
 import SwiftUI
 
 struct BtnProfile: View {
+//    var btnEvent: ()->Void
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button{
+            
+        } label:{
+            ZStack{
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundColor(.blue)
+                    .padding(10)
+                    .frame(width: 350, height: 80)
+                Text("wyloguj")
+                    .foregroundStyle(.white)
+                    .padding()
+                    .bold()
+                    .font(.system(size: 16))
+            }
+        }
     }
 }
 
-#Preview {
-    BtnProfile()
-}

@@ -9,7 +9,25 @@ import SwiftUI
 
 struct RegisterView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
+                           startPoint: .top, endPoint: UnitPoint.bottom)
+                            .ignoresSafeArea()
+            VStack{
+                HeaderComponent(headerText: "Zarejestruj się",
+                                headerTopPadding: 160)
+                Spacer()
+                FormComponent(isRegister: true)
+                
+                Spacer()
+                
+                BtnUnderlineComponent(btnText: "Mam już konto",
+                                      btnTextSize: 18,
+                                        destinationView: AnyView(LoginView()))
+                .padding(.bottom, 140)
+               
+            }
+        }
     }
 }
 

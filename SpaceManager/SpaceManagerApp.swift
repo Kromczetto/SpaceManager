@@ -6,12 +6,34 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseCore
+
+class AppDelegate: NSObject, UIApplicationDelegate{
+    func application(_ application: UIApplication, didFinishLaunchingWithOption launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool{
+        
+        return true;
+    }
+}
 
 @main
 struct SpaceManagerApp: App {
+    
+    @StateObject var loggedUser = MainViewModel()
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    init(){
+        FirebaseApp.configure()
+    }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+         
+            if(!loggedUser.logged || loggedUser.idOfCurrentUser.isEmpty){
+                LoginView()
+            }else{
+                LoggedMainView()
+            }
+            
         }
     }
 }

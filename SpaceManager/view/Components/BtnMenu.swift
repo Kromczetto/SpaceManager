@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct BtnMenu: View {
+    
+   
+    var btnText: String
+    var btnIcon: String
+    //var btnEvent: ()->Void
+    var destinationView: AnyView
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationLink{
+                destinationView
+        }label:{
+            ZStack{
+                Text("\(Image(systemName: btnIcon)) \(btnText)")
+                    
+            }
+            
+        }
     }
 }
 
-#Preview {
-    BtnMenu()
-}
+
