@@ -5,22 +5,24 @@
 //  Created by Kuba Kromomołowski on 04/05/2024.
 //
 
-//import Foundation
-//import SwiftUI
-//
-//class QrCodeGenerator{
-//    func generatorQr() -> UIImage? {
-//        let data = string.data(using: String.Encoding.ascii)
-//
-//            if let filter = CIFilter(name: "CIQRCodeGenerator") {
-//                filter.setValue(data, forKey: "inputMessage")
-//                let transform = CGAffineTransform(scaleX: 3, y: 3)
-//
-//                if let output = filter.outputImage?.transformed(by: transform) {
-//                    return UIImage(ciImage: output)
-//                }
-//            }
-//
-//            return nil
-//    }
-//}
+import Foundation
+import SwiftUI
+import CoreImage
+import CoreImage.CIFilterBuiltins
+
+class QrCodeGenerator: ObservableObject {
+    private let context = CIContext()
+    private let filter = CIFilter.qrCodeGenerator()
+    func generatorQr(from input: String) -> UIImage {
+        
+        filter.message = Data(input.utf8)
+
+              if let outputImage = filter.outputImage {
+                  if let cgImage = context.createCGImage(outputImage, from: outputImage.extent) {
+                      return UIImage(cgImage: cgImage)
+                  }
+              }
+
+              return UIImage(systemName: "xmark.circle") ?? UIImage()
+    }
+}

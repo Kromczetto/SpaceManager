@@ -8,20 +8,17 @@
 import SwiftUI
 import Firebase
 import FirebaseAuth
-import CoreImage
-import CoreImage.CIFilterBuiltins
 
 struct LoggedMainView: View {
     
     @StateObject var logManager = MainViewModel()
+    @StateObject var qrCodeGenerator = QrCodeGenerator()
     @State private var itemName: String = ""
     @State private var numberOfItems: String = ""
     @State private var resposablePerson: String = ""
     @State private var comments: String = ""
     
-    
-    let context = CIContext()
-    let filter = CIFilter.qrCodeGenerator()
+    private var productID: String = UUID().uuidString
     
     var body: some View {
         NavigationView{
@@ -29,22 +26,22 @@ struct LoggedMainView: View {
                 LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
                                startPoint: .top, endPoint: UnitPoint.bottom)
                                 .ignoresSafeArea()
-              
                 VStack{
                     Spacer()
                     Group{
-                        Image(uiImage: generateQRCode(from: "\($itemName)"))
+                        Image(uiImage: qrCodeGenerator.generatorQr(from: productID))
                             .resizable()
                             .interpolation(.none)
                             .scaledToFit()
                             .frame(width: 200, height: 200)
-                        
+                       
                               
                         Form{
                             TextField("Nazwa", text: $itemName)
                             TextField("Ilość", text: $numberOfItems)
                             TextField("Osoba dodająca", text: $resposablePerson)
                             TextField("Uwagi", text: $comments)
+                            BtnDatabase(btnLabel: "Dodaj")
                         }
                     }
                     BottomMenu()
@@ -53,36 +50,9 @@ struct LoggedMainView: View {
         }
             
         }
-    func generateQRCode(from string: String) -> UIImage {
-        filter.message = Data(string.utf8)
-
-        if let outputImage = filter.outputImage {
-            if let cgImage = context.createCGImage(outputImage, from: outputImage.extent) {
-                return UIImage(cgImage: cgImage)
-            }
-        }
-
-        return UIImage(systemName: "xmark.circle") ?? UIImage()
-    }
+    
 }
 
 #Preview {
     LoggedMainView()
 }
-//Button{
-//    do{
-//        try Auth.auth().signOut()
-//        logManager.logged = false
-//    }catch{
-//        print("Błąd podczas wylogowywania")
-//    }} label: {
-//    ZStack{
-//        RoundedRectangle(cornerRadius: 20)
-//
-//            .padding(10)
-//        Text("Wyloguj")
-//
-//            .padding()
-//            .bold()
-//
-//    }

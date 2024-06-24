@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F102D732C24928200A6702D /* BtnDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F102D722C24928200A6702D /* BtnDatabase.swift */; };
 		4F15F8D82BF61CA2001B58CA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F15F8D72BF61CA2001B58CA /* ProfileView.swift */; };
 		4F15F8DA2BF61CD3001B58CA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F15F8D92BF61CD3001B58CA /* ProfileViewModel.swift */; };
 		4F15F8DC2BF61D54001B58CA /* BtnProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F15F8DB2BF61D54001B58CA /* BtnProfile.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F102D722C24928200A6702D /* BtnDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnDatabase.swift; sourceTree = "<group>"; };
 		4F15F8D72BF61CA2001B58CA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4F15F8D92BF61CD3001B58CA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		4F15F8DB2BF61D54001B58CA /* BtnProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnProfile.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				4F3363BA2BE6AF800042D0AD /* BottomMenu.swift */,
 				4F4E58FA2BF0FE4500B80AB8 /* SearchView.swift */,
 				4F15F8DB2BF61D54001B58CA /* BtnProfile.swift */,
+				4F102D722C24928200A6702D /* BtnDatabase.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				4F3363BB2BE6AF800042D0AD /* BottomMenu.swift in Sources */,
 				4F4E58FB2BF0FE4500B80AB8 /* SearchView.swift in Sources */,
 				4F15F8DC2BF61D54001B58CA /* BtnProfile.swift in Sources */,
+				4F102D732C24928200A6702D /* BtnDatabase.swift in Sources */,
 				4F3363B42BE689C00042D0AD /* BtnMenu.swift in Sources */,
 				4F3363B22BE561C50042D0AD /* User.swift in Sources */,
 				4F859C3D2BD06BC400924EF5 /* HeaderComponent.swift in Sources */,
