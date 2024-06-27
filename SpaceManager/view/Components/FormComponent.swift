@@ -22,36 +22,43 @@ struct FormComponent: View {
     
     var body: some View{
         Form{
-            TextField("Email", text: $loginHandler.email)
+            TextField("Email", text: isRegister ? $registerHandler.email :$loginHandler.email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .font(.system(size: 25))
                 .multilineTextAlignment(.center)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
                 
-            SecureField("Hasło", text: $loginHandler.password)
+            SecureField("Hasło", text: isRegister ? $registerHandler.password :$loginHandler.password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .font(.system(size: 25))
                 .multilineTextAlignment(.center)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
                 
             if(isRegister){
-                SecureField("Powtorz haslo", text: $repeatedPassword)
+                SecureField("Powtórz haslo", text: $registerHandler.repeatedPassword)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .font(.system(size: 25))
                     .multilineTextAlignment(.center)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
             }
-            isRegister ? BtnClearComponet(btnText: "Zarejestruj się", 
-                                          btnRegister: isRegister,
-                                          email: $loginHandler.email,
-                                          password: $loginHandler.password,
-                                          loginHandler: loginHandler,
-                                          registerHandler: registerHandler)
             
-                .padding(.bottom, 5) :
-            BtnClearComponet(btnText: "Zaloguj się",
-                             email: $loginHandler.email,
-                             password: $loginHandler.password,
-                             loginHandler:loginHandler,
-                             registerHandler: registerHandler)
-            .padding(.bottom, 5)
+            BtnClearComponet(btnText: isRegister ? "Zarejestruj się" : "Zaloguj się",
+                                       btnRegister: isRegister,
+                                       action: {
+                                          if isRegister {
+                                              registerHandler.registerUser()
+                                          } else {
+                                              loginHandler.userLogin()
+                                          }
+                                       },
+                                       loginHandler: loginHandler,
+                                       registerHandler: registerHandler
+            )
+                .padding(.bottom, 5)
+
         }
         .frame(width:350,height:400)
         .scrollContentBackground(.hidden)

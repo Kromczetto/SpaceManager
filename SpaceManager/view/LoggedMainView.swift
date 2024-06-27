@@ -38,10 +38,9 @@ struct LoggedMainView: View {
                             TextField("Waga", text: $logManager.weight)
                             TextField("Uwagi", text: $logManager.comments)
                             BtnDatabase(btnLabel: "Dodaj"){
-
                                 logManager.addItemToDatabase()
                             }
-                            .alert("Dodano \($logManager.itemName.wrappedValue)",
+                            .alert("Dodano \($logManager.itemNameHolder.wrappedValue)",
                                    isPresented: $logManager.isSuccess) {
                                            Button("OK", role: .cancel) { }
                             }

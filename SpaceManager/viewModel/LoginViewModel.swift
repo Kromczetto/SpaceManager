@@ -10,37 +10,33 @@ import Firebase
 import FirebaseAuth
 
 class LoginViewModel : ObservableObject {
-    @Published var email = ""
-    @Published var password = ""
+    @Published var email: String = ""
+    @Published var password: String = ""
  
+    @Published var isFail: Bool = false
+    @Published var message: String = ""
     
     func inputValid() -> Bool{
         if(email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty){
-            
-           //Type email regex validation
+            message = "Żadne pole nie może być puste"
+            isFail = true
             return false
-        }else{
-            
-            return true;
         }
         
+        
+        return true
     }
     
-    func userLogin(email: String, password: String)->(){
-        guard inputValid() else{ return }
+    func userLogin()->(){
+        guard inputValid() else { return }
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-            //print(error?.localizedDescription)
-                //guard let strongSelf = self else { return
-                if let error = error {
-                    print(error.localizedDescription)
-                }else{
-                        print("\(email), \(password)")
-                    }
-                //(self?.logged = true)!
-            
-           // }
-            
+     
+            if let error = error {
+                print(error.localizedDescription)
+                self!.message = "Błędny email lub hasło"
+                self!.isFail = true
+            }
         }
         
     }
