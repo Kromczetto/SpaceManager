@@ -29,7 +29,7 @@ class RegisterViewModel : ObservableObject {
             guard let self = self else { return }
             if let err = err {
                            self.isFail = true
-                           self.message = "Błąd przy rejestracji"
+                           self.message = "Błąd przy rejestracji \(err)"
                            return
                        }
             guard let userID = res?.user.uid else {
@@ -58,6 +58,37 @@ class RegisterViewModel : ObservableObject {
             isFail = true
             return false
         }
+        if(passwordWithoutWhiteCharacters.count<8){
+            message = "Hasło musi mieć przynajmniej 8 znaków"
+            isFail = true
+            return false
+        }
+        var uppercaseCount = 0
+        var lowercaseCount = 0
+        var digitCount = 0
+
+        for char in passwordWithoutWhiteCharacters {
+            if char.isUppercase {
+                uppercaseCount += 1
+            } else if char.isLowercase {
+                lowercaseCount += 1
+            } else if char.isNumber {
+                digitCount += 1
+            }
+        }
+        if(uppercaseCount<2 || lowercaseCount<2 || digitCount<2){
+            message = "Hasło musi mieć przynajmniej dwie małe litery, dwie duże i dwie cyfry"
+            isFail = true
+            return false
+        }
+        if(passwordWithoutWhiteCharacters != repeatedPasswordWithoutWhiteCharacters){
+            message = "Hasło i powtórzone hasło muszą być takie same"
+            isFail = true
+            return false
+        }
+        //valid mail
+        //valid is user with this mail
+       
         return true
     }
     private func addIntoDatabe(userID: String, email: String) {

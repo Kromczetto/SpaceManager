@@ -26,17 +26,23 @@ struct FormComponent: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .font(.system(size: 25))
                 .multilineTextAlignment(.center)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
                 
             SecureField("Hasło", text: isRegister ? $registerHandler.password :$loginHandler.password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .font(.system(size: 25))
                 .multilineTextAlignment(.center)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
                 
             if(isRegister){
                 SecureField("Powtórz haslo", text: $registerHandler.repeatedPassword)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .font(.system(size: 25))
                     .multilineTextAlignment(.center)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
             }
             
             BtnClearComponet(btnText: isRegister ? "Zarejestruj się" : "Zaloguj się",

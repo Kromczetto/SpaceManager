@@ -20,13 +20,11 @@ class LoginViewModel : ObservableObject {
         if(email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty){
             message = "Żadne pole nie może być puste"
             isFail = true
-           //Type email regex validation
             return false
-        }else{
-            
-            return true;
         }
         
+        
+        return true
     }
     
     func userLogin()->(){
@@ -36,6 +34,8 @@ class LoginViewModel : ObservableObject {
      
             if let error = error {
                 print(error.localizedDescription)
+                self!.message = "Błędny email lub hasło"
+                self!.isFail = true
             }
         }
         
