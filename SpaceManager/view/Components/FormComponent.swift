@@ -44,6 +44,7 @@ struct FormComponent: View {
                                           password: $loginHandler.password,
                                           loginHandler: loginHandler,
                                           registerHandler: registerHandler)
+            
                 .padding(.bottom, 5) :
             BtnClearComponet(btnText: "Zaloguj się",
                              email: $loginHandler.email,

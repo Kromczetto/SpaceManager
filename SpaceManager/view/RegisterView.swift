@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct RegisterView: View {
+    
+  
     var body: some View {
         ZStack{
             LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
@@ -17,15 +19,17 @@ struct RegisterView: View {
                 HeaderComponent(headerText: "Zarejestruj się",
                                 headerTopPadding: 160)
                 Spacer()
-                FormComponent(isRegister: true)
+                FormComponent(isRegister: true) 
+                    
                 
                 Spacer()
                 
                 BtnUnderlineComponent(btnText: "Mam już konto",
                                       btnTextSize: 18,
                                         destinationView: AnyView(LoginView()))
+        
                 .padding(.bottom, 140)
-               
+                
             }
         }
     }

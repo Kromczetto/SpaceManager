@@ -45,7 +45,7 @@ struct LoggedMainView: View {
                                    isPresented: $logManager.isSuccess) {
                                            Button("OK", role: .cancel) { }
                             }
-                                   .alert("\($logManager.message.wrappedValue)",
+                            .alert("\($logManager.message.wrappedValue)",
                                    isPresented: $logManager.isFail) {
                                            Button("OK", role: .cancel) { }
                             }

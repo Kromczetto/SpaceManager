@@ -15,6 +15,8 @@ struct BtnUnderlineComponent: View {
     var btnTextSize: CGFloat = 16
     var destinationView: AnyView
     
+    
+    
     var body: some View{
         NavigationLink{
             destinationView
@@ -28,6 +30,7 @@ struct BtnUnderlineComponent: View {
                 .underline()
             
         }
+    
         
     }
 }
