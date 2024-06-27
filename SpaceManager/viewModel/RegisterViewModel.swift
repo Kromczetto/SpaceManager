@@ -11,27 +11,31 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class RegisterViewModel : ObservableObject {
-    @Published var email=""
-    @Published var password=""
-    @Published var repeatedPassword=""
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var repeatedPassword: String = ""
     
     @Published var isFail: Bool = false
     @Published var message: String = ""
     
     
-    func registerUser(email: String, password: String) -> () {
-        print(email)
-        print(password)
+    func registerUser() -> () {
+        
         if(!validInput()){
             return
         }
         Auth.auth().createUser(withEmail: email, password: password){
             [weak self] res, err in
-            
+            guard let self = self else { return }
+            if let err = err {
+                           self.isFail = true
+                           self.message = "Błąd przy rejestracji"
+                           return
+                       }
             guard let userID = res?.user.uid else {
                 return
             }
-            self?.addIntoDatabe(userID: userID, email: email)
+            self.addIntoDatabe(userID: userID, email: email)
         }
     }
     private func validInput() -> Bool {

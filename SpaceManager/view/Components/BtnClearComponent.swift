@@ -18,24 +18,15 @@ struct BtnClearComponet: View {
     var btnTextSize: CGFloat = 16
     var btnRegister = false
     //var destinationView: AnyView
-    
-    @Binding var email: String
-    @Binding var password: String
-    
+    var action: ()->Void
+
     @ObservedObject var loginHandler: LoginViewModel
     @ObservedObject var registerHandler: RegisterViewModel
   
     
     var body: some View{
         Button{
-            if(btnRegister){
-                registerHandler.registerUser(email: $email.wrappedValue,
-                                             password: $password.wrappedValue)
-                
-            }else{
-                loginHandler.userLogin(email: $email.wrappedValue, password: $password.wrappedValue)
-              
-            }
+            action()
         } label: {
             ZStack{
                 RoundedRectangle(cornerRadius: 20)
@@ -48,8 +39,8 @@ struct BtnClearComponet: View {
                     .font(.system(size: btnTextSize))
             }
         }
-        .alert("\($registerHandler.message.wrappedValue)",
-               isPresented: $registerHandler.isFail) {
+        .alert("\(btnRegister ? $registerHandler.message.wrappedValue : $loginHandler.message.wrappedValue)",
+               isPresented: btnRegister ? $registerHandler.isFail : $loginHandler.isFail) {
                        Button("OK", role: .cancel) { }
         }
     }

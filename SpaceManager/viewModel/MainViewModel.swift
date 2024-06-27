@@ -23,6 +23,8 @@ class MainViewModel: ObservableObject{
     @Published var isFail: Bool = false
     @Published var message: String = ""
     
+    var itemNameHolder: String = ""
+    
     private var handler = Auth.auth().addStateDidChangeListener{_,_ in}
     
     init(){
@@ -110,6 +112,7 @@ class MainViewModel: ObservableObject{
                     self.isSuccess = false
                     self.isFail = true
                 } else {
+                    self.itemNameHolder = self.itemName
                     self.isSuccess = true
                     self.isFail = false
                     self.itemName = ""
