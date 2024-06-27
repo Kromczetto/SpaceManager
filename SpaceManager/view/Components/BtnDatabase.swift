@@ -9,9 +9,12 @@ import SwiftUI
 
 struct BtnDatabase: View {
     @State var btnLabel = "Button"
+    var action: () -> Void
+    
     var body: some View {
+        
         Button{
-            //handel action to add/search etc
+            action()
         } label:{
             ZStack{
                 RoundedRectangle(cornerRadius: 20)
@@ -29,5 +32,5 @@ struct BtnDatabase: View {
 }
 
 #Preview {
-    BtnDatabase()
+    BtnDatabase(){print(" ")}
 }

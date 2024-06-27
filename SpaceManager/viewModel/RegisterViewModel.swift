@@ -16,16 +16,22 @@ class RegisterViewModel : ObservableObject {
     @Published var repeatedPassword=""
     
     func registerUser(email: String, password: String) -> () {
-        Auth.auth().createUser(withEmail: email,
-                               password: password){
-            authResult, error in
-            if(error != nil){
-                print(error?.localizedDescription)
-            }else{
-                print("utworzono uztkowniak")
+        Auth.auth().createUser(withEmail: email, password: password){
+            [weak self] res, err in
+            
+            guard let userID = res?.user.uid else {
+                return
             }
+            self?.addIntoDatabe(userID: userID, email: email)
         }
     }
-    
-   
+    private func addIntoDatabe(userID: String, email: String){
+        let newUser = User(uid: userID, email: email)
+        
+        let db = Firestore.firestore()
+        db.collection("users")
+            .document(userID)
+            .setData(["uid": userID, "email": email])
+        
+    }
 }

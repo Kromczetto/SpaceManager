@@ -24,16 +24,7 @@ struct BottomMenu: View {
             Spacer()
 
             BtnMenu(btnText: "Profil", btnIcon: "person.crop.circle.fill",destinationView: AnyView(ProfileView()))
-//                {
-//                do{
-//                    try Auth.auth().signOut()
-//                    logManager.logged = false
-//                }catch{
-//                    print("Problem with siging out")
-//                }
-//                
-//                
-//            }
+
             Spacer()
           
         }.padding(.bottom, 30)

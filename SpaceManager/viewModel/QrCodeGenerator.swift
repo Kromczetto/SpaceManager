@@ -13,8 +13,15 @@ import CoreImage.CIFilterBuiltins
 class QrCodeGenerator: ObservableObject {
     private let context = CIContext()
     private let filter = CIFilter.qrCodeGenerator()
+    
+    @Published var itemName = ""
+    @Published var numberOfItems = ""
+    @Published var resposablePerson = ""
+    @Published var comments = ""
+    
     func generatorQr(from input: String) -> UIImage {
         
+       
         filter.message = Data(input.utf8)
 
               if let outputImage = filter.outputImage {
@@ -24,5 +31,8 @@ class QrCodeGenerator: ObservableObject {
               }
 
               return UIImage(systemName: "xmark.circle") ?? UIImage()
+    }
+    init(){
+        
     }
 }

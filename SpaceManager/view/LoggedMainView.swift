@@ -13,10 +13,6 @@ struct LoggedMainView: View {
     
     @StateObject var logManager = MainViewModel()
     @StateObject var qrCodeGenerator = QrCodeGenerator()
-    @State private var itemName: String = ""
-    @State private var numberOfItems: String = ""
-    @State private var resposablePerson: String = ""
-    @State private var comments: String = ""
     
     private var productID: String = UUID().uuidString
     
@@ -37,11 +33,21 @@ struct LoggedMainView: View {
                        
                               
                         Form{
-                            TextField("Nazwa", text: $itemName)
-                            TextField("Ilość", text: $numberOfItems)
-                            TextField("Osoba dodająca", text: $resposablePerson)
-                            TextField("Uwagi", text: $comments)
-                            BtnDatabase(btnLabel: "Dodaj")
+                            TextField("Nazwa", text: $logManager.itemName)
+                            TextField("Ilość", text: $logManager.numberOfItems)
+                            TextField("Waga", text: $logManager.weight)
+                            TextField("Uwagi", text: $logManager.comments)
+                            BtnDatabase(btnLabel: "Dodaj"){
+
+                                logManager.addItemToDatabase()
+                            }
+                            .alert("Dodano przedmiot", isPresented: $logManager.isSuccess) {
+                                           Button("OK", role: .cancel) { }
+                            }
+                            .alert("Problem z dodaniem przedmiotu",
+                                   isPresented: $logManager.isFail) {
+                                           Button("OK", role: .cancel) { }
+                            }
                         }
                     }
                     BottomMenu()
