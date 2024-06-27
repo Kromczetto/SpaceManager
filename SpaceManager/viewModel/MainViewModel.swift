@@ -21,15 +21,14 @@ class MainViewModel: ObservableObject{
     
     @Published var isSuccess: Bool = false
     @Published var isFail: Bool = false
+    @Published var message: String = ""
     
     private var handler = Auth.auth().addStateDidChangeListener{_,_ in}
     
     init(){
         self.handler = Auth.auth().addStateDidChangeListener{auth, user in
-//            print("zmiana")
             self.idOfCurrentUser=user?.uid ?? ""
             self.logged=true
-//            print(self.idOfCurrentUser)
         }
     }
     func isUserLogged() -> Bool{
@@ -38,10 +37,44 @@ class MainViewModel: ObservableObject{
         }
         return false
     }
-    //Valid adding items fild
+    private func validItemField()-> Bool{
+        var itemNameWithoutWhiteCharacters: String{
+            itemName.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        var amountWithoutWhiteCharacters: String{
+            numberOfItems.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        var weightWithoutWhiteCharacters: String{
+            weight.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        var commentsWithoutWhiteCharacters: String{
+            comments.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        if(itemNameWithoutWhiteCharacters.isEmpty ||
+           amountWithoutWhiteCharacters.isEmpty ||
+           weightWithoutWhiteCharacters.isEmpty ||
+           commentsWithoutWhiteCharacters.isEmpty){
+            message = "Żadne pole nie może być puste"
+            return false
+        }
+        let amountIsDigits = amountWithoutWhiteCharacters.allSatisfy { $0.isNumber }
+        let weigthIsDigits = weightWithoutWhiteCharacters.allSatisfy { $0.isNumber }
+        
+        if(!amountIsDigits || !weigthIsDigits){
+            message = "Liczba i waga muszą być dodatnimi liczbami"
+            return false
+        }
+        
+        return true
+    }
     
     func addItemToDatabase(){
-
+        
+        if(!validItemField()){
+            self.isSuccess = false
+            self.isFail = true
+            return
+        }
         let itemID = UUID().uuidString
         guard let userID = Auth.auth().currentUser?.uid else{
             return

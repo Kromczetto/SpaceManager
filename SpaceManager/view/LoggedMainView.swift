@@ -41,10 +41,11 @@ struct LoggedMainView: View {
 
                                 logManager.addItemToDatabase()
                             }
-                            .alert("Dodano przedmiot", isPresented: $logManager.isSuccess) {
+                            .alert("Dodano \($logManager.itemName.wrappedValue)",
+                                   isPresented: $logManager.isSuccess) {
                                            Button("OK", role: .cancel) { }
                             }
-                            .alert("Problem z dodaniem przedmiotu",
+                                   .alert("\($logManager.message.wrappedValue)",
                                    isPresented: $logManager.isFail) {
                                            Button("OK", role: .cancel) { }
                             }
