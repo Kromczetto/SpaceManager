@@ -29,7 +29,8 @@ struct BtnClearComponet: View {
     var body: some View{
         Button{
             if(btnRegister){
-                registerHandler.registerUser(email: $email.wrappedValue, password: $password.wrappedValue)
+                registerHandler.registerUser(email: $email.wrappedValue,
+                                             password: $password.wrappedValue)
                 
             }else{
                 loginHandler.userLogin(email: $email.wrappedValue, password: $password.wrappedValue)
@@ -46,7 +47,10 @@ struct BtnClearComponet: View {
                     .bold()
                     .font(.system(size: btnTextSize))
             }
-            
+        }
+        .alert("\($registerHandler.message.wrappedValue)",
+               isPresented: $registerHandler.isFail) {
+                       Button("OK", role: .cancel) { }
         }
     }
 }

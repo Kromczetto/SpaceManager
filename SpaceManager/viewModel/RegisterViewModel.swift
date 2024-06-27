@@ -15,7 +15,16 @@ class RegisterViewModel : ObservableObject {
     @Published var password=""
     @Published var repeatedPassword=""
     
+    @Published var isFail: Bool = false
+    @Published var message: String = ""
+    
+    
     func registerUser(email: String, password: String) -> () {
+        print(email)
+        print(password)
+        if(!validInput()){
+            return
+        }
         Auth.auth().createUser(withEmail: email, password: password){
             [weak self] res, err in
             
@@ -25,13 +34,33 @@ class RegisterViewModel : ObservableObject {
             self?.addIntoDatabe(userID: userID, email: email)
         }
     }
-    private func addIntoDatabe(userID: String, email: String){
-        let newUser = User(uid: userID, email: email)
+    private func validInput() -> Bool {
+      
+      
+        var emailWithoutWhiteCharacters: String{
+            email.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        var passwordWithoutWhiteCharacters: String{
+            password.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        var repeatedPasswordWithoutWhiteCharacters: String{
+            repeatedPassword.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
         
+        if(emailWithoutWhiteCharacters.isEmpty ||
+           passwordWithoutWhiteCharacters.isEmpty ||
+           repeatedPasswordWithoutWhiteCharacters.isEmpty){
+            message = "Żadne pole nie może być puste"
+            isFail = true
+            return false
+        }
+        return true
+    }
+    private func addIntoDatabe(userID: String, email: String) {
+        let newUser = User(uid: userID, email: email)
         let db = Firestore.firestore()
         db.collection("users")
             .document(userID)
-            .setData(["uid": userID, "email": email])
-        
+            .setData(["uid": newUser.uid, "email": newUser.email])
     }
 }

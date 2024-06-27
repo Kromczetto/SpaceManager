@@ -112,6 +112,11 @@ class MainViewModel: ObservableObject{
                 } else {
                     self.isSuccess = true
                     self.isFail = false
+                    self.itemName = ""
+                    self.numberOfItems = ""
+                    self.weight = ""
+                    self.comments = ""
+                    
                 }
             }
         
