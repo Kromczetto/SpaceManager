@@ -14,7 +14,7 @@ struct LoggedMainView: View {
     @StateObject var logManager = MainViewModel()
     @StateObject var qrCodeGenerator = QrCodeGenerator()
     
-    private var productID: String = UUID().uuidString
+    @State var productID: String = UUID().uuidString
     
     var body: some View {
         NavigationView{
@@ -38,7 +38,9 @@ struct LoggedMainView: View {
                             TextField("Waga", text: $logManager.weight)
                             TextField("Uwagi", text: $logManager.comments)
                             BtnDatabase(btnLabel: "Dodaj"){
+                                logManager.itemID = productID
                                 logManager.addItemToDatabase()
+                                productID = UUID().uuidString
                             }
                             .alert("Dodano \($logManager.itemNameHolder.wrappedValue)",
                                    isPresented: $logManager.isSuccess) {

@@ -34,6 +34,9 @@
 		4F8B5C492BC697B100094D5B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8B5C482BC697B100094D5B /* FirebaseAuth */; };
 		4F8B5C4B2BC697B100094D5B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8B5C4A2BC697B100094D5B /* FirebaseFirestore */; };
 		4F8B5C4D2BC697B100094D5B /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8B5C4C2BC697B100094D5B /* FirebaseFirestoreSwift */; };
+		4F9DE7CF2C2ECD58001829BA /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9DE7CE2C2ECD58001829BA /* CodeScanner */; };
+		4F9DE7D12C2ECD81001829BA /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE7D02C2ECD81001829BA /* CameraView.swift */; };
+		4F9DE7D32C2ED13D001829BA /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE7D22C2ED13D001829BA /* CameraViewModel.swift */; };
 		4FEADE522BC74459009C31BD /* BtnUnderlineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +66,8 @@
 		4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnClearComponent.swift; sourceTree = "<group>"; };
 		4F859C3C2BD06BC400924EF5 /* HeaderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderComponent.swift; sourceTree = "<group>"; };
 		4F859C3E2BD06DC700924EF5 /* FormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormComponent.swift; sourceTree = "<group>"; };
+		4F9DE7D02C2ECD81001829BA /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		4F9DE7D22C2ED13D001829BA /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnUnderlineComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F9DE7CF2C2ECD58001829BA /* CodeScanner in Frameworks */,
 				4F8B5C492BC697B100094D5B /* FirebaseAuth in Frameworks */,
 				4F8B5C4B2BC697B100094D5B /* FirebaseFirestore in Frameworks */,
 				4F8B5C4D2BC697B100094D5B /* FirebaseFirestoreSwift in Frameworks */,
@@ -88,6 +94,7 @@
 				4F3363AD2BE549860042D0AD /* MainViewModel.swift */,
 				4F3363B52BE69B2A0042D0AD /* QrCodeGenerator.swift */,
 				4F15F8D92BF61CD3001B58CA /* ProfileViewModel.swift */,
+				4F9DE7D22C2ED13D001829BA /* CameraViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -138,6 +145,7 @@
 				4F32055E2BBDB2AE000BD18C /* RegisterView.swift */,
 				4F859C382BD067B000924EF5 /* ForgotPasswordView.swift */,
 				4F3363AF2BE54A790042D0AD /* LoggedMainView.swift */,
+				4F4E58FA2BF0FE4500B80AB8 /* SearchView.swift */,
 				4F15F8D72BF61CA2001B58CA /* ProfileView.swift */,
 			);
 			path = view;
@@ -161,9 +169,9 @@
 				4F859C3E2BD06DC700924EF5 /* FormComponent.swift */,
 				4F3363B32BE689C00042D0AD /* BtnMenu.swift */,
 				4F3363BA2BE6AF800042D0AD /* BottomMenu.swift */,
-				4F4E58FA2BF0FE4500B80AB8 /* SearchView.swift */,
 				4F15F8DB2BF61D54001B58CA /* BtnProfile.swift */,
 				4F102D722C24928200A6702D /* BtnDatabase.swift */,
+				4F9DE7D02C2ECD81001829BA /* CameraView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -188,6 +196,7 @@
 				4F8B5C482BC697B100094D5B /* FirebaseAuth */,
 				4F8B5C4A2BC697B100094D5B /* FirebaseFirestore */,
 				4F8B5C4C2BC697B100094D5B /* FirebaseFirestoreSwift */,
+				4F9DE7CE2C2ECD58001829BA /* CodeScanner */,
 			);
 			productName = SpaceManager;
 			productReference = 4F1E6C2F2BBD939F00BDE9B5 /* SpaceManager.app */;
@@ -219,6 +228,7 @@
 			mainGroup = 4F1E6C262BBD939F00BDE9B5;
 			packageReferences = (
 				4F8B5C472BC697B100094D5B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4F9DE7CD2C2ECD58001829BA /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = 4F1E6C302BBD939F00BDE9B5 /* Products */;
 			projectDirPath = "";
@@ -252,6 +262,7 @@
 				4F3363AA2BE51F750042D0AD /* RegisterViewModel.swift in Sources */,
 				4F32055D2BBDB217000BD18C /* LoginView.swift in Sources */,
 				4F859C3F2BD06DC800924EF5 /* FormComponent.swift in Sources */,
+				4F9DE7D32C2ED13D001829BA /* CameraViewModel.swift in Sources */,
 				4FEADE522BC74459009C31BD /* BtnUnderlineComponent.swift in Sources */,
 				4F102D752C2C79D100A6702D /* Item.swift in Sources */,
 				4F3363BB2BE6AF800042D0AD /* BottomMenu.swift in Sources */,
@@ -265,6 +276,7 @@
 				4F3363B62BE69B2A0042D0AD /* QrCodeGenerator.swift in Sources */,
 				4F3363B02BE54A790042D0AD /* LoggedMainView.swift in Sources */,
 				4F859C392BD067B000924EF5 /* ForgotPasswordView.swift in Sources */,
+				4F9DE7D12C2ECD81001829BA /* CameraView.swift in Sources */,
 				4F859C3B2BD06A5F00924EF5 /* BtnClearComponent.swift in Sources */,
 				4F1E6C332BBD939F00BDE9B5 /* SpaceManagerApp.swift in Sources */,
 				4F2C28FE2BDEDC6E00D040D2 /* LoginViewModel.swift in Sources */,
@@ -400,10 +412,12 @@
 				DEVELOPMENT_TEAM = CL7V5AJQ9D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We need caledars";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera to scan QR code";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -428,10 +442,12 @@
 				DEVELOPMENT_TEAM = CL7V5AJQ9D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "We need caledars";
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need camera to scan QR code";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -477,6 +493,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		4F9DE7CD2C2ECD58001829BA /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -494,6 +518,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4F8B5C472BC697B100094D5B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		4F9DE7CE2C2ECD58001829BA /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F9DE7CD2C2ECD58001829BA /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
