@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BtnMenu: View {
     
-   
+    
     var btnText: String
     var btnIcon: String
     //var btnEvent: ()->Void

@@ -18,6 +18,7 @@ class MainViewModel: ObservableObject{
     @Published var numberOfItems: String = ""
     @Published var weight: String = ""
     @Published var comments: String = ""
+    @Published var itemID: String = ""
     
     @Published var isSuccess: Bool = false
     @Published var isFail: Bool = false
@@ -77,7 +78,7 @@ class MainViewModel: ObservableObject{
             self.isFail = true
             return
         }
-        let itemID = UUID().uuidString
+       
         guard let userID = Auth.auth().currentUser?.uid else{
             return
         }
