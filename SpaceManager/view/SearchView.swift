@@ -32,18 +32,33 @@ struct SearchView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text(self.messageFromQR)
-                Button("Skanuj kod QR") {
+                Spacer()
+                //Text(self.messageFromQR)
+                Button {
                     self.isCameraOpen = true
+                } label :{
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.blue)
+                            .padding(10)
+                            .frame(width: 350, height: 80)
+                        Text("Skanuj kod QR")
+                            .foregroundStyle(.white)
+                            .padding()
+                            .bold()
+                            .font(.system(size: 16))
+                    }
                 }
                 .sheet(isPresented: $isCameraOpen) {
                     self.camera
                 }
-                NavigationLink(destination: ReadItem(messageFromQR: messageFromQR), isActive: $isRead) {
+                NavigationLink(destination: ReadItem(messageFromQR: messageFromQR).navigationBarBackButtonHidden(true), isActive: $isRead) {
                     EmptyView()
                 }
+                Spacer()
+                BottomMenu()
             }
-            .navigationBarTitle("Search View")
+            
         }
     }
 }

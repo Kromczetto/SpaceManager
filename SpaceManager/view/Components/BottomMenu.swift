@@ -19,13 +19,11 @@ struct BottomMenu: View {
             Group{
                 
             Spacer()
-            BtnMenu(btnText: "Dodaj", btnIcon: "plus.app.fill",destinationView: AnyView(LoggedMainView()))
+            BtnMenu(btnText: "Dodaj", btnIcon: "plus.app.fill",destinationView: AnyView(LoggedMainView().navigationBarBackButtonHidden(true)))
             Spacer()
-            BtnMenu(btnText: "Szukaj", btnIcon: "magnifyingglass",destinationView: AnyView(SearchView()))
+            BtnMenu(btnText: "Szukaj", btnIcon: "magnifyingglass",destinationView: AnyView(SearchView().navigationBarBackButtonHidden(true)))
             Spacer()
-
-            BtnMenu(btnText: "Profil", btnIcon: "person.crop.circle.fill",destinationView: AnyView(ProfileView()))
-
+            BtnMenu(btnText: "Profil", btnIcon: "person.crop.circle.fill",destinationView: AnyView(ProfileView().navigationBarBackButtonHidden(true)))
             Spacer()
           
         }.padding(.bottom, 30)
