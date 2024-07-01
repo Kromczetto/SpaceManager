@@ -7,10 +7,13 @@
 
 import SwiftUI
 import CodeScanner
+import FirebaseAuth
 
 struct SearchView: View {
     @State var isCameraOpen: Bool = false
     @State var messageFromQR: String = "id: "
+    
+    @State var isRead: Bool = false
     
     var camera: some View {
         CodeScannerView(
@@ -20,23 +23,28 @@ struct SearchView: View {
                 if case let .success(code) = result {
                     self.messageFromQR = code.string
                     self.isCameraOpen = false
+                    self.isRead = true
                 }
             }
         )
     }
     
     var body: some View {
-        
-        VStack{
-            Text(messageFromQR)
-            Button("Skanuj kod QR"){
-                self.isCameraOpen = true
+        NavigationView {
+            VStack {
+                Text(self.messageFromQR)
+                Button("Skanuj kod QR") {
+                    self.isCameraOpen = true
+                }
+                .sheet(isPresented: $isCameraOpen) {
+                    self.camera
+                }
+                NavigationLink(destination: ReadItem(messageFromQR: messageFromQR), isActive: $isRead) {
+                    EmptyView()
+                }
             }
-            .sheet(isPresented: $isCameraOpen){
-                self.camera
-            }
+            .navigationBarTitle("Search View")
         }
-        
     }
 }
 

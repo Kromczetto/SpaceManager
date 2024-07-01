@@ -15,9 +15,4 @@ struct Item: Codable, Identifiable{
     let commentsToItem: String
     let productWeight: String
     let addDate: Date
-    var isDone: Bool
-    
-    mutating func setDone(state: Bool){
-        isDone = state
-    }
 }
