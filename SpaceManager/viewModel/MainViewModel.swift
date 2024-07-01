@@ -92,8 +92,7 @@ class MainViewModel: ObservableObject{
                            nameOfAdder: userName,
                            commentsToItem: comments,
                            productWeight: weight,
-                           addDate: Date(),
-                           isDone: false
+                           addDate: Date()
         )
     
         let db = Firestore.firestore()

@@ -9,7 +9,8 @@ import SwiftUI
 import CodeScanner
 
 struct CameraView: View {
-    @EnvironmentObject var cameraViewModel: CameraViewModel
+    @Binding var messageFromQR: String
+    @Binding var isCameraOpen: Bool
     
     var body: some View {
         CodeScannerView(
@@ -17,14 +18,11 @@ struct CameraView: View {
             completion: {
                 result in
                 if case let .success(code) = result {
-                    cameraViewModel.messageFromQR = code.string
-                    cameraViewModel.isCameraOpen = false
+                    self.messageFromQR = code.string
+                    self.isCameraOpen = false
                 }
             }
         )
     }
 }
 
-#Preview {
-    CameraView()
-}
