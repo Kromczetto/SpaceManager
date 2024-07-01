@@ -13,8 +13,10 @@ struct ReadItem: View {
        
 var body: some View {
     VStack {
+        
+            
        if let item = readItemViewModel.item {
-           if(!isEdit){
+           if(!isEdit && !readItemViewModel.isDeleted){
                List{
                    Text("Nazwa: \(item.name)")
                    Text("Ilość: \(item.amount)")
@@ -25,81 +27,31 @@ var body: some View {
                }.onAppear{
                    readItemViewModel.fetchItem(with: messageFromQR)
                }
-               Button{
-                   isEdit = !isEdit
-               } label:{
-                   ZStack{
-                       RoundedRectangle(cornerRadius: 20)
-                           .foregroundColor(.green)
-                           .padding(10)
-                           .frame(width: 150, height: 50)
-                       Text("Edytuj \(Image(systemName: "pencil"))")
-                           .foregroundStyle(.white)
-                           .padding()
-                           .bold()
-                           .font(.system(size: 16))
-                   }
-               }
-           }else{
-               List{
-                   VStack{
-                       HStack{
-                           Text("Nazwa:")
-                           TextField("Nazwa", text: $itemName)
-                               .onAppear{
-                                   self.itemName = item.name
-                               }
-                       }
-                       HStack{
-                           Text("Ilość:")
-                           TextField("Ilość", text: $amount)
-                               .onAppear{
-                                   self.amount = item.amount
-                               }
-                       }
-                       HStack{
-                           Text("Waga:")
-                           TextField("Waga", text: $weight)
-                               .onAppear{
-                                   self.weight = item.productWeight
-                               }
-                       }
-                       HStack{
-                           Text("Uwagi:")
-                           TextField("Uwagi", text: $comment)
-                               .onAppear{
-                                   self.comment = item.commentsToItem
-                               }
-                       }
-                   }
-               }
                HStack{
-                   Button{
-                       readItemViewModel.saveNewData(idOfItem: messageFromQR, nameOfItem: $itemName.wrappedValue,
-                                                     amountOfItem: $amount.wrappedValue, weigthOfItem: $weight.wrappedValue, commentsToItem: $comment.wrappedValue)
-                       isEdit = !isEdit
-                   }label:{
-                       ZStack{
-                           RoundedRectangle(cornerRadius: 20)
-                               .foregroundColor(.green)
-                               .padding(10)
-                               .frame(width: 150, height: 50)
-                           Text("Zapisz \(Image(systemName: "paperplane"))")
-                               .foregroundStyle(.white)
-                               .padding()
-                               .bold()
-                               .font(.system(size: 16))
-                       }
-                   }
                    Button{
                        isEdit = !isEdit
                    } label:{
                        ZStack{
                            RoundedRectangle(cornerRadius: 20)
-                               .foregroundColor(.blue)
+                               .foregroundColor(.green)
                                .padding(10)
                                .frame(width: 150, height: 50)
-                           Text("Wróć \(Image(systemName: "arrowshape.turn.up.backward"))")
+                           Text("Edytuj \(Image(systemName: "pencil"))")
+                               .foregroundStyle(.white)
+                               .padding()
+                               .bold()
+                               .font(.system(size: 16))
+                       }
+                   }
+                   Button{
+                       readItemViewModel.delete(id: messageFromQR)
+                   } label:{
+                       ZStack{
+                           RoundedRectangle(cornerRadius: 20)
+                               .foregroundColor(.red)
+                               .padding(10)
+                               .frame(width: 150, height: 50)
+                           Text("Usuń \(Image(systemName: "trash"))")
                                .foregroundStyle(.white)
                                .padding()
                                .bold()
@@ -107,11 +59,89 @@ var body: some View {
                        }
                    }
                }
+           }else{
+               if(!readItemViewModel.isDeleted){
+                   List{
+                       VStack{
+                           HStack{
+                               Text("Nazwa:")
+                               TextField("Nazwa", text: $itemName)
+                                   .onAppear{
+                                       self.itemName = item.name
+                                   }
+                           }
+                           HStack{
+                               Text("Ilość:")
+                               TextField("Ilość", text: $amount)
+                                   .onAppear{
+                                       self.amount = item.amount
+                                   }
+                           }
+                           HStack{
+                               Text("Waga:")
+                               TextField("Waga", text: $weight)
+                                   .onAppear{
+                                       self.weight = item.productWeight
+                                   }
+                           }
+                           HStack{
+                               Text("Uwagi:")
+                               TextField("Uwagi", text: $comment)
+                                   .onAppear{
+                                       self.comment = item.commentsToItem
+                                   }
+                           }
+                       }
+                   }
+                   
+                   HStack{
+                       Button{
+                           readItemViewModel.saveNewData(idOfItem: messageFromQR, nameOfItem: $itemName.wrappedValue,
+                                                         amountOfItem: $amount.wrappedValue, weigthOfItem: $weight.wrappedValue, commentsToItem: $comment.wrappedValue)
+                           isEdit = !isEdit
+                       }label:{
+                           ZStack{
+                               RoundedRectangle(cornerRadius: 20)
+                                   .foregroundColor(.green)
+                                   .padding(10)
+                                   .frame(width: 150, height: 50)
+                               Text("Zapisz \(Image(systemName: "paperplane"))")
+                                   .foregroundStyle(.white)
+                                   .padding()
+                                   .bold()
+                                   .font(.system(size: 16))
+                           }
+                       }
+                       Button{
+                           isEdit = !isEdit
+                       } label:{
+                           ZStack{
+                               RoundedRectangle(cornerRadius: 20)
+                                   .foregroundColor(.blue)
+                                   .padding(10)
+                                   .frame(width: 150, height: 50)
+                               Text("Wróć \(Image(systemName: "arrowshape.turn.up.backward"))")
+                                   .foregroundStyle(.white)
+                                   .padding()
+                                   .bold()
+                                   .font(.system(size: 16))
+                           }
+                       }
+                   }
+               }else{
+                   Spacer()
+                   Text("Usunięto produkt")
+                   Spacer()
+               }
            }
        } else {
-           Text("Problemy ze znalezieniem produktu")
+           Spacer()
+           Text("Problemy ze znalezieniem produktu. Spróbuj ponwnie")
+           Spacer()
+           
        }
     
+        
            
     }
     .padding()

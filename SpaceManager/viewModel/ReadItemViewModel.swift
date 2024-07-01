@@ -13,6 +13,7 @@ import FirebaseAuth
 
 class ReadItemViewModel: ObservableObject {
     @Published var item: Item?
+    @Published var isDeleted: Bool = false
     
     func fetchItem(with id: String) {
         let db = Firestore.firestore()
@@ -73,5 +74,18 @@ class ReadItemViewModel: ObservableObject {
                       "productWeight": data.productWeight,
                       "addDate": data.addDate
             ])
+    }
+    func delete(id: String){
+        let db = Firestore.firestore()
+       
+        guard let userID = Auth.auth().currentUser?.uid else{
+            return
+        }
+        db.collection("users")
+                        .document(userID)
+                        .collection("items")
+                        .document(id)
+                        .delete()
+        isDeleted = true
     }
 }
