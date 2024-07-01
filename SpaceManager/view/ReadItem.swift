@@ -7,46 +7,148 @@ struct ReadItem: View {
     var messageFromQR: String
     @State var isEdit: Bool = false
     @State var itemName: String = ""
+    @State var amount: String = ""
+    @State var weight: String = ""
+    @State var comment: String = ""
        
 var body: some View {
     VStack {
+        
+            
        if let item = readItemViewModel.item {
-           if(!isEdit){
-               VStack{
-                   Text("Nazwa produktu: \(item.name)")
-                   Text("Ilość produktu: \(item.amount)")
-                   Text("Dodane przez: \(item.nameOfAdder)")
+           if(!isEdit && !readItemViewModel.isDeleted){
+               List{
+                   Text("Nazwa: \(item.name)")
+                   Text("Ilość: \(item.amount)")
                    Text("Waga: \(item.productWeight)")
                    Text("Uwagi: \(item.commentsToItem)")
+                   Text("Dodane przez: \(item.nameOfAdder)")
                    Text("Dodano: \(readItemViewModel.prepairDate(input: item.addDate))")
                }.onAppear{
                    readItemViewModel.fetchItem(with: messageFromQR)
                }
-           }else{
-               TextField("Nazwa", text: $itemName)
-                   .onAppear{
-                       self.itemName = item.name
+               HStack{
+                   Button{
+                       isEdit = !isEdit
+                   } label:{
+                       ZStack{
+                           RoundedRectangle(cornerRadius: 20)
+                               .foregroundColor(.green)
+                               .padding(10)
+                               .frame(width: 150, height: 50)
+                           Text("Edytuj \(Image(systemName: "pencil"))")
+                               .foregroundStyle(.white)
+                               .padding()
+                               .bold()
+                               .font(.system(size: 16))
+                       }
                    }
-               Button{
-                   readItemViewModel.saveNewData()
-               }label:{
-                   Text("Zapisz")
+                   Button{
+                       readItemViewModel.delete(id: messageFromQR)
+                   } label:{
+                       ZStack{
+                           RoundedRectangle(cornerRadius: 20)
+                               .foregroundColor(.red)
+                               .padding(10)
+                               .frame(width: 150, height: 50)
+                           Text("Usuń \(Image(systemName: "trash"))")
+                               .foregroundStyle(.white)
+                               .padding()
+                               .bold()
+                               .font(.system(size: 16))
+                       }
+                   }
+               }
+           }else{
+               if(!readItemViewModel.isDeleted){
+                   List{
+                       VStack{
+                           HStack{
+                               Text("Nazwa:")
+                               TextField("Nazwa", text: $itemName)
+                                   .onAppear{
+                                       self.itemName = item.name
+                                   }
+                           }
+                           HStack{
+                               Text("Ilość:")
+                               TextField("Ilość", text: $amount)
+                                   .onAppear{
+                                       self.amount = item.amount
+                                   }
+                           }
+                           HStack{
+                               Text("Waga:")
+                               TextField("Waga", text: $weight)
+                                   .onAppear{
+                                       self.weight = item.productWeight
+                                   }
+                           }
+                           HStack{
+                               Text("Uwagi:")
+                               TextField("Uwagi", text: $comment)
+                                   .onAppear{
+                                       self.comment = item.commentsToItem
+                                   }
+                           }
+                       }
+                   }
+                   
+                   HStack{
+                       Button{
+                           readItemViewModel.saveNewData(idOfItem: messageFromQR, nameOfItem: $itemName.wrappedValue,
+                                                         amountOfItem: $amount.wrappedValue, weigthOfItem: $weight.wrappedValue, commentsToItem: $comment.wrappedValue)
+                           isEdit = !isEdit
+                       }label:{
+                           ZStack{
+                               RoundedRectangle(cornerRadius: 20)
+                                   .foregroundColor(.green)
+                                   .padding(10)
+                                   .frame(width: 150, height: 50)
+                               Text("Zapisz \(Image(systemName: "paperplane"))")
+                                   .foregroundStyle(.white)
+                                   .padding()
+                                   .bold()
+                                   .font(.system(size: 16))
+                           }
+                       }
+                       Button{
+                           isEdit = !isEdit
+                       } label:{
+                           ZStack{
+                               RoundedRectangle(cornerRadius: 20)
+                                   .foregroundColor(.blue)
+                                   .padding(10)
+                                   .frame(width: 150, height: 50)
+                               Text("Wróć \(Image(systemName: "arrowshape.turn.up.backward"))")
+                                   .foregroundStyle(.white)
+                                   .padding()
+                                   .bold()
+                                   .font(.system(size: 16))
+                           }
+                       }
+                   }
+               }else{
+                   Spacer()
+                   Text("Usunięto produkt")
+                   Spacer()
                }
            }
        } else {
-           Text("Problemy ze znalezieniem produktu")
+           Spacer()
+           Text("Problemy ze znalezieniem produktu. Spróbuj ponwnie")
+           Spacer()
+           
        }
-       Button{
-           isEdit = !isEdit
-       } label:{
-           Text("edit")
-       }
+    
+        
            
     }
     .padding()
         .onAppear {
             readItemViewModel.fetchItem(with: messageFromQR)
         }
+    BottomMenu()
     }
 }
 

@@ -13,6 +13,7 @@ import FirebaseAuth
 
 class ReadItemViewModel: ObservableObject {
     @Published var item: Item?
+    @Published var isDeleted: Bool = false
     
     func fetchItem(with id: String) {
         let db = Firestore.firestore()
@@ -44,18 +45,22 @@ class ReadItemViewModel: ObservableObject {
         let formattedDate = formatter.string(from: input)
         return formattedDate
     }
-    func saveNewData(){
-        let data = Item(id:"845A36A8-AC18-43BE-BD85-DC40CF5DDA20",
-                           name: "sadas",
-                           amount: "a",
-                           nameOfAdder: "a",
-                           commentsToItem: "comments",
-                           productWeight: "weight",
-                           addDate: Date()
-        )
+    func saveNewData(idOfItem: String, nameOfItem: String, amountOfItem: String,
+                     weigthOfItem: String, commentsToItem: String){
         guard let userID = Auth.auth().currentUser?.uid else{
             return
         }
+        guard let userName = Auth.auth().currentUser?.email else{
+            return
+        }
+        let data = Item(id:idOfItem,
+                           name: nameOfItem,
+                           amount: amountOfItem,
+                           nameOfAdder: userName,
+                           commentsToItem: commentsToItem,
+                           productWeight: weigthOfItem,
+                           addDate: Date()
+        )
         let db = Firestore.firestore()
         db.collection("users")
             .document(userID)
@@ -69,5 +74,18 @@ class ReadItemViewModel: ObservableObject {
                       "productWeight": data.productWeight,
                       "addDate": data.addDate
             ])
+    }
+    func delete(id: String){
+        let db = Firestore.firestore()
+       
+        guard let userID = Auth.auth().currentUser?.uid else{
+            return
+        }
+        db.collection("users")
+                        .document(userID)
+                        .collection("items")
+                        .document(id)
+                        .delete()
+        isDeleted = true
     }
 }
