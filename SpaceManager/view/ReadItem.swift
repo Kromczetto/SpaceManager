@@ -4,12 +4,16 @@ import FirebaseAuth
 
 struct ReadItem: View {
     @StateObject var readItemViewModel = ReadItemViewModel()
+    @StateObject var readActiveViewModel = ReadActiveViewModel()
+    @EnvironmentObject var generatorViewModel: GeneratorViewModel
     var messageFromQR: String
     @State var isEdit: Bool = false
     @State var itemName: String = ""
     @State var amount: String = ""
     @State var weight: String = ""
     @State var comment: String = ""
+    
+    
        
 var body: some View {
     VStack {
@@ -24,8 +28,41 @@ var body: some View {
                    Text("Uwagi: \(item.commentsToItem)")
                    Text("Dodane przez: \(item.nameOfAdder)")
                    Text("Dodano: \(readItemViewModel.prepairDate(input: item.addDate))")
+                   
+                   if(generatorViewModel.num1 != 0){
+                       Text("Liczba obrotów: \(generatorViewModel.num1)").onAppear{
+                           generatorViewModel.startGeneratingData()
+                           generatorViewModel.storeData(itemID: messageFromQR)
+                           
+                       }
+                       .onDisappear {
+                          generatorViewModel.stopGeneratingData()
+                       }
+                   }
+                   if(generatorViewModel.num2 != 0){
+                       Text("Zużycie prądu: \(generatorViewModel.num2)").onAppear{
+                           generatorViewModel.startGeneratingData()
+                           generatorViewModel.storeData(itemID: messageFromQR)
+                           
+                       }
+                       .onDisappear {
+                          generatorViewModel.stopGeneratingData()
+                       }
+                   }
+                   if(generatorViewModel.workTime != 0){
+                       Text("Czas pracy: \(generatorViewModel.workTime)").onAppear{
+                           generatorViewModel.startGeneratingData()
+                           generatorViewModel.storeData(itemID: messageFromQR)
+                           
+                       }
+                       .onDisappear {
+                          generatorViewModel.stopGeneratingData()
+                       }
+                   }
+                 
                }.onAppear{
                    readItemViewModel.fetchItem(with: messageFromQR)
+                   readActiveViewModel.fetchItem(with: messageFromQR)
                }
                HStack{
                    Button{
