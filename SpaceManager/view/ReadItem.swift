@@ -6,14 +6,13 @@ struct ReadItem: View {
     @StateObject var readItemViewModel = ReadItemViewModel()
     @StateObject var readActiveViewModel = ReadActiveViewModel()
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
+    
     var messageFromQR: String
     @State var isEdit: Bool = false
     @State var itemName: String = ""
     @State var amount: String = ""
     @State var weight: String = ""
     @State var comment: String = ""
-    
-    
        
 var body: some View {
     VStack {
@@ -116,12 +115,14 @@ var body: some View {
                }else{
                    Spacer()
                    Text("Usunięto produkt")
+                       .foregroundColor(.red)
                    Spacer()
                }
            }
        } else {
            Spacer()
            Text("Problemy ze znalezieniem produktu. Spróbuj ponwnie")
+               .foregroundColor(.red)
            Spacer()
            
        }

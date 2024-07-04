@@ -11,9 +11,9 @@ import FirebaseAuth
 
 struct BottomMenu: View {
     
-    //zmienic zeby bylo przekazywane jako properties
     @StateObject var logManager = MainViewModel()
-    @StateObject private var cameraViewModel = CameraViewModel()
+
+//    @StateObject private var cameraViewModel = CameraViewModel()
     var body: some View {
         HStack{
             Group{

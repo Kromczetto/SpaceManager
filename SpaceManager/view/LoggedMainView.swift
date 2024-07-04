@@ -15,6 +15,7 @@ struct LoggedMainView: View {
     @StateObject var qrCodeGenerator = QrCodeGenerator()
     @StateObject var generatorViewModel = GeneratorViewModel()
     @StateObject var activeHandlerViewModel = ActivevHandlerViewModel()
+    @StateObject var menuViewModel = MenuViewModel()
     
     @State var productID: String = UUID().uuidString
     
@@ -102,6 +103,7 @@ struct LoggedMainView: View {
             }
         }
         .environmentObject(generatorViewModel)
+        .environmentObject(menuViewModel)
     }
     
 }
