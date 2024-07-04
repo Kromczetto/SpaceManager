@@ -12,6 +12,8 @@ struct ProfileView: View {
         Spacer()
         
         BtnProfile()
+        Spacer()
+        BottomMenu()
     }
 }
 
