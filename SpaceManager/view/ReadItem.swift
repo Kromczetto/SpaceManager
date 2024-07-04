@@ -6,19 +6,16 @@ struct ReadItem: View {
     @StateObject var readItemViewModel = ReadItemViewModel()
     @StateObject var readActiveViewModel = ReadActiveViewModel()
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
+    
     var messageFromQR: String
     @State var isEdit: Bool = false
     @State var itemName: String = ""
     @State var amount: String = ""
     @State var weight: String = ""
     @State var comment: String = ""
-    
-    
        
 var body: some View {
     VStack {
-        
-            
        if let item = readItemViewModel.item {
            if(!isEdit && !readItemViewModel.isDeleted){
                List{
@@ -33,7 +30,6 @@ var body: some View {
                        Text("Liczba obrotów: \(generatorViewModel.num1)").onAppear{
                            generatorViewModel.startGeneratingData()
                            generatorViewModel.storeData(itemID: messageFromQR)
-                           
                        }
                        .onDisappear {
                           generatorViewModel.stopGeneratingData()
@@ -43,7 +39,6 @@ var body: some View {
                        Text("Zużycie prądu: \(generatorViewModel.num2)").onAppear{
                            generatorViewModel.startGeneratingData()
                            generatorViewModel.storeData(itemID: messageFromQR)
-                           
                        }
                        .onDisappear {
                           generatorViewModel.stopGeneratingData()
@@ -53,7 +48,6 @@ var body: some View {
                        Text("Czas pracy: \(generatorViewModel.workTime)").onAppear{
                            generatorViewModel.startGeneratingData()
                            generatorViewModel.storeData(itemID: messageFromQR)
-                           
                        }
                        .onDisappear {
                           generatorViewModel.stopGeneratingData()
@@ -65,35 +59,11 @@ var body: some View {
                    readActiveViewModel.fetchItem(with: messageFromQR)
                }
                HStack{
-                   Button{
+                   BtnModifier(btnText: "Edytuj", btnIcon: "pencil"){
                        isEdit = !isEdit
-                   } label:{
-                       ZStack{
-                           RoundedRectangle(cornerRadius: 20)
-                               .foregroundColor(.green)
-                               .padding(10)
-                               .frame(width: 150, height: 50)
-                           Text("Edytuj \(Image(systemName: "pencil"))")
-                               .foregroundStyle(.white)
-                               .padding()
-                               .bold()
-                               .font(.system(size: 16))
-                       }
                    }
-                   Button{
+                   BtnModifier(btnText: "Usuń", btnIcon: "trash", btnColor: .red){
                        readItemViewModel.delete(id: messageFromQR)
-                   } label:{
-                       ZStack{
-                           RoundedRectangle(cornerRadius: 20)
-                               .foregroundColor(.red)
-                               .padding(10)
-                               .frame(width: 150, height: 50)
-                           Text("Usuń \(Image(systemName: "trash"))")
-                               .foregroundStyle(.white)
-                               .padding()
-                               .bold()
-                               .font(.system(size: 16))
-                       }
                    }
                }
            }else{
@@ -132,54 +102,30 @@ var body: some View {
                    }
                    
                    HStack{
-                       Button{
+                       BtnModifier(btnText: "Zapisz", btnIcon: "paperplane",
+                                   btnColor: .green){
                            readItemViewModel.saveNewData(idOfItem: messageFromQR, nameOfItem: $itemName.wrappedValue,
                                                          amountOfItem: $amount.wrappedValue, weigthOfItem: $weight.wrappedValue, commentsToItem: $comment.wrappedValue)
                            isEdit = !isEdit
-                       }label:{
-                           ZStack{
-                               RoundedRectangle(cornerRadius: 20)
-                                   .foregroundColor(.green)
-                                   .padding(10)
-                                   .frame(width: 150, height: 50)
-                               Text("Zapisz \(Image(systemName: "paperplane"))")
-                                   .foregroundStyle(.white)
-                                   .padding()
-                                   .bold()
-                                   .font(.system(size: 16))
-                           }
                        }
-                       Button{
+                       BtnModifier(btnText: "Wróć", btnIcon: "arrowshape.turn.up.backward"){
                            isEdit = !isEdit
-                       } label:{
-                           ZStack{
-                               RoundedRectangle(cornerRadius: 20)
-                                   .foregroundColor(.blue)
-                                   .padding(10)
-                                   .frame(width: 150, height: 50)
-                               Text("Wróć \(Image(systemName: "arrowshape.turn.up.backward"))")
-                                   .foregroundStyle(.white)
-                                   .padding()
-                                   .bold()
-                                   .font(.system(size: 16))
-                           }
                        }
                    }
                }else{
                    Spacer()
                    Text("Usunięto produkt")
+                       .foregroundColor(.red)
                    Spacer()
                }
            }
        } else {
            Spacer()
            Text("Problemy ze znalezieniem produktu. Spróbuj ponwnie")
+               .foregroundColor(.red)
            Spacer()
            
        }
-    
-        
-           
     }
     .padding()
         .onAppear {

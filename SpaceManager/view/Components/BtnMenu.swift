@@ -9,21 +9,21 @@ import SwiftUI
 
 struct BtnMenu: View {
     
-    
+    @EnvironmentObject var menuViewModel: MenuViewModel
     var btnText: String
     var btnIcon: String
     //var btnEvent: ()->Void
     var destinationView: AnyView
     
     var body: some View {
-        NavigationLink{
-                destinationView
+      
+        NavigationLink(){
+            destinationView
         }label:{
             ZStack{
                 Text("\(Image(systemName: btnIcon)) \(btnText)")
                     
             }
-            
         }
     }
 }

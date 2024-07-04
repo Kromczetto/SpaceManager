@@ -15,6 +15,7 @@ struct LoggedMainView: View {
     @StateObject var qrCodeGenerator = QrCodeGenerator()
     @StateObject var generatorViewModel = GeneratorViewModel()
     @StateObject var activeHandlerViewModel = ActivevHandlerViewModel()
+    @StateObject var menuViewModel = MenuViewModel()
     
     @State var productID: String = UUID().uuidString
     
@@ -32,7 +33,14 @@ struct LoggedMainView: View {
                     Spacer()
                     HStack(spacing: 0){
                        
-                        BtnItemType()
+                        BtnItemType().onAppear{
+                            generatorViewModel.isStatic = true
+                            if(generatorViewModel.isStatic == true){
+                                generatorViewModel.setSpins(number: 0)
+                                generatorViewModel.setConsumption(number: 0)
+                                generatorViewModel.setWorkTime(number: 0)
+                            }
+                        }
                         BtnItemType(btnText: "Aktywne",
                                     firstColor: .gray,
                                     secondColor: .blue,
@@ -41,7 +49,6 @@ struct LoggedMainView: View {
                     }.padding(10)
                     Spacer()
                     Group{
-                              
                         Form{
                             GeometryReader { geometry in
                                 Image(uiImage: qrCodeGenerator.generatorQr(from: productID))
@@ -96,6 +103,7 @@ struct LoggedMainView: View {
             }
         }
         .environmentObject(generatorViewModel)
+        .environmentObject(menuViewModel)
     }
     
 }
