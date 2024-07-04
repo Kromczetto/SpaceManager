@@ -31,36 +31,13 @@ struct LoggedMainView: View {
                 VStack{
                     Spacer()
                     HStack(spacing: 0){
-                        Button{
-                            generatorViewModel.isStatic = true
-                        }label:{
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 0)
-                                    .foregroundColor(.gray)
-                                    
-                                    .frame(width: 100, height: 30)
-                                Text("Statyczne")
-                                    .foregroundStyle(.white)
-                                    .padding()
-                                    .bold()
-                                    .font(.system(size: 16))
-                            }
-                        }.padding(.leading, -4)
-                        Button{
-                            generatorViewModel.isStatic = false
-                        }label:{
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 0)
-                                    .foregroundColor(.gray)
-                                    
-                                    .frame(width: 100, height: 30)
-                                Text("Aktywne")
-                                    .foregroundStyle(.white)
-                                    .padding()
-                                    .bold()
-                                    .font(.system(size: 16))
-                            }
-                        }.padding(.leading, -3)
+                       
+                        BtnItemType()
+                        BtnItemType(btnText: "Aktywne",
+                                    firstColor: .gray,
+                                    secondColor: .blue,
+                                    state: false
+                        )
                     }.padding(10)
                     Spacer()
                     Group{
