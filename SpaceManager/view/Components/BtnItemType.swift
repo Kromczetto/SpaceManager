@@ -13,16 +13,11 @@ struct BtnItemType: View {
     var firstColor: Color = .blue
     var secondColor: Color = .gray
     @State var state: Bool = true
+    var action: ()->Void
     
     var body: some View {
         Button{
-            generatorViewModel.isStatic = state
-            if(generatorViewModel.isStatic == true){
-                generatorViewModel.setSpins(number: 0)
-                generatorViewModel.setConsumption(number: 0)
-                generatorViewModel.setWorkTime(number: 0)
-                
-            }
+          action()
         }label:{
             ZStack{
                 RoundedRectangle(cornerRadius: 0)
@@ -40,6 +35,6 @@ struct BtnItemType: View {
     }
 }
 
-#Preview {
-    BtnItemType()
-}
+//#Preview {
+//    BtnItemType()
+//}
