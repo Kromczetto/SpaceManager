@@ -23,6 +23,8 @@ struct LoggedMainView: View {
     @State private var isSecondCheck: Bool = false
     @State private var isThirdCheck: Bool = false
     
+    @State private var qrCodeToSave: UIImage? = nil
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -33,31 +35,42 @@ struct LoggedMainView: View {
                     Spacer()
                     HStack(spacing: 0){
                        
-                        BtnItemType().onAppear{
+                        BtnItemType(){
                             generatorViewModel.isStatic = true
-                            if(generatorViewModel.isStatic == true){
-                                generatorViewModel.setSpins(number: 0)
-                                generatorViewModel.setConsumption(number: 0)
-                                generatorViewModel.setWorkTime(number: 0)
-                            }
+                            generatorViewModel.setSpins(number: 0)
+                            generatorViewModel.setConsumption(number: 0)
+                            generatorViewModel.setWorkTime(number: 0)
+                            
                         }
                         BtnItemType(btnText: "Aktywne",
                                     firstColor: .gray,
                                     secondColor: .blue,
                                     state: false
-                        )
-                    }.padding(10)
+                        ){
+                            generatorViewModel.isStatic = false
+                            generatorViewModel.setSpins(number: 10)
+                            generatorViewModel.setConsumption(number: 10)
+                            generatorViewModel.setWorkTime(number: 100)
+                            
+                        }
+                    }.padding(10).onAppear{
+                        generatorViewModel.isStatic = true
+                        generatorViewModel.setSpins(number: 0)
+                        generatorViewModel.setConsumption(number: 0)
+                        generatorViewModel.setWorkTime(number: 0)
+                    }
                     Spacer()
                     Group{
                         Form{
                             GeometryReader { geometry in
-                                Image(uiImage: qrCodeGenerator.generatorQr(from: productID))
+                                Image(uiImage: qrCodeGenerator.generatorQr(from: productID)!)
                                     .resizable()
                                     .interpolation(.none)
                                     .scaledToFit()
                                     .frame(width: 200, height: 200)
                                     .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
                             }.frame(minHeight: 200)
+                            
                             TextField("Nazwa", text: $logManager.itemName)
                             TextField("Ilość", text: $logManager.numberOfItems)
                             TextField("Waga", text: $logManager.weight)
@@ -74,12 +87,23 @@ struct LoggedMainView: View {
                                              activeHandler: activeHandlerViewModel)
                             }
                             BtnDatabase(btnLabel: "Dodaj"){
+                                qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
+                                UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
                                 logManager.itemID = productID
                                 logManager.addItemToDatabase()
                                 if (!generatorViewModel.isStatic ){
-                                    if(!isFirstCheck){ generatorViewModel.setSpins(number: 0)}
-                                    if(!isSecondCheck){generatorViewModel.setConsumption(number: 0)}
-                                    if(!isThirdCheck){ generatorViewModel.setWorkTime(number: 0)}
+                                    if(!isFirstCheck){ generatorViewModel.setSpins(number: 0)
+                                    }
+                                    if(!isSecondCheck){generatorViewModel.setConsumption(number: 0)
+                                    }
+                                    if(!isThirdCheck){ generatorViewModel.setWorkTime(number: 0)
+                                    }
+                                    generatorViewModel.storeData(itemID: productID)
+                                    isFirstCheck = false
+                                    isSecondCheck = false
+                                    isThirdCheck = false
+                                } else{
+                                    print("dynamik")
                                     generatorViewModel.storeData(itemID: productID)
                                     isFirstCheck = false
                                     isSecondCheck = false
@@ -88,7 +112,7 @@ struct LoggedMainView: View {
                                 productID = UUID().uuidString
                             }
                             
-                            .alert("Dodano \($logManager.itemNameHolder.wrappedValue)",
+                            .alert("Dodano \($logManager.itemNameHolder.wrappedValue), kod QR został zapisany w galerii zdjęć",
                                    isPresented: $logManager.isSuccess) {
                                            Button("OK", role: .cancel) { }
                             }

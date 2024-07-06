@@ -13,20 +13,23 @@ import FirebaseAuth
 class GeneratorViewModel: ObservableObject {
     @Published var isStatic: Bool = true
    
-    @Published var num1: Int = Int.random(in: 100 ..< 1000)
-    @Published var num2: Int = Int.random(in: 100 ..< 1000)
-    @Published var workTime: Int = 100
+    @Published var num1: Int
+    @Published var num2: Int
+    @Published var workTime: Int
     
     private var counter: Int = 0
     
     var timer: Timer?
 
     init() {
+        num1 = Int.random(in: 100 ..< 1000)
+        num2 = Int.random(in: 100 ..< 1000)
+        workTime = 100
         startGeneratingData()
     }
 
     func startGeneratingData() {
-        timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { timer in
             self.generateData()
         }
     }
@@ -51,7 +54,6 @@ class GeneratorViewModel: ObservableObject {
     }
     
     func storeData(itemID: String){
-        
         
         guard let userID = Auth.auth().currentUser?.uid else{
             return
