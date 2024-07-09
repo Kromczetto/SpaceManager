@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegisterView: View {
-    
+    @Environment(\.presentationMode) var presentationMode
   
     var body: some View {
         ZStack{
@@ -24,9 +24,14 @@ struct RegisterView: View {
                 
                 Spacer()
                 
-                BtnUnderlineComponent(btnText: "Mam już konto",
-                                      btnTextSize: 18,
-                                        destinationView: AnyView(LoginView()))
+                Button{
+                    self.presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Text("Mam już konto")
+                        .foregroundStyle(.gray)
+                        .font(.system(size: 18))
+                        .underline()
+                }
         
                 .padding(.bottom, 140)
                 

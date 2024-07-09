@@ -16,7 +16,7 @@ struct CustomBack: View {
             self.presentationMode.wrappedValue.dismiss()
         } label: {
             HStack{
-                Image(systemName: "arrow.left")
+                Image(systemName: "chevron.left")
                 Text(title)
             }
         }

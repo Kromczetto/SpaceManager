@@ -14,23 +14,15 @@ struct BtnUnderlineComponent: View {
     var btnText: String = "Button"
     var btnTextSize: CGFloat = 16
     var destinationView: AnyView
-    
-    
-    
+
     var body: some View{
         NavigationLink{
-            destinationView
-                .navigationBarHidden(true)
-                
+            destinationView.navigationBarBackButtonHidden(true)
         }label:{
-            
             Text(btnText)
                 .foregroundStyle(btnTextColor)
                 .font(.system(size: btnTextSize))
                 .underline()
-            
         }
-    
-        
     }
 }
