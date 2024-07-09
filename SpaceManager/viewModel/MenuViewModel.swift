@@ -1,16 +1,16 @@
+////
+////  MenuViewModel.swift
+////  SpaceManager
+////
+////  Created by Kuba Kromomołowski on 04/07/2024.
+////
 //
-//  MenuViewModel.swift
-//  SpaceManager
+//import Foundation
 //
-//  Created by Kuba Kromomołowski on 04/07/2024.
-//
-
-import Foundation
-
-class MenuViewModel: ObservableObject{
-    @Published var currentViewIndex: Int = 0
-    
-    func setViewIndex(){
-       currentViewIndex = currentViewIndex + 1
-    }
-}
+//class MenuViewModel: ObservableObject{
+//    @Published var currentViewIndex: Int = 0
+//    
+//    func setViewIndex(){
+//       currentViewIndex = currentViewIndex + 1
+//    }
+//}
