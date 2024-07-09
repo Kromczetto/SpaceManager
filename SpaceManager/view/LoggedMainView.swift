@@ -13,7 +13,7 @@ struct LoggedMainView: View {
     
     @StateObject var logManager = MainViewModel()
     @StateObject var qrCodeGenerator = QrCodeGenerator()
-    @StateObject var generatorViewModel = GeneratorViewModel()
+    @EnvironmentObject var generatorViewModel: GeneratorViewModel
     @StateObject var activeHandlerViewModel = ActivevHandlerViewModel()
     @StateObject var menuViewModel = MenuViewModel()
     
@@ -26,7 +26,7 @@ struct LoggedMainView: View {
     @State private var qrCodeToSave: UIImage? = nil
     
     var body: some View {
-        NavigationView{
+       
             ZStack{
                 LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
                                startPoint: .top, endPoint: UnitPoint.bottom)
@@ -122,8 +122,7 @@ struct LoggedMainView: View {
                             }
                         }
                     }
-                    BottomMenu()
-                }
+                
             }
         }
         .environmentObject(generatorViewModel)
