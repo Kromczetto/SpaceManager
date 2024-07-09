@@ -8,8 +8,48 @@
 import SwiftUI
 
 struct ForgotPasswordView: View {
+    
+    @StateObject var forgotViewModel = ForgotViewModel()
+    @State var tempEmail = ""
     var body: some View {
-        Text("ZAPOMNIALEM HASLA")
+        VStack{
+            Text("Wpisz swój Email:")
+                .padding(20)
+                .font(.system(size: 25))
+            Spacer()
+            Form{
+                TextField("Email", text: $forgotViewModel.email)
+                    .font(.system(size: 25))
+                    .multilineTextAlignment(.center)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                Button{
+                    forgotViewModel.resetPassword()
+                    tempEmail = forgotViewModel.email
+                    forgotViewModel.email = ""
+                }label:{
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.blue)
+                            .padding(10)
+                            .frame(width: 350, height: 80)
+                        Text("Zresetuj hasło")
+                            .foregroundStyle(.white)
+                            .padding()
+                            .bold()
+                            .font(.system(size: 16))
+                    }
+                }
+            }.alert("Twoje haslo zostało wysłane na email: \($tempEmail.wrappedValue)",
+                      isPresented: $forgotViewModel.isSuccess) {
+                              Button("OK", role: .cancel) { }
+                    }
+              .alert("\($forgotViewModel.message.wrappedValue)",
+                isPresented: $forgotViewModel.isProblem) {
+                        Button("OK", role: .cancel) { }
+              }
+        }.navigationBarItems(leading: CustomBack(title: "Wróć"))
+
     }
 }
 

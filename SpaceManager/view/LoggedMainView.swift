@@ -13,9 +13,9 @@ struct LoggedMainView: View {
     
     @StateObject var logManager = MainViewModel()
     @StateObject var qrCodeGenerator = QrCodeGenerator()
-    @EnvironmentObject var generatorViewModel: GeneratorViewModel
     @StateObject var activeHandlerViewModel = ActivevHandlerViewModel()
     @StateObject var menuViewModel = MenuViewModel()
+    @EnvironmentObject var generatorViewModel: GeneratorViewModel
     
     @State var productID: String = UUID().uuidString
     
