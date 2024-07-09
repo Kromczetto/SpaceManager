@@ -13,7 +13,7 @@ struct LoggedMainView: View {
     
     @StateObject var logManager = MainViewModel()
     @StateObject var qrCodeGenerator = QrCodeGenerator()
-    @StateObject var generatorViewModel = GeneratorViewModel()
+    @EnvironmentObject var generatorViewModel: GeneratorViewModel
     @StateObject var activeHandlerViewModel = ActivevHandlerViewModel()
     @StateObject var menuViewModel = MenuViewModel()
     
