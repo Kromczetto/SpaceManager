@@ -14,7 +14,7 @@ struct BottomMenu: View {
     var body: some View {
         TabView {
             NavigationView {
-                LoggedMainView()
+                AddNewItemView()
                     .navigationBarBackButtonHidden(true)
             }
             .tabItem {

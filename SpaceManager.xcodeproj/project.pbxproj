@@ -18,14 +18,13 @@
 		4F1E6C3A2BBD93A100BDE9B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F1E6C392BBD93A100BDE9B5 /* Preview Assets.xcassets */; };
 		4F20BFD42C36D3D20026C58B /* BtnItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F20BFD32C36D3D20026C58B /* BtnItemType.swift */; };
 		4F20BFD82C36DE610026C58B /* BtnModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F20BFD72C36DE610026C58B /* BtnModifier.swift */; };
-		4F20BFDA2C36F7C20026C58B /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F20BFD92C36F7C20026C58B /* MenuViewModel.swift */; };
 		4F2C28FE2BDEDC6E00D040D2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C28FD2BDEDC6E00D040D2 /* LoginViewModel.swift */; };
 		4F32055D2BBDB217000BD18C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F32055C2BBDB217000BD18C /* LoginView.swift */; };
 		4F32055F2BBDB2AE000BD18C /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F32055E2BBDB2AE000BD18C /* RegisterView.swift */; };
 		4F3205612BC2D123000BD18C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F3205602BC2D122000BD18C /* GoogleService-Info.plist */; };
 		4F3363AA2BE51F750042D0AD /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363A92BE51F750042D0AD /* RegisterViewModel.swift */; };
 		4F3363AE2BE549860042D0AD /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363AD2BE549860042D0AD /* MainViewModel.swift */; };
-		4F3363B02BE54A790042D0AD /* LoggedMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363AF2BE54A790042D0AD /* LoggedMainView.swift */; };
+		4F3363B02BE54A790042D0AD /* AddNewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363AF2BE54A790042D0AD /* AddNewItemView.swift */; };
 		4F3363B22BE561C50042D0AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363B12BE561C50042D0AD /* User.swift */; };
 		4F3363B42BE689C00042D0AD /* BtnMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363B32BE689C00042D0AD /* BtnMenu.swift */; };
 		4F3363B62BE69B2A0042D0AD /* QrCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363B52BE69B2A0042D0AD /* QrCodeGenerator.swift */; };
@@ -46,7 +45,6 @@
 		4F8B5C4B2BC697B100094D5B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8B5C4A2BC697B100094D5B /* FirebaseFirestore */; };
 		4F8B5C4D2BC697B100094D5B /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4F8B5C4C2BC697B100094D5B /* FirebaseFirestoreSwift */; };
 		4F9DE7CF2C2ECD58001829BA /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9DE7CE2C2ECD58001829BA /* CodeScanner */; };
-		4F9DE7D32C2ED13D001829BA /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE7D22C2ED13D001829BA /* CameraViewModel.swift */; };
 		4F9DE7D92C2F07B2001829BA /* ReadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE7D82C2F07B2001829BA /* ReadItem.swift */; };
 		4F9DE7DB2C2F07BE001829BA /* ReadItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE7DA2C2F07BE001829BA /* ReadItemViewModel.swift */; };
 		4FEADE522BC74459009C31BD /* BtnUnderlineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */; };
@@ -65,14 +63,13 @@
 		4F1E6C392BBD93A100BDE9B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4F20BFD32C36D3D20026C58B /* BtnItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnItemType.swift; sourceTree = "<group>"; };
 		4F20BFD72C36DE610026C58B /* BtnModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnModifier.swift; sourceTree = "<group>"; };
-		4F20BFD92C36F7C20026C58B /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		4F2C28FD2BDEDC6E00D040D2 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4F32055C2BBDB217000BD18C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		4F32055E2BBDB2AE000BD18C /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		4F3205602BC2D122000BD18C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4F3363A92BE51F750042D0AD /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		4F3363AD2BE549860042D0AD /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
-		4F3363AF2BE54A790042D0AD /* LoggedMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedMainView.swift; sourceTree = "<group>"; };
+		4F3363AF2BE54A790042D0AD /* AddNewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewItemView.swift; sourceTree = "<group>"; };
 		4F3363B12BE561C50042D0AD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4F3363B32BE689C00042D0AD /* BtnMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnMenu.swift; sourceTree = "<group>"; };
 		4F3363B52BE69B2A0042D0AD /* QrCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeGenerator.swift; sourceTree = "<group>"; };
@@ -89,7 +86,6 @@
 		4F859C3C2BD06BC400924EF5 /* HeaderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderComponent.swift; sourceTree = "<group>"; };
 		4F859C3E2BD06DC700924EF5 /* FormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormComponent.swift; sourceTree = "<group>"; };
 		4F85DFEC2C33016A00A5844D /* ReadActiveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadActiveViewModel.swift; sourceTree = "<group>"; };
-		4F9DE7D22C2ED13D001829BA /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
 		4F9DE7D82C2F07B2001829BA /* ReadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadItem.swift; sourceTree = "<group>"; };
 		4F9DE7DA2C2F07BE001829BA /* ReadItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadItemViewModel.swift; sourceTree = "<group>"; };
 		4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnUnderlineComponent.swift; sourceTree = "<group>"; };
@@ -118,12 +114,10 @@
 				4F3363AD2BE549860042D0AD /* MainViewModel.swift */,
 				4F3363B52BE69B2A0042D0AD /* QrCodeGenerator.swift */,
 				4F15F8D92BF61CD3001B58CA /* ProfileViewModel.swift */,
-				4F9DE7D22C2ED13D001829BA /* CameraViewModel.swift */,
 				4F9DE7DA2C2F07BE001829BA /* ReadItemViewModel.swift */,
 				4F4A8DAF2C32E9FC0002744A /* GeneratorViewModel.swift */,
 				4F85DFEC2C33016A00A5844D /* ReadActiveViewModel.swift */,
 				4F07E1DB2C35AB6A000B26A8 /* ActiveHandlerViewModel.swift */,
-				4F20BFD92C36F7C20026C58B /* MenuViewModel.swift */,
 				4F5889492C3D7CF500CAB19D /* ForgotViewModel.swift */,
 			);
 			path = viewModel;
@@ -174,7 +168,7 @@
 				4F32055C2BBDB217000BD18C /* LoginView.swift */,
 				4F32055E2BBDB2AE000BD18C /* RegisterView.swift */,
 				4F859C382BD067B000924EF5 /* ForgotPasswordView.swift */,
-				4F3363AF2BE54A790042D0AD /* LoggedMainView.swift */,
+				4F3363AF2BE54A790042D0AD /* AddNewItemView.swift */,
 				4F4E58FA2BF0FE4500B80AB8 /* SearchView.swift */,
 				4F15F8D72BF61CA2001B58CA /* ProfileView.swift */,
 				4F9DE7D82C2F07B2001829BA /* ReadItem.swift */,
@@ -299,7 +293,6 @@
 				4F32055D2BBDB217000BD18C /* LoginView.swift in Sources */,
 				4F859C3F2BD06DC800924EF5 /* FormComponent.swift in Sources */,
 				4F4A8DB22C32F1430002744A /* ActiveItem.swift in Sources */,
-				4F9DE7D32C2ED13D001829BA /* CameraViewModel.swift in Sources */,
 				4FEADE522BC74459009C31BD /* BtnUnderlineComponent.swift in Sources */,
 				4F20BFD42C36D3D20026C58B /* BtnItemType.swift in Sources */,
 				4F102D752C2C79D100A6702D /* Item.swift in Sources */,
@@ -318,11 +311,10 @@
 				4F15F8D82BF61CA2001B58CA /* ProfileView.swift in Sources */,
 				4F3363B62BE69B2A0042D0AD /* QrCodeGenerator.swift in Sources */,
 				4F07E1DC2C35AB6A000B26A8 /* ActiveHandlerViewModel.swift in Sources */,
-				4F3363B02BE54A790042D0AD /* LoggedMainView.swift in Sources */,
+				4F3363B02BE54A790042D0AD /* AddNewItemView.swift in Sources */,
 				4F859C392BD067B000924EF5 /* ForgotPasswordView.swift in Sources */,
 				4F859C3B2BD06A5F00924EF5 /* BtnClearComponent.swift in Sources */,
 				4F9DE7D92C2F07B2001829BA /* ReadItem.swift in Sources */,
-				4F20BFDA2C36F7C20026C58B /* MenuViewModel.swift in Sources */,
 				4F1E6C332BBD939F00BDE9B5 /* SpaceManagerApp.swift in Sources */,
 				4F9DE7DB2C2F07BE001829BA /* ReadItemViewModel.swift in Sources */,
 				4F2C28FE2BDEDC6E00D040D2 /* LoginViewModel.swift in Sources */,

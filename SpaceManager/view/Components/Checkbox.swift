@@ -10,7 +10,7 @@ import SwiftUI
 struct Checkbox: View {
     @Binding var isChecked: Bool
     var checkName: String = ""
-    var activeHandler: ActivevHandlerViewModel
+//    var activeHandler: ActivevHandlerViewModel
     var body: some View {
         Button {
             self.isChecked.toggle()
