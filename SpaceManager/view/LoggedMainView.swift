@@ -26,7 +26,7 @@ struct LoggedMainView: View {
     @State private var qrCodeToSave: UIImage? = nil
     
     var body: some View {
-        NavigationView{
+       
             ZStack{
                 LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
                                startPoint: .top, endPoint: UnitPoint.bottom)
@@ -122,8 +122,7 @@ struct LoggedMainView: View {
                             }
                         }
                     }
-                    BottomMenu()
-                }
+                
             }
         }
         .environmentObject(generatorViewModel)

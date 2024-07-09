@@ -8,24 +8,21 @@
 import SwiftUI
 
 struct BtnMenu: View {
-    
-    
     var btnText: String
     var btnIcon: String
-    //var btnEvent: ()->Void
     var destinationView: AnyView
     
+    @State var isActive: Bool = true
     var body: some View {
-        
         NavigationLink{
-                 destinationView
-        }label:{
-            ZStack{
-                Text("\(Image(systemName: btnIcon)) \(btnText)")
-                    
-            }
             
-        }
+            destinationView
+        }  label: {
+            ZStack {
+                Text("\(Image(systemName: btnIcon)) \(btnText)")
+            }
+        }.disabled(isActive)
+       
     }
 }
 

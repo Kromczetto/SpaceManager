@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         Spacer()
         
         BtnProfile()
         Spacer()
-        BottomMenu()
     }
 }
 

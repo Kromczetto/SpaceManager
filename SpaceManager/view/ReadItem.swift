@@ -131,10 +131,10 @@ var body: some View {
         .onAppear {
             readItemViewModel.fetchItem(with: messageFromQR)
         }
-    BottomMenu()
+//    BottomMenu()
     }
 }
 
-#Preview {
-    ReadItem(messageFromQR: "1")
-}
+//#Preview {
+//    ReadItem(messageFromQR: "1")
+//}

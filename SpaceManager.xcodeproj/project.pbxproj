@@ -30,6 +30,8 @@
 		4F3363B42BE689C00042D0AD /* BtnMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363B32BE689C00042D0AD /* BtnMenu.swift */; };
 		4F3363B62BE69B2A0042D0AD /* QrCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363B52BE69B2A0042D0AD /* QrCodeGenerator.swift */; };
 		4F3363BB2BE6AF800042D0AD /* BottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363BA2BE6AF800042D0AD /* BottomMenu.swift */; };
+		4F47058E2C3C3E8F00F42F12 /* CustomBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */; };
+		4F4705902C3C5FF400F42F12 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F47058F2C3C5FF400F42F12 /* WelcomeView.swift */; };
 		4F4A8DB02C32E9FC0002744A /* GeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4A8DAF2C32E9FC0002744A /* GeneratorViewModel.swift */; };
 		4F4A8DB22C32F1430002744A /* ActiveItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4A8DB12C32F1430002744A /* ActiveItem.swift */; };
 		4F4E58FB2BF0FE4500B80AB8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E58FA2BF0FE4500B80AB8 /* SearchView.swift */; };
@@ -74,6 +76,8 @@
 		4F3363B32BE689C00042D0AD /* BtnMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnMenu.swift; sourceTree = "<group>"; };
 		4F3363B52BE69B2A0042D0AD /* QrCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeGenerator.swift; sourceTree = "<group>"; };
 		4F3363BA2BE6AF800042D0AD /* BottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenu.swift; sourceTree = "<group>"; };
+		4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBack.swift; sourceTree = "<group>"; };
+		4F47058F2C3C5FF400F42F12 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		4F4A8DAF2C32E9FC0002744A /* GeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorViewModel.swift; sourceTree = "<group>"; };
 		4F4A8DB12C32F1430002744A /* ActiveItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveItem.swift; sourceTree = "<group>"; };
 		4F4E58FA2BF0FE4500B80AB8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 				4F4E58FA2BF0FE4500B80AB8 /* SearchView.swift */,
 				4F15F8D72BF61CA2001B58CA /* ProfileView.swift */,
 				4F9DE7D82C2F07B2001829BA /* ReadItem.swift */,
+				4F47058F2C3C5FF400F42F12 /* WelcomeView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 				4F66DB9F2C335FD60035B34F /* Checkbox.swift */,
 				4F20BFD32C36D3D20026C58B /* BtnItemType.swift */,
 				4F20BFD72C36DE610026C58B /* BtnModifier.swift */,
+				4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -304,6 +310,7 @@
 				4F3363B22BE561C50042D0AD /* User.swift in Sources */,
 				4F859C3D2BD06BC400924EF5 /* HeaderComponent.swift in Sources */,
 				4F66DBA02C335FD60035B34F /* Checkbox.swift in Sources */,
+				4F4705902C3C5FF400F42F12 /* WelcomeView.swift in Sources */,
 				4F15F8D82BF61CA2001B58CA /* ProfileView.swift in Sources */,
 				4F3363B62BE69B2A0042D0AD /* QrCodeGenerator.swift in Sources */,
 				4F07E1DC2C35AB6A000B26A8 /* ActiveHandlerViewModel.swift in Sources */,
@@ -315,6 +322,7 @@
 				4F1E6C332BBD939F00BDE9B5 /* SpaceManagerApp.swift in Sources */,
 				4F9DE7DB2C2F07BE001829BA /* ReadItemViewModel.swift in Sources */,
 				4F2C28FE2BDEDC6E00D040D2 /* LoginViewModel.swift in Sources */,
+				4F47058E2C3C3E8F00F42F12 /* CustomBack.swift in Sources */,
 				4F3363AE2BE549860042D0AD /* MainViewModel.swift in Sources */,
 				4F20BFD82C36DE610026C58B /* BtnModifier.swift in Sources */,
 			);

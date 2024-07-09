@@ -31,7 +31,7 @@ struct SpaceManagerApp: App {
             if(!loggedUser.logged || loggedUser.idOfCurrentUser.isEmpty){
                 LoginView()
             }else{
-                LoggedMainView()
+                WelcomeView()
             }
             
         }
