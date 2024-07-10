@@ -23,7 +23,7 @@
 		4F32055F2BBDB2AE000BD18C /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F32055E2BBDB2AE000BD18C /* RegisterView.swift */; };
 		4F3205612BC2D123000BD18C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F3205602BC2D122000BD18C /* GoogleService-Info.plist */; };
 		4F3363AA2BE51F750042D0AD /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363A92BE51F750042D0AD /* RegisterViewModel.swift */; };
-		4F3363AE2BE549860042D0AD /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363AD2BE549860042D0AD /* MainViewModel.swift */; };
+		4F3363AE2BE549860042D0AD /* AddNewItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363AD2BE549860042D0AD /* AddNewItemViewModel.swift */; };
 		4F3363B02BE54A790042D0AD /* AddNewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363AF2BE54A790042D0AD /* AddNewItemView.swift */; };
 		4F3363B22BE561C50042D0AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363B12BE561C50042D0AD /* User.swift */; };
 		4F3363B42BE689C00042D0AD /* BtnMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363B32BE689C00042D0AD /* BtnMenu.swift */; };
@@ -47,6 +47,7 @@
 		4F9DE7CF2C2ECD58001829BA /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 4F9DE7CE2C2ECD58001829BA /* CodeScanner */; };
 		4F9DE7D92C2F07B2001829BA /* ReadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE7D82C2F07B2001829BA /* ReadItem.swift */; };
 		4F9DE7DB2C2F07BE001829BA /* ReadItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE7DA2C2F07BE001829BA /* ReadItemViewModel.swift */; };
+		4FA1C6772C3EF46800306B59 /* PermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA1C6762C3EF46800306B59 /* PermissionViewModel.swift */; };
 		4FEADE522BC74459009C31BD /* BtnUnderlineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +69,7 @@
 		4F32055E2BBDB2AE000BD18C /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		4F3205602BC2D122000BD18C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4F3363A92BE51F750042D0AD /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
-		4F3363AD2BE549860042D0AD /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		4F3363AD2BE549860042D0AD /* AddNewItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewItemViewModel.swift; sourceTree = "<group>"; };
 		4F3363AF2BE54A790042D0AD /* AddNewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewItemView.swift; sourceTree = "<group>"; };
 		4F3363B12BE561C50042D0AD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4F3363B32BE689C00042D0AD /* BtnMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnMenu.swift; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 		4F85DFEC2C33016A00A5844D /* ReadActiveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadActiveViewModel.swift; sourceTree = "<group>"; };
 		4F9DE7D82C2F07B2001829BA /* ReadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadItem.swift; sourceTree = "<group>"; };
 		4F9DE7DA2C2F07BE001829BA /* ReadItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadItemViewModel.swift; sourceTree = "<group>"; };
+		4FA1C6762C3EF46800306B59 /* PermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewModel.swift; sourceTree = "<group>"; };
 		4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnUnderlineComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,7 +113,7 @@
 			children = (
 				4F2C28FD2BDEDC6E00D040D2 /* LoginViewModel.swift */,
 				4F3363A92BE51F750042D0AD /* RegisterViewModel.swift */,
-				4F3363AD2BE549860042D0AD /* MainViewModel.swift */,
+				4F3363AD2BE549860042D0AD /* AddNewItemViewModel.swift */,
 				4F3363B52BE69B2A0042D0AD /* QrCodeGenerator.swift */,
 				4F15F8D92BF61CD3001B58CA /* ProfileViewModel.swift */,
 				4F9DE7DA2C2F07BE001829BA /* ReadItemViewModel.swift */,
@@ -119,6 +121,7 @@
 				4F85DFEC2C33016A00A5844D /* ReadActiveViewModel.swift */,
 				4F07E1DB2C35AB6A000B26A8 /* ActiveHandlerViewModel.swift */,
 				4F5889492C3D7CF500CAB19D /* ForgotViewModel.swift */,
+				4FA1C6762C3EF46800306B59 /* PermissionViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -314,12 +317,13 @@
 				4F3363B02BE54A790042D0AD /* AddNewItemView.swift in Sources */,
 				4F859C392BD067B000924EF5 /* ForgotPasswordView.swift in Sources */,
 				4F859C3B2BD06A5F00924EF5 /* BtnClearComponent.swift in Sources */,
+				4FA1C6772C3EF46800306B59 /* PermissionViewModel.swift in Sources */,
 				4F9DE7D92C2F07B2001829BA /* ReadItem.swift in Sources */,
 				4F1E6C332BBD939F00BDE9B5 /* SpaceManagerApp.swift in Sources */,
 				4F9DE7DB2C2F07BE001829BA /* ReadItemViewModel.swift in Sources */,
 				4F2C28FE2BDEDC6E00D040D2 /* LoginViewModel.swift in Sources */,
 				4F47058E2C3C3E8F00F42F12 /* CustomBack.swift in Sources */,
-				4F3363AE2BE549860042D0AD /* MainViewModel.swift in Sources */,
+				4F3363AE2BE549860042D0AD /* AddNewItemViewModel.swift in Sources */,
 				4F20BFD82C36DE610026C58B /* BtnModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
