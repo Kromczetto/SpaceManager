@@ -17,8 +17,7 @@ class RegisterViewModel : ObservableObject {
     
     @Published var isFail: Bool = false
     @Published var message: String = ""
-    
-    
+        
     func registerUser() -> () {
         
         if(!validInput()){
@@ -29,7 +28,7 @@ class RegisterViewModel : ObservableObject {
             guard let self = self else { return }
             if let err = err {
                            self.isFail = true
-                           self.message = "Błąd przy rejestracji \(err)"
+                self.message = "Błąd przy rejestracji \(err.localizedDescription)"
                            return
                        }
             guard let userID = res?.user.uid else {
@@ -86,16 +85,47 @@ class RegisterViewModel : ObservableObject {
             isFail = true
             return false
         }
+//        let db = Firestore.firestore()
+//        let docRef = db.collection("users")
+//                        .document(email)
+//                      
+//        var user: User = User(uid:"123", email: email)
+//        docRef.getDocument { (document, error) in
+//            if let document = document, document.exists {
+//                do {
+//                    user = try document.data(as: User.self)
+//                } catch {
+//                    print("Problem z odczytaniem przedmiotu")
+//                }
+//            }
         //valid mail
-        //valid is user with this mail
-       
-        return true
+        let range = NSRange(location: 0, length: email.utf16.count)
+        let regexPattern = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
+        do {
+            let regex = try NSRegularExpression(pattern: regexPattern)
+            
+            let conditon =  regex.firstMatch(in: email, options: [], range: range) != nil
+            if(conditon){
+                isFail = false
+                return true
+            }else{
+                message = "Niepoprawny format emailu"
+                isFail = true
+                return false
+            }
+        } catch {
+            return false
+        }
+        
+        
     }
     private func addIntoDatabe(userID: String, email: String) {
         let newUser = User(uid: userID, email: email)
         let db = Firestore.firestore()
         db.collection("users")
             .document(userID)
-            .setData(["uid": newUser.uid, "email": newUser.email])
+            .setData(["uid": newUser.uid, 
+                      "email": newUser.email
+                     ])
     }
 }

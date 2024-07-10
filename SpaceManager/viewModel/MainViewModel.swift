@@ -40,7 +40,7 @@ class MainViewModel: ObservableObject{
         }
         return false
     }
-    private func validItemField()-> Bool{
+    func validItemField()-> Bool{
         var itemNameWithoutWhiteCharacters: String{
             itemName.trimmingCharacters(in: .whitespacesAndNewlines)
         }
