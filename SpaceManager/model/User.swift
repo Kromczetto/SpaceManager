@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct User {
+struct User{
+    
     let uid: String
     let email: String
+
 }
