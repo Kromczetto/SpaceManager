@@ -120,12 +120,10 @@ class RegisterViewModel : ObservableObject {
         
     }
     private func addIntoDatabe(userID: String, email: String) {
-        let newUser = User(uid: userID, email: email)
+        let newUser = User(uid: userID, email: email, permission: Permission.Reader)
         let db = Firestore.firestore()
         db.collection("users")
             .document(userID)
-            .setData(["uid": newUser.uid, 
-                      "email": newUser.email
-                     ])
+            .setData(newUser.toDictionary())
     }
 }

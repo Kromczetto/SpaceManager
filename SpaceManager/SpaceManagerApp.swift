@@ -19,7 +19,7 @@ class AppDelegate: NSObject, UIApplicationDelegate{
 @main
 struct SpaceManagerApp: App {
     
-    @StateObject var loggedUser = MainViewModel()
+    @StateObject var loggedUser = AddNewItemViewModel()
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     init(){

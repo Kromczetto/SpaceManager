@@ -10,7 +10,7 @@ import SwiftUI
 struct BtnProfile: View {
 //    var btnEvent: ()->Void
     @ObservedObject var profileView = ProfileViewModel()
-    @StateObject var logManager = MainViewModel()
+    @StateObject var logManager = AddNewItemViewModel()
     var body: some View {
         Button{
             profileView.loggout()

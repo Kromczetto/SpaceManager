@@ -11,9 +11,10 @@ import FirebaseAuth
 
 struct AddNewItemView: View {
     
-    @StateObject var logManager = MainViewModel()
+    @StateObject var logManager = AddNewItemViewModel()
     @StateObject var qrCodeGenerator = QrCodeGenerator()
     @StateObject var activeHandlerViewModel = ActivevHandlerViewModel()
+    @StateObject var permissionViewModel = PermissionViewModel()
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
     
     @State var productID: String = UUID().uuidString
@@ -81,6 +82,11 @@ struct AddNewItemView: View {
                                          checkName: "Zużycie prądu")
                                 Checkbox(isChecked: $isThirdCheck,
                                          checkName: "Czas pracy")
+                        }
+                        if(permissionViewModel.returnPermission() == Permission.Reader){
+                            Text("Reader B)")
+                        }else{
+                            Text("Lipa")
                         }
                         BtnDatabase(btnLabel: "Dodaj"){
                             qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)

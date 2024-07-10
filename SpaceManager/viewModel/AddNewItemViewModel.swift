@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-class MainViewModel: ObservableObject{
+class AddNewItemViewModel: ObservableObject{
     @Published var logged = false
     @Published var idOfCurrentUser: String  = ""
     @Published var whichView: Int = 1
@@ -122,7 +122,5 @@ class MainViewModel: ObservableObject{
                     
                 }
             }
-        
-        
     }
 }
