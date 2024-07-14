@@ -12,7 +12,7 @@ import FirebaseFirestore
 class AddNewItemViewModel: ObservableObject{
     @Published var logged = false
     @Published var idOfCurrentUser: String  = ""
-    @Published var whichView: Int = 1
+   // @Published var whichView: Int = 1
     
     @Published var itemName: String = ""
     @Published var numberOfItems: String = ""
@@ -31,13 +31,13 @@ class AddNewItemViewModel: ObservableObject{
     init(){
         self.handler = Auth.auth().addStateDidChangeListener{auth, user in
             self.idOfCurrentUser=user?.uid ?? ""
-            self.logged=true
+            self.logged=false
         }
     }
     func isUserLogged() -> Bool{
-        if(Auth.auth().currentUser != nil){
-            return true
-        }
+//        if(Auth.auth().currentUser != nil){
+//            return true
+//        }
         return false
     }
     func validItemField()-> Bool{

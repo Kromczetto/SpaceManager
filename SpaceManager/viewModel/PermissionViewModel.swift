@@ -19,7 +19,6 @@ class PermissionViewModel: ObservableObject{
             return
         }
         
-        print(userID)
         let db = Firestore.firestore()
         let userRef = db.collection("users")
                         .document(userID)

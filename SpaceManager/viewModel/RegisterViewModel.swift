@@ -23,18 +23,24 @@ class RegisterViewModel : ObservableObject {
         if(!validInput()){
             return
         }
-        Auth.auth().createUser(withEmail: email, password: password){
-            [weak self] res, err in
+        
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] res, err in
             guard let self = self else { return }
+            
             if let err = err {
-                           self.isFail = true
+             
+                self.isFail = true
                 self.message = "Błąd przy rejestracji \(err.localizedDescription)"
-                           return
-                       }
+                
+                return
+            }
+            
             guard let userID = res?.user.uid else {
                 return
             }
+                
             self.addIntoDatabe(userID: userID, email: email)
+                
         }
     }
     private func validInput() -> Bool {
@@ -125,5 +131,6 @@ class RegisterViewModel : ObservableObject {
         db.collection("users")
             .document(userID)
             .setData(newUser.toDictionary())
+        print("User has been added into db")
     }
 }
