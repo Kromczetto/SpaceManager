@@ -17,30 +17,21 @@ class RegisterViewModel : ObservableObject {
     
     @Published var isFail: Bool = false
     @Published var message: String = ""
-        
+    
     func registerUser() -> () {
-        
         if(!validInput()){
             return
         }
-        
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] res, err in
-            guard let self = self else { return }
-            
+        Auth.auth().createUser(withEmail: email, password: password) { res, err in
             if let err = err {
-             
                 self.isFail = true
                 self.message = "Błąd przy rejestracji \(err.localizedDescription)"
-                
                 return
             }
-            
             guard let userID = res?.user.uid else {
                 return
             }
-                
-            self.addIntoDatabe(userID: userID, email: email)
-                
+            self.addIntoDatabe(userID: userID, email: self.email)
         }
     }
     private func validInput() -> Bool {
@@ -126,7 +117,7 @@ class RegisterViewModel : ObservableObject {
         
     }
     private func addIntoDatabe(userID: String, email: String) {
-        let newUser = User(uid: userID, email: email, permission: Permission.Reader)
+        let newUser = User(uid: userID, email: email, permission: Permission.Adder)
         let db = Firestore.firestore()
         db.collection("users")
             .document(userID)

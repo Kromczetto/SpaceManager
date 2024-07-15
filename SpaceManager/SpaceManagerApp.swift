@@ -19,7 +19,7 @@ class AppDelegate: NSObject, UIApplicationDelegate{
 @main
 struct SpaceManagerApp: App {
     
-    @StateObject var loggedUser = AddNewItemViewModel()
+    @StateObject var staySignin = StaySigninViewModel()
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     init(){
@@ -28,7 +28,7 @@ struct SpaceManagerApp: App {
     var body: some Scene {
         WindowGroup {
          
-            if(!loggedUser.logged || loggedUser.idOfCurrentUser.isEmpty){
+            if(!staySignin.logged || staySignin.idOfCurrentUser.isEmpty){
                 LoginView()
             }else{
                 WelcomeView()

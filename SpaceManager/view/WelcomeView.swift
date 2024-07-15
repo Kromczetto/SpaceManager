@@ -10,9 +10,11 @@ import SwiftUI
 struct WelcomeView: View {
     
     @StateObject var generatorViewModel = GeneratorViewModel()
+    @StateObject var permissionViewModel = PermissionViewModel()
     var body: some View {
         BottomMenu()
             .environmentObject(generatorViewModel)
+            .environmentObject(permissionViewModel)
     }
 }
 
