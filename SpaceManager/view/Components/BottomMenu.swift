@@ -11,6 +11,7 @@ import FirebaseAuth
 
 struct BottomMenu: View {
 
+    @EnvironmentObject var permissionViewModel: PermissionViewModel
     var body: some View {
         TabView {
             NavigationView {
@@ -26,6 +27,15 @@ struct BottomMenu: View {
             }
             .tabItem {
                 Label("Szukaj", systemImage: "magnifyingglass")
+            }
+            if(permissionViewModel.canUserAdmin){
+                NavigationView {
+                    ManagerView()
+                        .navigationBarBackButtonHidden(true)
+                }
+                .tabItem {
+                    Label("Manager", systemImage: "person.badge.shield.checkmark.fill")
+                }                
             }
             NavigationView {
                 ProfileView()

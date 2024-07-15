@@ -14,7 +14,8 @@ class PermissionViewModel: ObservableObject{
     @Published var userDetails: User?
     
     @Published var canUserAdd: Bool = true
-    private var counter:Int = 0
+    @Published var canUserRead: Bool = true
+    @Published var canUserAdmin: Bool = false
 
     func getPermission() {
           guard let userID = Auth.auth().currentUser?.uid else {
@@ -46,6 +47,16 @@ class PermissionViewModel: ObservableObject{
             canUserAdd = true
         } else {
             canUserAdd = false
+        }
+        if permission == Permission.Reader || permission == Permission.Full || permission == Permission.Admin {
+            canUserRead = true
+        } else {
+            canUserRead = false
+        }
+        if permission == Permission.Admin {
+            canUserAdmin = true
+        } else {
+            canUserAdmin = false
         }
     }
 

@@ -14,6 +14,8 @@ struct SearchView: View {
     @State var messageFromQR: String = "id: "
     @State var isRead: Bool = false
     
+    @EnvironmentObject var permissionViewModel: PermissionViewModel
+    
     var camera: some View {
         CodeScannerView(
             codeTypes: [.qr],
@@ -31,24 +33,30 @@ struct SearchView: View {
     var body: some View {
         VStack {
             Spacer()
-            Button {
-                self.isCameraOpen = true
-            } label :{
-                ZStack{
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundColor(.blue)
-                        .padding(10)
-                        .frame(width: 350, height: 80)
-                    Text("Skanuj kod QR")
-                        .foregroundStyle(.white)
-                        .padding()
-                        .bold()
-                        .font(.system(size: 16))
+            if(permissionViewModel.canUserRead){
+                Button {
+                    self.isCameraOpen = true
+                } label :{
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.blue)
+                            .padding(10)
+                            .frame(width: 350, height: 80)
+                        Text("Skanuj kod QR")
+                            .foregroundStyle(.white)
+                            .padding()
+                            .bold()
+                            .font(.system(size: 16))
+                    }
                 }
+                .sheet(isPresented: $isCameraOpen) {
+                    self.camera
+                }
+            }else{
+                Text("Nie masz uprawnień do odczytywania kodów QR")
+                    .foregroundStyle(.red)
             }
-            .sheet(isPresented: $isCameraOpen) {
-                self.camera
-            }
+            
             NavigationLink(destination: ReadItem(messageFromQR: messageFromQR).navigationBarBackButtonHidden(true)
                 .navigationBarItems(leading: CustomBack(title:"Skanuj")),
                            isActive: $isRead) {
