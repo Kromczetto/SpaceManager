@@ -14,14 +14,17 @@ struct AddNewItemView: View {
     @StateObject var logManager = AddNewItemViewModel()
     @StateObject var qrCodeGenerator = QrCodeGenerator()
     @StateObject var activeHandlerViewModel = ActivevHandlerViewModel()
-    @StateObject var permissionViewModel = PermissionViewModel()
+    //@StateObject var permissionViewModel = PermissionViewModel()
+    @EnvironmentObject var permissionViewModel: PermissionViewModel
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
     
     @State var productID: String = UUID().uuidString
     
-    @State var isFirstCheck: Bool = false
+    @State private var isFirstCheck: Bool = false
     @State private var isSecondCheck: Bool = false
     @State private var isThirdCheck: Bool = false
+    @State private var canAdd: Bool = false
+
     
     @State private var qrCodeToSave: UIImage? = nil
     
@@ -58,8 +61,11 @@ struct AddNewItemView: View {
                     generatorViewModel.setSpins(number: 0)
                     generatorViewModel.setConsumption(number: 0)
                     generatorViewModel.setWorkTime(number: 0)
+                    
+                    permissionViewModel.getPermission()
                 }
                 Spacer()
+                permissionViewModel.canUserAdd ? nil : Text("Nie posiadasz uprawnień, aby dodać przedmiot")
                 Group{
                     Form{
                         GeometryReader { geometry in
@@ -83,11 +89,7 @@ struct AddNewItemView: View {
                                 Checkbox(isChecked: $isThirdCheck,
                                          checkName: "Czas pracy")
                         }
-                        if(permissionViewModel.returnPermission() == Permission.Reader){
-                            Text("Reader B)")
-                        }else{
-                            Text("Lipa")
-                        }
+                     
                         BtnDatabase(btnLabel: "Dodaj"){
                             qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
                             UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
@@ -123,7 +125,8 @@ struct AddNewItemView: View {
                                        Button("OK", role: .cancel) { }
                         }
                     }
-                }
+                }.disabled(!permissionViewModel.canUserAdd)
+                    .opacity(permissionViewModel.canUserAdd ? 1 : 0.4)
             }
         }
     }

@@ -48,6 +48,7 @@
 		4F9DE7D92C2F07B2001829BA /* ReadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE7D82C2F07B2001829BA /* ReadItem.swift */; };
 		4F9DE7DB2C2F07BE001829BA /* ReadItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE7DA2C2F07BE001829BA /* ReadItemViewModel.swift */; };
 		4FA1C6772C3EF46800306B59 /* PermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA1C6762C3EF46800306B59 /* PermissionViewModel.swift */; };
+		4FAB91D92C43DD9500337256 /* StaySigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB91D82C43DD9500337256 /* StaySigninViewModel.swift */; };
 		4FEADE522BC74459009C31BD /* BtnUnderlineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		4F9DE7D82C2F07B2001829BA /* ReadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadItem.swift; sourceTree = "<group>"; };
 		4F9DE7DA2C2F07BE001829BA /* ReadItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadItemViewModel.swift; sourceTree = "<group>"; };
 		4FA1C6762C3EF46800306B59 /* PermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewModel.swift; sourceTree = "<group>"; };
+		4FAB91D82C43DD9500337256 /* StaySigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaySigninViewModel.swift; sourceTree = "<group>"; };
 		4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnUnderlineComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +124,7 @@
 				4F07E1DB2C35AB6A000B26A8 /* ActiveHandlerViewModel.swift */,
 				4F5889492C3D7CF500CAB19D /* ForgotViewModel.swift */,
 				4FA1C6762C3EF46800306B59 /* PermissionViewModel.swift */,
+				4FAB91D82C43DD9500337256 /* StaySigninViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F32055F2BBDB2AE000BD18C /* RegisterView.swift in Sources */,
+				4FAB91D92C43DD9500337256 /* StaySigninViewModel.swift in Sources */,
 				4F15F8DA2BF61CD3001B58CA /* ProfileViewModel.swift in Sources */,
 				4F3363AA2BE51F750042D0AD /* RegisterViewModel.swift in Sources */,
 				4F32055D2BBDB217000BD18C /* LoginView.swift in Sources */,
