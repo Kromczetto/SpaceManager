@@ -49,6 +49,7 @@
 		4F9DE7DB2C2F07BE001829BA /* ReadItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9DE7DA2C2F07BE001829BA /* ReadItemViewModel.swift */; };
 		4FA1C6772C3EF46800306B59 /* PermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA1C6762C3EF46800306B59 /* PermissionViewModel.swift */; };
 		4FAB91D92C43DD9500337256 /* StaySigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB91D82C43DD9500337256 /* StaySigninViewModel.swift */; };
+		4FAB91DB2C456A4D00337256 /* ManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB91DA2C456A4D00337256 /* ManagerView.swift */; };
 		4FEADE522BC74459009C31BD /* BtnUnderlineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		4F9DE7DA2C2F07BE001829BA /* ReadItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadItemViewModel.swift; sourceTree = "<group>"; };
 		4FA1C6762C3EF46800306B59 /* PermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewModel.swift; sourceTree = "<group>"; };
 		4FAB91D82C43DD9500337256 /* StaySigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaySigninViewModel.swift; sourceTree = "<group>"; };
+		4FAB91DA2C456A4D00337256 /* ManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerView.swift; sourceTree = "<group>"; };
 		4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnUnderlineComponent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,6 +181,7 @@
 				4F15F8D72BF61CA2001B58CA /* ProfileView.swift */,
 				4F9DE7D82C2F07B2001829BA /* ReadItem.swift */,
 				4F47058F2C3C5FF400F42F12 /* WelcomeView.swift */,
+				4FAB91DA2C456A4D00337256 /* ManagerView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				4F859C392BD067B000924EF5 /* ForgotPasswordView.swift in Sources */,
 				4F859C3B2BD06A5F00924EF5 /* BtnClearComponent.swift in Sources */,
 				4FA1C6772C3EF46800306B59 /* PermissionViewModel.swift in Sources */,
+				4FAB91DB2C456A4D00337256 /* ManagerView.swift in Sources */,
 				4F9DE7D92C2F07B2001829BA /* ReadItem.swift in Sources */,
 				4F1E6C332BBD939F00BDE9B5 /* SpaceManagerApp.swift in Sources */,
 				4F9DE7DB2C2F07BE001829BA /* ReadItemViewModel.swift in Sources */,
