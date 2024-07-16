@@ -21,7 +21,7 @@ struct User: Codable{
     let email: String
     let permission: Permission
     
-    func toDictionary() -> [String: Any]{
+    func toDictionary() -> [String: Any] {
         return ["uid": uid, "email": email, "permission": permission.rawValue]
     }
     

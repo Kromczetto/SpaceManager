@@ -2,27 +2,40 @@
 //  CameraView.swift
 //  SpaceManager
 //
-//  Created by Kuba Kromomołowski on 28/06/2024.
+//  Created by Kuba Kromomołowski on 16/07/2024.
 //
 
 import SwiftUI
-import CodeScanner
 
-struct CameraView: View {
-    @Binding var messageFromQR: String
-    @Binding var isCameraOpen: Bool
+struct CameraView: View{
     
-    var body: some View {
-        CodeScannerView(
-            codeTypes: [.qr],
-            completion: {
-                result in
-                if case let .success(code) = result {
-                    self.messageFromQR = code.string
-                    self.isCameraOpen = false
+    @StateObject var cameraViewModel = CameraViewModel()
+    var body: some View{
+        Color.black.ignoresSafeArea(.all, edges: .all)
+        VStack{
+            Spacer()
+            HStack{
+                if (cameraViewModel.isTaken){
+                    
+                }else{
+                    Button{
+                        cameraViewModel.isTaken.toggle()
+                    }label: {
+                        Circle()
+                            .fill(Color.white)
+                            .frame(width: 65, height: 65)
+                        Circle()
+                            .stroke(Color.white, lineWidth: 2)
+                            .frame(width: 75, height: 75)
+                    }
                 }
+            }.onAppear{
+                cameraViewModel.checkPermission()
             }
-        )
+        }
     }
 }
 
+#Preview {
+    CameraView()
+}
