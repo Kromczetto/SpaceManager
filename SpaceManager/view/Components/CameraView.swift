@@ -7,9 +7,32 @@
 
 import SwiftUI
 
-struct CameraView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+struct CameraView: View{
+    
+    @StateObject var cameraViewModel = CameraViewModel()
+    var body: some View{
+        Color.black.ignoresSafeArea(.all, edges: .all)
+        VStack{
+            Spacer()
+            HStack{
+                if (cameraViewModel.isTaken){
+                    
+                }else{
+                    Button{
+                        cameraViewModel.isTaken.toggle()
+                    }label: {
+                        Circle()
+                            .fill(Color.white)
+                            .frame(width: 65, height: 65)
+                        Circle()
+                            .stroke(Color.white, lineWidth: 2)
+                            .frame(width: 75, height: 75)
+                    }
+                }
+            }.onAppear{
+                cameraViewModel.checkPermission()
+            }
+        }
     }
 }
 
