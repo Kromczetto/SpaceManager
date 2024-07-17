@@ -6,18 +6,22 @@
 //
 
 import Foundation
-import PhotosUI
+import AVFoundation
 
-class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    var picker: accessCameraView
+class Coordinator: NSObject, AVCapturePhotoCaptureDelegate {
+    let parent: CameraView
+    var didFinishProcessingPhoto: (Result<AVCapturePhoto, Error>) -> ()
     
-    init(picker: accessCameraView) {
-        self.picker = picker
+    init(_ parent: CameraView, didFinishProcessingPhoto: @escaping (Result<AVCapturePhoto, Error>) -> ()) {
+        self.parent = parent
+        self.didFinishProcessingPhoto = didFinishProcessingPhoto
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let selectedImage = info[.originalImage] as? UIImage else { return }
-        self.picker.selectedImage = selectedImage
-        self.picker.isPresented.wrappedValue.dismiss()
-    }
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+           if let error = error {
+               didFinishProcessingPhoto(.failure(error))
+           } else {
+               didFinishProcessingPhoto(.success(photo))
+           }
+       }
 }

@@ -2,40 +2,36 @@
 //  CameraView.swift
 //  SpaceManager
 //
-//  Created by Kuba Kromomołowski on 16/07/2024.
+//  Created by Kuba Kromomołowski on 17/07/2024.
 //
 
 import SwiftUI
+import AVFoundation
 
-struct CameraView: View{
+struct CameraView: UIViewControllerRepresentable {
+    typealias UIViewControllerType = UIViewController
     
-    @StateObject var cameraViewModel = CameraViewModel()
-    var body: some View{
-        Color.black.ignoresSafeArea(.all, edges: .all)
-        VStack{
-            Spacer()
-            HStack{
-                if (false){
-                    
-                }else{
-                    Button{
-                        
-                    }label: {
-                        Circle()
-                            .fill(Color.white)
-                            .frame(width: 65, height: 65)
-                        Circle()
-                            .stroke(Color.white, lineWidth: 2)
-                            .frame(width: 75, height: 75)
-                    }
-                }
-            }.onAppear{
-              
+    let cameraService: CameraService
+    let didFinishedProcessingPhoto: (Result<AVCapturePhoto, Error>) -> ()
+    
+    func makeUIViewController(context: Context) -> UIViewController {
+        
+        cameraService.start(delegate: context.coordinator) { err in
+            if let err = err {
+                didFinishedProcessingPhoto(.failure(err))
+                return
             }
         }
+        let viewController = UIViewController()
+        viewController.view.backgroundColor = .black
+        viewController.view.layer.addSublayer(cameraService.previewLayer)
+        cameraService.previewLayer.frame = viewController.view.bounds
+        return viewController
     }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self, didFinishProcessingPhoto: didFinishedProcessingPhoto)
+    }
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
-#Preview {
-    CameraView()
-}
