@@ -10,9 +10,9 @@ import SwiftUI
 
 struct ProfileView: View {
     @StateObject var profileViewModel = ProfileViewModel()
-    @State private var showCamera = false
-    @State private var selectedImage: UIImage?
-    @State var image: UIImage?
+    @State private var showCamera: Bool = false
+    @State private var captureImage: UIImage? = nil
+//    @State var image: UIImage?
     var body: some View {
         VStack{
             ZStack{
@@ -21,20 +21,28 @@ struct ProfileView: View {
                     .padding(10)
                     .frame(width: 420, height: 120)
                 HStack() {
-                    Button{
+                    Button {
                         self.showCamera.toggle()
                     } label: {
-                        ZStack{
+                        ZStack {
                             RoundedRectangle(cornerRadius: 100)
                                 .foregroundColor(Color(red: 220/255, green: 220/255, blue: 220/255))
                                 .frame(width: 80, height: 80)
-                            Image(systemName: "plus")
-                                .font(.system(size: 40))
-                                .foregroundColor(.white)
+                            if let image = captureImage {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 80, height: 80)
+                                    .clipShape(Circle())
+                            } else {
+                                Image(systemName: "plus")
+                                    .font(.system(size: 40))
+                                    .foregroundColor(.white)
+                            }
                         }
-                    } .fullScreenCover(isPresented: self.$showCamera) {
-                        accessCameraView(selectedImage: self.$selectedImage)
-                    }
+                    } .sheet(isPresented: self.$showCamera, content: {
+                        CustomCameraView(captureImage: $captureImage)
+                    })
                     Text(profileViewModel.whoAmI())
                         .foregroundColor(.white)
                         .fontWeight(.bold)
@@ -48,27 +56,6 @@ struct ProfileView: View {
     }
 }
 
-struct accessCameraView: UIViewControllerRepresentable {
-    
-    @Binding var selectedImage: UIImage?
-    @Environment(\.presentationMode) var isPresented
-    
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .camera
-        imagePicker.allowsEditing = true
-        imagePicker.delegate = context.coordinator
-        return imagePicker
-    }
-    
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
-        
-    }
-
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(picker: self)
-    }
-}
 #Preview {
     ProfileView()
 }

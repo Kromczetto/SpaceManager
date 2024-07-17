@@ -6,15 +6,31 @@
 //
 
 import SwiftUI
-import PhotosUI
+
 
 struct Camera: UIViewControllerRepresentable {
     
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    @Binding var selectedImage: UIImage?
+ 
+    @Environment(\.presentationMode) var isPresented
+    
+    func makeUIViewController(context: Context) -> UIImagePickerController {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .camera
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = context.coordinator
+        return imagePicker
+    }
+    
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
+        
+    }
+
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(picker: self)
     }
 }
 
-#Preview {
-    Camera()
-}
+//#Preview {
+//    Camera()
+//}
