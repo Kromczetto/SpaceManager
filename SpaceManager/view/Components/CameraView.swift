@@ -15,11 +15,11 @@ struct CameraView: View{
         VStack{
             Spacer()
             HStack{
-                if (cameraViewModel.isTaken){
+                if (false){
                     
                 }else{
                     Button{
-                        cameraViewModel.isTaken.toggle()
+                        
                     }label: {
                         Circle()
                             .fill(Color.white)
@@ -30,7 +30,7 @@ struct CameraView: View{
                     }
                 }
             }.onAppear{
-                cameraViewModel.checkPermission()
+              
             }
         }
     }
