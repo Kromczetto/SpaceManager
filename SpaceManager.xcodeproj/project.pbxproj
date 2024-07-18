@@ -30,6 +30,8 @@
 		4F3363B42BE689C00042D0AD /* BtnMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363B32BE689C00042D0AD /* BtnMenu.swift */; };
 		4F3363B62BE69B2A0042D0AD /* QrCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363B52BE69B2A0042D0AD /* QrCodeGenerator.swift */; };
 		4F3363BB2BE6AF800042D0AD /* BottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363BA2BE6AF800042D0AD /* BottomMenu.swift */; };
+		4F411BE32C493C90004FC735 /* ImagePopUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F411BE22C493C90004FC735 /* ImagePopUpMenu.swift */; };
+		4F411BE52C4955BC004FC735 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F411BE42C4955BC004FC735 /* PhotoPicker.swift */; };
 		4F47058E2C3C3E8F00F42F12 /* CustomBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */; };
 		4F4705902C3C5FF400F42F12 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F47058F2C3C5FF400F42F12 /* WelcomeView.swift */; };
 		4F4A8DB02C32E9FC0002744A /* GeneratorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4A8DAF2C32E9FC0002744A /* GeneratorViewModel.swift */; };
@@ -83,6 +85,8 @@
 		4F3363B32BE689C00042D0AD /* BtnMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnMenu.swift; sourceTree = "<group>"; };
 		4F3363B52BE69B2A0042D0AD /* QrCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeGenerator.swift; sourceTree = "<group>"; };
 		4F3363BA2BE6AF800042D0AD /* BottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenu.swift; sourceTree = "<group>"; };
+		4F411BE22C493C90004FC735 /* ImagePopUpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePopUpMenu.swift; sourceTree = "<group>"; };
+		4F411BE42C4955BC004FC735 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBack.swift; sourceTree = "<group>"; };
 		4F47058F2C3C5FF400F42F12 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		4F4A8DAF2C32E9FC0002744A /* GeneratorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorViewModel.swift; sourceTree = "<group>"; };
@@ -226,6 +230,8 @@
 				4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */,
 				4FF426D72C4827D20096ED46 /* CameraView.swift */,
 				4FF426D92C482CC70096ED46 /* CustomCameraView.swift */,
+				4F411BE22C493C90004FC735 /* ImagePopUpMenu.swift */,
+				4F411BE42C4955BC004FC735 /* PhotoPicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -323,7 +329,9 @@
 				4F102D752C2C79D100A6702D /* Item.swift in Sources */,
 				4F3363BB2BE6AF800042D0AD /* BottomMenu.swift in Sources */,
 				4F4E58FB2BF0FE4500B80AB8 /* SearchView.swift in Sources */,
+				4F411BE52C4955BC004FC735 /* PhotoPicker.swift in Sources */,
 				4F056CC92C46979E006408E4 /* Photo.swift in Sources */,
+				4F411BE32C493C90004FC735 /* ImagePopUpMenu.swift in Sources */,
 				4F15F8DC2BF61D54001B58CA /* BtnProfile.swift in Sources */,
 				4F58894A2C3D7CF500CAB19D /* ForgotViewModel.swift in Sources */,
 				4FF426D82C4827D20096ED46 /* CameraView.swift in Sources */,
@@ -491,6 +499,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -522,6 +531,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
