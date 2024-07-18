@@ -11,9 +11,14 @@ import AVFoundation
 class CameraService {
     var session: AVCaptureSession?
     var delegate: AVCapturePhotoCaptureDelegate?
+    var cameraSite: AVCaptureDevice?
     
     let output = AVCapturePhotoOutput()
     let previewLayer = AVCaptureVideoPreviewLayer()
+    
+    init(siteOfCamera: AVCaptureDevice.Position){
+        cameraSite = getCamera(site: siteOfCamera)
+    }
     
     func start(delegate: AVCapturePhotoCaptureDelegate, completion: @escaping (Error?) -> ()) {
         self.delegate = delegate
@@ -42,7 +47,7 @@ class CameraService {
     }
     private func setUp(completion: @escaping (Error?) -> ()) {
         let session = AVCaptureSession()
-        if let device = getFrontCamera() {
+        if let device = cameraSite {
             do {
                 let input = try AVCaptureDeviceInput(device: device)
                 if (session.canAddInput(input)) {
@@ -65,8 +70,8 @@ class CameraService {
             }
         }
     }
-    private func getFrontCamera() -> AVCaptureDevice? {
-         let devices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .front).devices
+    private func getCamera(site: AVCaptureDevice.Position) -> AVCaptureDevice? {
+        let devices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: site).devices
          return devices.first
      }
     func capturePhoto(with settings: AVCapturePhotoSettings = AVCapturePhotoSettings()) {
