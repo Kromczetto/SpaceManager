@@ -10,11 +10,14 @@ import Firebase
 import FirebaseAuth
 
 class ProfileViewModel: ObservableObject{
-    func whoAmI()->String{
-        if let userEmail = Auth.auth().currentUser?.email {
-            return userEmail
+    
+    @Published var userEmail: String = ""
+    
+    func whoAmI() {
+        if let email = Auth.auth().currentUser?.email {
+            userEmail = email
         } else {
-            return "Nie zalogowany"
+            userEmail = ""
         }
     }
     func loggout(){

@@ -15,21 +15,21 @@ struct FormComponent: View {
     //viewModel of Login
     @StateObject private var loginHandler = LoginViewModel()
     @StateObject private var registerHandler = RegisterViewModel()
-   
+    @EnvironmentObject var permissionViewModel: PermissionViewModel
     
     
     var isRegister: Bool = true
     
     var body: some View{
         Form{
-            TextField("Email", text: isRegister ? $registerHandler.email :$loginHandler.email)
+            TextField("Email", text: isRegister ? $registerHandler.email : $loginHandler.email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .font(.system(size: 25))
                 .multilineTextAlignment(.center)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 
-            SecureField("Hasło", text: isRegister ? $registerHandler.password :$loginHandler.password)
+            SecureField("Hasło", text: isRegister ? $registerHandler.password : $loginHandler.password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .font(.system(size: 25))
                 .multilineTextAlignment(.center)
@@ -49,9 +49,13 @@ struct FormComponent: View {
                                        btnRegister: isRegister,
                                        action: {
                                           if isRegister {
-                                              registerHandler.registerUser()
+                                              registerHandler.registerUser() {
+                                                  permissionViewModel.getPermission()
+                                              }
                                           } else {
-                                              loginHandler.userLogin()
+                                              loginHandler.userLogin() {
+                                                  permissionViewModel.getPermission()
+                                              }
                                           }
                                        },
                                        loginHandler: loginHandler,

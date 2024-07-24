@@ -10,11 +10,16 @@ import SwiftUI
 struct WelcomeView: View {
     
     @StateObject var generatorViewModel = GeneratorViewModel()
-    @StateObject var permissionViewModel = PermissionViewModel()
+    @EnvironmentObject var permissionViewModel: PermissionViewModel
+    //@EnvironmentObject var storageManager: StorageManager
     var body: some View {
         BottomMenu()
+//            .onAppear {
+//                permissionViewModel.getPermission()
+//            }
             .environmentObject(generatorViewModel)
             .environmentObject(permissionViewModel)
+            //.environmentObject(storageManager)
     }
 }
 

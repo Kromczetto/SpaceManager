@@ -15,6 +15,7 @@ class LoginViewModel : ObservableObject {
  
     @Published var isFail: Bool = false
     @Published var message: String = ""
+    @Published var loginSucces: Bool = false
     
     func inputValid() -> Bool{
         if(email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty){
@@ -27,7 +28,7 @@ class LoginViewModel : ObservableObject {
         return true
     }
     
-    func userLogin()->(){
+    func userLogin(completion: @escaping () -> Void){
         guard inputValid() else { return }
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
@@ -36,6 +37,10 @@ class LoginViewModel : ObservableObject {
                 print(error.localizedDescription)
                 self!.message = "Błędny email lub hasło"
                 self!.isFail = true
+                self!.loginSucces = false
+            } else {
+                self!.loginSucces = true
+                completion()
             }
         }
         
