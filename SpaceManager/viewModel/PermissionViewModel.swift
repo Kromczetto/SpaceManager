@@ -17,6 +17,8 @@ class PermissionViewModel: ObservableObject{
     @Published var canUserRead: Bool = true
     @Published var canUserAdmin: Bool = false
 
+    init() { getPermission() }
+    
     func getPermission() {
           guard let userID = Auth.auth().currentUser?.uid else {
               return
@@ -29,6 +31,9 @@ class PermissionViewModel: ObservableObject{
               if let document = document, document.exists {
                   do {
                       self.userDetails = try document.data(as: User.self)
+                      if let perm = self.userDetails?.permission {
+                          self.checkPermission(permission: perm)
+                      }
                   } catch {
                       print("error")
                   }
@@ -36,28 +41,27 @@ class PermissionViewModel: ObservableObject{
                   print("No collection perm")
               }
              
-              if let perm = self.userDetails?.permission {
-                  self.checkPermission(permission: perm)
-              }
+             
           }
       }
-    func checkPermission(permission: Permission) {
-//        print(permission)
-        if permission == Permission.Adder || permission == Permission.Full || permission == Permission.Admin {
-            canUserAdd = true
-        } else {
-            canUserAdd = false
-        }
-        if permission == Permission.Reader || permission == Permission.Full || permission == Permission.Admin {
-            canUserRead = true
-        } else {
-            canUserRead = false
-        }
-        if permission == Permission.Admin {
-            canUserAdmin = true
-        } else {
-            canUserAdmin = false
+    private func checkPermission(permission: Permission) {
+        DispatchQueue.main.async {
+            print(permission)
+            if permission == .Adder || permission == .Full || permission == .Admin {
+                self.canUserAdd = true
+            } else {
+                self.canUserAdd = false
+            }
+            if permission == .Reader || permission == .Full || permission == .Admin {
+                self.canUserRead = true
+            } else {
+                self.canUserRead = false
+            }
+            if permission == .Admin {
+                self.canUserAdmin = true
+            } else {
+                self.canUserAdmin = false
+            }
         }
     }
-
 }

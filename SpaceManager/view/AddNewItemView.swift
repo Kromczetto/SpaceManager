@@ -62,7 +62,7 @@ struct AddNewItemView: View {
                     generatorViewModel.setConsumption(number: 0)
                     generatorViewModel.setWorkTime(number: 0)
                     
-                    permissionViewModel.getPermission()
+                   // permissionViewModel.getPermission()
                 }
                 Spacer()
                 permissionViewModel.canUserAdd ? nil : Text("Nie posiadasz uprawnień, aby dodać przedmiot")
