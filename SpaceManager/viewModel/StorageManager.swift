@@ -46,7 +46,7 @@ class StorageManager: ObservableObject {
             return
         }
         print(uid)
-        let ref = storage.reference(withPath: "profile/WojBojK0guclBeQ3IAxB5tdSUd43" )
+        let ref = storage.reference(withPath: "profile/\(uid)" )
         ref.getData(maxSize: 2048 * 2048) { data, err in
             if let err = err {
                 print("Problem with reading photo: \(err.localizedDescription)")
