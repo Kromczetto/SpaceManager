@@ -10,9 +10,8 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-class PermissionViewModel: ObservableObject{
+class PermissionViewModel: ObservableObject {
     @Published var userDetails: User?
-    
     @Published var canUserAdd: Bool = true
     @Published var canUserRead: Bool = true
     @Published var canUserAdmin: Bool = false

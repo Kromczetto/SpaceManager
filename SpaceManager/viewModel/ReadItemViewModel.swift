@@ -59,7 +59,8 @@ class ReadItemViewModel: ObservableObject {
                            nameOfAdder: userName,
                            commentsToItem: commentsToItem,
                            productWeight: weigthOfItem,
-                           addDate: Date()
+                           addDate: Date(),
+                        properties: [["key":"value"]] //remove
         )
         let db = Firestore.firestore()
         db.collection("users")
@@ -72,7 +73,8 @@ class ReadItemViewModel: ObservableObject {
                       "commentsToItem": data.commentsToItem,
                       "nameOfAdder": data.nameOfAdder,
                       "productWeight": data.productWeight,
-                      "addDate": data.addDate
+                      "addDate": data.addDate,
+                      "properties": [["key":"valie"]]
             ])
     }
     func delete(id: String){

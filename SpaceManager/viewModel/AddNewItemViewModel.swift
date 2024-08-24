@@ -10,10 +10,6 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class AddNewItemViewModel: ObservableObject{
-//    @Published var logged = false
-//    @Published var idOfCurrentUser: String  = ""
-//    @Published var whichView: Int = 1
-    
     @Published var itemName: String = ""
     @Published var numberOfItems: String = ""
     @Published var weight: String = ""
@@ -26,31 +22,25 @@ class AddNewItemViewModel: ObservableObject{
     
     var itemNameHolder: String = ""
     
-//    private var handler = Auth.auth().addStateDidChangeListener{_,_ in}
-//      
-//      init(){
-//          self.handler = Auth.auth().addStateDidChangeListener{auth, user in
-//              self.idOfCurrentUser=user?.uid ?? ""
-//              self.logged=true
-//          }
-//      }
-//      func isUserLogged() -> Bool{
-//          if(Auth.auth().currentUser != nil){
-//              return true
-//          }
-//          return false
-//      }
-    func validItemField()-> Bool{
-        var itemNameWithoutWhiteCharacters: String{
+    private var tempProperty: [String: String] = [:]
+    
+    @Published var properties: [[String: String]] = []
+    @Published var propertyKey: [String] = [""]
+    @Published var propertyValue: [String] = [""]
+    @Published var listIndex: Int = 0
+    
+    
+    func validItemField()-> Bool {
+        var itemNameWithoutWhiteCharacters: String {
             itemName.trimmingCharacters(in: .whitespacesAndNewlines)
         }
-        var amountWithoutWhiteCharacters: String{
+        var amountWithoutWhiteCharacters: String {
             numberOfItems.trimmingCharacters(in: .whitespacesAndNewlines)
         }
-        var weightWithoutWhiteCharacters: String{
+        var weightWithoutWhiteCharacters: String {
             weight.trimmingCharacters(in: .whitespacesAndNewlines)
         }
-        var commentsWithoutWhiteCharacters: String{
+        var commentsWithoutWhiteCharacters: String {
             comments.trimmingCharacters(in: .whitespacesAndNewlines)
         }
         if(itemNameWithoutWhiteCharacters.isEmpty ||
@@ -63,7 +53,7 @@ class AddNewItemViewModel: ObservableObject{
         let amountIsDigits = amountWithoutWhiteCharacters.allSatisfy { $0.isNumber }
         let weigthIsDigits = weightWithoutWhiteCharacters.allSatisfy { $0.isNumber }
         
-        if(!amountIsDigits || !weigthIsDigits){
+        if(!amountIsDigits || !weigthIsDigits) {
             message = "Liczba i waga muszą być dodatnimi liczbami"
             return false
         }
@@ -71,28 +61,30 @@ class AddNewItemViewModel: ObservableObject{
         return true
     }
     
-    func addItemToDatabase(){
+    func addItemToDatabase() {
         
-        if(!validItemField()){
+        if(!validItemField()) {
             self.isSuccess = false
             self.isFail = true
             return
         }
        
-        guard let userID = Auth.auth().currentUser?.uid else{
+        guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
-        guard let userName = Auth.auth().currentUser?.email else{
+        guard let userName = Auth.auth().currentUser?.email else {
             return
         }
         
+        //createProperty()
         let newItem = Item(id:itemID,
                            name: itemName,
                            amount: numberOfItems,
                            nameOfAdder: userName,
                            commentsToItem: comments,
                            productWeight: weight,
-                           addDate: Date()
+                           addDate: Date(),
+                           properties: properties
         )
     
         let db = Firestore.firestore()
@@ -106,7 +98,8 @@ class AddNewItemViewModel: ObservableObject{
                       "commentsToItem": newItem.commentsToItem,
                       "nameOfAdder": newItem.nameOfAdder,
                       "productWeight": newItem.productWeight,
-                      "addDate": newItem.addDate
+                      "addDate": newItem.addDate,
+                      "properties": newItem.properties
             ]){ error in
                 if let error = error {
                     self.isSuccess = false
@@ -119,8 +112,32 @@ class AddNewItemViewModel: ObservableObject{
                     self.numberOfItems = ""
                     self.weight = ""
                     self.comments = ""
-                    
                 }
             }
+    }
+    func createProperty(index: Int) {
+        if (!propertyKey[index].isEmpty && !propertyValue[index].isEmpty) {
+            tempProperty[propertyKey[index]] = propertyValue[index]
+            properties.append(tempProperty)
+            tempProperty.removeAll()
+            //print("Na indexie: \(index) mamy slownik: [\(propertyKey[index]) : \(propertyValue[index])]")
+            
+        }
+    }
+    func removeItems(at offsets: IndexSet) {
+//        print(offsets.first!)
+        propertyKey.remove(atOffsets: offsets)
+        propertyValue.remove(atOffsets: offsets)
+        self.listIndex = listIndex - 1
+    
+    }
+    func canAddNewProperty() -> Bool {
+        if (self.listIndex == 0) {
+            return false
+        }
+        if (propertyKey[self.listIndex - 1].isEmpty || propertyValue[self.listIndex - 1].isEmpty) {
+            return true
+        }
+        return false
     }
 }
