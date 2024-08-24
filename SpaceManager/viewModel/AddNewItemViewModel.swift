@@ -115,21 +115,30 @@ class AddNewItemViewModel: ObservableObject{
                 }
             }
     }
-    func createProperty(index: Int) {
-        if (!propertyKey[index].isEmpty && !propertyValue[index].isEmpty) {
-            tempProperty[propertyKey[index]] = propertyValue[index]
+    func createProperty() {
+        if (listIndex == 0) {
+            tempProperty[propertyKey[self.listIndex]] = propertyValue[self.listIndex]
             properties.append(tempProperty)
             tempProperty.removeAll()
-            //print("Na indexie: \(index) mamy slownik: [\(propertyKey[index]) : \(propertyValue[index])]")
+            propertyKey.append("")
+            propertyValue.append("")
+            self.listIndex = listIndex + 1
+        } else {
             
+            print(listIndex)
+            tempProperty[propertyKey[self.listIndex - 1]] = propertyValue[self.listIndex - 1]
+            properties.append(tempProperty)
+            tempProperty.removeAll()
+            propertyKey.append("")
+            propertyValue.append("")
+            self.listIndex = listIndex + 1
         }
     }
     func removeItems(at offsets: IndexSet) {
-//        print(offsets.first!)
         propertyKey.remove(atOffsets: offsets)
         propertyValue.remove(atOffsets: offsets)
+        properties.remove(atOffsets: offsets)
         self.listIndex = listIndex - 1
-    
     }
     func canAddNewProperty() -> Bool {
         if (self.listIndex == 0) {

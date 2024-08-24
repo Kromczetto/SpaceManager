@@ -83,42 +83,7 @@ struct AddNewItemView: View {
                         TextField("Waga", text: $addNewItemViewModel.weight)
                         TextField("Uwagi", text: $addNewItemViewModel.comments)
                         
-                        if isCustionProperty {
-                            List {
-                                ForEach(Array($addNewItemViewModel.propertyKey.enumerated()), id: \.offset) { index, _ in
-                                
-                                    HStack{
-                                        TextField("Właściość", text: $addNewItemViewModel.propertyKey[index] )
-                                        TextField("Wartość", text: $addNewItemViewModel.propertyValue[index] )
-                                    }.onAppear {
-                                        addNewItemViewModel.createProperty(index: index)
-                                        print(addNewItemViewModel.properties)
-                                    }
-                                }.onDelete(perform: addNewItemViewModel.removeItems)
-                            }
-                        }
-                        Button {
-                            isCustionProperty = true
-                            print(addNewItemViewModel.listIndex)
-                            if addNewItemViewModel.listIndex != 0 {
-                                addNewItemViewModel.propertyKey.append("")
-                                addNewItemViewModel.propertyValue.append("")
-                            }
-                            addNewItemViewModel.createProperty(index: addNewItemViewModel.listIndex)
-                            addNewItemViewModel.listIndex = addNewItemViewModel.listIndex + 1
-                        } label: {
-                            ZStack{
-                                RoundedRectangle(cornerRadius: 20)
-                                    .foregroundColor(.blue)
-                                    .padding(10)
-                                    .frame(width: 350, height: 80)
-                                Text("+")
-                                    .foregroundStyle(.white)
-                                    .padding()
-                                    .bold()
-                                    .font(.system(size: 16))
-                            }
-                        }.disabled(addNewItemViewModel.canAddNewProperty())
+                        CustomProperties().environmentObject(addNewItemViewModel)
                         
                         if (!generatorViewModel.isStatic) {
                                 Checkbox(isChecked: $isFirstCheck,
