@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var profileViewModel : ProfileViewModel
-//    @EnvironmentObject var storageManager: StorageManager
+
     var body: some View {
         VStack{
             ZStack{
@@ -20,7 +20,6 @@ struct ProfileView: View {
                     .frame(width: 420, height: 120)
                 HStack() {
                     ImagePopUpMenu(isFront: true)
-                    //.environmentObject(storageManager)
                     Text(profileViewModel.userEmail)
                         .foregroundColor(.white)
                         .fontWeight(.bold)

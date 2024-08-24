@@ -13,6 +13,7 @@ struct ReadItem: View {
     @State var amount: String = ""
     @State var weight: String = ""
     @State var comment: String = ""
+    @State var property: [[String: String]] = []
        
 var body: some View {
     VStack {
@@ -25,7 +26,16 @@ var body: some View {
                    Text("Uwagi: \(item.commentsToItem)")
                    Text("Dodane przez: \(item.nameOfAdder)")
                    Text("Dodano: \(readItemViewModel.prepairDate(input: item.addDate))")
-                   
+                   ForEach(0..<item.properties.count, id: \.self) { index in
+                       let dict = item.properties[index]
+                       ForEach(dict.keys.sorted(), id: \.self) { key in
+                           if let value = dict[key] {
+                               HStack {
+                                   Text("\(key): \(value)")
+                               }
+                           }
+                       }
+                   }
                    if(generatorViewModel.num1 != 0){
                        Text("Liczba obrotów: \(generatorViewModel.num1)").onAppear{
                            generatorViewModel.startGeneratingData()
