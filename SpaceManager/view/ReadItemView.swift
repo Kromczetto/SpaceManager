@@ -2,19 +2,16 @@ import SwiftUI
 import FirebaseFirestoreSwift
 import FirebaseAuth
 
-struct ReadItem: View {
+struct ReadItemView: View {
     @StateObject var readItemViewModel = ReadItemViewModel()
     @StateObject var readActiveViewModel = ReadActiveViewModel()
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
     
     var messageFromQR: String
     @State var isEdit: Bool = false
-    @State var itemName: String = ""
-    @State var amount: String = ""
-    @State var weight: String = ""
-    @State var comment: String = ""
-    @State var prop1: String = ""
-    @State var prop2: String = ""
+
+//    @State var prop1: String = ""
+//    @State var prop2: String = ""
 //    @State var property: [[String: String]] = []
        
 var body: some View {
@@ -82,59 +79,10 @@ var body: some View {
                }
            } else {
                if (!readItemViewModel.isDeleted) {
-                   List {
-                       VStack {
-                           HStack {
-                               Text("Nazwa:")
-                               TextField("Nazwa", text: $itemName)
-                                   .onAppear {
-                                       self.itemName = item.name
-                                   }
-                           }
-                           HStack {
-                               Text("Ilość:")
-                               TextField("Ilość", text: $amount)
-                                   .onAppear {
-                                       self.amount = item.amount
-                                   }
-                           }
-                           HStack {
-                               Text("Waga:")
-                               TextField("Waga", text: $weight)
-                                   .onAppear {
-                                       self.weight = item.productWeight
-                                   }
-                           }
-                           HStack {
-                               Text("Uwagi:")
-                               TextField("Uwagi", text: $comment)
-                                   .onAppear {
-                                       self.comment = item.commentsToItem
-                                   }
-                           }
-                           
-                           ForEach(0 ..< readItemViewModel.item!.properties.count) { index in
-                               HStack {
-                                   TextField("\(readItemViewModel.tempKeys[index])", 
-                                             text: $readItemViewModel.tempKeys[index])
-                                   TextField("\(readItemViewModel.tempValues[index])",
-                                             text: $readItemViewModel.tempValues[index])
-                               }
-                           }
-                       }
-                   }
+                   EditField(messageFromQR: messageFromQR, itemName: item.name, amount: item.amount,
+                             weight: item.productWeight, comment: item.commentsToItem, isEdit: $isEdit)
+                       .environmentObject(readItemViewModel)
                    
-                   HStack {
-                       BtnModifier(btnText: "Zapisz", btnIcon: "paperplane",
-                                   btnColor: .green) {
-                           readItemViewModel.saveNewData(idOfItem: messageFromQR, nameOfItem: $itemName.wrappedValue,
-                                                         amountOfItem: $amount.wrappedValue, weigthOfItem: $weight.wrappedValue, commentsToItem: $comment.wrappedValue)
-                           isEdit = !isEdit
-                       }
-                       BtnModifier(btnText: "Wróć", btnIcon: "arrowshape.turn.up.backward") {
-                           isEdit = !isEdit
-                       }
-                   }
                } else {
                    Spacer()
                    Text("Usunięto produkt")
