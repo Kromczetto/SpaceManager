@@ -14,6 +14,11 @@ import FirebaseAuth
 class ReadItemViewModel: ObservableObject {
     @Published var item: Item?
     @Published var isDeleted: Bool = false
+    @Published var tempKeys: [String] = []
+    @Published var tempValues: [String] = []
+    
+    private var tempProperties: [[String: String]] = []
+    private var tempDictionary: [String: String] = [:]
     
     func fetchItem(with id: String) {
         let db = Firestore.firestore()
@@ -30,6 +35,7 @@ class ReadItemViewModel: ObservableObject {
             if let document = document, document.exists {
                 do {
                     self.item = try document.data(as: Item.self)
+                    
                 } catch {
                     print("Problem z odczytaniem przedmiotu")
                 }
@@ -53,14 +59,15 @@ class ReadItemViewModel: ObservableObject {
         guard let userName = Auth.auth().currentUser?.email else{
             return
         }
+        createDictionary()
         let data = Item(id:idOfItem,
-                           name: nameOfItem,
-                           amount: amountOfItem,
-                           nameOfAdder: userName,
-                           commentsToItem: commentsToItem,
-                           productWeight: weigthOfItem,
-                           addDate: Date(),
-                        properties: [["key":"value"]] //remove
+                        name: nameOfItem,
+                        amount: amountOfItem,
+                        nameOfAdder: userName,
+                        commentsToItem: commentsToItem,
+                        productWeight: weigthOfItem,
+                        addDate: Date(),
+                        properties: self.tempProperties
         )
         let db = Firestore.firestore()
         db.collection("users")
@@ -74,8 +81,9 @@ class ReadItemViewModel: ObservableObject {
                       "nameOfAdder": data.nameOfAdder,
                       "productWeight": data.productWeight,
                       "addDate": data.addDate,
-                      "properties": [["key":"valie"]]
+                      "properties": data.properties
             ])
+        
     }
     func delete(id: String){
         let db = Firestore.firestore()
@@ -89,5 +97,24 @@ class ReadItemViewModel: ObservableObject {
                         .document(id)
                         .delete()
         isDeleted = true
+    }
+    func splitProperties() {
+        if let item = item {
+            for index in item.properties {
+                for (key, value) in index {
+                    tempKeys.append(key)
+                    tempValues.append(value)
+                }
+            }
+        }
+    }
+    func createDictionary() {
+        tempProperties.removeAll()
+        tempDictionary.removeAll()
+        for i in 0..<tempKeys.count {
+            tempDictionary[tempKeys[i]] = tempValues[i]
+            tempProperties.append(tempDictionary)
+            tempDictionary.removeAll()
+        }
     }
 }

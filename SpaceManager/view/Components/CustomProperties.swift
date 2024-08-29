@@ -9,9 +9,9 @@ import SwiftUI
 
 struct CustomProperties: View {
     @EnvironmentObject var addNewItemViewModel : AddNewItemViewModel
-    @State private var isCustionProperty: Bool = false
+    @State private var isCustomProperty: Bool = false
     var body: some View {
-        if isCustionProperty {
+        if isCustomProperty {
             List {
                 ForEach(Array($addNewItemViewModel.properties.enumerated()), id: \.offset) { index, _ in
                 
@@ -29,7 +29,7 @@ struct CustomProperties: View {
             }
         }
         Button {
-            isCustionProperty = true
+            isCustomProperty = true
             print(addNewItemViewModel.listIndex)
             addNewItemViewModel.createProperty()
         } label: {

@@ -13,7 +13,9 @@ struct ReadItem: View {
     @State var amount: String = ""
     @State var weight: String = ""
     @State var comment: String = ""
-    @State var property: [[String: String]] = []
+    @State var prop1: String = ""
+    @State var prop2: String = ""
+//    @State var property: [[String: String]] = []
        
 var body: some View {
     VStack {
@@ -35,6 +37,8 @@ var body: some View {
                                }
                            }
                        }
+                   }.onAppear {
+                       readItemViewModel.splitProperties()
                    }
                    if(generatorViewModel.num1 != 0){
                        Text("Liczba obrotów: \(generatorViewModel.num1)").onAppear{
@@ -76,53 +80,62 @@ var body: some View {
                        readItemViewModel.delete(id: messageFromQR)
                    }
                }
-           }else{
-               if(!readItemViewModel.isDeleted){
-                   List{
-                       VStack{
-                           HStack{
+           } else {
+               if (!readItemViewModel.isDeleted) {
+                   List {
+                       VStack {
+                           HStack {
                                Text("Nazwa:")
                                TextField("Nazwa", text: $itemName)
-                                   .onAppear{
+                                   .onAppear {
                                        self.itemName = item.name
                                    }
                            }
-                           HStack{
+                           HStack {
                                Text("Ilość:")
                                TextField("Ilość", text: $amount)
-                                   .onAppear{
+                                   .onAppear {
                                        self.amount = item.amount
                                    }
                            }
-                           HStack{
+                           HStack {
                                Text("Waga:")
                                TextField("Waga", text: $weight)
-                                   .onAppear{
+                                   .onAppear {
                                        self.weight = item.productWeight
                                    }
                            }
-                           HStack{
+                           HStack {
                                Text("Uwagi:")
                                TextField("Uwagi", text: $comment)
-                                   .onAppear{
+                                   .onAppear {
                                        self.comment = item.commentsToItem
                                    }
+                           }
+                           
+                           ForEach(0 ..< readItemViewModel.item!.properties.count) { index in
+                               HStack {
+                                   TextField("\(readItemViewModel.tempKeys[index])", 
+                                             text: $readItemViewModel.tempKeys[index])
+                                   TextField("\(readItemViewModel.tempValues[index])",
+                                             text: $readItemViewModel.tempValues[index])
+                               }
                            }
                        }
                    }
                    
-                   HStack{
+                   HStack {
                        BtnModifier(btnText: "Zapisz", btnIcon: "paperplane",
-                                   btnColor: .green){
+                                   btnColor: .green) {
                            readItemViewModel.saveNewData(idOfItem: messageFromQR, nameOfItem: $itemName.wrappedValue,
                                                          amountOfItem: $amount.wrappedValue, weigthOfItem: $weight.wrappedValue, commentsToItem: $comment.wrappedValue)
                            isEdit = !isEdit
                        }
-                       BtnModifier(btnText: "Wróć", btnIcon: "arrowshape.turn.up.backward"){
+                       BtnModifier(btnText: "Wróć", btnIcon: "arrowshape.turn.up.backward") {
                            isEdit = !isEdit
                        }
                    }
-               }else{
+               } else {
                    Spacer()
                    Text("Usunięto produkt")
                        .foregroundColor(.red)
