@@ -124,7 +124,6 @@ class AddNewItemViewModel: ObservableObject{
             propertyValue.append("")
             self.listIndex = listIndex + 1
         } else {
-            
             print(listIndex)
             tempProperty[propertyKey[self.listIndex - 1]] = propertyValue[self.listIndex - 1]
             properties.append(tempProperty)
@@ -148,5 +147,10 @@ class AddNewItemViewModel: ObservableObject{
             return true
         }
         return false
+    }
+    func splitArray() {
+        if (properties.count > 0 || !properties.isEmpty) {
+            properties.removeFirst()
+        }
     }
 }
