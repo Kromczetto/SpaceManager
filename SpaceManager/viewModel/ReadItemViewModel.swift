@@ -16,14 +16,12 @@ class ReadItemViewModel: ObservableObject {
     @Published var isDeleted: Bool = false
     @Published var tempKeys: [String] = []
     @Published var tempValues: [String] = []
-    
     private var tempProperties: [[String: String]] = []
     private var tempDictionary: [String: String] = [:]
     
     func fetchItem(with id: String) {
         let db = Firestore.firestore()
-       
-        guard let userID = Auth.auth().currentUser?.uid else{
+        guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
         let docRef = db.collection("users")
@@ -44,7 +42,7 @@ class ReadItemViewModel: ObservableObject {
             }
         }
     }
-    func prepairDate(input: Date)-> String{
+    func prepairDate(input: Date)-> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "pl_PL")
         formatter.dateFormat = "d MMMM yyyy"
@@ -52,11 +50,11 @@ class ReadItemViewModel: ObservableObject {
         return formattedDate
     }
     func saveNewData(idOfItem: String, nameOfItem: String, amountOfItem: String,
-                     weigthOfItem: String, commentsToItem: String){
-        guard let userID = Auth.auth().currentUser?.uid else{
+                     weigthOfItem: String, commentsToItem: String) {
+        guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
-        guard let userName = Auth.auth().currentUser?.email else{
+        guard let userName = Auth.auth().currentUser?.email else {
             return
         }
         createDictionary()
@@ -69,26 +67,26 @@ class ReadItemViewModel: ObservableObject {
                         addDate: Date(),
                         properties: self.tempProperties
         )
-        let db = Firestore.firestore()
-        db.collection("users")
-            .document(userID)
-            .collection("items")
-            .document(data.id)
-            .setData(["id": data.id,
-                      "name": data.name,
-                      "amount": data.amount,
-                      "commentsToItem": data.commentsToItem,
-                      "nameOfAdder": data.nameOfAdder,
-                      "productWeight": data.productWeight,
-                      "addDate": data.addDate,
-                      "properties": data.properties
-            ])
-        
+        DispatchQueue.main.async {
+            let db = Firestore.firestore()
+            db.collection("users")
+                .document(userID)
+                .collection("items")
+                .document(data.id)
+                .setData(["id": data.id,
+                          "name": data.name,
+                          "amount": data.amount,
+                          "commentsToItem": data.commentsToItem,
+                          "nameOfAdder": data.nameOfAdder,
+                          "productWeight": data.productWeight,
+                          "addDate": data.addDate,
+                          "properties": data.properties
+                ])
+        }
     }
-    func delete(id: String){
+    func delete(id: String) {
         let db = Firestore.firestore()
-       
-        guard let userID = Auth.auth().currentUser?.uid else{
+        guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
         db.collection("users")
@@ -100,12 +98,16 @@ class ReadItemViewModel: ObservableObject {
     }
     func splitProperties() {
         if let item = item {
+            tempKeys.removeAll()
+            tempValues.removeAll()
             for index in item.properties {
                 for (key, value) in index {
+                    var formatedKey: String = key
                     tempKeys.append(key)
                     tempValues.append(value)
                 }
             }
+            self.tempProperties.removeAll()
         }
     }
     func createDictionary() {

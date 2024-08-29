@@ -57,7 +57,7 @@ struct SearchView: View {
                     .foregroundStyle(.red)
             }
             
-            NavigationLink(destination: ReadItem(messageFromQR: messageFromQR).navigationBarBackButtonHidden(true)
+            NavigationLink(destination: ReadItemView(messageFromQR: messageFromQR).navigationBarBackButtonHidden(true)
                 .navigationBarItems(leading: CustomBack(title:"Skanuj")),
                            isActive: $isRead) {
                 EmptyView()
