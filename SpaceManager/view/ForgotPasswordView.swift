@@ -8,27 +8,26 @@
 import SwiftUI
 
 struct ForgotPasswordView: View {
-    
     @StateObject var forgotViewModel = ForgotViewModel()
     @State var tempEmail = ""
     var body: some View {
-        VStack{
+        VStack {
             Text("Wpisz swój Email:")
                 .padding(20)
                 .font(.system(size: 25))
             Spacer()
-            Form{
+            Form {
                 TextField("Email", text: $forgotViewModel.email)
                     .font(.system(size: 25))
                     .multilineTextAlignment(.center)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
-                Button{
+                Button {
                     forgotViewModel.resetPassword()
                     tempEmail = forgotViewModel.email
                     forgotViewModel.email = ""
-                }label:{
-                    ZStack{
+                } label: {
+                    ZStack {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(.blue)
                             .padding(10)

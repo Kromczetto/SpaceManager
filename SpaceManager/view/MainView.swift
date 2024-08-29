@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MainView: View {
-    
     @StateObject var staySignin = StaySigninViewModel()
     @StateObject var permissionViewModel = PermissionViewModel()
     var body: some View {

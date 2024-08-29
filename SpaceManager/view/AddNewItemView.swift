@@ -25,8 +25,6 @@ struct AddNewItemView: View {
     @State private var canAdd: Bool = false
     
     @State private var qrCodeToSave: UIImage? = nil
-//    private var itemIndex: Int = 0
-//    @State private var listIndex: Int = 0
     @State private var isCustionProperty: Bool = false
     
     var body: some View {
@@ -35,11 +33,11 @@ struct AddNewItemView: View {
             LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
                            startPoint: .top, endPoint: UnitPoint.bottom)
                             .ignoresSafeArea()
-            VStack{
+            VStack {
                 Spacer()
-                HStack(spacing: 0){
+                HStack(spacing: 0) {
                    
-                    BtnItemType(){
+                    BtnItemType() {
                         generatorViewModel.isStatic = true
                         generatorViewModel.setSpins(number: 0)
                         generatorViewModel.setConsumption(number: 0)
@@ -50,20 +48,18 @@ struct AddNewItemView: View {
                                 firstColor: .gray,
                                 secondColor: .blue,
                                 state: false
-                    ){
+                    ) {
                         generatorViewModel.isStatic = false
                         generatorViewModel.setSpins(number: 10)
                         generatorViewModel.setConsumption(number: 10)
                         generatorViewModel.setWorkTime(number: 100)
                         
                     }
-                }.padding(10).onAppear{
+                }.padding(10).onAppear {
                     generatorViewModel.isStatic = true
                     generatorViewModel.setSpins(number: 0)
                     generatorViewModel.setConsumption(number: 0)
                     generatorViewModel.setWorkTime(number: 0)
-                    
-                   // permissionViewModel.getPermission()
                 }
                 Spacer()
                 permissionViewModel.canUserAdd ? nil : Text("Nie posiadasz uprawnień, aby dodać przedmiot")
@@ -101,25 +97,21 @@ struct AddNewItemView: View {
                             UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
                             addNewItemViewModel.itemID = productID
                             addNewItemViewModel.addItemToDatabase()
-                            if (!generatorViewModel.isStatic ){
-                                if(!isFirstCheck){ generatorViewModel.setSpins(number: 0)
-                                }
-                                if(!isSecondCheck){generatorViewModel.setConsumption(number: 0)
-                                }
-                                if(!isThirdCheck){ generatorViewModel.setWorkTime(number: 0)
-                                }
+                            if (!generatorViewModel.isStatic ) {
+                                if (!isFirstCheck) { generatorViewModel.setSpins(number: 0)}
+                                if (!isSecondCheck) {generatorViewModel.setConsumption(number: 0)}
+                                if (!isThirdCheck) { generatorViewModel.setWorkTime(number: 0)}
                                 generatorViewModel.storeData(itemID: productID)
                                 isFirstCheck = false
                                 isSecondCheck = false
                                 isThirdCheck = false
-                            } else{
+                            } else {
                                 generatorViewModel.storeData(itemID: productID)
                                 isFirstCheck = false
                                 isSecondCheck = false
                                 isThirdCheck = false
                             }
                             productID = UUID().uuidString
-                            
                         }
                         
                         .alert("Dodano \($addNewItemViewModel.itemNameHolder.wrappedValue), kod QR został zapisany w galerii zdjęć",

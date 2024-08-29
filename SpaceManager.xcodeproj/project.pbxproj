@@ -230,27 +230,59 @@
 		4FD950C92C8092210075BF72 /* ReadItem */ = {
 			isa = PBXGroup;
 			children = (
+				4F20BFD72C36DE610026C58B /* BtnModifier.swift */,
 				4FD950C72C808F510075BF72 /* EditField.swift */,
 				4FD950CA2C8092670075BF72 /* ReadItem.swift */,
 			);
 			path = ReadItem;
 			sourceTree = "<group>";
 		};
+		4FD950CC2C80B87E0075BF72 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				4F859C3C2BD06BC400924EF5 /* HeaderComponent.swift */,
+				4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */,
+				4F859C3E2BD06DC700924EF5 /* FormComponent.swift */,
+				4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		4FD950CD2C80BB900075BF72 /* AddItem */ = {
+			isa = PBXGroup;
+			children = (
+				4F20BFD32C36D3D20026C58B /* BtnItemType.swift */,
+				4F102D722C24928200A6702D /* BtnDatabase.swift */,
+			);
+			path = AddItem;
+			sourceTree = "<group>";
+		};
+		4FD950CE2C80BB9E0075BF72 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				4F15F8DB2BF61D54001B58CA /* BtnProfile.swift */,
+				4F3363BA2BE6AF800042D0AD /* BottomMenu.swift */,
+				4F3363B32BE689C00042D0AD /* BtnMenu.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		4FD950CF2C80BBEB0075BF72 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		4FEADE4E2BC738E2009C31BD /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				4FD950CF2C80BBEB0075BF72 /* Other */,
+				4FD950CE2C80BB9E0075BF72 /* Menu */,
+				4FD950CD2C80BB900075BF72 /* AddItem */,
+				4FD950CC2C80B87E0075BF72 /* Auth */,
 				4FD950C92C8092210075BF72 /* ReadItem */,
-				4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */,
-				4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */,
-				4F859C3C2BD06BC400924EF5 /* HeaderComponent.swift */,
-				4F859C3E2BD06DC700924EF5 /* FormComponent.swift */,
-				4F3363B32BE689C00042D0AD /* BtnMenu.swift */,
-				4F3363BA2BE6AF800042D0AD /* BottomMenu.swift */,
-				4F15F8DB2BF61D54001B58CA /* BtnProfile.swift */,
-				4F102D722C24928200A6702D /* BtnDatabase.swift */,
 				4F66DB9F2C335FD60035B34F /* Checkbox.swift */,
-				4F20BFD32C36D3D20026C58B /* BtnItemType.swift */,
-				4F20BFD72C36DE610026C58B /* BtnModifier.swift */,
 				4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */,
 				4FF426D72C4827D20096ED46 /* CameraView.swift */,
 				4FF426D92C482CC70096ED46 /* CustomCameraView.swift */,

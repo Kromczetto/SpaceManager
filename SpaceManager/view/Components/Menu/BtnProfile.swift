@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct BtnProfile: View {
-//    var btnEvent: ()->Void
     @ObservedObject var profileViewModel = ProfileViewModel()
     @StateObject var staySignin = StaySigninViewModel()
     var body: some View {
-        Button{
+        Button {
             profileViewModel.loggout()
             staySignin.logged = false
-        } label:{
+        } label: {
             ZStack{
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(.blue)

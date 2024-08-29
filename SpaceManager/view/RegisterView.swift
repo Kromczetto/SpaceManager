@@ -11,20 +11,16 @@ struct RegisterView: View {
     @Environment(\.presentationMode) var presentationMode
   
     var body: some View {
-        ZStack{
+        ZStack {
             LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
                            startPoint: .top, endPoint: UnitPoint.bottom)
                             .ignoresSafeArea()
-            VStack{
-                HeaderComponent(headerText: "Zarejestruj się",
-                                headerTopPadding: 160)
+            VStack {
+                HeaderComponent(headerText: "Zarejestruj się", headerTopPadding: 160)
                 Spacer()
-                FormComponent(isRegister: true) 
-                    
-                
+                FormComponent(isRegister: true)
                 Spacer()
-                
-                Button{
+                Button {
                     self.presentationMode.wrappedValue.dismiss()
                 } label: {
                     Text("Mam już konto")
@@ -32,9 +28,7 @@ struct RegisterView: View {
                         .font(.system(size: 18))
                         .underline()
                 }
-        
                 .padding(.bottom, 140)
-                
             }
         }
     }

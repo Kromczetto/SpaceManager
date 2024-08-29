@@ -33,11 +33,11 @@ struct SearchView: View {
     var body: some View {
         VStack {
             Spacer()
-            if(permissionViewModel.canUserRead){
+            if (permissionViewModel.canUserRead) {
                 Button {
                     self.isCameraOpen = true
-                } label :{
-                    ZStack{
+                } label : {
+                    ZStack {
                         RoundedRectangle(cornerRadius: 20)
                             .foregroundColor(.blue)
                             .padding(10)
