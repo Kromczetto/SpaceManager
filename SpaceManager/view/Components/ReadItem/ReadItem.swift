@@ -35,39 +35,39 @@ struct ReadItem: View {
                     readItemViewModel.splitProperties()
                 }
             }
-            if (generatorViewModel.num1 != 0) {
-                Text("Liczba obrotów: \(generatorViewModel.num1)")
-                    .onAppear {
-                    generatorViewModel.startGeneratingData()
-                    generatorViewModel.storeData(itemID: messageFromQR)
-                }
-                .onDisappear {
-                   generatorViewModel.stopGeneratingData()
-                }
-            }
-            if (generatorViewModel.num2 != 0) {
-                Text("Zużycie prądu: \(generatorViewModel.num2)")
-                    .onAppear {
-                    generatorViewModel.startGeneratingData()
-                    generatorViewModel.storeData(itemID: messageFromQR)
-                }
-                .onDisappear {
-                   generatorViewModel.stopGeneratingData()
-                }
-            }
-            if (generatorViewModel.workTime != 0) {
-                Text("Czas pracy: \(generatorViewModel.workTime)")
-                    .onAppear {
-                    generatorViewModel.startGeneratingData()
-                    generatorViewModel.storeData(itemID: messageFromQR)
-                }
-                .onDisappear {
-                   generatorViewModel.stopGeneratingData()
-                }
-            }
+//            if (generatorViewModel.num1 != 0) {
+//                Text("Liczba obrotów: \(generatorViewModel.num1)")
+//                    .onAppear {
+//                    generatorViewModel.startGeneratingData()
+//                    generatorViewModel.storeData(itemID: messageFromQR)
+//                }
+//                .onDisappear {
+//                   generatorViewModel.stopGeneratingData()
+//                }
+//            }
+//            if (generatorViewModel.num2 != 0) {
+//                Text("Zużycie prądu: \(generatorViewModel.num2)")
+//                    .onAppear {
+//                    generatorViewModel.startGeneratingData()
+//                    generatorViewModel.storeData(itemID: messageFromQR)
+//                }
+//                .onDisappear {
+//                   generatorViewModel.stopGeneratingData()
+//                }
+//            }
+//            if (generatorViewModel.workTime != 0) {
+//                Text("Czas pracy: \(generatorViewModel.workTime)")
+//                    .onAppear {
+//                    generatorViewModel.startGeneratingData()
+//                    generatorViewModel.storeData(itemID: messageFromQR)
+//                }
+//                .onDisappear {
+//                   generatorViewModel.stopGeneratingData()
+//                }
+//            }
         }.onAppear {
             readItemViewModel.fetchItem(with: messageFromQR)
-            readActiveViewModel.fetchItem(with: messageFromQR)
+            //readActiveViewModel.fetchItem(with: messageFromQR)
         }
         HStack {
             BtnModifier(btnText: "Edytuj", btnIcon: "pencil") {

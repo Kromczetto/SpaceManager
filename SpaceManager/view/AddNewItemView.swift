@@ -13,6 +13,7 @@ struct AddNewItemView: View {
     
     @StateObject var addNewItemViewModel = AddNewItemViewModel()
     @StateObject var qrCodeGenerator = QrCodeGenerator()
+    @StateObject var dynamicItemViewModel = DynamicItemViewModel()
     @StateObject var activeHandlerViewModel = ActivevHandlerViewModel()
     @EnvironmentObject var permissionViewModel: PermissionViewModel
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
@@ -24,7 +25,7 @@ struct AddNewItemView: View {
     @State private var isThirdCheck: Bool = false
     @State private var canAdd: Bool = false
     
-    @State private var qrCodeToSave: UIImage? = nil
+//    @State private var qrCodeToSave: UIImage? = nil
     @State private var isCustionProperty: Bool = false
     
     var body: some View {
@@ -36,13 +37,8 @@ struct AddNewItemView: View {
             VStack {
                 Spacer()
                 HStack(spacing: 0) {
-                   
                     BtnItemType() {
                         generatorViewModel.isStatic = true
-                        generatorViewModel.setSpins(number: 0)
-                        generatorViewModel.setConsumption(number: 0)
-                        generatorViewModel.setWorkTime(number: 0)
-                        
                     }
                     BtnItemType(btnText: "Aktywne",
                                 firstColor: .gray,
@@ -50,81 +46,25 @@ struct AddNewItemView: View {
                                 state: false
                     ) {
                         generatorViewModel.isStatic = false
-                        generatorViewModel.setSpins(number: 10)
-                        generatorViewModel.setConsumption(number: 10)
-                        generatorViewModel.setWorkTime(number: 100)
-                        
                     }
-                }.padding(10).onAppear {
+                }.padding(10)
+                .onAppear {
                     generatorViewModel.isStatic = true
-                    generatorViewModel.setSpins(number: 0)
-                    generatorViewModel.setConsumption(number: 0)
-                    generatorViewModel.setWorkTime(number: 0)
                 }
                 Spacer()
-                permissionViewModel.canUserAdd ? nil : Text("Nie posiadasz uprawnień, aby dodać przedmiot")
-                Group {
-                    Form {
-                        GeometryReader { geometry in
-                            Image(uiImage: qrCodeGenerator.generatorQr(from: productID)!)
-                                .resizable()
-                                .interpolation(.none)
-                                .scaledToFit()
-                                .frame(width: 200, height: 200)
-                                .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                        }.frame(minHeight: 200)
-                        
-                        TextField("Nazwa", text: $addNewItemViewModel.itemName)
-                        TextField("Ilość", text: $addNewItemViewModel.numberOfItems)
-                        TextField("Waga", text: $addNewItemViewModel.weight)
-                        TextField("Uwagi", text: $addNewItemViewModel.comments)
-                        
-                        CustomProperties().environmentObject(addNewItemViewModel)
-                        
-                        if (!generatorViewModel.isStatic) {
-                                Checkbox(isChecked: $isFirstCheck,
-                                         checkName: "Obroty silnika")
-                                Checkbox(isChecked: $isSecondCheck,
-                                         checkName: "Zużycie prądu")
-                                Checkbox(isChecked: $isThirdCheck,
-                                         checkName: "Czas pracy")
-                        }
-                     
-                        BtnDatabase(btnLabel: "Dodaj") {
-                            print(addNewItemViewModel.properties)
-                            addNewItemViewModel.splitArray()
-                            qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
-                            UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
-                            addNewItemViewModel.itemID = productID
-                            addNewItemViewModel.addItemToDatabase()
-                            if (!generatorViewModel.isStatic ) {
-                                if (!isFirstCheck) { generatorViewModel.setSpins(number: 0)}
-                                if (!isSecondCheck) {generatorViewModel.setConsumption(number: 0)}
-                                if (!isThirdCheck) { generatorViewModel.setWorkTime(number: 0)}
-                                generatorViewModel.storeData(itemID: productID)
-                                isFirstCheck = false
-                                isSecondCheck = false
-                                isThirdCheck = false
-                            } else {
-                                generatorViewModel.storeData(itemID: productID)
-                                isFirstCheck = false
-                                isSecondCheck = false
-                                isThirdCheck = false
-                            }
-                            productID = UUID().uuidString
-                        }
-                        
-                        .alert("Dodano \($addNewItemViewModel.itemNameHolder.wrappedValue), kod QR został zapisany w galerii zdjęć",
-                               isPresented: $addNewItemViewModel.isSuccess) {
-                                       Button("OK", role: .cancel) { }
-                        }
-                        .alert("\($addNewItemViewModel.message.wrappedValue)",
-                               isPresented: $addNewItemViewModel.isFail) {
-                                       Button("OK", role: .cancel) { }
-                        }
-                    }
-                }.disabled(!permissionViewModel.canUserAdd)
-                    .opacity(permissionViewModel.canUserAdd ? 1 : 0.4)
+                if generatorViewModel.isStatic {
+                    StaticItem(productID: productID)
+                        .environmentObject(permissionViewModel)
+                        //.environmentObject(generatorViewModel)
+                        .environmentObject(addNewItemViewModel)
+                } else {
+                    //przekazad productID zeby potem przekazac w dynamic do static
+                    DynamicItem(productID: productID)
+                        .environmentObject(permissionViewModel)
+                        .environmentObject(generatorViewModel)
+                        .environmentObject(addNewItemViewModel)
+                        .environmentObject(dynamicItemViewModel)
+                }
             }
         }
     }

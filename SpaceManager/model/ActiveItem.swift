@@ -7,10 +7,9 @@
 
 import Foundation
 
-struct ActiveItem: Codable, Identifiable{
+struct ActiveItem: Codable, Identifiable {
     let id: String
     let numberOfSpins: Int
     let electricityConsumpsion: Int
     let workingTime: Int
-    
 }

@@ -14,13 +14,10 @@ enum Permission: String, Codable {
     case Admin
     case Error
 }
-
-struct User: Codable{
-    
+struct User: Codable {
     let uid: String
     let email: String
     let permission: Permission
-    
     func toDictionary() -> [String: Any] {
         return ["uid": uid, "email": email, "permission": permission.rawValue]
     }

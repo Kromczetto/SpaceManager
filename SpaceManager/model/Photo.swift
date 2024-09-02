@@ -12,7 +12,6 @@ import FirebaseFirestoreSwift
 class Photo: Identifiable, Codable {
     var pid: String = ""
     var imageURL: String = ""
-    
     func toDictionary() -> [String: Any] {
         return ["pid": pid, "imageURL": imageURL]
     }

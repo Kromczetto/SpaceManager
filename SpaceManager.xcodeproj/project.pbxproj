@@ -58,6 +58,9 @@
 		4FAB91DB2C456A4D00337256 /* ManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB91DA2C456A4D00337256 /* ManagerView.swift */; };
 		4FD950C82C808F510075BF72 /* EditField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950C72C808F510075BF72 /* EditField.swift */; };
 		4FD950CB2C8092670075BF72 /* ReadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950CA2C8092670075BF72 /* ReadItem.swift */; };
+		4FD950D32C80CFC30075BF72 /* StaticItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950D22C80CFC30075BF72 /* StaticItem.swift */; };
+		4FD950D52C80D4190075BF72 /* DynamicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950D42C80D4190075BF72 /* DynamicItem.swift */; };
+		4FD950D72C80D4420075BF72 /* DynamicItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950D62C80D4420075BF72 /* DynamicItemViewModel.swift */; };
 		4FDE85E12C7A36BF0002F656 /* CustomProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDE85E02C7A36BF0002F656 /* CustomProperties.swift */; };
 		4FEADE522BC74459009C31BD /* BtnUnderlineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */; };
 		4FF426D22C47DD2E0096ED46 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF426D12C47DD2E0096ED46 /* Coordinator.swift */; };
@@ -114,6 +117,9 @@
 		4FAB91DA2C456A4D00337256 /* ManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerView.swift; sourceTree = "<group>"; };
 		4FD950C72C808F510075BF72 /* EditField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditField.swift; sourceTree = "<group>"; };
 		4FD950CA2C8092670075BF72 /* ReadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadItem.swift; sourceTree = "<group>"; };
+		4FD950D22C80CFC30075BF72 /* StaticItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticItem.swift; sourceTree = "<group>"; };
+		4FD950D42C80D4190075BF72 /* DynamicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicItem.swift; sourceTree = "<group>"; };
+		4FD950D62C80D4420075BF72 /* DynamicItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicItemViewModel.swift; sourceTree = "<group>"; };
 		4FDE85E02C7A36BF0002F656 /* CustomProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProperties.swift; sourceTree = "<group>"; };
 		4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnUnderlineComponent.swift; sourceTree = "<group>"; };
 		4FF426D12C47DD2E0096ED46 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -156,6 +162,7 @@
 				4FF426D12C47DD2E0096ED46 /* Coordinator.swift */,
 				4FF426D52C481E220096ED46 /* CameraService.swift */,
 				4F10E20E2C4EA3F900B76EA4 /* StorageManager.swift */,
+				4FD950D62C80D4420075BF72 /* DynamicItemViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -251,8 +258,11 @@
 		4FD950CD2C80BB900075BF72 /* AddItem */ = {
 			isa = PBXGroup;
 			children = (
+				4FDE85E02C7A36BF0002F656 /* CustomProperties.swift */,
 				4F20BFD32C36D3D20026C58B /* BtnItemType.swift */,
 				4F102D722C24928200A6702D /* BtnDatabase.swift */,
+				4FD950D22C80CFC30075BF72 /* StaticItem.swift */,
+				4FD950D42C80D4190075BF72 /* DynamicItem.swift */,
 			);
 			path = AddItem;
 			sourceTree = "<group>";
@@ -270,25 +280,32 @@
 		4FD950CF2C80BBEB0075BF72 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */,
+				4F66DB9F2C335FD60035B34F /* Checkbox.swift */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		4FD950D12C80BE450075BF72 /* CameraAndGallery */ = {
+			isa = PBXGroup;
+			children = (
+				4F411BE42C4955BC004FC735 /* PhotoPicker.swift */,
+				4F411BE22C493C90004FC735 /* ImagePopUpMenu.swift */,
+				4FF426D92C482CC70096ED46 /* CustomCameraView.swift */,
+				4FF426D72C4827D20096ED46 /* CameraView.swift */,
+			);
+			path = CameraAndGallery;
 			sourceTree = "<group>";
 		};
 		4FEADE4E2BC738E2009C31BD /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				4FD950D12C80BE450075BF72 /* CameraAndGallery */,
 				4FD950CF2C80BBEB0075BF72 /* Other */,
 				4FD950CE2C80BB9E0075BF72 /* Menu */,
 				4FD950CD2C80BB900075BF72 /* AddItem */,
 				4FD950CC2C80B87E0075BF72 /* Auth */,
 				4FD950C92C8092210075BF72 /* ReadItem */,
-				4F66DB9F2C335FD60035B34F /* Checkbox.swift */,
-				4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */,
-				4FF426D72C4827D20096ED46 /* CameraView.swift */,
-				4FF426D92C482CC70096ED46 /* CustomCameraView.swift */,
-				4F411BE22C493C90004FC735 /* ImagePopUpMenu.swift */,
-				4F411BE42C4955BC004FC735 /* PhotoPicker.swift */,
-				4FDE85E02C7A36BF0002F656 /* CustomProperties.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -381,6 +398,7 @@
 				4F15F8DA2BF61CD3001B58CA /* ProfileViewModel.swift in Sources */,
 				4FD950C82C808F510075BF72 /* EditField.swift in Sources */,
 				4F3363AA2BE51F750042D0AD /* RegisterViewModel.swift in Sources */,
+				4FD950D32C80CFC30075BF72 /* StaticItem.swift in Sources */,
 				4F32055D2BBDB217000BD18C /* LoginView.swift in Sources */,
 				4F859C3F2BD06DC800924EF5 /* FormComponent.swift in Sources */,
 				4F4A8DB22C32F1430002744A /* ActiveItem.swift in Sources */,
@@ -391,8 +409,10 @@
 				4F4E58FB2BF0FE4500B80AB8 /* SearchView.swift in Sources */,
 				4F10E20F2C4EA3F900B76EA4 /* StorageManager.swift in Sources */,
 				4F411BE52C4955BC004FC735 /* PhotoPicker.swift in Sources */,
+				4FD950D72C80D4420075BF72 /* DynamicItemViewModel.swift in Sources */,
 				4F056CC92C46979E006408E4 /* Photo.swift in Sources */,
 				4F411BE32C493C90004FC735 /* ImagePopUpMenu.swift in Sources */,
+				4FD950D52C80D4190075BF72 /* DynamicItem.swift in Sources */,
 				4F15F8DC2BF61D54001B58CA /* BtnProfile.swift in Sources */,
 				4F58894A2C3D7CF500CAB19D /* ForgotViewModel.swift in Sources */,
 				4FF426D82C4827D20096ED46 /* CameraView.swift in Sources */,
