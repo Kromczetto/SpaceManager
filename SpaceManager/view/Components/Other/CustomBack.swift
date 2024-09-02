@@ -12,7 +12,7 @@ struct CustomBack: View {
     var title: String = "Wróć"
     
     var body: some View {
-        Button{
+        Button {
             self.presentationMode.wrappedValue.dismiss()
         } label: {
             HStack{

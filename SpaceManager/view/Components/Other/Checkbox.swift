@@ -15,7 +15,7 @@ struct Checkbox: View {
         Button {
             self.isChecked.toggle()
         } label: {
-            HStack{
+            HStack {
                 Image(systemName: isChecked ? "checkmark.square" : "square")
                                     .foregroundColor(isChecked ? .green : .gray)
                 Text(checkName)

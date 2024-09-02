@@ -12,8 +12,8 @@ struct ProfileView: View {
     @EnvironmentObject var profileViewModel : ProfileViewModel
 
     var body: some View {
-        VStack{
-            ZStack{
+        VStack {
+            ZStack {
                 RoundedRectangle(cornerRadius: 5)
                     .foregroundColor(Color(red: 80/255, green: 80/255, blue: 80/255))
                     .padding(10)

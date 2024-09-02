@@ -14,13 +14,9 @@ struct CustomProperties: View {
         if isCustomProperty {
             List {
                 ForEach(Array($addNewItemViewModel.properties.enumerated()), id: \.offset) { index, _ in
-                
-                    HStack{
-                       
-                    TextField("Właściość:", text: $addNewItemViewModel.propertyKey[index])
-                    TextField("Wartość", text: $addNewItemViewModel.propertyValue[index])
-                        
-    
+                    HStack {
+                        TextField("Właściość:", text: $addNewItemViewModel.propertyKey[index])
+                        TextField("Wartość", text: $addNewItemViewModel.propertyValue[index])
                     }.onAppear {
                         print(addNewItemViewModel.properties)
                         print("index of \(index)")
@@ -33,7 +29,7 @@ struct CustomProperties: View {
             print(addNewItemViewModel.listIndex)
             addNewItemViewModel.createProperty()
         } label: {
-            ZStack{
+            ZStack {
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(.blue)
                     .padding(10)

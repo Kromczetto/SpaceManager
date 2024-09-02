@@ -8,14 +8,10 @@
 import SwiftUI
 
 struct CustomCameraView: View {
-    
     @State var isFront: Bool = true
     let cameraSeriveFront = CameraService(siteOfCamera: .front)
     let cameraSeriveBack = CameraService(siteOfCamera: .back)
-        
-    
     @Binding var captureImage: UIImage?
-    
     @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack {
@@ -37,7 +33,6 @@ struct CustomCameraView: View {
                 Button {
                     isFront ? cameraSeriveFront.capturePhoto() : cameraSeriveBack.capturePhoto()
                 } label: {
-                    //Zmien przycisk
                     Image(systemName: "circle")
                         .font(.system(size: 72))
                 }

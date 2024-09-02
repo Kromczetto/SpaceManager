@@ -68,15 +68,13 @@ class AddNewItemViewModel: ObservableObject{
             self.isFail = true
             return
         }
-       
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
         guard let userName = Auth.auth().currentUser?.email else {
             return
         }
-        
-        //createProperty()
+
         let newItem = Item(id:itemID,
                            name: itemName,
                            amount: numberOfItems,

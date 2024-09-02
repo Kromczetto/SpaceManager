@@ -10,20 +10,18 @@ import SwiftUI
 struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
-    
     var body: some View {
-        NavigationView{
-            ZStack{
-
+        NavigationView {
+            ZStack {
                 LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
                                startPoint: .top, endPoint: UnitPoint.bottom)
                                 .ignoresSafeArea()
-                VStack{
+                VStack {
                     HeaderComponent(headerText: "Zaloguj się")
                     Spacer()
                     FormComponent(isRegister: false)
                     Spacer()
-                    HStack{
+                    HStack {
                         BtnUnderlineComponent(btnText: "Zapomniałem hasła",
                                               destinationView: AnyView(ForgotPasswordView()))
                                                 .padding()

@@ -10,12 +10,10 @@ import AVFoundation
 
 struct CameraView: UIViewControllerRepresentable {
     typealias UIViewControllerType = UIViewController
-    
     let cameraService: CameraService
     let didFinishedProcessingPhoto: (Result<AVCapturePhoto, Error>) -> ()
     
     func makeUIViewController(context: Context) -> UIViewController {
-        
         cameraService.start(delegate: context.coordinator) { err in
             if let err = err {
                 didFinishedProcessingPhoto(.failure(err))
@@ -28,7 +26,6 @@ struct CameraView: UIViewControllerRepresentable {
         cameraService.previewLayer.frame = viewController.view.bounds
         return viewController
     }
-    
     func makeCoordinator() -> Coordinator {
         Coordinator(self, didFinishProcessingPhoto: didFinishedProcessingPhoto)
     }

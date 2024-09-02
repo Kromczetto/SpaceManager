@@ -13,10 +13,10 @@ struct BtnDatabase: View {
     
     var body: some View {
         
-        Button{
+        Button {
             action()
-        } label:{
-            ZStack{
+        } label: {
+            ZStack {
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(.blue)
                     .padding(10)

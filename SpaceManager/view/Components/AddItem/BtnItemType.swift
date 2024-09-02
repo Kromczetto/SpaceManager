@@ -16,14 +16,12 @@ struct BtnItemType: View {
     var action: ()->Void
     
     var body: some View {
-        Button{
+        Button {
           action()
-        }label:{
-            ZStack{
+        } label: {
+            ZStack {
                 RoundedRectangle(cornerRadius: 0)
-                    .foregroundColor( generatorViewModel.isStatic ?
-                        firstColor : secondColor
-                    )
+                    .foregroundColor(generatorViewModel.isStatic ? firstColor : secondColor)
                     .frame(width: 100, height: 30)
                 Text(btnText)
                     .foregroundStyle(.white)

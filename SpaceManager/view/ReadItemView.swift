@@ -11,7 +11,7 @@ struct ReadItemView: View {
     var body: some View {
     VStack {
        if let item = readItemViewModel.item {
-           if(!isEdit && !readItemViewModel.isDeleted) {
+           if (!isEdit && !readItemViewModel.isDeleted) {
                ReadItem(messageFromQR: messageFromQR, isEdit: $isEdit)
                    .environmentObject(readItemViewModel)
                    .environmentObject(readActiveViewModel)
