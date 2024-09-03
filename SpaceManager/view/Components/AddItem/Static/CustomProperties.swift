@@ -34,7 +34,7 @@ struct CustomProperties: View {
                     .foregroundColor(.blue)
                     .padding(10)
                     .frame(width: 350, height: 80)
-                Text("+")
+                Text("Dodaj statyczne pole")
                     .foregroundStyle(.white)
                     .padding()
                     .bold()

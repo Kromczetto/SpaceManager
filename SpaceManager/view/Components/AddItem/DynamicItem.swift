@@ -9,36 +9,50 @@ import SwiftUI
 
 struct DynamicItem: View {
     @State var productID: String
+    @State private var qrCodeToSave: UIImage? = nil
     @EnvironmentObject var dynamicItemViewModel: DynamicItemViewModel
+    @EnvironmentObject var addNewItemViewModel: AddNewItemViewModel
+    @EnvironmentObject var permissionViewModel: PermissionViewModel
+    @EnvironmentObject var qrCodeGenerator: QrCodeGenerator
     var body: some View {
-        //StaticItem().frame(height: 400)
-        List {
-            Text("asd")
-            ForEach(Array($dynamicItemViewModel.api.enumerated()), id: \.offset) { index, _ in
-                HStack {
-                    TextField("Źródło:", text: $dynamicItemViewModel.apiConnection[index])
-                    TextField("Wartość", text: $dynamicItemViewModel.valueName[index])
-                }.onAppear {
-                    print(dynamicItemViewModel.apiConnection)
-                    print(dynamicItemViewModel.valueName)
+        permissionViewModel.canUserAdd ? nil : Text("Nie posiadasz uprawnień, aby dodać przedmiot")
+        Group {
+            Form {
+                QRCode(productID: productID)
+                    .environmentObject(qrCodeGenerator)
+
+                BasicForm(itemName: $addNewItemViewModel.itemName,
+                          numberOfItems: $addNewItemViewModel.numberOfItems,
+                          weight: $addNewItemViewModel.weight,
+                          comments: $addNewItemViewModel.comments)
+                
+                CustomProperties()
+                    .environmentObject(addNewItemViewModel)
+                
+                DynamicApi()
+                    .environmentObject(dynamicItemViewModel)
+                
+                BtnDatabase(btnLabel: "Dodaj") {
+                    addNewItemViewModel.splitArray()
+                    qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
+                    UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
+                    addNewItemViewModel.itemID = productID
+                    addNewItemViewModel.addItemToDatabase()
+                    productID = UUID().uuidString
                 }
-            }.onDelete(perform: dynamicItemViewModel.removeItems)
-        }
-        Button {
-            dynamicItemViewModel.createApiConnection()
-        } label: {
-            ZStack {
-                RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(.red)
-                    .padding(10)
-                    .frame(width: 350, height: 80)
-                Text("+")
-                    .foregroundStyle(.white)
-                    .padding()
-                    .bold()
-                    .font(.system(size: 16))
+                
+                .alert("Dodano \($addNewItemViewModel.itemNameHolder.wrappedValue), kod QR został zapisany w galerii zdjęć",
+                       isPresented: $addNewItemViewModel.isSuccess) {
+                               Button("OK", role: .cancel) { }
+                }
+                .alert("\($addNewItemViewModel.message.wrappedValue)",
+                       isPresented: $addNewItemViewModel.isFail) {
+                               Button("OK", role: .cancel) { }
+                }
             }
-        }.disabled(dynamicItemViewModel.canAddNewApi())
+        }.disabled(!permissionViewModel.canUserAdd)
+            .opacity(permissionViewModel.canUserAdd ? 1 : 0.4)
+       
     }
 }
 
