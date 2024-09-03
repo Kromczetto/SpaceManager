@@ -19,19 +19,13 @@ struct StaticItem: View {
         permissionViewModel.canUserAdd ? nil : Text("Nie posiadasz uprawnień, aby dodać przedmiot")
         Group {
             Form {
-                GeometryReader { geometry in
-                    Image(uiImage: qrCodeGenerator.generatorQr(from: productID)!)
-                        .resizable()
-                        .interpolation(.none)
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                        .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-                }.frame(minHeight: 200)
-                
-                TextField("Nazwa", text: $addNewItemViewModel.itemName)
-                TextField("Ilość", text: $addNewItemViewModel.numberOfItems)
-                TextField("Waga", text: $addNewItemViewModel.weight)
-                TextField("Uwagi", text: $addNewItemViewModel.comments)
+                QRCode(productID: productID)
+                    .environmentObject(qrCodeGenerator)
+
+                BasicForm(itemName: $addNewItemViewModel.itemName,
+                          numberOfItems: $addNewItemViewModel.numberOfItems,
+                          weight: $addNewItemViewModel.weight,
+                          comments: $addNewItemViewModel.comments)
                 
                 CustomProperties()
                     .environmentObject(addNewItemViewModel)

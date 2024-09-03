@@ -61,7 +61,7 @@ struct AddNewItemView: View {
                     //przekazad productID zeby potem przekazac w dynamic do static
                     DynamicItem(productID: productID)
                         .environmentObject(permissionViewModel)
-                        .environmentObject(generatorViewModel)
+                        .environmentObject(qrCodeGenerator)
                         .environmentObject(addNewItemViewModel)
                         .environmentObject(dynamicItemViewModel)
                 }

@@ -41,6 +41,9 @@
 		4F4E58FB2BF0FE4500B80AB8 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4E58FA2BF0FE4500B80AB8 /* SearchView.swift */; };
 		4F58894A2C3D7CF500CAB19D /* ForgotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5889492C3D7CF500CAB19D /* ForgotViewModel.swift */; };
 		4F609BB62C514AB300D05121 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F609BB52C514AB300D05121 /* MainView.swift */; };
+		4F621B0D2C8779EC00CB7073 /* QRCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F621B0C2C8779EC00CB7073 /* QRCode.swift */; };
+		4F621B0F2C877B7900CB7073 /* BasicForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F621B0E2C877B7900CB7073 /* BasicForm.swift */; };
+		4F621B122C877D9600CB7073 /* DynamicApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F621B112C877D9600CB7073 /* DynamicApi.swift */; };
 		4F66DBA02C335FD60035B34F /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66DB9F2C335FD60035B34F /* Checkbox.swift */; };
 		4F859C392BD067B000924EF5 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C382BD067B000924EF5 /* ForgotPasswordView.swift */; };
 		4F859C3B2BD06A5F00924EF5 /* BtnClearComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */; };
@@ -104,6 +107,9 @@
 		4F4E58FA2BF0FE4500B80AB8 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		4F5889492C3D7CF500CAB19D /* ForgotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotViewModel.swift; sourceTree = "<group>"; };
 		4F609BB52C514AB300D05121 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		4F621B0C2C8779EC00CB7073 /* QRCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCode.swift; sourceTree = "<group>"; };
+		4F621B0E2C877B7900CB7073 /* BasicForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicForm.swift; sourceTree = "<group>"; };
+		4F621B112C877D9600CB7073 /* DynamicApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicApi.swift; sourceTree = "<group>"; };
 		4F66DB9F2C335FD60035B34F /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		4F859C382BD067B000924EF5 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnClearComponent.swift; sourceTree = "<group>"; };
@@ -234,6 +240,24 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		4F621B0B2C87795D00CB7073 /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				4FDE85E02C7A36BF0002F656 /* CustomProperties.swift */,
+				4F621B0C2C8779EC00CB7073 /* QRCode.swift */,
+				4F621B0E2C877B7900CB7073 /* BasicForm.swift */,
+			);
+			path = Static;
+			sourceTree = "<group>";
+		};
+		4F621B102C877D8700CB7073 /* Dynamic */ = {
+			isa = PBXGroup;
+			children = (
+				4F621B112C877D9600CB7073 /* DynamicApi.swift */,
+			);
+			path = Dynamic;
+			sourceTree = "<group>";
+		};
 		4FD950C92C8092210075BF72 /* ReadItem */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,7 +282,8 @@
 		4FD950CD2C80BB900075BF72 /* AddItem */ = {
 			isa = PBXGroup;
 			children = (
-				4FDE85E02C7A36BF0002F656 /* CustomProperties.swift */,
+				4F621B102C877D8700CB7073 /* Dynamic */,
+				4F621B0B2C87795D00CB7073 /* Static */,
 				4F20BFD32C36D3D20026C58B /* BtnItemType.swift */,
 				4F102D722C24928200A6702D /* BtnDatabase.swift */,
 				4FD950D22C80CFC30075BF72 /* StaticItem.swift */,
@@ -392,6 +417,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F621B0F2C877B7900CB7073 /* BasicForm.swift in Sources */,
+				4F621B0D2C8779EC00CB7073 /* QRCode.swift in Sources */,
 				4F32055F2BBDB2AE000BD18C /* RegisterView.swift in Sources */,
 				4FDE85E12C7A36BF0002F656 /* CustomProperties.swift in Sources */,
 				4FAB91D92C43DD9500337256 /* StaySigninViewModel.swift in Sources */,
@@ -439,6 +466,7 @@
 				4F9DE7D92C2F07B2001829BA /* ReadItemView.swift in Sources */,
 				4F1E6C332BBD939F00BDE9B5 /* SpaceManagerApp.swift in Sources */,
 				4F9DE7DB2C2F07BE001829BA /* ReadItemViewModel.swift in Sources */,
+				4F621B122C877D9600CB7073 /* DynamicApi.swift in Sources */,
 				4F2C28FE2BDEDC6E00D040D2 /* LoginViewModel.swift in Sources */,
 				4F47058E2C3C3E8F00F42F12 /* CustomBack.swift in Sources */,
 				4FF426DA2C482CC70096ED46 /* CustomCameraView.swift in Sources */,
