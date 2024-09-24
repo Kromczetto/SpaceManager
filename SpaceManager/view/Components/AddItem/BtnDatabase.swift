@@ -10,7 +10,6 @@ import SwiftUI
 struct BtnDatabase: View {
     @State var btnLabel = "Button"
     var action: () -> Void
-    
     var body: some View {
         Button {
             action()

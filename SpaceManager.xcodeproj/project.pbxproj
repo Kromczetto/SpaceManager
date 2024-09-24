@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4F056CC92C46979E006408E4 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F056CC82C46979E006408E4 /* Photo.swift */; };
+		4F0575F12C90744800E4D2D3 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0575F02C90744800E4D2D3 /* Api.swift */; };
 		4F07E1DC2C35AB6A000B26A8 /* ActiveHandlerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F07E1DB2C35AB6A000B26A8 /* ActiveHandlerViewModel.swift */; };
 		4F102D732C24928200A6702D /* BtnDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F102D722C24928200A6702D /* BtnDatabase.swift */; };
 		4F102D752C2C79D100A6702D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F102D742C2C79D100A6702D /* Item.swift */; };
@@ -32,6 +33,7 @@
 		4F3363B42BE689C00042D0AD /* BtnMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363B32BE689C00042D0AD /* BtnMenu.swift */; };
 		4F3363B62BE69B2A0042D0AD /* QrCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363B52BE69B2A0042D0AD /* QrCodeGenerator.swift */; };
 		4F3363BB2BE6AF800042D0AD /* BottomMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3363BA2BE6AF800042D0AD /* BottomMenu.swift */; };
+		4F3ABCCF2C8A4D4C003E3F8C /* ApiManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3ABCCE2C8A4D4C003E3F8C /* ApiManagerViewModel.swift */; };
 		4F411BE32C493C90004FC735 /* ImagePopUpMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F411BE22C493C90004FC735 /* ImagePopUpMenu.swift */; };
 		4F411BE52C4955BC004FC735 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F411BE42C4955BC004FC735 /* PhotoPicker.swift */; };
 		4F47058E2C3C3E8F00F42F12 /* CustomBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */; };
@@ -59,6 +61,9 @@
 		4FA1C6772C3EF46800306B59 /* PermissionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA1C6762C3EF46800306B59 /* PermissionViewModel.swift */; };
 		4FAB91D92C43DD9500337256 /* StaySigninViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB91D82C43DD9500337256 /* StaySigninViewModel.swift */; };
 		4FAB91DB2C456A4D00337256 /* ManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB91DA2C456A4D00337256 /* ManagerView.swift */; };
+		4FB76E132C945A7F00D6DF80 /* TemplateList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB76E122C945A7F00D6DF80 /* TemplateList.swift */; };
+		4FB76E152C945D8500D6DF80 /* Template.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB76E142C945D8500D6DF80 /* Template.swift */; };
+		4FB76E192C9474E500D6DF80 /* TemplateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB76E182C9474E500D6DF80 /* TemplateViewModel.swift */; };
 		4FD950C82C808F510075BF72 /* EditField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950C72C808F510075BF72 /* EditField.swift */; };
 		4FD950CB2C8092670075BF72 /* ReadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950CA2C8092670075BF72 /* ReadItem.swift */; };
 		4FD950D32C80CFC30075BF72 /* StaticItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950D22C80CFC30075BF72 /* StaticItem.swift */; };
@@ -74,6 +79,7 @@
 
 /* Begin PBXFileReference section */
 		4F056CC82C46979E006408E4 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		4F0575F02C90744800E4D2D3 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		4F07E1DB2C35AB6A000B26A8 /* ActiveHandlerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveHandlerViewModel.swift; sourceTree = "<group>"; };
 		4F102D722C24928200A6702D /* BtnDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnDatabase.swift; sourceTree = "<group>"; };
 		4F102D742C2C79D100A6702D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -98,6 +104,7 @@
 		4F3363B32BE689C00042D0AD /* BtnMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnMenu.swift; sourceTree = "<group>"; };
 		4F3363B52BE69B2A0042D0AD /* QrCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeGenerator.swift; sourceTree = "<group>"; };
 		4F3363BA2BE6AF800042D0AD /* BottomMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenu.swift; sourceTree = "<group>"; };
+		4F3ABCCE2C8A4D4C003E3F8C /* ApiManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManagerViewModel.swift; sourceTree = "<group>"; };
 		4F411BE22C493C90004FC735 /* ImagePopUpMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePopUpMenu.swift; sourceTree = "<group>"; };
 		4F411BE42C4955BC004FC735 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBack.swift; sourceTree = "<group>"; };
@@ -121,6 +128,9 @@
 		4FA1C6762C3EF46800306B59 /* PermissionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionViewModel.swift; sourceTree = "<group>"; };
 		4FAB91D82C43DD9500337256 /* StaySigninViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaySigninViewModel.swift; sourceTree = "<group>"; };
 		4FAB91DA2C456A4D00337256 /* ManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerView.swift; sourceTree = "<group>"; };
+		4FB76E122C945A7F00D6DF80 /* TemplateList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateList.swift; sourceTree = "<group>"; };
+		4FB76E142C945D8500D6DF80 /* Template.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Template.swift; sourceTree = "<group>"; };
+		4FB76E182C9474E500D6DF80 /* TemplateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateViewModel.swift; sourceTree = "<group>"; };
 		4FD950C72C808F510075BF72 /* EditField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditField.swift; sourceTree = "<group>"; };
 		4FD950CA2C8092670075BF72 /* ReadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadItem.swift; sourceTree = "<group>"; };
 		4FD950D22C80CFC30075BF72 /* StaticItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticItem.swift; sourceTree = "<group>"; };
@@ -169,6 +179,8 @@
 				4FF426D52C481E220096ED46 /* CameraService.swift */,
 				4F10E20E2C4EA3F900B76EA4 /* StorageManager.swift */,
 				4FD950D62C80D4420075BF72 /* DynamicItemViewModel.swift */,
+				4F3ABCCE2C8A4D4C003E3F8C /* ApiManagerViewModel.swift */,
+				4FB76E182C9474E500D6DF80 /* TemplateViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -236,6 +248,8 @@
 				4F102D742C2C79D100A6702D /* Item.swift */,
 				4F4A8DB12C32F1430002744A /* ActiveItem.swift */,
 				4F056CC82C46979E006408E4 /* Photo.swift */,
+				4F0575F02C90744800E4D2D3 /* Api.swift */,
+				4FB76E142C945D8500D6DF80 /* Template.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -246,6 +260,7 @@
 				4FDE85E02C7A36BF0002F656 /* CustomProperties.swift */,
 				4F621B0C2C8779EC00CB7073 /* QRCode.swift */,
 				4F621B0E2C877B7900CB7073 /* BasicForm.swift */,
+				4FB76E122C945A7F00D6DF80 /* TemplateList.swift */,
 			);
 			path = Static;
 			sourceTree = "<group>";
@@ -420,12 +435,14 @@
 				4F621B0F2C877B7900CB7073 /* BasicForm.swift in Sources */,
 				4F621B0D2C8779EC00CB7073 /* QRCode.swift in Sources */,
 				4F32055F2BBDB2AE000BD18C /* RegisterView.swift in Sources */,
+				4F0575F12C90744800E4D2D3 /* Api.swift in Sources */,
 				4FDE85E12C7A36BF0002F656 /* CustomProperties.swift in Sources */,
 				4FAB91D92C43DD9500337256 /* StaySigninViewModel.swift in Sources */,
 				4F15F8DA2BF61CD3001B58CA /* ProfileViewModel.swift in Sources */,
 				4FD950C82C808F510075BF72 /* EditField.swift in Sources */,
 				4F3363AA2BE51F750042D0AD /* RegisterViewModel.swift in Sources */,
 				4FD950D32C80CFC30075BF72 /* StaticItem.swift in Sources */,
+				4FB76E192C9474E500D6DF80 /* TemplateViewModel.swift in Sources */,
 				4F32055D2BBDB217000BD18C /* LoginView.swift in Sources */,
 				4F859C3F2BD06DC800924EF5 /* FormComponent.swift in Sources */,
 				4F4A8DB22C32F1430002744A /* ActiveItem.swift in Sources */,
@@ -438,6 +455,7 @@
 				4F411BE52C4955BC004FC735 /* PhotoPicker.swift in Sources */,
 				4FD950D72C80D4420075BF72 /* DynamicItemViewModel.swift in Sources */,
 				4F056CC92C46979E006408E4 /* Photo.swift in Sources */,
+				4F3ABCCF2C8A4D4C003E3F8C /* ApiManagerViewModel.swift in Sources */,
 				4F411BE32C493C90004FC735 /* ImagePopUpMenu.swift in Sources */,
 				4FD950D52C80D4190075BF72 /* DynamicItem.swift in Sources */,
 				4F15F8DC2BF61D54001B58CA /* BtnProfile.swift in Sources */,
@@ -446,6 +464,7 @@
 				4F609BB62C514AB300D05121 /* MainView.swift in Sources */,
 				4FD950CB2C8092670075BF72 /* ReadItem.swift in Sources */,
 				4F85DFED2C33016A00A5844D /* ReadActiveViewModel.swift in Sources */,
+				4FB76E152C945D8500D6DF80 /* Template.swift in Sources */,
 				4F102D732C24928200A6702D /* BtnDatabase.swift in Sources */,
 				4F4A8DB02C32E9FC0002744A /* GeneratorViewModel.swift in Sources */,
 				4F3363B42BE689C00042D0AD /* BtnMenu.swift in Sources */,
@@ -456,6 +475,7 @@
 				4F4705902C3C5FF400F42F12 /* WelcomeView.swift in Sources */,
 				4F15F8D82BF61CA2001B58CA /* ProfileView.swift in Sources */,
 				4F3363B62BE69B2A0042D0AD /* QrCodeGenerator.swift in Sources */,
+				4FB76E132C945A7F00D6DF80 /* TemplateList.swift in Sources */,
 				4F07E1DC2C35AB6A000B26A8 /* ActiveHandlerViewModel.swift in Sources */,
 				4FF426D62C481E220096ED46 /* CameraService.swift in Sources */,
 				4F3363B02BE54A790042D0AD /* AddNewItemView.swift in Sources */,

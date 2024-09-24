@@ -10,6 +10,7 @@ import SwiftUI
 struct DynamicItem: View {
     @State var productID: String
     @State private var qrCodeToSave: UIImage? = nil
+    @StateObject var apiManagerViewModel = ApiManagerViewModel()
     @EnvironmentObject var dynamicItemViewModel: DynamicItemViewModel
     @EnvironmentObject var addNewItemViewModel: AddNewItemViewModel
     @EnvironmentObject var permissionViewModel: PermissionViewModel
@@ -31,6 +32,7 @@ struct DynamicItem: View {
                 
                 DynamicApi()
                     .environmentObject(dynamicItemViewModel)
+                    .environmentObject(apiManagerViewModel)
                 
                 BtnDatabase(btnLabel: "Dodaj") {
                     addNewItemViewModel.splitArray()

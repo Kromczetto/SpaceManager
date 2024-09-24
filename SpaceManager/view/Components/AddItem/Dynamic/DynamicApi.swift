@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DynamicApi: View {
     @EnvironmentObject var dynamicItemViewModel: DynamicItemViewModel
+    @EnvironmentObject var apiManagerViewModel: ApiManagerViewModel
     var body: some View {
         List {
             ForEach(Array($dynamicItemViewModel.api.enumerated()), id: \.offset) { index, _ in
@@ -21,8 +22,13 @@ struct DynamicApi: View {
                 }
             }.onDelete(perform: dynamicItemViewModel.removeItems)
         }
+        Text("\(apiManagerViewModel.value)")
         Button {
             dynamicItemViewModel.createApiConnection()
+            //odpowiedni index zrobić
+//            apiManagerViewModel.setUrl(url: dynamicItemViewModel.apiConnection[0])
+            print(dynamicItemViewModel.valueName[0])
+            apiManagerViewModel.getData(key: "name")
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 20)
