@@ -15,6 +15,7 @@ struct AddNewItemView: View {
     @StateObject var qrCodeGenerator = QrCodeGenerator()
     @StateObject var dynamicItemViewModel = DynamicItemViewModel()
     @StateObject var activeHandlerViewModel = ActivevHandlerViewModel()
+    @StateObject var templateViewModel = TemplateViewModel()
     @EnvironmentObject var permissionViewModel: PermissionViewModel
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
     
@@ -24,12 +25,10 @@ struct AddNewItemView: View {
     @State private var isSecondCheck: Bool = false
     @State private var isThirdCheck: Bool = false
     @State private var canAdd: Bool = false
-    
-//    @State private var qrCodeToSave: UIImage? = nil
+    @State private var selectedOption = "Nowy szablon"
     @State private var isCustionProperty: Bool = false
     
     var body: some View {
-       
         ZStack{
             LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
                            startPoint: .top, endPoint: UnitPoint.bottom)
@@ -52,10 +51,13 @@ struct AddNewItemView: View {
                     generatorViewModel.isStatic = true
                 }
                 Spacer()
+                TemplateList(selectedOption: $templateViewModel.selectedItem)
+                    .environmentObject(templateViewModel)
+                Spacer()
                 if generatorViewModel.isStatic {
-                    StaticItem(productID: productID)
+                    StaticItem(productID: productID, selectedOption: $templateViewModel.selectedItem)
                         .environmentObject(permissionViewModel)
-                        //.environmentObject(generatorViewModel)
+                        .environmentObject(templateViewModel)
                         .environmentObject(addNewItemViewModel)
                 } else {
                     //przekazad productID zeby potem przekazac w dynamic do static

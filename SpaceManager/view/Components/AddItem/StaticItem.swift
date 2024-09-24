@@ -10,9 +10,10 @@ import SwiftUI
 struct StaticItem: View {
     @State var productID: String = ""
     @State private var qrCodeToSave: UIImage? = nil
+    @Binding var selectedOption: String
     @StateObject var qrCodeGenerator = QrCodeGenerator()
     @EnvironmentObject var permissionViewModel: PermissionViewModel
-   // @EnvironmentObject var generatorViewModel: GeneratorViewModel
+    @EnvironmentObject var templateViewModel: TemplateViewModel
     @EnvironmentObject var addNewItemViewModel: AddNewItemViewModel
     
     var body: some View {
@@ -37,6 +38,7 @@ struct StaticItem: View {
                     addNewItemViewModel.itemID = productID
                     addNewItemViewModel.addItemToDatabase()
                     productID = UUID().uuidString
+                    templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
                 }
                 
                 .alert("Dodano \($addNewItemViewModel.itemNameHolder.wrappedValue), kod QR został zapisany w galerii zdjęć",
@@ -53,6 +55,6 @@ struct StaticItem: View {
     }
 }
 
-#Preview {
-    StaticItem()
-}
+//#Preview {
+//    StaticItem()
+//}

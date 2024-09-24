@@ -62,7 +62,6 @@ class AddNewItemViewModel: ObservableObject{
     }
     
     func addItemToDatabase() {
-        
         if(!validItemField()) {
             self.isSuccess = false
             self.isFail = true
