@@ -13,6 +13,7 @@ import FirebaseFirestore
 class TemplateViewModel: ObservableObject {
     @Published var selectedItem: String = "Nowy szablon"
     @Published var options: [String] = ["Nowy szablon"] //, "Opcja1", "Opcja2", "Opcja3"
+    @Published var properties: [String] = [""]
     func addNewTemplate(selectedItem: String, propertyKey: [String]) {
         options.append(selectedItem)
         let tid: String = UUID().uuidString
@@ -37,6 +38,25 @@ class TemplateViewModel: ObservableObject {
         return false
     }
     func getTemplateFromDB() {
-        print("Getting data from db :)")
+        let db = Firestore.firestore()
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        db.collection("users")
+            .document(uid)
+            .collection("templates")
+            .getDocuments { (snap, err) in
+                snap?.documents.forEach({ doc in
+                    let dictionary = doc.data()
+                    if let templateName = dictionary["name"] as? String {
+                        self.options.append(templateName)
+                    }
+                    if let templateProperties = dictionary["propertiesKey"] as? [String] {
+                        for property in templateProperties {
+                            self.properties.append(property)
+                        }
+                    }
+                })
+            }
     }
 }

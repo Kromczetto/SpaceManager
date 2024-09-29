@@ -38,7 +38,11 @@ struct StaticItem: View {
                     addNewItemViewModel.itemID = productID
                     addNewItemViewModel.addItemToDatabase()
                     productID = UUID().uuidString
-                    templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
+                    if !addNewItemViewModel.isFail {
+                        templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
+                        templateViewModel.options[0] = "Nowy szablon"
+                    }
+                   
                 }
                 
                 .alert("Dodano \($addNewItemViewModel.itemNameHolder.wrappedValue), kod QR został zapisany w galerii zdjęć",

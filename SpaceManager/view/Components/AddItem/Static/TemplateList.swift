@@ -21,6 +21,9 @@ struct TemplateList: View {
                 }
             }
             .pickerStyle(MenuPickerStyle())
+            .onAppear {
+                templateViewModel.getTemplateFromDB()
+            }
             
             if (selectedOption == templateViewModel.options[0]) {
                 TextField(templateViewModel.options[0], text: $editTemplate)

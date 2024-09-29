@@ -29,7 +29,7 @@ struct AddNewItemView: View {
     @State private var isCustionProperty: Bool = false
     
     var body: some View {
-        ZStack{
+        ZStack {
             LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
                            startPoint: .top, endPoint: UnitPoint.bottom)
                             .ignoresSafeArea()
