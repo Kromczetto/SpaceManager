@@ -29,7 +29,7 @@ struct AddNewItemView: View {
     @State private var isCustionProperty: Bool = false
     
     var body: some View {
-        ZStack{
+        ZStack {
             LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
                            startPoint: .top, endPoint: UnitPoint.bottom)
                             .ignoresSafeArea()
@@ -53,6 +53,7 @@ struct AddNewItemView: View {
                 Spacer()
                 TemplateList(selectedOption: $templateViewModel.selectedItem)
                     .environmentObject(templateViewModel)
+                    .environmentObject(addNewItemViewModel)
                 Spacer()
                 if generatorViewModel.isStatic {
                     StaticItem(productID: productID, selectedOption: $templateViewModel.selectedItem)

@@ -17,6 +17,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 @main
+
 struct SpaceManagerApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     init() {

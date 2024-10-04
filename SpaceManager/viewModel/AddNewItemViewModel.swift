@@ -147,7 +147,22 @@ class AddNewItemViewModel: ObservableObject{
     }
     func splitArray() {
         if (properties.count > 0 || !properties.isEmpty) {
+            propertyKey.removeFirst()
+            propertyValue.removeFirst()
             properties.removeFirst()
         }
+    }
+    func fillArray(prop: [String]) {
+        properties.removeAll()
+        propertyKey.removeAll()
+        propertyValue.removeAll()
+        for p in prop {
+            propertyKey.append(p)
+            propertyValue.append("")
+            tempProperty[propertyKey[0]] = p
+            properties.append(tempProperty)
+            tempProperty.removeAll()
+        }
+        splitArray()
     }
 }
