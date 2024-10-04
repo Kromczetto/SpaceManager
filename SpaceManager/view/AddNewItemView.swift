@@ -53,6 +53,7 @@ struct AddNewItemView: View {
                 Spacer()
                 TemplateList(selectedOption: $templateViewModel.selectedItem)
                     .environmentObject(templateViewModel)
+                    .environmentObject(addNewItemViewModel)
                 Spacer()
                 if generatorViewModel.isStatic {
                     StaticItem(productID: productID, selectedOption: $templateViewModel.selectedItem)

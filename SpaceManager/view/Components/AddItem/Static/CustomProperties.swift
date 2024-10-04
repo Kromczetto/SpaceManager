@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomProperties: View {
     @EnvironmentObject var addNewItemViewModel : AddNewItemViewModel
+    @EnvironmentObject var templateViewModel : TemplateViewModel
     @State private var isCustomProperty: Bool = false
     var body: some View {
         if isCustomProperty {
@@ -26,8 +27,8 @@ struct CustomProperties: View {
         }
         Button {
             isCustomProperty = true
-            print(addNewItemViewModel.listIndex)
-            addNewItemViewModel.createProperty()
+//            print(addNewItemViewModel.listIndex)
+//            addNewItemViewModel.createProperty()
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 20)

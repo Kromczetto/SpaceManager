@@ -13,6 +13,7 @@ struct TemplateList: View {
     @State private var isNewTemplate: Bool = false
     @FocusState private var isFocused: Bool
     @EnvironmentObject var templateViewModel: TemplateViewModel
+    @EnvironmentObject var addNewItemViewModel: AddNewItemViewModel
     var body: some View {
         VStack {
             Picker("Wybierz szablon", selection: $selectedOption) {
@@ -21,8 +22,21 @@ struct TemplateList: View {
                 }
             }
             .pickerStyle(MenuPickerStyle())
+            .onChange(of: selectedOption) {
+                if !templateViewModel.nameTid[templateViewModel.selectedItem]!.isEmpty {
+                    DispatchQueue.main.async {
+                        templateViewModel.getProperties(tid: templateViewModel.nameTid[templateViewModel.selectedItem]!) {
+                            print(templateViewModel.template?.propertiesKey)
+                            if let temp = templateViewModel.template?.propertiesKey {
+                                addNewItemViewModel.fillArray(prop: temp)
+                            }
+                        }
+                    }
+                }
+                
+            }
             .onAppear {
-                templateViewModel.getTemplateFromDB()
+                templateViewModel.getTemplateFromDB() 
             }
             
             if (selectedOption == templateViewModel.options[0]) {
@@ -35,6 +49,7 @@ struct TemplateList: View {
                             templateViewModel.options[0] = newTemplate
                             selectedOption = templateViewModel.options[0]
                         }
+                        
                     }
             } else {
                 Text(selectedOption)

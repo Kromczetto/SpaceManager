@@ -29,7 +29,13 @@ struct StaticItem: View {
                           comments: $addNewItemViewModel.comments)
                 
                 CustomProperties()
+                    .onAppear {
+                        if selectedOption != "Nowy szablon" {
+                            
+                        }
+                    }
                     .environmentObject(addNewItemViewModel)
+                    .environmentObject(templateViewModel)
                 
                 BtnDatabase(btnLabel: "Dodaj") {
                     addNewItemViewModel.splitArray()
