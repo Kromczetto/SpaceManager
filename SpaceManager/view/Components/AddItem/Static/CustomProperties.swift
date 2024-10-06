@@ -11,10 +11,11 @@ struct CustomProperties: View {
     @EnvironmentObject var addNewItemViewModel : AddNewItemViewModel
     @EnvironmentObject var templateViewModel : TemplateViewModel
     @Binding var isCustomProperty: Bool
+    @State private var sercondIteration: Bool = false
     var body: some View {
         if isCustomProperty {
             List {
-                ForEach(Array($addNewItemViewModel.properties.enumerated()), id: \.offset) { index, _ in
+                ForEach(Array($addNewItemViewModel.propertyKey.enumerated()), id: \.offset) { index, _ in
                     HStack {
                         TextField("Właściość:", text: $addNewItemViewModel.propertyKey[index])
                         TextField("Wartość", text: $addNewItemViewModel.propertyValue[index])
@@ -28,7 +29,11 @@ struct CustomProperties: View {
         Button {
             isCustomProperty = true
             print(addNewItemViewModel.listIndex)
-            addNewItemViewModel.createProperty()
+            if sercondIteration {
+                addNewItemViewModel.propertyKey.append("")
+                addNewItemViewModel.propertyValue.append("")
+            }
+            sercondIteration = true
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 20)

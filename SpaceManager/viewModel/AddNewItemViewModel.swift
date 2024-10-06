@@ -112,23 +112,38 @@ class AddNewItemViewModel: ObservableObject{
                 }
             }
     }
+//    func createProperty() {
+//        if (listIndex == 0) {
+//            tempProperty[propertyKey[self.listIndex]] = propertyValue[self.listIndex]
+//            properties.append(tempProperty)
+//            tempProperty.removeAll()
+//            propertyKey.append("")
+//            propertyValue.append("")
+//            self.listIndex = listIndex + 1
+//        } else {
+//            print(listIndex)
+//            tempProperty[propertyKey[self.listIndex - 1]] = propertyValue[self.listIndex - 1]
+//            properties.append(tempProperty)
+//            tempProperty.removeAll()
+//            propertyKey.append("")
+//            propertyValue.append("")
+//            self.listIndex = listIndex + 1
+//        }
+//    }
     func createProperty() {
-        if (listIndex == 0) {
-            tempProperty[propertyKey[self.listIndex]] = propertyValue[self.listIndex]
+        properties.removeAll()
+        for (index, _) in propertyKey.enumerated() {
+            tempProperty[propertyKey[index]] = propertyValue[index]
             properties.append(tempProperty)
             tempProperty.removeAll()
-            propertyKey.append("")
-            propertyValue.append("")
-            self.listIndex = listIndex + 1
-        } else {
-            print(listIndex)
-            tempProperty[propertyKey[self.listIndex - 1]] = propertyValue[self.listIndex - 1]
-            properties.append(tempProperty)
-            tempProperty.removeAll()
-            propertyKey.append("")
-            propertyValue.append("")
-            self.listIndex = listIndex + 1
         }
+//        for k in propertyKey {
+//            print(k)
+//            print("======")
+//            print("PROPERTIES: \(self.properties)")
+//            print("PROPERTYkey: \(self.propertyKey)")
+//            print("PROPERTYvalue: \(self.propertyValue)")
+//        }
     }
     func removeItems(at offsets: IndexSet) {
         propertyKey.remove(atOffsets: offsets)
