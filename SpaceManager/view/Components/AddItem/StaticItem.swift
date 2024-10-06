@@ -28,27 +28,36 @@ struct StaticItem: View {
                           weight: $addNewItemViewModel.weight,
                           comments: $addNewItemViewModel.comments)
                 
-                CustomProperties()
+                CustomProperties(isCustomProperty: $templateViewModel.isDBReading)
                     .onAppear {
-                        if selectedOption != "Nowy szablon" {
-                            
-                        }
+                        print(addNewItemViewModel.propertyKey)
+                    }
+                    .onChange(of: templateViewModel.isDBReading) {
+                        print("zmienna \(templateViewModel.isDBReading)")
                     }
                     .environmentObject(addNewItemViewModel)
                     .environmentObject(templateViewModel)
                 
                 BtnDatabase(btnLabel: "Dodaj") {
-                    addNewItemViewModel.splitArray()
-                    qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
-                    UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
-                    addNewItemViewModel.itemID = productID
-                    addNewItemViewModel.addItemToDatabase()
-                    productID = UUID().uuidString
-                    if !addNewItemViewModel.isFail {
-                        templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
-                        templateViewModel.options[0] = "Nowy szablon"
+                    if let lastKey = addNewItemViewModel.propertyKey.last {
+                        if !addNewItemViewModel.isFail {
+                            templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
+                            templateViewModel.options[0] = "Nowy szablon"
+                        }
+                        if lastKey.isEmpty {
+                            addNewItemViewModel.propertyKey.removeLast()
+                            addNewItemViewModel.propertyValue.removeLast()
+                        }
+                        addNewItemViewModel.createProperty()
+                        qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
+                        UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
+                        addNewItemViewModel.itemID = productID
+                        addNewItemViewModel.addItemToDatabase()
+                        productID = UUID().uuidString
+                        addNewItemViewModel.properties.removeAll()
+                        addNewItemViewModel.propertyKey.removeAll()
+                        addNewItemViewModel.propertyValue.removeAll()
                     }
-                   
                 }
                 
                 .alert("Dodano \($addNewItemViewModel.itemNameHolder.wrappedValue), kod QR został zapisany w galerii zdjęć",

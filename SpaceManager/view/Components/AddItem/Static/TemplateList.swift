@@ -23,16 +23,22 @@ struct TemplateList: View {
             }
             .pickerStyle(MenuPickerStyle())
             .onChange(of: selectedOption) {
-                if !templateViewModel.nameTid[templateViewModel.selectedItem]!.isEmpty {
-                    DispatchQueue.main.async {
-                        templateViewModel.getProperties(tid: templateViewModel.nameTid[templateViewModel.selectedItem]!) {
-                            print(templateViewModel.template?.propertiesKey)
-                            if let temp = templateViewModel.template?.propertiesKey {
-                                addNewItemViewModel.fillArray(prop: temp)
+                templateViewModel.isDBReading = true
+                if let tempNameTid = templateViewModel.nameTid[templateViewModel.selectedItem] {
+                    if !tempNameTid.isEmpty {
+                        DispatchQueue.main.async {
+                            templateViewModel.getProperties(tid: templateViewModel.nameTid[templateViewModel.selectedItem]!) {
+                                print(templateViewModel.template?.propertiesKey)
+                                if let temp = templateViewModel.template?.propertiesKey {
+                                    addNewItemViewModel.fillArray(prop: temp)
+                                }
                             }
                         }
                     }
                 }
+                   
+                
+               
                 
             }
             .onAppear {

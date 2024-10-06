@@ -17,6 +17,7 @@ class TemplateViewModel: ObservableObject {
     @Published var properties: [String] = [""]
     @Published var nameTid: [String: String] = [:]
     @Published var template: Template?
+    @Published var isDBReading: Bool = false
     func addNewTemplate(selectedItem: String, propertyKey: [String]) {
         options.append(selectedItem)
         let tid: String = UUID().uuidString
