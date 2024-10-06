@@ -137,12 +137,12 @@ class AddNewItemViewModel: ObservableObject{
         self.listIndex = listIndex - 1
     }
     func canAddNewProperty() -> Bool {
-        if (self.listIndex == 0) {
-            return false
-        }
-        if (propertyKey[self.listIndex - 1].isEmpty || propertyValue[self.listIndex - 1].isEmpty) {
-            return true
-        }
+//        if (self.listIndex == 0) {
+//            return false
+//        }
+//        if (propertyKey[self.listIndex - 1].isEmpty || propertyValue[self.listIndex - 1].isEmpty) {
+//            return true
+//        }
         return false
     }
     func splitArray() {

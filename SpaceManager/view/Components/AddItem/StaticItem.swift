@@ -29,11 +29,9 @@ struct StaticItem: View {
                           comments: $addNewItemViewModel.comments)
                 
                 CustomProperties(isCustomProperty: $templateViewModel.isDBReading)
-//                    .onAppear {
-//                        if selectedOption != "Nowy szablon" {
-//                            
-//                        }
-//                    }
+                    .onAppear {
+                        print(addNewItemViewModel.propertyKey)
+                    }
                     .onChange(of: templateViewModel.isDBReading) {
                         print("zmienna \(templateViewModel.isDBReading)")
                     }
@@ -47,37 +45,18 @@ struct StaticItem: View {
                             templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
                             templateViewModel.options[0] = "Nowy szablon"
                         }
-                        print(!last.isEmpty)
-                        if !last.isEmpty {
-                            addNewItemViewModel.splitArray()
-                            addNewItemViewModel.createProperty()
-
-                            //addNewItemViewModel.createProperty()
-                            qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
-                            UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
-                            addNewItemViewModel.itemID = productID
-                            if let tempArr = addNewItemViewModel.properties.last {
-                                if tempArr.isEmpty {
-                                    addNewItemViewModel.properties.removeLast()
-                                    addNewItemViewModel.addItemToDatabase()
-                                } else {
-                                    addNewItemViewModel.addItemToDatabase()
-                                }
-                            }
-                            productID = UUID().uuidString
-                            addNewItemViewModel.properties.removeAll()
-                            addNewItemViewModel.propertyKey.removeAll()
-                            addNewItemViewModel.propertyValue.removeAll()
-                            addNewItemViewModel.listIndex = 0
-                         
-                        } else {
-                            //poprawic bo gdzies jest blad
-//                            addNewItemViewModel.isFail = true
-//                            addNewItemViewModel.message = "Żadne pole nie moze być puste"
-                            print("PROPERTY: \(addNewItemViewModel.propertyKey)")
+                        
+                    
+                       // print(!last.isEmpty)
+                        if addNewItemViewModel.propertyKey.count > addNewItemViewModel.properties.count {
                             addNewItemViewModel.propertyKey.removeLast()
                             addNewItemViewModel.propertyValue.removeLast()
                             addNewItemViewModel.createProperty()
+                            print("dluzsze")
+                            print("PROPERTY: \(addNewItemViewModel.propertyKey)")
+//                            addNewItemViewModel.propertyKey.removeLast()
+//                            addNewItemViewModel.propertyValue.removeLast()
+//                            addNewItemViewModel.createProperty()
 
                             addNewItemViewModel.splitArray()
                             print("PROPERTies: \(addNewItemViewModel.properties)")
@@ -100,6 +79,37 @@ struct StaticItem: View {
                             addNewItemViewModel.propertyKey.removeAll()
                             addNewItemViewModel.propertyValue.removeAll()
                             addNewItemViewModel.listIndex = 0
+                        } else {
+                            addNewItemViewModel.propertyKey.removeLast()
+                            addNewItemViewModel.propertyValue.removeLast()
+                            print(addNewItemViewModel.properties)
+                            print(addNewItemViewModel.propertyKey)
+                            print(addNewItemViewModel.propertyValue)
+                        }
+                        if !last.isEmpty {
+                            
+                            qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
+                            UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
+                            addNewItemViewModel.itemID = productID
+                            if let tempArr = addNewItemViewModel.properties.last {
+                                if tempArr.isEmpty {
+                                    addNewItemViewModel.properties.removeLast()
+                                    addNewItemViewModel.addItemToDatabase()
+                                } else {
+                                    addNewItemViewModel.addItemToDatabase()
+                                }
+                            }
+                            productID = UUID().uuidString
+                            addNewItemViewModel.properties.removeAll()
+                            addNewItemViewModel.propertyKey.removeAll()
+                            addNewItemViewModel.propertyValue.removeAll()
+                            addNewItemViewModel.listIndex = 0
+                         
+                        } else {
+                            //poprawic bo gdzies jest blad
+//                            addNewItemViewModel.isFail = true
+//                            addNewItemViewModel.message = "Żadne pole nie moze być puste"
+                            
                         }
                     }
                 }
