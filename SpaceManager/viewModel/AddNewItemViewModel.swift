@@ -15,21 +15,14 @@ class AddNewItemViewModel: ObservableObject{
     @Published var weight: String = ""
     @Published var comments: String = ""
     @Published var itemID: String = ""
-    
     @Published var isSuccess: Bool = false
     @Published var isFail: Bool = false
     @Published var message: String = ""
-    
     var itemNameHolder: String = ""
-    
     private var tempProperty: [String: String] = [:]
-    
     @Published var properties: [[String: String]] = []
     @Published var propertyKey: [String] = [""]
     @Published var propertyValue: [String] = [""]
-    @Published var listIndex: Int = 0
-    
-    
     func validItemField()-> Bool {
         var itemNameWithoutWhiteCharacters: String {
             itemName.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -57,10 +50,8 @@ class AddNewItemViewModel: ObservableObject{
             message = "Liczba i waga muszą być dodatnimi liczbami"
             return false
         }
-        
         return true
     }
-    
     func addItemToDatabase() {
         if(!validItemField()) {
             self.isSuccess = false
@@ -73,7 +64,6 @@ class AddNewItemViewModel: ObservableObject{
         guard let userName = Auth.auth().currentUser?.email else {
             return
         }
-
         let newItem = Item(id:itemID,
                            name: itemName,
                            amount: numberOfItems,
@@ -112,24 +102,6 @@ class AddNewItemViewModel: ObservableObject{
                 }
             }
     }
-//    func createProperty() {
-//        if (listIndex == 0) {
-//            tempProperty[propertyKey[self.listIndex]] = propertyValue[self.listIndex]
-//            properties.append(tempProperty)
-//            tempProperty.removeAll()
-//            propertyKey.append("")
-//            propertyValue.append("")
-//            self.listIndex = listIndex + 1
-//        } else {
-//            print(listIndex)
-//            tempProperty[propertyKey[self.listIndex - 1]] = propertyValue[self.listIndex - 1]
-//            properties.append(tempProperty)
-//            tempProperty.removeAll()
-//            propertyKey.append("")
-//            propertyValue.append("")
-//            self.listIndex = listIndex + 1
-//        }
-//    }
     func createProperty() {
         properties.removeAll()
         for (index, _) in propertyKey.enumerated() {
@@ -137,36 +109,34 @@ class AddNewItemViewModel: ObservableObject{
             properties.append(tempProperty)
             tempProperty.removeAll()
         }
-//        for k in propertyKey {
-//            print(k)
-//            print("======")
-//            print("PROPERTIES: \(self.properties)")
-//            print("PROPERTYkey: \(self.propertyKey)")
-//            print("PROPERTYvalue: \(self.propertyValue)")
-//        }
     }
     func removeItems(at offsets: IndexSet) {
         propertyKey.remove(atOffsets: offsets)
         propertyValue.remove(atOffsets: offsets)
         properties.remove(atOffsets: offsets)
-        self.listIndex = listIndex - 1
     }
     func canAddNewProperty() -> Bool {
-//        if (self.listIndex == 0) {
-//            return false
-//        }
-//        if (propertyKey[self.listIndex - 1].isEmpty || propertyValue[self.listIndex - 1].isEmpty) {
-//            return true
-//        }
-        return false
-    }
-    func splitArray() {
-        if (properties.count > 0 || !properties.isEmpty) {
-            propertyKey.removeFirst()
-            propertyValue.removeFirst()
-            properties.removeFirst()
+        let propertyLenght: Int = propertyKey.count
+        if  propertyLenght == 0 {
+            return false
         }
+        if propertyLenght == 1 {
+            if propertyKey[0] == "" {
+                return true
+            }
+        }
+        if propertyKey[propertyLenght - 1] != "" {
+            return false
+        }
+        return true
     }
+//    func splitArray() {
+//        if (properties.count > 0 || !properties.isEmpty) {
+//            propertyKey.removeFirst()
+//            propertyValue.removeFirst()
+//            properties.removeFirst()
+//        }
+//    }
     func fillArray(prop: [String]) {
         properties.removeAll()
         propertyKey.removeAll()

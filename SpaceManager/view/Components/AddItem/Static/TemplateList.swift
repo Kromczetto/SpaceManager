@@ -23,6 +23,7 @@ struct TemplateList: View {
             }
             .pickerStyle(MenuPickerStyle())
             .onChange(of: selectedOption) {
+                editTemplate = ""
                 templateViewModel.isDBReading = true
                 if let tempNameTid = templateViewModel.nameTid[templateViewModel.selectedItem] {
                     if !tempNameTid.isEmpty {
@@ -36,10 +37,6 @@ struct TemplateList: View {
                         }
                     }
                 }
-                   
-                
-               
-                
             }
             .onAppear {
                 templateViewModel.getTemplateFromDB() 
@@ -51,11 +48,16 @@ struct TemplateList: View {
                     .focused($isFocused)
                     .onChange(of: isFocused) {
                         if (!isFocused) {
-                            newTemplate = editTemplate
-                            templateViewModel.options[0] = newTemplate
-                            selectedOption = templateViewModel.options[0]
+                            if templateViewModel.checkIsNameTaken(name: editTemplate) {
+                                addNewItemViewModel.isFail = true
+                                addNewItemViewModel.message = "W bazie danych znajduje się już szablon o takiej nazwie. Użyj innej."
+                                editTemplate = ""
+                            } else {
+                                newTemplate = editTemplate
+                                templateViewModel.options[0] = newTemplate
+                                selectedOption = templateViewModel.options[0]
+                            }
                         }
-                        
                     }
             } else {
                 Text(selectedOption)

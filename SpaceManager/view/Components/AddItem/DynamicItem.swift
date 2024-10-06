@@ -35,7 +35,7 @@ struct DynamicItem: View {
                     .environmentObject(apiManagerViewModel)
                 
                 BtnDatabase(btnLabel: "Dodaj") {
-                    addNewItemViewModel.splitArray()
+                    //addNewItemViewModel.splitArray()
                     qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
                     UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
                     addNewItemViewModel.itemID = productID
