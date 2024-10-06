@@ -18,6 +18,14 @@ class TemplateViewModel: ObservableObject {
     @Published var nameTid: [String: String] = [:]
     @Published var template: Template?
     @Published var isDBReading: Bool = false
+    func checkIsNameTaken(name: String) -> Bool{
+        for (index, option) in options.enumerated() {
+            if name == option {
+                return true
+            }
+        }
+        return false
+    }
     func addNewTemplate(selectedItem: String, propertyKey: [String]) {
         options.append(selectedItem)
         let tid: String = UUID().uuidString
@@ -94,7 +102,3 @@ class TemplateViewModel: ObservableObject {
         }
     }
 }
-
-//TODO:
-//-sprawdzanie czy template ktory dodajemy nie ma juz w bazie i czy nie nazywa sie nowy szablon
-//-debugowanie w szczegolnosci (usuwanie ostatniego properties w customProperties)

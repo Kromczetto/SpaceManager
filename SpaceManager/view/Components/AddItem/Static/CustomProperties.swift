@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-
 struct CustomProperties: View {
     @EnvironmentObject var addNewItemViewModel : AddNewItemViewModel
     @EnvironmentObject var templateViewModel : TemplateViewModel
     @Binding var isCustomProperty: Bool
-    @State private var sercondIteration: Bool = false
+    @Binding var secondIteration: Bool 
     var body: some View {
         if isCustomProperty {
             List {
@@ -19,21 +18,22 @@ struct CustomProperties: View {
                     HStack {
                         TextField("Właściość:", text: $addNewItemViewModel.propertyKey[index])
                         TextField("Wartość", text: $addNewItemViewModel.propertyValue[index])
-                    }.onAppear {
-                        print(addNewItemViewModel.properties)
-                        print("index of \(index)")
                     }
+//                    .onAppear {
+//                        print(addNewItemViewModel.properties)
+//                        print("index of \(index)")
+//                    }
                 }.onDelete(perform: addNewItemViewModel.removeItems)
             }
         }
         Button {
             isCustomProperty = true
-            print(addNewItemViewModel.listIndex)
-            if sercondIteration {
+//            print(addNewItemViewModel.listIndex)
+            if secondIteration {
                 addNewItemViewModel.propertyKey.append("")
                 addNewItemViewModel.propertyValue.append("")
             }
-            sercondIteration = true
+            secondIteration = true
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 20)
@@ -46,7 +46,7 @@ struct CustomProperties: View {
                     .bold()
                     .font(.system(size: 16))
             }
-        }.disabled(addNewItemViewModel.canAddNewProperty())
+        }.disabled(secondIteration ? addNewItemViewModel.canAddNewProperty() : false)
     }
 }
 

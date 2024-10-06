@@ -10,6 +10,7 @@ import SwiftUI
 struct StaticItem: View {
     @State var productID: String = ""
     @State private var qrCodeToSave: UIImage? = nil
+    @State private var secondIteration: Bool = false
     @Binding var selectedOption: String
     @StateObject var qrCodeGenerator = QrCodeGenerator()
     @EnvironmentObject var permissionViewModel: PermissionViewModel
@@ -28,13 +29,14 @@ struct StaticItem: View {
                           weight: $addNewItemViewModel.weight,
                           comments: $addNewItemViewModel.comments)
                 
-                CustomProperties(isCustomProperty: $templateViewModel.isDBReading)
-                    .onAppear {
-                        print(addNewItemViewModel.propertyKey)
-                    }
-                    .onChange(of: templateViewModel.isDBReading) {
-                        print("zmienna \(templateViewModel.isDBReading)")
-                    }
+                CustomProperties(isCustomProperty: $templateViewModel.isDBReading, 
+                                 secondIteration: $secondIteration)
+//                    .onAppear {
+//                        print(addNewItemViewModel.propertyKey)
+//                    }
+//                    .onChange(of: templateViewModel.isDBReading) {
+//                        print("zmienna \(templateViewModel.isDBReading)")
+//                    }
                     .environmentObject(addNewItemViewModel)
                     .environmentObject(templateViewModel)
                 
@@ -57,6 +59,7 @@ struct StaticItem: View {
                         addNewItemViewModel.properties.removeAll()
                         addNewItemViewModel.propertyKey.removeAll()
                         addNewItemViewModel.propertyValue.removeAll()
+                        secondIteration = false
                     }
                 }
                 
