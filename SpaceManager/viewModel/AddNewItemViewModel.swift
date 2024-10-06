@@ -163,6 +163,5 @@ class AddNewItemViewModel: ObservableObject{
             properties.append(tempProperty)
             tempProperty.removeAll()
         }
-        splitArray()
     }
 }

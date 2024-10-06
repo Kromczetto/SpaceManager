@@ -10,7 +10,7 @@ import SwiftUI
 struct CustomProperties: View {
     @EnvironmentObject var addNewItemViewModel : AddNewItemViewModel
     @EnvironmentObject var templateViewModel : TemplateViewModel
-    @State private var isCustomProperty: Bool = false
+    @Binding var isCustomProperty: Bool
     var body: some View {
         if isCustomProperty {
             List {
@@ -27,8 +27,8 @@ struct CustomProperties: View {
         }
         Button {
             isCustomProperty = true
-//            print(addNewItemViewModel.listIndex)
-//            addNewItemViewModel.createProperty()
+            print(addNewItemViewModel.listIndex)
+            addNewItemViewModel.createProperty()
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 20)
@@ -45,6 +45,6 @@ struct CustomProperties: View {
     }
 }
 
-#Preview {
-    CustomProperties()
-}
+//#Preview {
+//    CustomProperties()
+//}

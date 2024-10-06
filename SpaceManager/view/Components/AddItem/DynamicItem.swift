@@ -26,9 +26,9 @@ struct DynamicItem: View {
                           numberOfItems: $addNewItemViewModel.numberOfItems,
                           weight: $addNewItemViewModel.weight,
                           comments: $addNewItemViewModel.comments)
-                
-                CustomProperties()
-                    .environmentObject(addNewItemViewModel)
+//                ODKOMENTOWAC GDY BEDZIEMY ROBILI CZYTANIE DLA AKTYTWNYCH
+//                CustomProperties()
+//                    .environmentObject(addNewItemViewModel)
                 
                 DynamicApi()
                     .environmentObject(dynamicItemViewModel)

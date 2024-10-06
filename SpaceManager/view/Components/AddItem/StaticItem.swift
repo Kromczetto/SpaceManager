@@ -28,27 +28,80 @@ struct StaticItem: View {
                           weight: $addNewItemViewModel.weight,
                           comments: $addNewItemViewModel.comments)
                 
-                CustomProperties()
-                    .onAppear {
-                        if selectedOption != "Nowy szablon" {
-                            
-                        }
+                CustomProperties(isCustomProperty: $templateViewModel.isDBReading)
+//                    .onAppear {
+//                        if selectedOption != "Nowy szablon" {
+//                            
+//                        }
+//                    }
+                    .onChange(of: templateViewModel.isDBReading) {
+                        print("zmienna \(templateViewModel.isDBReading)")
                     }
                     .environmentObject(addNewItemViewModel)
                     .environmentObject(templateViewModel)
                 
                 BtnDatabase(btnLabel: "Dodaj") {
-                    addNewItemViewModel.splitArray()
-                    qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
-                    UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
-                    addNewItemViewModel.itemID = productID
-                    addNewItemViewModel.addItemToDatabase()
-                    productID = UUID().uuidString
-                    if !addNewItemViewModel.isFail {
-                        templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
-                        templateViewModel.options[0] = "Nowy szablon"
+                    if let last = addNewItemViewModel.propertyKey.last {
+                        
+                        if !addNewItemViewModel.isFail {
+                            templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
+                            templateViewModel.options[0] = "Nowy szablon"
+                        }
+                        print(!last.isEmpty)
+                        if !last.isEmpty {
+                            addNewItemViewModel.splitArray()
+                            addNewItemViewModel.createProperty()
+
+                            //addNewItemViewModel.createProperty()
+                            qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
+                            UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
+                            addNewItemViewModel.itemID = productID
+                            if let tempArr = addNewItemViewModel.properties.last {
+                                if tempArr.isEmpty {
+                                    addNewItemViewModel.properties.removeLast()
+                                    addNewItemViewModel.addItemToDatabase()
+                                } else {
+                                    addNewItemViewModel.addItemToDatabase()
+                                }
+                            }
+                            productID = UUID().uuidString
+                            addNewItemViewModel.properties.removeAll()
+                            addNewItemViewModel.propertyKey.removeAll()
+                            addNewItemViewModel.propertyValue.removeAll()
+                            addNewItemViewModel.listIndex = 0
+                         
+                        } else {
+                            //poprawic bo gdzies jest blad
+//                            addNewItemViewModel.isFail = true
+//                            addNewItemViewModel.message = "Żadne pole nie moze być puste"
+                            print("PROPERTY: \(addNewItemViewModel.propertyKey)")
+                            addNewItemViewModel.propertyKey.removeLast()
+                            addNewItemViewModel.propertyValue.removeLast()
+                            addNewItemViewModel.createProperty()
+
+                            addNewItemViewModel.splitArray()
+                            print("PROPERTies: \(addNewItemViewModel.properties)")
+                            print("Nie mozna byc puste")
+//                            addNewItemViewModel.propertyKey.removeLast()
+                            qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
+                            UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
+                            addNewItemViewModel.itemID = productID
+                            if let tempArr = addNewItemViewModel.properties.last {
+                                if tempArr.isEmpty {
+                                    addNewItemViewModel.properties.removeLast()
+                                    addNewItemViewModel.addItemToDatabase()
+                                } else {
+                                    addNewItemViewModel.addItemToDatabase()
+                                }
+                            }
+                            
+                            productID = UUID().uuidString
+                            addNewItemViewModel.properties.removeAll()
+                            addNewItemViewModel.propertyKey.removeAll()
+                            addNewItemViewModel.propertyValue.removeAll()
+                            addNewItemViewModel.listIndex = 0
+                        }
                     }
-                   
                 }
                 
                 .alert("Dodano \($addNewItemViewModel.itemNameHolder.wrappedValue), kod QR został zapisany w galerii zdjęć",
