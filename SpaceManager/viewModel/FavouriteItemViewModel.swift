@@ -36,23 +36,19 @@ class FavouriteItemViewModel: ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
-        //        let docRef = db.collection("users")
-        //            .document(uid)
-        //            .collection("favourite")
-        //            .getDocuments { (snap, err) in
-        //                snap?.documents.forEach({ doc in
-        //                    let dictionary = doc.data()
-        //                    if let favouriteName = dictionary["name"] as? String {
-        //                        self.options.append(favouriteName)
-        //                    }
-        //                })
-        //                var index: Int = 0
-        //                for option in self.options {
-        //                    self.nameTid[option] = self.tids[index]
-        //                    index = index + 1
-        //                }
-        //            }
-        print("DB request :)")
+        let docRef = db.collection("users")
+            .document(uid)
+            .collection("favourite")
+            .getDocuments { (snap, err) in
+                snap?.documents.forEach({ doc in
+                    let dictionary = doc.data()
+                    if let favouriteName = dictionary["favourites"] as? String {
+                        print(favouriteName)
+                        self.arrayOfFavourtieItem.append(favouriteName)
+                    }
+                })
+            }
+        print("Fav: \(arrayOfFavourtieItem)")
         
     }
     

@@ -10,7 +10,10 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var profileViewModel : ProfileViewModel
-
+    @EnvironmentObject var favouriteItemViewModel : FavouriteItemViewModel
+    @State var favouriteBool: Bool = false
+    @State var statsBool: Bool = false
+    @State var settingsBool: Bool = false
     var body: some View {
         VStack {
             ZStack {
@@ -29,6 +32,28 @@ struct ProfileView: View {
                             profileViewModel.whoAmI()
                         }
                 }
+            }
+            Spacer()
+            ProfileListBtn(name: "Ulubione przedmioty",tempBool: $favouriteBool)
+            NavigationLink(destination: FavouriteView().navigationBarBackButtonHidden(true)
+                               .environmentObject(favouriteItemViewModel)
+                               .navigationBarItems(leading: CustomBack(title:"Wróć")),
+                                isActive: $favouriteBool) {
+                EmptyView()
+            }
+            ProfileListBtn(name: "Statystki",tempBool: $statsBool)
+            NavigationLink(destination: StatsView().navigationBarBackButtonHidden(true)
+                              .environmentObject(favouriteItemViewModel)
+                              .navigationBarItems(leading: CustomBack(title:"Wróć")),
+                                isActive: $statsBool) {
+                EmptyView()
+            }
+            ProfileListBtn(name: "Statystki",tempBool: $settingsBool)
+            NavigationLink(destination: SettingsView().navigationBarBackButtonHidden(true)
+                              .environmentObject(favouriteItemViewModel)
+                              .navigationBarItems(leading: CustomBack(title:"Wróć")),
+                           isActive: $settingsBool) {
+                EmptyView()
             }
             Spacer()
             BtnProfile()

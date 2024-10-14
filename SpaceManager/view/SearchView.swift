@@ -15,7 +15,7 @@ struct SearchView: View {
     @State var isRead: Bool = false
     
     @EnvironmentObject var permissionViewModel: PermissionViewModel
-    
+    @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
     var camera: some View {
         CodeScannerView(
             codeTypes: [.qr],
@@ -58,6 +58,7 @@ struct SearchView: View {
             }
             
             NavigationLink(destination: ReadItemView(messageFromQR: messageFromQR).navigationBarBackButtonHidden(true)
+                .environmentObject(favouriteItemViewModel)
                 .navigationBarItems(leading: CustomBack(title:"Skanuj")),
                            isActive: $isRead) {
                 EmptyView()
