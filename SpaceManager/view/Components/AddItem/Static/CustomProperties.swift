@@ -19,16 +19,11 @@ struct CustomProperties: View {
                         TextField("Właściość:", text: $addNewItemViewModel.propertyKey[index])
                         TextField("Wartość", text: $addNewItemViewModel.propertyValue[index])
                     }
-//                    .onAppear {
-//                        print(addNewItemViewModel.properties)
-//                        print("index of \(index)")
-//                    }
                 }.onDelete(perform: addNewItemViewModel.removeItems)
             }
         }
         Button {
             isCustomProperty = true
-//            print(addNewItemViewModel.listIndex)
             if secondIteration {
                 addNewItemViewModel.propertyKey.append("")
                 addNewItemViewModel.propertyValue.append("")

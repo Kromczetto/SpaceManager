@@ -149,4 +149,18 @@ class AddNewItemViewModel: ObservableObject{
             tempProperty.removeAll()
         }
     }
+    func isArrayEmpty() {
+        for p in propertyKey {
+            if p.isEmpty {
+                self.message = "Wszystkie pola powinny być wypełnione"
+                self.isFail = true
+            }
+        }
+        for p in propertyValue {
+            if p.isEmpty {
+                self.message = "Wszystkie pola powinny być wypełnione"
+                self.isFail = true
+            }
+        }
+    }
 }

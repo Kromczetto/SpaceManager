@@ -100,5 +100,5 @@ class TemplateViewModel: ObservableObject {
                     print("kolekcja nie istnije \(err?.localizedDescription)")
                 }
         }
-    }
+}
 }
