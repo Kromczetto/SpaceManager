@@ -47,6 +47,9 @@
 		4F621B0F2C877B7900CB7073 /* BasicForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F621B0E2C877B7900CB7073 /* BasicForm.swift */; };
 		4F621B122C877D9600CB7073 /* DynamicApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F621B112C877D9600CB7073 /* DynamicApi.swift */; };
 		4F66DBA02C335FD60035B34F /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F66DB9F2C335FD60035B34F /* Checkbox.swift */; };
+		4F74B2662CB862DC00A98598 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74B2652CB862DC00A98598 /* HeartButton.swift */; };
+		4F74B26A2CB86AD100A98598 /* Favourite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74B2692CB86AD100A98598 /* Favourite.swift */; };
+		4F74B26C2CB86B2D00A98598 /* FavouriteItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74B26B2CB86B2D00A98598 /* FavouriteItemViewModel.swift */; };
 		4F859C392BD067B000924EF5 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C382BD067B000924EF5 /* ForgotPasswordView.swift */; };
 		4F859C3B2BD06A5F00924EF5 /* BtnClearComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */; };
 		4F859C3D2BD06BC400924EF5 /* HeaderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C3C2BD06BC400924EF5 /* HeaderComponent.swift */; };
@@ -118,6 +121,9 @@
 		4F621B0E2C877B7900CB7073 /* BasicForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicForm.swift; sourceTree = "<group>"; };
 		4F621B112C877D9600CB7073 /* DynamicApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicApi.swift; sourceTree = "<group>"; };
 		4F66DB9F2C335FD60035B34F /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		4F74B2652CB862DC00A98598 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
+		4F74B2692CB86AD100A98598 /* Favourite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favourite.swift; sourceTree = "<group>"; };
+		4F74B26B2CB86B2D00A98598 /* FavouriteItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteItemViewModel.swift; sourceTree = "<group>"; };
 		4F859C382BD067B000924EF5 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnClearComponent.swift; sourceTree = "<group>"; };
 		4F859C3C2BD06BC400924EF5 /* HeaderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderComponent.swift; sourceTree = "<group>"; };
@@ -181,6 +187,7 @@
 				4FD950D62C80D4420075BF72 /* DynamicItemViewModel.swift */,
 				4F3ABCCE2C8A4D4C003E3F8C /* ApiManagerViewModel.swift */,
 				4FB76E182C9474E500D6DF80 /* TemplateViewModel.swift */,
+				4F74B26B2CB86B2D00A98598 /* FavouriteItemViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -250,6 +257,7 @@
 				4F056CC82C46979E006408E4 /* Photo.swift */,
 				4F0575F02C90744800E4D2D3 /* Api.swift */,
 				4FB76E142C945D8500D6DF80 /* Template.swift */,
+				4F74B2692CB86AD100A98598 /* Favourite.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -322,6 +330,7 @@
 			children = (
 				4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */,
 				4F66DB9F2C335FD60035B34F /* Checkbox.swift */,
+				4F74B2652CB862DC00A98598 /* HeartButton.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -443,12 +452,14 @@
 				4F3363AA2BE51F750042D0AD /* RegisterViewModel.swift in Sources */,
 				4FD950D32C80CFC30075BF72 /* StaticItem.swift in Sources */,
 				4FB76E192C9474E500D6DF80 /* TemplateViewModel.swift in Sources */,
+				4F74B26A2CB86AD100A98598 /* Favourite.swift in Sources */,
 				4F32055D2BBDB217000BD18C /* LoginView.swift in Sources */,
 				4F859C3F2BD06DC800924EF5 /* FormComponent.swift in Sources */,
 				4F4A8DB22C32F1430002744A /* ActiveItem.swift in Sources */,
 				4FEADE522BC74459009C31BD /* BtnUnderlineComponent.swift in Sources */,
 				4F20BFD42C36D3D20026C58B /* BtnItemType.swift in Sources */,
 				4F102D752C2C79D100A6702D /* Item.swift in Sources */,
+				4F74B26C2CB86B2D00A98598 /* FavouriteItemViewModel.swift in Sources */,
 				4F3363BB2BE6AF800042D0AD /* BottomMenu.swift in Sources */,
 				4F4E58FB2BF0FE4500B80AB8 /* SearchView.swift in Sources */,
 				4F10E20F2C4EA3F900B76EA4 /* StorageManager.swift in Sources */,
@@ -469,6 +480,7 @@
 				4F4A8DB02C32E9FC0002744A /* GeneratorViewModel.swift in Sources */,
 				4F3363B42BE689C00042D0AD /* BtnMenu.swift in Sources */,
 				4F3363B22BE561C50042D0AD /* User.swift in Sources */,
+				4F74B2662CB862DC00A98598 /* HeartButton.swift in Sources */,
 				4FF426D22C47DD2E0096ED46 /* Coordinator.swift in Sources */,
 				4F859C3D2BD06BC400924EF5 /* HeaderComponent.swift in Sources */,
 				4F66DBA02C335FD60035B34F /* Checkbox.swift in Sources */,

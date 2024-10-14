@@ -41,6 +41,7 @@ struct StaticItem: View {
                     .environmentObject(templateViewModel)
                 
                 BtnDatabase(btnLabel: "Dodaj") {
+                    addNewItemViewModel.isArrayEmpty()
                     if let lastKey = addNewItemViewModel.propertyKey.last {
                         if !addNewItemViewModel.isFail {
                             templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)

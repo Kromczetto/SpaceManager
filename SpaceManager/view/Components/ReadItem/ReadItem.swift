@@ -10,31 +10,51 @@ import SwiftUI
 struct ReadItem: View {
     var messageFromQR: String
     @Binding var isEdit: Bool
+    @Binding var isClick: Bool
+    @State private var isFirstClick: Bool = false
     @EnvironmentObject var readItemViewModel: ReadItemViewModel
     @EnvironmentObject var readActiveViewModel: ReadActiveViewModel
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
+    @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
     var body: some View {
-        List {
-            if let item = readItemViewModel.item {
-                Text("Nazwa: \(item.name)")
-                Text("Ilość: \(item.amount)")
-                Text("Waga: \(item.productWeight)")
-                Text("Uwagi: \(item.commentsToItem)")
-                Text("Dodane przez: \(item.nameOfAdder)")
-                Text("Dodano: \(readItemViewModel.prepairDate(input: item.addDate))")
-                ForEach(0..<item.properties.count, id: \.self) { index in
-                    let dict = item.properties[index]
-                    ForEach(dict.keys.sorted(), id: \.self) { key in
-                        if let value = dict[key] {
-                            HStack {
-                                Text("\(key): \(value)")
+        VStack {
+            List {
+                if let item = readItemViewModel.item {
+                    Text("Nazwa: \(item.name)")
+                    Text("Ilość: \(item.amount)")
+                    Text("Waga: \(item.productWeight)")
+                    Text("Uwagi: \(item.commentsToItem)")
+                    Text("Dodane przez: \(item.nameOfAdder)")
+                    Text("Dodano: \(readItemViewModel.prepairDate(input: item.addDate))")
+                    ForEach(0..<item.properties.count, id: \.self) { index in
+                        let dict = item.properties[index]
+                        ForEach(dict.keys.sorted(), id: \.self) { key in
+                            if let value = dict[key] {
+                                HStack {
+                                    Text("\(key): \(value)")
+                                }
                             }
                         }
+                    }.onAppear {
+                        readItemViewModel.splitProperties()
+                        
+                            
                     }
-                }.onAppear {
-                    readItemViewModel.splitProperties()
                 }
             }
+            HeartButton(isClick: $isClick)
+                .onChange(of: isClick) {
+                    if isClick {
+                        print("Clicked")
+                        favouriteItemViewModel.setFavouriteItem(newFavourite: readItemViewModel.item!.name,
+                                                                itemID: readItemViewModel.item!.id)
+                    } else {
+                        print("Unclicked")
+                        favouriteItemViewModel.deleteFavouriteItem(itemID: readItemViewModel.item!.id) 
+                    }
+                    
+                }
+                .padding(.bottom)
 //            if (generatorViewModel.num1 != 0) {
 //                Text("Liczba obrotów: \(generatorViewModel.num1)")
 //                    .onAppear {

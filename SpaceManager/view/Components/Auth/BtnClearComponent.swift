@@ -16,7 +16,7 @@ struct BtnClearComponet: View {
     var btnText: String = "Button"
     var btnTextSize: CGFloat = 16
     var btnRegister = false
-    var action: ()->Void
+    var action: ()-> Void
     @ObservedObject var loginHandler: LoginViewModel
     @ObservedObject var registerHandler: RegisterViewModel
     var body: some View {
