@@ -16,8 +16,9 @@ struct FavouriteView: View {
             }
                     
         }.onAppear {
-            favouriteItemViewModel.arrayOfFavourtieItem.removeAll()
+            //favouriteItemViewModel.arrayOfFavourtieItem.removeAll()
             favouriteItemViewModel.getFavouriteItems()
+           
         }
     }
 }

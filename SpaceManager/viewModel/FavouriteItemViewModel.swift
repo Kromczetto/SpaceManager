@@ -12,12 +12,17 @@ import FirebaseFirestore
 class FavouriteItemViewModel: ObservableObject {
     @Published var favouriteItems: Favourite?
     @Published var arrayOfFavourtieItem: [String] = []
+    @Published var arrayOfFid: [String] = []
+    @Published var isOnList: Bool = false
+    func getState() -> Bool {
+        return isOnList
+    }
     func setFavouriteItem(newFavourite: String, itemID: String) {
         var favourite = Favourite(fid: itemID, favourites: "")
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
-        getFavouriteItems()
+        //getFavouriteItems()
         favourite = Favourite(fid: itemID, favourites: newFavourite)
         let db = Firestore.firestore()
         let docRef = db.collection("users")
@@ -29,9 +34,10 @@ class FavouriteItemViewModel: ObservableObject {
                     print(err.localizedDescription)
                 }
             }
-        
     }
     func getFavouriteItems() {
+        arrayOfFid.removeAll()
+        arrayOfFavourtieItem.removeAll()
         let db = Firestore.firestore()
         guard let uid = Auth.auth().currentUser?.uid else {
             return
@@ -43,17 +49,16 @@ class FavouriteItemViewModel: ObservableObject {
                 snap?.documents.forEach({ doc in
                     let dictionary = doc.data()
                     if let favouriteName = dictionary["favourites"] as? String {
-                        print(favouriteName)
                         self.arrayOfFavourtieItem.append(favouriteName)
+                    }
+                    if let fids = dictionary["fid"] as? String {
+                        self.arrayOfFid.append(fids)
                     }
                 })
             }
-        print("Fav: \(arrayOfFavourtieItem)")
-        
     }
-    
     func deleteFavouriteItem(itemID: String) {
-        print("del")
+        self.isOnList = false
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else {
             return
@@ -64,9 +69,15 @@ class FavouriteItemViewModel: ObservableObject {
             .document(itemID)
             .delete()
     }
-    //ADD LOGIC
-    func isOnFavouriteList() -> Bool {
-        
-        return false
+    func isOnFavouriteList(id: String) {
+        for f in arrayOfFid {
+            if f == id {
+                self.isOnList = true
+                return
+            }
+            else {
+                self.isOnList = false
+            }
+        }
     }
 }
