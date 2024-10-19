@@ -5,16 +5,17 @@ import FirebaseAuth
 struct ReadItemView: View {
     var messageFromQR: String
     @State var isEdit: Bool = false
-    @State var isClick: Bool = false
+    //@State var isClick: Bool = false
     @StateObject var readItemViewModel = ReadItemViewModel()
     @StateObject var readActiveViewModel = ReadActiveViewModel()
-    @StateObject var favouriteItemViewModel = FavouriteItemViewModel()
+    
     @EnvironmentObject var generatorViewModel: GeneratorViewModel
+    @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
     var body: some View {
     VStack {
        if let item = readItemViewModel.item {
            if (!isEdit && !readItemViewModel.isDeleted) {
-               ReadItem(messageFromQR: messageFromQR, isEdit: $isEdit, isClick: $isClick)
+               ReadItem(messageFromQR: messageFromQR, isEdit: $isEdit, isClick: $favouriteItemViewModel.isOnList)
                    .environmentObject(readItemViewModel)
                    .environmentObject(readActiveViewModel)
                    .environmentObject(generatorViewModel)
@@ -43,7 +44,7 @@ struct ReadItemView: View {
     .padding()
     .onAppear {
         readItemViewModel.fetchItem(with: messageFromQR)
-        isClick = favouriteItemViewModel.isOnFavouriteList()
+        //favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
     }
     }
 }

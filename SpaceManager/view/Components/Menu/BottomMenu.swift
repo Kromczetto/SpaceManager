@@ -14,6 +14,7 @@ struct BottomMenu: View {
     
     @StateObject var permissionViewModel = PermissionViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
+    @StateObject var favouriteItemViewModel = FavouriteItemViewModel()
    // @EnvironmentObject var storageManager: StorageManager
     
     var body: some View {
@@ -29,6 +30,7 @@ struct BottomMenu: View {
             NavigationView {
                 SearchView()
                     .environmentObject(permissionViewModel)
+                    .environmentObject(favouriteItemViewModel)
                     .navigationBarBackButtonHidden(true)
             }.tag(1)
             .tabItem {
@@ -49,6 +51,7 @@ struct BottomMenu: View {
                         profileViewModel.whoAmI()
                     }
                     .environmentObject(profileViewModel)
+                    .environmentObject(favouriteItemViewModel)
                     .navigationBarBackButtonHidden(true)
             }
             .tabItem {

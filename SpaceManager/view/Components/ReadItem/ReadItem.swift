@@ -37,12 +37,23 @@ struct ReadItem: View {
                         }
                     }.onAppear {
                         readItemViewModel.splitProperties()
-                        
+                        favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
+                        isClick = favouriteItemViewModel.isOnList
                             
                     }
                 }
             }
+//            Text("\(favouriteItemViewModel.arrayOfFavourtieItem)")
             HeartButton(isClick: $isClick)
+                .onAppear {
+                    favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
+                    print("eee: \(favouriteItemViewModel.arrayOfFavourtieItem)")  
+                    if favouriteItemViewModel.isOnList {
+                        isClick = true
+                    } else {
+                        isClick = false
+                    }
+                }
                 .onChange(of: isClick) {
                     if isClick {
                         print("Clicked")
@@ -50,9 +61,10 @@ struct ReadItem: View {
                                                                 itemID: readItemViewModel.item!.id)
                     } else {
                         print("Unclicked")
-                        favouriteItemViewModel.deleteFavouriteItem(itemID: readItemViewModel.item!.id) 
+                        favouriteItemViewModel.deleteFavouriteItem(itemID: readItemViewModel.item!.id)
                     }
                     
+                
                 }
                 .padding(.bottom)
 //            if (generatorViewModel.num1 != 0) {

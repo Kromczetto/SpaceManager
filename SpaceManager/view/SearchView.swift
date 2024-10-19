@@ -13,9 +13,8 @@ struct SearchView: View {
     @State var isCameraOpen: Bool = false
     @State var messageFromQR: String = "id: "
     @State var isRead: Bool = false
-    
     @EnvironmentObject var permissionViewModel: PermissionViewModel
-    
+    @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
     var camera: some View {
         CodeScannerView(
             codeTypes: [.qr],
@@ -52,12 +51,17 @@ struct SearchView: View {
                 .sheet(isPresented: $isCameraOpen) {
                     self.camera
                 }
+                .onAppear {
+                    favouriteItemViewModel.getFavouriteItems()
+                }
+                
             }else{
                 Text("Nie masz uprawnień do odczytywania kodów QR")
                     .foregroundStyle(.red)
             }
             
             NavigationLink(destination: ReadItemView(messageFromQR: messageFromQR).navigationBarBackButtonHidden(true)
+                .environmentObject(favouriteItemViewModel)
                 .navigationBarItems(leading: CustomBack(title:"Skanuj")),
                            isActive: $isRead) {
                 EmptyView()
