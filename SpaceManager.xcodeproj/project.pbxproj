@@ -71,6 +71,8 @@
 		4FBB4F472CBDAEAF00793104 /* ProfileListBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBB4F462CBDAEAF00793104 /* ProfileListBtn.swift */; };
 		4FBB4F492CBDB7BE00793104 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBB4F482CBDB7BE00793104 /* StatsView.swift */; };
 		4FBB4F4B2CBDB7D100793104 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBB4F4A2CBDB7D100793104 /* SettingsView.swift */; };
+		4FD0D4A02CD1080C00604623 /* ManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD0D49F2CD1080C00604623 /* ManagerViewModel.swift */; };
+		4FD0D4A22CD1148E00604623 /* ManagerUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD0D4A12CD1148E00604623 /* ManagerUserView.swift */; };
 		4FD950C82C808F510075BF72 /* EditField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950C72C808F510075BF72 /* EditField.swift */; };
 		4FD950CB2C8092670075BF72 /* ReadItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950CA2C8092670075BF72 /* ReadItem.swift */; };
 		4FD950D32C80CFC30075BF72 /* StaticItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950D22C80CFC30075BF72 /* StaticItem.swift */; };
@@ -145,6 +147,8 @@
 		4FBB4F462CBDAEAF00793104 /* ProfileListBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileListBtn.swift; sourceTree = "<group>"; };
 		4FBB4F482CBDB7BE00793104 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		4FBB4F4A2CBDB7D100793104 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4FD0D49F2CD1080C00604623 /* ManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerViewModel.swift; sourceTree = "<group>"; };
+		4FD0D4A12CD1148E00604623 /* ManagerUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerUserView.swift; sourceTree = "<group>"; };
 		4FD950C72C808F510075BF72 /* EditField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditField.swift; sourceTree = "<group>"; };
 		4FD950CA2C8092670075BF72 /* ReadItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadItem.swift; sourceTree = "<group>"; };
 		4FD950D22C80CFC30075BF72 /* StaticItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticItem.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 				4F3ABCCE2C8A4D4C003E3F8C /* ApiManagerViewModel.swift */,
 				4FB76E182C9474E500D6DF80 /* TemplateViewModel.swift */,
 				4F74B26B2CB86B2D00A98598 /* FavouriteItemViewModel.swift */,
+				4FD0D49F2CD1080C00604623 /* ManagerViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				4F47058D2C3C3E8F00F42F12 /* CustomBack.swift */,
 				4F66DB9F2C335FD60035B34F /* Checkbox.swift */,
 				4F74B2652CB862DC00A98598 /* HeartButton.swift */,
+				4FD0D4A12CD1148E00604623 /* ManagerUserView.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -469,6 +475,7 @@
 				4FAB91D92C43DD9500337256 /* StaySigninViewModel.swift in Sources */,
 				4F15F8DA2BF61CD3001B58CA /* ProfileViewModel.swift in Sources */,
 				4FD950C82C808F510075BF72 /* EditField.swift in Sources */,
+				4FD0D4A02CD1080C00604623 /* ManagerViewModel.swift in Sources */,
 				4F3363AA2BE51F750042D0AD /* RegisterViewModel.swift in Sources */,
 				4FD950D32C80CFC30075BF72 /* StaticItem.swift in Sources */,
 				4FB76E192C9474E500D6DF80 /* TemplateViewModel.swift in Sources */,
@@ -514,6 +521,7 @@
 				4FF426D62C481E220096ED46 /* CameraService.swift in Sources */,
 				4F3363B02BE54A790042D0AD /* AddNewItemView.swift in Sources */,
 				4F859C392BD067B000924EF5 /* ForgotPasswordView.swift in Sources */,
+				4FD0D4A22CD1148E00604623 /* ManagerUserView.swift in Sources */,
 				4F859C3B2BD06A5F00924EF5 /* BtnClearComponent.swift in Sources */,
 				4FA1C6772C3EF46800306B59 /* PermissionViewModel.swift in Sources */,
 				4FAB91DB2C456A4D00337256 /* ManagerView.swift in Sources */,

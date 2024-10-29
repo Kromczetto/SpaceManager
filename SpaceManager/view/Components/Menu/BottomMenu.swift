@@ -15,6 +15,7 @@ struct BottomMenu: View {
     @StateObject var permissionViewModel = PermissionViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
     @StateObject var favouriteItemViewModel = FavouriteItemViewModel()
+    @StateObject var managerViewModel = ManagerViewModel()
    // @EnvironmentObject var storageManager: StorageManager
     
     var body: some View {
@@ -39,6 +40,8 @@ struct BottomMenu: View {
             if(permissionViewModel.canUserAdmin){
                 NavigationView {
                     ManagerView()
+                        .environmentObject(managerViewModel)
+                        .environmentObject(favouriteItemViewModel)
                         .navigationBarBackButtonHidden(true)
                 }
                 .tabItem {
@@ -57,6 +60,8 @@ struct BottomMenu: View {
             .tabItem {
                 Label("Profil", systemImage: "person.crop.circle.fill")
             }.tag(3)
+        }.onAppear {
+            managerViewModel.getUsers()
         }
     }
 }

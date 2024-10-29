@@ -33,7 +33,7 @@ class FavouriteItemViewModel: ObservableObject {
                 if let err = err {
                     print(err.localizedDescription)
                 }
-            }
+        }
     }
     func getFavouriteItems() {
         arrayOfFid.removeAll()
