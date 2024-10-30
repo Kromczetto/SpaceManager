@@ -5,7 +5,8 @@ import FirebaseAuth
 struct ReadItemView: View {
     var messageFromQR: String
     @State var isEdit: Bool = false
-    //@State var isClick: Bool = false
+    @State var adminChange: Bool = false
+    @State var uidFromAdmin: String = ""
     @StateObject var readItemViewModel = ReadItemViewModel()
     @StateObject var readActiveViewModel = ReadActiveViewModel()
     
@@ -15,7 +16,11 @@ struct ReadItemView: View {
     VStack {
        if let item = readItemViewModel.item {
            if (!isEdit && !readItemViewModel.isDeleted) {
-               ReadItem(messageFromQR: messageFromQR, isEdit: $isEdit, isClick: $favouriteItemViewModel.isOnList)
+               ReadItem(messageFromQR: messageFromQR, 
+                        isEdit: $isEdit,
+                        isClick: $favouriteItemViewModel.isOnList,
+                        adminChange: $adminChange,
+                        uidFromAdmin: $uidFromAdmin)
                    .environmentObject(readItemViewModel)
                    .environmentObject(readActiveViewModel)
                    .environmentObject(generatorViewModel)
@@ -23,7 +28,7 @@ struct ReadItemView: View {
            } else {
                if (!readItemViewModel.isDeleted) {
                    EditField(messageFromQR: messageFromQR, itemName: item.name, amount: item.amount,
-                             weight: item.productWeight, comment: item.commentsToItem, isEdit: $isEdit)
+                             weight: item.productWeight, comment: item.commentsToItem, adminChange: adminChange, changeUid: uidFromAdmin, isEdit: $isEdit)
                        .environmentObject(readItemViewModel)
                    
                } else {
@@ -43,7 +48,12 @@ struct ReadItemView: View {
     }
     .padding()
     .onAppear {
-        readItemViewModel.fetchItem(with: messageFromQR)
+        if adminChange {
+            readItemViewModel.fetchItemAsAdmin(with: messageFromQR, uid: uidFromAdmin)
+            print("admin checking..")
+        } else {
+            readItemViewModel.fetchItem(with: messageFromQR)
+        }
         //favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
     }
     }

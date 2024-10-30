@@ -11,6 +11,8 @@ struct ReadItem: View {
     var messageFromQR: String
     @Binding var isEdit: Bool
     @Binding var isClick: Bool
+    @Binding var adminChange: Bool
+    @Binding var uidFromAdmin: String
     @State private var isFirstClick: Bool = false
     @EnvironmentObject var readItemViewModel: ReadItemViewModel
     @EnvironmentObject var readActiveViewModel: ReadActiveViewModel
@@ -37,36 +39,39 @@ struct ReadItem: View {
                         }
                     }.onAppear {
                         readItemViewModel.splitProperties()
-                        favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
-                        isClick = favouriteItemViewModel.isOnList
-                            
+                        if !adminChange {
+                            favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
+                            isClick = favouriteItemViewModel.isOnList
+                        }
                     }
                 }
             }
 //            Text("\(favouriteItemViewModel.arrayOfFavourtieItem)")
-            HeartButton(isClick: $isClick)
-                .onAppear {
-                    favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
-                    print("eee: \(favouriteItemViewModel.arrayOfFavourtieItem)")  
-                    if favouriteItemViewModel.isOnList {
-                        isClick = true
-                    } else {
-                        isClick = false
+            if !adminChange {
+                HeartButton(isClick: $isClick)
+                    .onAppear {
+                        favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
+                        print("eee: \(favouriteItemViewModel.arrayOfFavourtieItem)")
+                        if favouriteItemViewModel.isOnList {
+                            isClick = true
+                        } else {
+                            isClick = false
+                        }
                     }
-                }
-                .onChange(of: isClick) {
-                    if isClick {
-                        print("Clicked")
-                        favouriteItemViewModel.setFavouriteItem(newFavourite: readItemViewModel.item!.name,
-                                                                itemID: readItemViewModel.item!.id)
-                    } else {
-                        print("Unclicked")
-                        favouriteItemViewModel.deleteFavouriteItem(itemID: readItemViewModel.item!.id)
+                    .onChange(of: isClick) {
+                        if isClick {
+                            print("Clicked")
+                            favouriteItemViewModel.setFavouriteItem(newFavourite: readItemViewModel.item!.name,
+                                                                    itemID: readItemViewModel.item!.id)
+                        } else {
+                            print("Unclicked")
+                            favouriteItemViewModel.deleteFavouriteItem(itemID: readItemViewModel.item!.id)
+                        }
+                        
+                        
                     }
-                    
-                
-                }
-                .padding(.bottom)
+                    .padding(.bottom)
+            }
 //            if (generatorViewModel.num1 != 0) {
 //                Text("Liczba obrotów: \(generatorViewModel.num1)")
 //                    .onAppear {
@@ -98,7 +103,11 @@ struct ReadItem: View {
 //                }
 //            }
         }.onAppear {
-            readItemViewModel.fetchItem(with: messageFromQR)
+            if adminChange {
+                readItemViewModel.fetchItemAsAdmin(with: messageFromQR, uid: uidFromAdmin)
+            } else {
+                readItemViewModel.fetchItem(with: messageFromQR)
+            }
             //readActiveViewModel.fetchItem(with: messageFromQR)
         }
         HStack {
@@ -106,7 +115,11 @@ struct ReadItem: View {
                 isEdit = !isEdit
             }
             BtnModifier(btnText: "Usuń", btnIcon: "trash", btnColor: .red) {
-                readItemViewModel.delete(id: messageFromQR)
+                if adminChange {
+                    readItemViewModel.delete(id: messageFromQR, changeUid: uidFromAdmin)
+                } else {
+                    readItemViewModel.delete(id: messageFromQR)
+                }
             }
         }
     }

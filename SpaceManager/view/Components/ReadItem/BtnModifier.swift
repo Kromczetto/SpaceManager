@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct BtnModifier: View {
-    
     var btnText: String
     var btnIcon: String
     var btnColor: Color = .blue
+    var width: CGFloat = 150
     var action: ()-> Void
     var body: some View {
-        Button{
+        Button {
             action()
-        } label:{
-            ZStack{
+        } label: {
+            ZStack {
                 RoundedRectangle(cornerRadius: 20)
                     .foregroundColor(btnColor)
                     .padding(10)
-                    .frame(width: 150, height: 50)
+                    .frame(width: width, height: 50)
                 Text("\(btnText) \(Image(systemName: btnIcon))")
                     .foregroundStyle(.white)
                     .padding()

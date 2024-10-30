@@ -18,6 +18,7 @@ class ManagerViewModel: ObservableObject {
     func getUsers() {
         print("Getting users...")
         users.removeAll()
+        publicUsers.removeAll()
         let docRef =  db.collection("users")
             .getDocuments { (snap, err) in
                 snap?.documents.forEach({doc in
@@ -58,13 +59,49 @@ class ManagerViewModel: ObservableObject {
             }
     }
     func findEmail(email: String) {
+        if email == "" {
+            getUsers()
+            return
+        }
         publicUsers.removeAll()
-        var tempUser: String = ""
+//        var tempUser: String = ""
         for (index, user) in users.enumerated() {
-            var mail = user.email.lowercased()
+            let mail = user.email.lowercased()
             if mail.contains(email.lowercased()) {
                 publicUsers.append(users[index])
             }
         }
+    }
+    func updateUser(uid: String, email: String, permission: Permission) {
+        let updatedUser = User(uid: uid, email: email, permission: permission)
+        print(updatedUser)
+        DispatchQueue.main.async {
+            let db = Firestore.firestore()
+            db.collection("users")
+                .document(uid)
+                .setData(updatedUser.toDictionary())
+        }
+    }
+    func deleteUser(uid: String) {
+        db.collection("users").document(uid).delete() { err in
+            if let err = err {
+                print(err.localizedDescription)
+            } else {
+                print("Deleted user")
+            }
+        }
+        
+//        let user = Auth.auth().currentUser
+//        print(user)
+//        user?.delete { err in
+//            if let err = err {
+//                print(err.localizedDescription)
+//            } else {
+//                print("User deleted")
+//            }
+//        }
+    }
+    func changePassword() {
+        
     }
 }
