@@ -42,6 +42,30 @@ class ReadItemViewModel: ObservableObject {
             }
         }
     }
+    func fetchItemAsAdmin(with id: String, uid: String) {
+        
+        let db = Firestore.firestore()
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        let docRef = db.collection("users")
+                        .document(uid)
+                        .collection("items")
+                        .document(id)
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                do {
+                    self.item = try document.data(as: Item.self)
+                    
+                } catch {
+                    print("Problem z odczytaniem przedmiotu")
+                }
+            } else {
+                print("kolekcja nie istnije")
+            }
+        }
+    }
     func prepairDate(input: Date)-> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "pl_PL")
@@ -84,6 +108,39 @@ class ReadItemViewModel: ObservableObject {
                 ])
         }
     }
+    func saveNewDataFromAdmin(idOfItem: String, nameOfItem: String, amountOfItem: String,
+                     weigthOfItem: String, commentsToItem: String, changeUid: String) {
+   
+        guard let userName = Auth.auth().currentUser?.email else {
+            return
+        }
+        createDictionary()
+        let data = Item(id:idOfItem,
+                        name: nameOfItem,
+                        amount: amountOfItem,
+                        nameOfAdder: userName,
+                        commentsToItem: commentsToItem,
+                        productWeight: weigthOfItem,
+                        addDate: Date(),
+                        properties: self.tempProperties
+        )
+        DispatchQueue.main.async {
+            let db = Firestore.firestore()
+            db.collection("users")
+                .document(changeUid)
+                .collection("items")
+                .document(data.id)
+                .setData(["id": data.id,
+                          "name": data.name,
+                          "amount": data.amount,
+                          "commentsToItem": data.commentsToItem,
+                          "nameOfAdder": data.nameOfAdder,
+                          "productWeight": data.productWeight,
+                          "addDate": data.addDate,
+                          "properties": data.properties
+                ])
+        }
+    }
     func delete(id: String) {
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else {
@@ -91,6 +148,16 @@ class ReadItemViewModel: ObservableObject {
         }
         db.collection("users")
                         .document(userID)
+                        .collection("items")
+                        .document(id)
+                        .delete()
+        isDeleted = true
+    }
+    func delete(id: String, changeUid: String) {
+        let db = Firestore.firestore()
+      
+        db.collection("users")
+                        .document(changeUid)
                         .collection("items")
                         .document(id)
                         .delete()
