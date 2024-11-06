@@ -18,8 +18,17 @@ struct User: Codable {
     let uid: String
     let email: String
     let permission: Permission
+    let itemReads: [[String: Int]]
+    let numberOfAddedItem: Int
+    let numberOfReadItem: Int
     func toDictionary() -> [String: Any] {
-        return ["uid": uid, "email": email, "permission": permission.rawValue]
+        return ["uid": uid,
+                "email": email,
+                "permission": permission.rawValue,
+                "itemReads": itemReads,
+                "numberOfAddedItem": numberOfAddedItem,
+                "numberOfReadItem": numberOfReadItem
+        ]
     }
     
 }

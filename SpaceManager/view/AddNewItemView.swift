@@ -17,7 +17,7 @@ struct AddNewItemView: View {
     @StateObject var activeHandlerViewModel = ActivevHandlerViewModel()
     @StateObject var templateViewModel = TemplateViewModel()
     @EnvironmentObject var permissionViewModel: PermissionViewModel
-    @EnvironmentObject var generatorViewModel: GeneratorViewModel
+    @StateObject var generatorViewModel = GeneratorViewModel()
     
     @State var productID: String = UUID().uuidString
     
@@ -38,14 +38,14 @@ struct AddNewItemView: View {
                 HStack(spacing: 0) {
                     BtnItemType() {
                         generatorViewModel.isStatic = true
-                    }
+                    }.environmentObject(generatorViewModel)
                     BtnItemType(btnText: "Aktywne",
                                 firstColor: .gray,
                                 secondColor: .blue,
                                 state: false
                     ) {
                         generatorViewModel.isStatic = false
-                    }
+                    }.environmentObject(generatorViewModel)
                 }.padding(10)
                 .onAppear {
                     generatorViewModel.isStatic = true
@@ -57,6 +57,7 @@ struct AddNewItemView: View {
                 Spacer()
                 if generatorViewModel.isStatic {
                     StaticItem(productID: productID, selectedOption: $templateViewModel.selectedItem)
+                        .environmentObject(qrCodeGenerator)
                         .environmentObject(permissionViewModel)
                         .environmentObject(templateViewModel)
                         .environmentObject(addNewItemViewModel)

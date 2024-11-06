@@ -11,9 +11,10 @@ import SwiftUI
 struct FormComponent: View {
     var isRegister: Bool = true
     @State private var repeatedPassword: String = ""
-    @StateObject private var loginHandler = LoginViewModel()
-    @StateObject private var registerHandler = RegisterViewModel()
-    @EnvironmentObject var permissionViewModel: PermissionViewModel
+    @StateObject var loginHandler = LoginViewModel()
+    @StateObject var registerHandler = RegisterViewModel()
+    //@EnvironmentObject var permissionViewModel: PermissionViewModel
+    //@EnvironmentObject var authViewModel: AuthViewModel
     var body: some View {
         Form {
             TextField("Email", text: isRegister ? $registerHandler.email : $loginHandler.email)
@@ -40,18 +41,19 @@ struct FormComponent: View {
                                        btnRegister: isRegister,
                                        action: {
                                           if isRegister {
-                                              registerHandler.registerUser() {
-                                                  permissionViewModel.getPermission()
+                                              Task {
+                                                  try await registerHandler.reg()
                                               }
                                           } else {
                                               loginHandler.userLogin() {
-                                                  permissionViewModel.getPermission()
+                                                 // permissionViewModel.getPermission()
+                                                  print("perm log")
                                               }
                                           }
-                                       },
-                                       loginHandler: loginHandler,
-                                       registerHandler: registerHandler
-            )
+                                       }
+                                       
+            ).environmentObject(loginHandler)
+                .environmentObject(registerHandler)
                 .padding(.bottom, 5)
         }
         .frame(width:350,height:400)

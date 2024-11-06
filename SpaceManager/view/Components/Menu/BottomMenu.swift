@@ -12,10 +12,12 @@ import FirebaseAuth
 struct BottomMenu: View {
     @State private var index: Int = 0
     
-    @StateObject var permissionViewModel = PermissionViewModel()
+    
     @StateObject var profileViewModel = ProfileViewModel()
     @StateObject var favouriteItemViewModel = FavouriteItemViewModel()
     @StateObject var managerViewModel = ManagerViewModel()
+    @EnvironmentObject var staySignin: StaySigninViewModel
+    @EnvironmentObject var permissionViewModel: PermissionViewModel
    // @EnvironmentObject var storageManager: StorageManager
     
     var body: some View {
@@ -37,7 +39,7 @@ struct BottomMenu: View {
             .tabItem {
                 Label("Szukaj", systemImage: "magnifyingglass")
             }
-            if(permissionViewModel.canUserAdmin){
+            if(permissionViewModel.canUserAdmin) {
                 NavigationView {
                     ManagerView()
                         .environmentObject(managerViewModel)
@@ -55,13 +57,14 @@ struct BottomMenu: View {
                     }
                     .environmentObject(profileViewModel)
                     .environmentObject(favouriteItemViewModel)
+                    .environmentObject(staySignin)
                     .navigationBarBackButtonHidden(true)
             }
             .tabItem {
                 Label("Profil", systemImage: "person.crop.circle.fill")
             }.tag(3)
         }.onAppear {
-            managerViewModel.getUsers()
+            //managerViewModel.getUsers()
         }
     }
 }

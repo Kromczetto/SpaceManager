@@ -12,7 +12,7 @@ struct StaticItem: View {
     @State private var qrCodeToSave: UIImage? = nil
     @State private var secondIteration: Bool = false
     @Binding var selectedOption: String
-    @StateObject var qrCodeGenerator = QrCodeGenerator()
+    @EnvironmentObject var qrCodeGenerator: QrCodeGenerator
     @EnvironmentObject var permissionViewModel: PermissionViewModel
     @EnvironmentObject var templateViewModel: TemplateViewModel
     @EnvironmentObject var addNewItemViewModel: AddNewItemViewModel

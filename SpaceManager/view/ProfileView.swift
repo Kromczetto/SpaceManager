@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileView: View {
     @EnvironmentObject var profileViewModel : ProfileViewModel
     @EnvironmentObject var favouriteItemViewModel : FavouriteItemViewModel
+    @EnvironmentObject var staySignin: StaySigninViewModel
     @State var favouriteBool: Bool = false
     @State var statsBool: Bool = false
     @State var settingsBool: Bool = false
@@ -48,7 +49,7 @@ struct ProfileView: View {
                                 isActive: $statsBool) {
                 EmptyView()
             }
-            ProfileListBtn(name: "Statystki",tempBool: $settingsBool)
+            ProfileListBtn(name: "Ustaiwnia",tempBool: $settingsBool)
             NavigationLink(destination: SettingsView().navigationBarBackButtonHidden(true)
                               .environmentObject(favouriteItemViewModel)
                               .navigationBarItems(leading: CustomBack(title:"Wróć")),
@@ -57,6 +58,8 @@ struct ProfileView: View {
             }
             Spacer()
             BtnProfile()
+                .environmentObject(staySignin)
+                .environmentObject(profileViewModel)
         }
     }
 }

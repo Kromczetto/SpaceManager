@@ -19,6 +19,7 @@ class PermissionViewModel: ObservableObject {
     init() { getPermission() }
     
     func getPermission() {
+        print("Getting perm...")
           guard let userID = Auth.auth().currentUser?.uid else {
               return
           }
@@ -44,6 +45,7 @@ class PermissionViewModel: ObservableObject {
           }
       }
     private func checkPermission(permission: Permission) {
+        print("Checking perm...")
         DispatchQueue.main.async {
             print(permission)
             if permission == .Adder || permission == .Full || permission == .Admin {

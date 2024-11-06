@@ -17,11 +17,21 @@ class RegisterViewModel : ObservableObject {
     
     @Published var isFail: Bool = false
     @Published var message: String = ""
-    
-    func registerUser(completion: @escaping () -> Void) {
-        if(!validInput()){
-            return
+    func reg() async throws {
+        do {
+            let res = try await Auth.auth().createUser(withEmail: email, password: password)
+            let newUser = User(uid: res.user.uid, email: email, permission: Permission.Admin, itemReads: [["Prop":2]], numberOfAddedItem: 0, numberOfReadItem: 0)
+            let encodedUser = try Firestore.Encoder().encode(newUser)
+            try await Firestore.firestore().collection("users").document(newUser.uid).setData(encodedUser)
+        } catch {
+            print("error ;( \(error.localizedDescription)")
         }
+    }
+//ODKOMENTOWAC WALIDACJE DANYCH !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    func registerUser(completion: @escaping () -> Void) {
+//        if(!validInput()){
+//            return
+//        }
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] res, err in
             guard let self = self else { return }
             if let err = err {
@@ -32,10 +42,13 @@ class RegisterViewModel : ObservableObject {
             guard let userID = res?.user.uid else {
                 return
             }
-            DispatchQueue.main.async {
+//            DispatchQueue.main.async {
+               // print("Starting adding...")
                 self.addIntoDatabe(userID: userID, email: self.email)
-            }
-            completion()
+//            }
+
+                completion()
+                        
         }
     }
     private func validInput() -> Bool {
@@ -121,11 +134,12 @@ class RegisterViewModel : ObservableObject {
         
     }
     private func addIntoDatabe(userID: String, email: String) {
-        let newUser = User(uid: userID, email: email, permission: Permission.Admin)
+        let newUser = User(uid: userID, email: email, permission: Permission.Admin, itemReads: [["Prop":2]],
+                           numberOfAddedItem: 0, numberOfReadItem: 0)
         let db = Firestore.firestore()
         db.collection("users")
             .document(userID)
-            .setData(["uid": newUser.uid, "email": newUser.email, "permission": newUser.permission.rawValue])
+            .setData(["uid": newUser.uid, "email": newUser.email, "permission": newUser.permission.rawValue, "itemReads": newUser.itemReads, "numberOfAddedItem": newUser.numberOfAddedItem, "numberOfReadItem": newUser.numberOfReadItem])
         print("User has been added into db")
     }
 }

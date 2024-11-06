@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RegisterView: View {
     @Environment(\.presentationMode) var presentationMode
-  
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],

@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct MainView: View {
-    @StateObject var staySignin = StaySigninViewModel()
-    @StateObject var permissionViewModel = PermissionViewModel()
+    @EnvironmentObject var staySignin: StaySigninViewModel
+//    @EnvironmentObject var permissionViewModel: PermissionViewModel
+
     var body: some View {
         if (!staySignin.isUserLogged() || staySignin.idOfCurrentUser.isEmpty) {
             LoginView()
-                .environmentObject(permissionViewModel)
-        } else {
+        } 
+        else {
             WelcomeView()
-                .environmentObject(permissionViewModel)
+                
+//                .environmentObject(permissionViewModel)
+                .environmentObject(staySignin)
         }
     }
 }
