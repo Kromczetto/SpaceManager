@@ -14,24 +14,12 @@ class RegisterViewModel : ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var repeatedPassword: String = ""
-    
     @Published var isFail: Bool = false
     @Published var message: String = ""
-    func reg() async throws {
-        do {
-            let res = try await Auth.auth().createUser(withEmail: email, password: password)
-            let newUser = User(uid: res.user.uid, email: email, permission: Permission.Admin, itemReads: [["Prop":2]], numberOfAddedItem: 0, numberOfReadItem: 0)
-            let encodedUser = try Firestore.Encoder().encode(newUser)
-            try await Firestore.firestore().collection("users").document(newUser.uid).setData(encodedUser)
-        } catch {
-            print("error ;( \(error.localizedDescription)")
-        }
-    }
-//ODKOMENTOWAC WALIDACJE DANYCH !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     func registerUser(completion: @escaping () -> Void) {
-//        if(!validInput()){
-//            return
-//        }
+        if(!validInput()){
+            return
+        }
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] res, err in
             guard let self = self else { return }
             if let err = err {
@@ -42,18 +30,11 @@ class RegisterViewModel : ObservableObject {
             guard let userID = res?.user.uid else {
                 return
             }
-//            DispatchQueue.main.async {
-               // print("Starting adding...")
-                self.addIntoDatabe(userID: userID, email: self.email)
-//            }
-
-                completion()
-                        
+            self.addIntoDatabe(userID: userID, email: self.email)
+            completion()
         }
     }
     private func validInput() -> Bool {
-      
-      
         var emailWithoutWhiteCharacters: String {
             email.trimmingCharacters(in: .whitespacesAndNewlines)
         }
@@ -64,14 +45,14 @@ class RegisterViewModel : ObservableObject {
             repeatedPassword.trimmingCharacters(in: .whitespacesAndNewlines)
         }
         
-        if(emailWithoutWhiteCharacters.isEmpty ||
+        if emailWithoutWhiteCharacters.isEmpty ||
            passwordWithoutWhiteCharacters.isEmpty ||
-           repeatedPasswordWithoutWhiteCharacters.isEmpty) {
+           repeatedPasswordWithoutWhiteCharacters.isEmpty {
             message = "Żadne pole nie może być puste"
             isFail = true
             return false
         }
-        if(passwordWithoutWhiteCharacters.count<8) {
+        if passwordWithoutWhiteCharacters.count<8 {
             message = "Hasło musi mieć przynajmniej 8 znaków"
             isFail = true
             return false
@@ -89,12 +70,12 @@ class RegisterViewModel : ObservableObject {
                 digitCount += 1
             }
         }
-        if (uppercaseCount<2 || lowercaseCount<2 || digitCount<2) {
+        if uppercaseCount<2 || lowercaseCount<2 || digitCount<2 {
             message = "Hasło musi mieć przynajmniej dwie małe litery, dwie duże i dwie cyfry"
             isFail = true
             return false
         }
-        if (passwordWithoutWhiteCharacters != repeatedPasswordWithoutWhiteCharacters) {
+        if passwordWithoutWhiteCharacters != repeatedPasswordWithoutWhiteCharacters {
             message = "Hasło i powtórzone hasło muszą być takie same"
             isFail = true
             return false
@@ -119,7 +100,7 @@ class RegisterViewModel : ObservableObject {
             let regex = try NSRegularExpression(pattern: regexPattern)
             
             let conditon =  regex.firstMatch(in: email, options: [], range: range) != nil
-            if (conditon) {
+            if conditon {
                 isFail = false
                 return true
             } else {
@@ -130,8 +111,6 @@ class RegisterViewModel : ObservableObject {
         } catch {
             return false
         }
-        
-        
     }
     private func addIntoDatabe(userID: String, email: String) {
         let newUser = User(uid: userID, email: email, permission: Permission.Admin, itemReads: [["Prop":2]],

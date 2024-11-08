@@ -36,7 +36,13 @@ class AuthViewModel: ObservableObject {
         }
     }
     func signOut() {
-        
+        do {
+            try Auth.auth().signOut()
+            self.currentUser = nil
+            self.userSession = nil
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     func fetchData() async {
         guard let uid = Auth.auth().currentUser?.uid else { return }

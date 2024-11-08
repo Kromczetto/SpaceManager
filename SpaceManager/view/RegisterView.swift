@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RegisterView: View {
     @Environment(\.presentationMode) var presentationMode
+    @StateObject var loginViewModel = LoginViewModel()
+    @StateObject var registerViewModel = RegisterViewModel()
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],
@@ -17,17 +19,47 @@ struct RegisterView: View {
             VStack {
                 HeaderComponent(headerText: "Zarejestruj się", headerTopPadding: 160)
                 Spacer()
-                FormComponent(isRegister: true)
-                Spacer()
-                Button {
-                    self.presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Text("Mam już konto")
-                        .foregroundStyle(.gray)
-                        .font(.system(size: 18))
-                        .underline()
+                Form {
+                    TextField("Email", text: $registerViewModel.email)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .font(.system(size: 25))
+                        .multilineTextAlignment(.center)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                    SecureField("Hasło", text: $registerViewModel.password)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .font(.system(size: 25))
+                        .multilineTextAlignment(.center)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                    SecureField("Powtórz haslo", text: $registerViewModel.repeatedPassword)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .font(.system(size: 25))
+                        .multilineTextAlignment(.center)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                    
+                    BtnClearComponet(btnText: "Zarejestruj się", btnRegister: true) {
+                        registerViewModel.registerUser() {
+                            print("Registered")
+                        }
+                    }.environmentObject(loginViewModel)
+                        .environmentObject(registerViewModel)
+                        .padding(.bottom, 5)
                 }
-                .padding(.bottom, 140)
+                .frame(width:350,height:400)
+                .scrollContentBackground(.hidden)
+                .padding(.top, 50)
+                Spacer()
+//                Button {
+//                    self.presentationMode.wrappedValue.dismiss()
+//                } label: {
+//                    Text("Mam już konto")
+//                        .foregroundStyle(.gray)
+//                        .font(.system(size: 18))
+//                        .underline()
+//                }
+//                .padding(.bottom, 140)
             }
         }
     }

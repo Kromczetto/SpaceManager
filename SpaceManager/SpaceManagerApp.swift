@@ -9,17 +9,9 @@ import SwiftUI
 import Firebase
 import FirebaseCore
 
-//class AppDelegate: NSObject, UIApplicationDelegate {
-//    func application(_ application: UIApplication, didFinishLaunchingWithOption launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-//        return true;
-//    }
-//}
-
 @main
 struct SpaceManagerApp: App {
     @StateObject var staySignin = StaySigninViewModel()
-//    @StateObject var permissionViewModel = PermissionViewModel()
-    //@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     init() {
         FirebaseApp.configure()
     }
@@ -27,7 +19,6 @@ struct SpaceManagerApp: App {
         WindowGroup {
             MainView()
                 .environmentObject(staySignin)
-//                .environmentObject(permissionViewModel)
         }
     }
 }

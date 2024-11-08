@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-class AddNewItemViewModel: ObservableObject{
+class AddNewItemViewModel: ObservableObject {
     @Published var itemName: String = ""
     @Published var numberOfItems: String = ""
     @Published var weight: String = ""
@@ -36,17 +36,16 @@ class AddNewItemViewModel: ObservableObject{
         var commentsWithoutWhiteCharacters: String {
             comments.trimmingCharacters(in: .whitespacesAndNewlines)
         }
-        if(itemNameWithoutWhiteCharacters.isEmpty ||
+        if itemNameWithoutWhiteCharacters.isEmpty ||
            amountWithoutWhiteCharacters.isEmpty ||
            weightWithoutWhiteCharacters.isEmpty ||
-           commentsWithoutWhiteCharacters.isEmpty){
+           commentsWithoutWhiteCharacters.isEmpty {
             message = "Żadne pole nie może być puste"
             return false
         }
         let amountIsDigits = amountWithoutWhiteCharacters.allSatisfy { $0.isNumber }
         let weigthIsDigits = weightWithoutWhiteCharacters.allSatisfy { $0.isNumber }
-        
-        if(!amountIsDigits || !weigthIsDigits) {
+        if !amountIsDigits || !weigthIsDigits {
             message = "Liczba i waga muszą być dodatnimi liczbami"
             return false
         }

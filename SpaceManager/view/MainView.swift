@@ -9,21 +9,16 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var staySignin: StaySigninViewModel
-//    @EnvironmentObject var permissionViewModel: PermissionViewModel
-
     var body: some View {
         if (!staySignin.isUserLogged() || staySignin.idOfCurrentUser.isEmpty) {
-            LoginView()
-        } 
+            AuthView()
+        }
         else {
             WelcomeView()
-                
-//                .environmentObject(permissionViewModel)
                 .environmentObject(staySignin)
         }
     }
 }
-
 #Preview {
     MainView()
 }

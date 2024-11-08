@@ -51,6 +51,7 @@
 		4F74B2662CB862DC00A98598 /* HeartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74B2652CB862DC00A98598 /* HeartButton.swift */; };
 		4F74B26A2CB86AD100A98598 /* Favourite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74B2692CB86AD100A98598 /* Favourite.swift */; };
 		4F74B26C2CB86B2D00A98598 /* FavouriteItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74B26B2CB86B2D00A98598 /* FavouriteItemViewModel.swift */; };
+		4F7F98172CDE79DA006480F0 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7F98162CDE79DA006480F0 /* AuthView.swift */; };
 		4F859C392BD067B000924EF5 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C382BD067B000924EF5 /* ForgotPasswordView.swift */; };
 		4F859C3B2BD06A5F00924EF5 /* BtnClearComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */; };
 		4F859C3D2BD06BC400924EF5 /* HeaderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C3C2BD06BC400924EF5 /* HeaderComponent.swift */; };
@@ -135,6 +136,7 @@
 		4F74B2652CB862DC00A98598 /* HeartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButton.swift; sourceTree = "<group>"; };
 		4F74B2692CB86AD100A98598 /* Favourite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Favourite.swift; sourceTree = "<group>"; };
 		4F74B26B2CB86B2D00A98598 /* FavouriteItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteItemViewModel.swift; sourceTree = "<group>"; };
+		4F7F98162CDE79DA006480F0 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		4F859C382BD067B000924EF5 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnClearComponent.swift; sourceTree = "<group>"; };
 		4F859C3C2BD06BC400924EF5 /* HeaderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderComponent.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				4F609BB52C514AB300D05121 /* MainView.swift */,
 				4FBB4F482CBDB7BE00793104 /* StatsView.swift */,
 				4FBB4F4A2CBDB7D100793104 /* SettingsView.swift */,
+				4F7F98162CDE79DA006480F0 /* AuthView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				4F621B0D2C8779EC00CB7073 /* QRCode.swift in Sources */,
 				4F32055F2BBDB2AE000BD18C /* RegisterView.swift in Sources */,
 				4F0575F12C90744800E4D2D3 /* Api.swift in Sources */,
+				4F7F98172CDE79DA006480F0 /* AuthView.swift in Sources */,
 				4FDE85E12C7A36BF0002F656 /* CustomProperties.swift in Sources */,
 				4FAB91D92C43DD9500337256 /* StaySigninViewModel.swift in Sources */,
 				4F15F8DA2BF61CD3001B58CA /* ProfileViewModel.swift in Sources */,
