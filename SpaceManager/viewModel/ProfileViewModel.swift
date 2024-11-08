@@ -20,10 +20,10 @@ class ProfileViewModel: ObservableObject{
             userEmail = ""
         }
     }
-    func loggout(){
-        do{
+    func loggout() {
+        do {
             try Auth.auth().signOut()
-        }catch{
+        } catch {
             print("Wystąpił problem podczas wylogowywania")
         }
     }

@@ -10,7 +10,6 @@ import SwiftUI
 struct CustomBack: View {
     @Environment(\.presentationMode) var presentationMode
     var title: String = "Wróć"
-    
     var body: some View {
         Button {
             self.presentationMode.wrappedValue.dismiss()

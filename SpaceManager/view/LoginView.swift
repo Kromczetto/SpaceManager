@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @StateObject var loginViewModel = LoginViewModel()
+    @StateObject var registerViewModel = RegisterViewModel()
     var body: some View {
         NavigationView {
             ZStack {
@@ -19,19 +19,41 @@ struct LoginView: View {
                 VStack {
                     HeaderComponent(headerText: "Zaloguj się")
                     Spacer()
-                    FormComponent(isRegister: false)
+                    Form {
+                        TextField("Email", text: $loginViewModel.email)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .font(.system(size: 25))
+                            .multilineTextAlignment(.center)
+                            .autocapitalization(.none)
+                            .disableAutocorrection(true)
+                        SecureField("Hasło", text: $loginViewModel.password)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .font(.system(size: 25))
+                            .multilineTextAlignment(.center)
+                            .autocapitalization(.none)
+                            .disableAutocorrection(true)
+                        BtnClearComponet(btnText: "Zaloguj się", btnRegister: false) {
+                            loginViewModel.userLogin() {
+                                print("perm log")
+                            }
+                        }
+                        .environmentObject(loginViewModel)
+                        .environmentObject(registerViewModel)
+                        .padding(.bottom, 5)
+                    }
+                    .frame(width:350,height:400)
+                    .scrollContentBackground(.hidden)
+                    .padding(.top, 50)
                     Spacer()
-                    HStack {
-                        BtnUnderlineComponent(btnText: "Zapomniałem hasła",
-                                              destinationView: AnyView(ForgotPasswordView()))
-                                                .padding()
-                        BtnUnderlineComponent(btnText: "Zarejestruj się",
-                                              destinationView: AnyView(RegisterView()))
-                        
-                    }.padding(.bottom, 140)
+//                    HStack {
+//                        BtnUnderlineComponent(btnText: "Zapomniałem hasła",
+//                                              destinationView: AnyView(ForgotPasswordView()))
+//                                                .padding()
+//                        BtnUnderlineComponent(btnText: "Zarejestruj się",
+//                                              destinationView: AnyView(RegisterView()))
+//                    }.padding(.bottom, 140)
                     Spacer()
                 }
-                
             }
         }
     }

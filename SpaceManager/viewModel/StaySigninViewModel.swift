@@ -10,20 +10,18 @@ import Firebase
 import FirebaseAuth
 
 class StaySigninViewModel: ObservableObject{
-    @Published var logged = false
     @Published var idOfCurrentUser: String  = ""
-        private var handler = Auth.auth().addStateDidChangeListener{_,_ in}
+    private var handler = Auth.auth().addStateDidChangeListener{_,_ in}
+    init() {
+        self.handler = Auth.auth().addStateDidChangeListener { auth, user in
+            self.idOfCurrentUser = user?.uid ?? ""
+        }
+    }
+    func isUserLogged() -> Bool {
+        if let auth = Auth.auth().currentUser {
+            return true
+        }
+        return false
+    }
     
-          init(){
-              self.handler = Auth.auth().addStateDidChangeListener{auth, user in
-                  self.idOfCurrentUser=user?.uid ?? ""
-                  self.logged=true
-              }
-          }
-          func isUserLogged() -> Bool{
-              if(Auth.auth().currentUser != nil){
-                  return true
-              }
-              return false
-          }
 }

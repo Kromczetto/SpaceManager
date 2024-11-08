@@ -24,9 +24,13 @@ class ManagerViewModel: ObservableObject {
                 snap?.documents.forEach({doc in
                     let dictionary = doc.data()
                     var tempPermission = Permission(rawValue: dictionary["permission"] as! String)
+                    print(dictionary)
                     var user: User = User(uid: dictionary["uid"] as! String,
                                           email: dictionary["email"] as! String,
-                                          permission: tempPermission!)
+                                          permission: tempPermission!,
+                                          itemReads: dictionary["itemReads"] as! [[String: Int]],
+                                          numberOfAddedItem: dictionary["numberOfAddedItem"] as! Int,
+                                          numberOfReadItem: dictionary["numberOfReadItem"] as! Int)
                     self.users.append(user)
                     self.publicUsers.append(user)
                 })
@@ -34,7 +38,6 @@ class ManagerViewModel: ObservableObject {
     }
     func getItems(uid: String) {
         items.removeAll()
-        print("W gecie \(uid)")
         let docRef = db.collection("users")
             .document(uid)
             .collection("items")
@@ -50,7 +53,8 @@ class ManagerViewModel: ObservableObject {
                                               commentsToItem: dictionary["commentsToItem"] as! String,
                                               productWeight: dictionary["productWeight"] as! String,
                                               addDate: Date(),
-                                              properties: [])
+                                              properties: []
+                        )
                         self.items.append(item)
                     } else {
                         return
@@ -73,7 +77,8 @@ class ManagerViewModel: ObservableObject {
         }
     }
     func updateUser(uid: String, email: String, permission: Permission) {
-        let updatedUser = User(uid: uid, email: email, permission: permission)
+        //ZMIENIC BO NARAZIE HARDCODE
+        let updatedUser = User(uid: uid, email: email, permission: permission, itemReads: [[:]], numberOfAddedItem: 0, numberOfReadItem: 0)
         print(updatedUser)
         DispatchQueue.main.async {
             let db = Firestore.firestore()
