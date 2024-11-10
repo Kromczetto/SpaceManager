@@ -41,6 +41,8 @@ struct ProfileView: View {
                                .navigationBarItems(leading: CustomBack(title:"Wróć")),
                                 isActive: $favouriteBool) {
                 EmptyView()
+            }.onAppear {
+                favouriteItemViewModel.getFavouriteItems()
             }
             ProfileListBtn(name: "Statystki",tempBool: $statsBool)
             NavigationLink(destination: StatsView().navigationBarBackButtonHidden(true)

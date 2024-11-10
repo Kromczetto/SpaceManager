@@ -10,7 +10,7 @@ struct ReadItemView: View {
     @StateObject var readItemViewModel = ReadItemViewModel()
     @StateObject var readActiveViewModel = ReadActiveViewModel()
     
-    @EnvironmentObject var generatorViewModel: GeneratorViewModel
+   // @EnvironmentObject var generatorViewModel: GeneratorViewModel
     @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
     var body: some View {
     VStack {
@@ -23,14 +23,15 @@ struct ReadItemView: View {
                         uidFromAdmin: $uidFromAdmin)
                    .environmentObject(readItemViewModel)
                    .environmentObject(readActiveViewModel)
-                   .environmentObject(generatorViewModel)
+                   //.environmentObject(generatorViewModel)
                    .environmentObject(favouriteItemViewModel)
            } else {
                if (!readItemViewModel.isDeleted) {
                    EditField(messageFromQR: messageFromQR, itemName: item.name, amount: item.amount,
                              weight: item.productWeight, comment: item.commentsToItem, adminChange: adminChange, changeUid: uidFromAdmin, isEdit: $isEdit)
                        .environmentObject(readItemViewModel)
-                   
+                       .environmentObject(favouriteItemViewModel)
+                       
                } else {
                    Spacer()
                    Text("Usunięto produkt")

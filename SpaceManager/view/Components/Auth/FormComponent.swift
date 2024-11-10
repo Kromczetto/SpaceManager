@@ -42,7 +42,7 @@ struct FormComponent: View {
                                        action: {
                                           if isRegister {
                                               Task {
-                                                  try await registerHandler.reg()
+                                                 // try await registerHandler.reg()
                                               }
                                           } else {
                                               loginHandler.userLogin() {

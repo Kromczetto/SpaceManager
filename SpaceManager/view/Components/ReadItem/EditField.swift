@@ -17,6 +17,7 @@ struct EditField: View {
     @State var changeUid: String = ""
     @Binding var isEdit: Bool
     @EnvironmentObject var readItemViewModel: ReadItemViewModel
+    @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
     var body: some View {
         if let item = readItemViewModel.item {
             List {
@@ -61,6 +62,8 @@ struct EditField: View {
                                                   amountOfItem: $amount.wrappedValue, weigthOfItem: $weight.wrappedValue,
                                                       commentsToItem: $comment.wrappedValue)
                     }
+                    favouriteItemViewModel.setFavouriteItem(newFavourite: $itemName.wrappedValue, itemID: messageFromQR)
+                    favouriteItemViewModel.getFavouriteItems()
                     isEdit = !isEdit
                 }
             }

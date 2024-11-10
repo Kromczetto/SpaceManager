@@ -16,7 +16,7 @@ struct ReadItem: View {
     @State private var isFirstClick: Bool = false
     @EnvironmentObject var readItemViewModel: ReadItemViewModel
     @EnvironmentObject var readActiveViewModel: ReadActiveViewModel
-    @EnvironmentObject var generatorViewModel: GeneratorViewModel
+    //@EnvironmentObject var generatorViewModel: GeneratorViewModel
     @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
     var body: some View {
         VStack {
@@ -61,11 +61,17 @@ struct ReadItem: View {
                     .onChange(of: isClick) {
                         if isClick {
                             print("Clicked")
-                            favouriteItemViewModel.setFavouriteItem(newFavourite: readItemViewModel.item!.name,
-                                                                    itemID: readItemViewModel.item!.id)
+                            if let itemName = readItemViewModel.item?.name {
+                                favouriteItemViewModel.setFavouriteItem(newFavourite: itemName,
+                                                                        itemID: readItemViewModel.item!.id)
+                            }
                         } else {
                             print("Unclicked")
-                            favouriteItemViewModel.deleteFavouriteItem(itemID: readItemViewModel.item!.id)
+                            if let itemID = readItemViewModel.item?.id {
+                                
+                                favouriteItemViewModel.deleteFavouriteItem(itemID: itemID)
+                            }
+                            
                         }
                         
                         
@@ -117,8 +123,14 @@ struct ReadItem: View {
             BtnModifier(btnText: "Usuń", btnIcon: "trash", btnColor: .red) {
                 if adminChange {
                     readItemViewModel.delete(id: messageFromQR, changeUid: uidFromAdmin)
+                    favouriteItemViewModel.deleteFavouriteItem(itemID: messageFromQR)
+                    favouriteItemViewModel.getFavouriteItems()
+                    favouriteItemViewModel.isDeleting = true
                 } else {
                     readItemViewModel.delete(id: messageFromQR)
+                    favouriteItemViewModel.deleteFavouriteItem(itemID: messageFromQR)
+                    favouriteItemViewModel.getFavouriteItems()
+                    favouriteItemViewModel.isDeleting = true
                 }
             }
         }

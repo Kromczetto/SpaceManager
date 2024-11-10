@@ -55,7 +55,6 @@
 		4F859C392BD067B000924EF5 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C382BD067B000924EF5 /* ForgotPasswordView.swift */; };
 		4F859C3B2BD06A5F00924EF5 /* BtnClearComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */; };
 		4F859C3D2BD06BC400924EF5 /* HeaderComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C3C2BD06BC400924EF5 /* HeaderComponent.swift */; };
-		4F859C3F2BD06DC800924EF5 /* FormComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F859C3E2BD06DC700924EF5 /* FormComponent.swift */; };
 		4F85DFED2C33016A00A5844D /* ReadActiveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F85DFEC2C33016A00A5844D /* ReadActiveViewModel.swift */; };
 		4F8839E82CD3CB4100B2A7FE /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8839E72CD3CB4100B2A7FE /* Stats.swift */; };
 		4F8839EC2CD3CBF000B2A7FE /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8839EB2CD3CBF000B2A7FE /* StatsViewModel.swift */; };
@@ -140,7 +139,6 @@
 		4F859C382BD067B000924EF5 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnClearComponent.swift; sourceTree = "<group>"; };
 		4F859C3C2BD06BC400924EF5 /* HeaderComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderComponent.swift; sourceTree = "<group>"; };
-		4F859C3E2BD06DC700924EF5 /* FormComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormComponent.swift; sourceTree = "<group>"; };
 		4F85DFEC2C33016A00A5844D /* ReadActiveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadActiveViewModel.swift; sourceTree = "<group>"; };
 		4F8839E72CD3CB4100B2A7FE /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		4F8839EB2CD3CBF000B2A7FE /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
@@ -313,6 +311,7 @@
 		4FBB4F432CBDAE1300793104 /* ProfileTabs */ = {
 			isa = PBXGroup;
 			children = (
+				4FFAB3AD2CD2C3ED005D5024 /* SettingsBtn.swift */,
 				4FBB4F442CBDAE2800793104 /* FavouriteView.swift */,
 				4FBB4F462CBDAEAF00793104 /* ProfileListBtn.swift */,
 			);
@@ -334,7 +333,6 @@
 			children = (
 				4F859C3C2BD06BC400924EF5 /* HeaderComponent.swift */,
 				4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */,
-				4F859C3E2BD06DC700924EF5 /* FormComponent.swift */,
 				4F859C3A2BD06A5F00924EF5 /* BtnClearComponent.swift */,
 			);
 			path = Auth;
@@ -370,7 +368,6 @@
 				4F66DB9F2C335FD60035B34F /* Checkbox.swift */,
 				4F74B2652CB862DC00A98598 /* HeartButton.swift */,
 				4FD0D4A12CD1148E00604623 /* ManagerUserView.swift */,
-				4FFAB3AD2CD2C3ED005D5024 /* SettingsBtn.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -497,7 +494,6 @@
 				4FB76E192C9474E500D6DF80 /* TemplateViewModel.swift in Sources */,
 				4F74B26A2CB86AD100A98598 /* Favourite.swift in Sources */,
 				4F32055D2BBDB217000BD18C /* LoginView.swift in Sources */,
-				4F859C3F2BD06DC800924EF5 /* FormComponent.swift in Sources */,
 				4F4A8DB22C32F1430002744A /* ActiveItem.swift in Sources */,
 				4FEADE522BC74459009C31BD /* BtnUnderlineComponent.swift in Sources */,
 				4F20BFD42C36D3D20026C58B /* BtnItemType.swift in Sources */,
