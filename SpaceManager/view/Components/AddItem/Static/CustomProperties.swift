@@ -18,17 +18,20 @@ struct CustomProperties: View {
                     HStack {
                         TextField("Właściość:", text: $addNewItemViewModel.propertyKey[index])
                         TextField("Wartość", text: $addNewItemViewModel.propertyValue[index])
-                    }
+                    }.onAppear { print("\(index)") }
                 }.onDelete(perform: addNewItemViewModel.removeItems)
+                    
             }
         }
         Button {
             isCustomProperty = true
-            if secondIteration {
-                addNewItemViewModel.propertyKey.append("")
-                addNewItemViewModel.propertyValue.append("")
+            DispatchQueue.main.async() {
+                if secondIteration {
+                    addNewItemViewModel.propertyKey.append("")
+                    addNewItemViewModel.propertyValue.append("")
+                }
+                secondIteration = true                
             }
-            secondIteration = true
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 20)
@@ -41,7 +44,7 @@ struct CustomProperties: View {
                     .bold()
                     .font(.system(size: 16))
             }
-        }.disabled(secondIteration ? addNewItemViewModel.canAddNewProperty() : false)
+        }//.disabled(secondIteration ? addNewItemViewModel.canAddNewProperty() : false)
     }
 }
 

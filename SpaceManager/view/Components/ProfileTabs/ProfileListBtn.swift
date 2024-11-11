@@ -10,18 +10,19 @@ import SwiftUI
 struct ProfileListBtn: View {
         @State var name: String
         @Binding var tempBool: Bool
+        private let bg: Color = Color(red: 0, green: 0, blue: 0, opacity: 0.1)
         var body: some View {
         Button {
             tempBool = true
         } label: {
             ZStack {
-                RoundedRectangle(cornerRadius: 5)
-                    .foregroundColor(.gray)
-                    .padding(5)
-                    .frame(width: 500, height: 80)
                 Text(name)
+                    .frame(width: 350, height:60)
+                    .background(bg)
+                    .foregroundStyle(.black)
+                    .cornerRadius(15)
                     .foregroundStyle(.white)
-                    .padding()
+                    .padding([.top, .bottom], 10)
                     .bold()
                     .font(.system(size: 16))
             }

@@ -12,10 +12,10 @@ struct BtnUnderlineComponent: View {
     var btnTextColor: Color = .gray
     var btnText: String = "Button"
     var btnTextSize: CGFloat = 16
-    var destinationView: AnyView
+    var action: () -> Void
     var body: some View {
-        NavigationLink {
-            destinationView.navigationBarBackButtonHidden(true)
+        Button {
+            action()
         } label: {
             Text(btnText)
                 .foregroundStyle(btnTextColor)

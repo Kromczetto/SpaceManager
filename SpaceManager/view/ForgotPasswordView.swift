@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
-
+import FirebaseAuth
 struct ForgotPasswordView: View {
     @StateObject var forgotViewModel = ForgotViewModel()
     @State var tempEmail = ""
+    @State private var isSignin: Bool = false
     var body: some View {
         VStack {
             Text("Wpisz swój Email:")
@@ -17,11 +18,24 @@ struct ForgotPasswordView: View {
                 .font(.system(size: 25))
             Spacer()
             Form {
-                TextField("Email", text: $forgotViewModel.email)
-                    .font(.system(size: 25))
-                    .multilineTextAlignment(.center)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
+                if isSignin {
+                    HStack {
+                        Spacer()
+                        if let email = Auth.auth().currentUser?.email {
+                            Text("\(email)")
+                                .onAppear {
+                                    forgotViewModel.email = email
+                                }
+                        }
+                        Spacer()
+                    }
+                } else {
+                    TextField("Email", text: $forgotViewModel.email)
+                        .font(.system(size: 25))
+                        .multilineTextAlignment(.center)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                }
                 Button {
                     forgotViewModel.resetPassword()
                     tempEmail = forgotViewModel.email
@@ -48,6 +62,13 @@ struct ForgotPasswordView: View {
                         Button("OK", role: .cancel) { }
               }
         }.navigationBarItems(leading: CustomBack(title: "Wróć"))
+            .onAppear {
+                if let sign = Auth.auth().currentUser?.email {
+                    isSignin = true
+                } else {
+                    isSignin = false
+                }
+            }
 
     }
 }

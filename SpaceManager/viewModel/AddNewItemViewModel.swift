@@ -110,9 +110,10 @@ class AddNewItemViewModel: ObservableObject {
         }
     }
     func removeItems(at offsets: IndexSet) {
+        print(offsets.first!)
         propertyKey.remove(atOffsets: offsets)
         propertyValue.remove(atOffsets: offsets)
-        properties.remove(atOffsets: offsets)
+//        properties.remove(atOffsets: offsets)
     }
     func canAddNewProperty() -> Bool {
         let propertyLenght: Int = propertyKey.count

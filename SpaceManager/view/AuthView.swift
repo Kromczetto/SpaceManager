@@ -14,36 +14,34 @@ struct AuthView: View {
     var body: some View {
         if isLogin && !isForgetPassword {
             LoginView()
-            Button {
-                isLogin.toggle()
-            } label: {
-                Text("Nie mam konta")
-            }
-            Button {
-                isForgetPassword.toggle()
-            } label: {
-                Text("Nie pamietam hasla")
-            }
+            HStack {
+                Spacer()
+                BtnUnderlineComponent(btnText: "Nie mam konta") {
+                    isLogin.toggle()
+                }
+                Spacer()
+                BtnUnderlineComponent(btnText: "Nie pamietam hasla") {
+                    isForgetPassword.toggle()
+                }
+                Spacer()
+            }.padding([.top, .bottom], 15)
         } else if !isLogin && !isForgetPassword {
             RegisterView()
-            Button {
+            BtnUnderlineComponent(btnText: "Mam juz konto") {
                 isLogin.toggle()
-            } label: {
-                Text("Mam juz konto")
-            }
+            }.padding([.top, .bottom], 15)
         } else {
             ForgotPasswordView()
-            Button {
-                isLogin = true
-                isForgetPassword = false
-            } label: {
-                Text("Mam juz konto")
-            }
-            Button {
-                isForgetPassword.toggle()
-            } label: {
-                Text("Nie mam kontaa")
-            }
+            HStack {
+                BtnUnderlineComponent(btnText: "Mam juz konto") {
+                    isLogin = true
+                    isForgetPassword = false
+                }
+                BtnUnderlineComponent(btnText: "Nie mam konta") {
+                    isLogin = false
+                    isForgetPassword.toggle()
+                }
+            }.padding([.top, .bottom], 15)
         }
     }
 }

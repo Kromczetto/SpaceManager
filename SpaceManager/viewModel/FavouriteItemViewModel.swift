@@ -14,6 +14,7 @@ class FavouriteItemViewModel: ObservableObject {
     @Published var arrayOfFavourtieItem: [String] = []
     @Published var arrayOfFid: [String] = []
     @Published var isOnList: Bool = false
+    @Published var isDeleting: Bool = false
     func getState() -> Bool {
         return isOnList
     }

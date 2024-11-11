@@ -26,6 +26,12 @@ class TemplateViewModel: ObservableObject {
         }
         return false
     }
+    func checkIsNameSet(name: String) -> Bool {
+        if name == "Nowy szablon" {
+            return false
+        }
+        return true
+    }
     func addNewTemplate(selectedItem: String, propertyKey: [String]) {
         options.append(selectedItem)
         let tid: String = UUID().uuidString

@@ -41,6 +41,8 @@ struct ProfileView: View {
                                .navigationBarItems(leading: CustomBack(title:"Wróć")),
                                 isActive: $favouriteBool) {
                 EmptyView()
+            }.onAppear {
+                favouriteItemViewModel.getFavouriteItems()
             }
             ProfileListBtn(name: "Statystki",tempBool: $statsBool)
             NavigationLink(destination: StatsView().navigationBarBackButtonHidden(true)
@@ -49,7 +51,7 @@ struct ProfileView: View {
                                 isActive: $statsBool) {
                 EmptyView()
             }
-            ProfileListBtn(name: "Ustaiwnia",tempBool: $settingsBool)
+            ProfileListBtn(name: "Ustawienia",tempBool: $settingsBool)
             NavigationLink(destination: SettingsView().navigationBarBackButtonHidden(true)
                               .environmentObject(favouriteItemViewModel)
                               .navigationBarItems(leading: CustomBack(title:"Wróć")),
