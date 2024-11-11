@@ -9,9 +9,9 @@ import SwiftUI
 import FirebaseAuth
 struct SettingsView: View {
     @State var changePassword: Bool = false
+    @State var deleteAccount: Bool = false
     @StateObject var settingsViewModel = SettingsViewModel()
     var body: some View {
-//        ProfileListBtn(name: "Zmień hasło",tempBool: $changePassword)
         SettingsBtn(labelBtn: "Zmień hasło", colorBtn: .black) {
             changePassword = true
         }
@@ -23,7 +23,16 @@ struct SettingsView: View {
                                             EmptyView()
         }
         SettingsBtn(labelBtn: "Usuń konto") {
-            print("uusn konto")
+            deleteAccount = true
+        }.alert(isPresented: $deleteAccount) {
+            Alert(
+                title: Text("Czy na pewno chcesz usunąć konto?"),
+                message: Text("Jest to operacja nie odwracalna"),
+                primaryButton: .destructive(Text("Usuń")) {
+                    settingsViewModel.deleteUser()
+                },
+                secondaryButton: .cancel(Text("Cofnij"))
+            )
         }
     }
 }

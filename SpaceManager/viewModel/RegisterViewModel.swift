@@ -121,4 +121,32 @@ class RegisterViewModel : ObservableObject {
             .setData(["uid": newUser.uid, "email": newUser.email, "permission": newUser.permission.rawValue, "itemReads": newUser.itemReads, "numberOfAddedItem": newUser.numberOfAddedItem, "numberOfReadItem": newUser.numberOfReadItem])
         print("User has been added into db")
     }
+    func passwordValid(password: String) -> (state: Bool, message: String) {
+        var pass: String {
+            password.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        if pass.isEmpty {
+            return (false, "Hasło nie może być puste")
+        }
+        if pass.count<8 {
+            return (false, "Hasło musi mieć przynajmniej 8 znaków")
+        }
+        var uppercaseCount = 0
+        var lowercaseCount = 0
+        var digitCount = 0
+
+        for p in pass {
+            if p.isUppercase {
+                uppercaseCount += 1
+            } else if p.isLowercase {
+                lowercaseCount += 1
+            } else if p.isNumber {
+                digitCount += 1
+            }
+        }
+        if uppercaseCount<2 || lowercaseCount<2 || digitCount<2 {
+            return (false, "Hasło musi mieć przynajmniej dwie małe litery, dwie duże i dwie cyfry")
+        }
+        return (true, "")
+    }
 }

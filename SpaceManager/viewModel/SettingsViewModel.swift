@@ -11,7 +11,8 @@ class SettingsViewModel: ObservableObject {
     private let user = Auth.auth().currentUser
     @Published var password: String = ""
     @Published var newPassword: String = ""
-    @Published var status: Bool = false
+    @Published var statusOK: Bool = false
+    @Published var statusFail: Bool = false
     @Published var message: String = ""
     func reAuth() {
         if let email = user?.email {
@@ -20,14 +21,14 @@ class SettingsViewModel: ObservableObject {
                 if let err = err {
                     print(err.localizedDescription)
                     self.message = "Nie poprawne obecne hasło"
-                    self.status = true
+                    self.statusFail = true
                 } else {
                     self.changePassword(password: self.newPassword)
                 }
             }
         } else {
             self.message = "Problem ze zmiena hasla"
-            self.status = true
+            self.statusFail = true
             print("Problem z zmianna hasła")
         }
     }
@@ -36,10 +37,20 @@ class SettingsViewModel: ObservableObject {
             if let error = error {
                 print(error.localizedDescription)
                 self.message = "Problem ze zmiena hasla"
-                self.status = true
+                self.statusFail = true
             }
             self.message = "Hasło zmienione"
-            self.status = true
+            self.statusOK = true
+        }
+    }
+    func deleteUser() {
+        let user = Auth.auth().currentUser
+        user?.delete() { error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                self.message = "Użytkownik usunięty"
+            }
         }
     }
 }
