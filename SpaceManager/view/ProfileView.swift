@@ -51,7 +51,7 @@ struct ProfileView: View {
                                 isActive: $statsBool) {
                 EmptyView()
             }
-            ProfileListBtn(name: "Ustaiwnia",tempBool: $settingsBool)
+            ProfileListBtn(name: "Ustawienia",tempBool: $settingsBool)
             NavigationLink(destination: SettingsView().navigationBarBackButtonHidden(true)
                               .environmentObject(favouriteItemViewModel)
                               .navigationBarItems(leading: CustomBack(title:"Wróć")),

@@ -6,13 +6,26 @@
 //
 
 import SwiftUI
-
+import FirebaseAuth
 struct SettingsView: View {
+    @State var changePassword: Bool = false
+    @StateObject var settingsViewModel = SettingsViewModel()
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+//        ProfileListBtn(name: "Zmień hasło",tempBool: $changePassword)
+        SettingsBtn(labelBtn: "Zmień hasło", colorBtn: .black) {
+            changePassword = true
+        }
+        NavigationLink(destination: ChangingPasswordView()
+                                        .environmentObject(settingsViewModel)
+                                        .navigationBarBackButtonHidden(true)
+                                        .navigationBarItems(leading: CustomBack(title:"Wróć")),
+                                        isActive: $changePassword) {
+                                            EmptyView()
+        }
+        SettingsBtn(labelBtn: "Usuń konto") {
+            print("uusn konto")
+        }
     }
 }
 
-#Preview {
-    SettingsView()
-}
+

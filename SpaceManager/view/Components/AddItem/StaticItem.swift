@@ -42,9 +42,16 @@ struct StaticItem: View {
                 
                 BtnDatabase(btnLabel: "Dodaj") {
                     addNewItemViewModel.isArrayEmpty()
+                    DispatchQueue.main.async {
+                        
                     if let lastKey = addNewItemViewModel.propertyKey.last {
+//                        if !templateViewModel.checkIsNameTaken(name: selectedOption) {
+//                            addNewItemViewModel.isFail = true
+//                            addNewItemViewModel.message = "Ustaw nazwe szablonu"
+//                        }
                         if !addNewItemViewModel.isFail {
                             templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
+                            
                             templateViewModel.options[0] = "Nowy szablon"
                         }
                         if lastKey.isEmpty {
@@ -60,7 +67,9 @@ struct StaticItem: View {
                         addNewItemViewModel.properties.removeAll()
                         addNewItemViewModel.propertyKey.removeAll()
                         addNewItemViewModel.propertyValue.removeAll()
+                        templateViewModel.isDBReading = false
                         secondIteration = false
+                    }
                     }
                 }
                 
