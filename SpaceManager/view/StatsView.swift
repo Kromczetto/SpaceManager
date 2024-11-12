@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct StatsView: View {
+//    @StateObject var statsViewModel = StatsViewModel()
     var body: some View {
         Text("Statystyki")
+//        Button {
+//            statsViewModel.setNumberOfAddedItems()
+//        } label: {
+//            Text("Dodaj odczytany item")
+//        }
     }
 }
 

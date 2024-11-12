@@ -95,16 +95,6 @@ class ManagerViewModel: ObservableObject {
                 print("Deleted user")
             }
         }
-        
-//        let user = Auth.auth().currentUser
-//        print(user)
-//        user?.delete { err in
-//            if let err = err {
-//                print(err.localizedDescription)
-//            } else {
-//                print("User deleted")
-//            }
-//        }
     }
     func changePassword() {
         
