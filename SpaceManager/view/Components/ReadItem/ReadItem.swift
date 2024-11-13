@@ -18,6 +18,7 @@ struct ReadItem: View {
     @EnvironmentObject var readActiveViewModel: ReadActiveViewModel
     //@EnvironmentObject var generatorViewModel: GeneratorViewModel
     @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
+    @EnvironmentObject var statsViewModel: StatsViewModel
     var body: some View {
         VStack {
             List {
@@ -45,13 +46,13 @@ struct ReadItem: View {
                         }
                     }
                 }
+            }.onAppear {
+                statsViewModel.setReadItem(id: messageFromQR)
             }
-//            Text("\(favouriteItemViewModel.arrayOfFavourtieItem)")
             if !adminChange {
                 HeartButton(isClick: $isClick)
                     .onAppear {
                         favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
-                        print("eee: \(favouriteItemViewModel.arrayOfFavourtieItem)")
                         if favouriteItemViewModel.isOnList {
                             isClick = true
                         } else {
@@ -71,10 +72,7 @@ struct ReadItem: View {
                                 
                                 favouriteItemViewModel.deleteFavouriteItem(itemID: itemID)
                             }
-                            
                         }
-                        
-                        
                     }
                     .padding(.bottom)
             }

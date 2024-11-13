@@ -21,32 +21,64 @@ class StatsViewModel: ObservableObject {
             if let document = document, document.exists {
                 do {
                     self.stats = try document.data(as: User.self)
-                    print("current user: \(self.stats!.numberOfAddedItem) \(self.stats!.numberOfReadItem)")
+                    print("current stats: \(self.stats!.numberOfAddedItem) \(self.stats!.numberOfReadItem)")
                 } catch {
-                    print("Użytkownika")
+                    print(error.localizedDescription)
                 }
             } else {
                 print("kolekcja nie istnije")
             }
         }
-        
     }
     func setNumberOfAddedItems() {
         if let userStats = stats {
             var addAmount: Int = userStats.numberOfAddedItem
             addAmount += 1
-            let itemRead: [[String: Int]] = userStats.itemReads
             let readAmount: Int = userStats.numberOfReadItem
+            let itemRead: [String: Int] = userStats.itemReads
             self.setItemStats(addAmount: addAmount, readAmount: readAmount, itemRead: itemRead)
         }
     }
-    func setNumberOfReadItems() {
-        print("miau")
+    func setReadItem(id: String) {
+        var tempDictionary: [String: Int] = [:]
+        if let userStats = stats {
+            print("read itme")
+            let addAmount: Int = userStats.numberOfAddedItem
+            var readAmount: Int = userStats.numberOfReadItem
+            readAmount += 1
+            if findItemById(id: id) {
+                tempDictionary = incReadItem(id: id, dic: userStats.itemReads)
+            } else {
+                for (key, value) in userStats.itemReads {
+                    tempDictionary[key] = value
+                }
+                tempDictionary[id] = 1
+            }
+            self.setItemStats(addAmount: addAmount, readAmount: readAmount, itemRead: tempDictionary)
+        }
     }
-    func setReadItem() {
-        
+    private func findItemById(id: String) -> Bool {
+        for (key, _) in stats!.itemReads {
+            if key == id {
+                print("jest")
+                return true
+            }
+        }
+        return false
     }
-    private func setItemStats(addAmount: Int, readAmount: Int, itemRead: [[String: Int]]) {
+    private func incReadItem(id: String, dic: [String: Int]) -> [String: Int]{
+        var temp: [String: Int] = [:]
+        for (key, value) in dic {
+            if key == id {
+                let val = value + 1
+                temp[key] = val
+            } else {
+                temp[key] = value
+            }
+        }
+        return temp
+    }
+    private func setItemStats(addAmount: Int, readAmount: Int, itemRead: [String: Int]) {
         let updatedUser = User(uid: stats!.uid, email: stats!.email,
                                permission: stats!.permission, itemReads: itemRead,
                                numberOfAddedItem: addAmount, numberOfReadItem: readAmount)

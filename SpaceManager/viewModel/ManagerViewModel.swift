@@ -14,6 +14,7 @@ class ManagerViewModel: ObservableObject {
     @Published var publicUsers: [User] = []
     @Published var items: [Item] = []
     @Published var favourties: [Favourite] = []
+//    private let svm = StatsViewModel()
     private let db = Firestore.firestore()
     func getUsers() {
         print("Getting users...")
@@ -28,7 +29,7 @@ class ManagerViewModel: ObservableObject {
                     var user: User = User(uid: dictionary["uid"] as! String,
                                           email: dictionary["email"] as! String,
                                           permission: tempPermission!,
-                                          itemReads: dictionary["itemReads"] as! [[String: Int]],
+                                          itemReads: dictionary["itemReads"] as! [String: Int],
                                           numberOfAddedItem: dictionary["numberOfAddedItem"] as! Int,
                                           numberOfReadItem: dictionary["numberOfReadItem"] as! Int)
                     self.users.append(user)
@@ -78,7 +79,8 @@ class ManagerViewModel: ObservableObject {
     }
     func updateUser(uid: String, email: String, permission: Permission) {
         //ZMIENIC BO NARAZIE HARDCODE
-        let updatedUser = User(uid: uid, email: email, permission: permission, itemReads: [[:]], numberOfAddedItem: 0, numberOfReadItem: 0)
+        //DOSPISAC FUNKCJE KTORA ITERUJE PO TABLICY W POSZUKIWANIU USERA O PODANYM ID A PTOEM UZUPELNIC ITEMREAD NUBMEROFADDEDIEM I NUMBEROFREADITEM
+        let updatedUser = User(uid: uid, email: email, permission: permission, itemReads: [:], numberOfAddedItem: 0, numberOfReadItem: 0)
         print(updatedUser)
         DispatchQueue.main.async {
             let db = Firestore.firestore()

@@ -9,7 +9,7 @@ struct ReadItemView: View {
     @State var uidFromAdmin: String = ""
     @StateObject var readItemViewModel = ReadItemViewModel()
     @StateObject var readActiveViewModel = ReadActiveViewModel()
-    
+    @StateObject var statsViewModel = StatsViewModel()
    // @EnvironmentObject var generatorViewModel: GeneratorViewModel
     @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
     var body: some View {
@@ -25,6 +25,7 @@ struct ReadItemView: View {
                    .environmentObject(readActiveViewModel)
                    //.environmentObject(generatorViewModel)
                    .environmentObject(favouriteItemViewModel)
+                   .environmentObject(statsViewModel)
            } else {
                if (!readItemViewModel.isDeleted) {
                    EditField(messageFromQR: messageFromQR, itemName: item.name, amount: item.amount,
@@ -50,9 +51,11 @@ struct ReadItemView: View {
     .padding()
     .onAppear {
         if adminChange {
+            statsViewModel.readStats()
             readItemViewModel.fetchItemAsAdmin(with: messageFromQR, uid: uidFromAdmin)
             print("admin checking..")
         } else {
+            statsViewModel.readStats()
             readItemViewModel.fetchItem(with: messageFromQR)
         }
         //favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
