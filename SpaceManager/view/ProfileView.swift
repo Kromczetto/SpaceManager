@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct ProfileView: View {
+    @StateObject var statsViewModel = StatsViewModel()
     @EnvironmentObject var profileViewModel : ProfileViewModel
     @EnvironmentObject var favouriteItemViewModel : FavouriteItemViewModel
     @EnvironmentObject var staySignin: StaySigninViewModel
@@ -45,8 +46,12 @@ struct ProfileView: View {
                 favouriteItemViewModel.getFavouriteItems()
             }
             ProfileListBtn(name: "Statystki",tempBool: $statsBool)
+            .onAppear {
+                statsViewModel.readStats()
+                
+            }
             NavigationLink(destination: StatsView().navigationBarBackButtonHidden(true)
-                              .environmentObject(favouriteItemViewModel)
+                              .environmentObject(statsViewModel)
                               .navigationBarItems(leading: CustomBack(title:"Wróć")),
                                 isActive: $statsBool) {
                 EmptyView()

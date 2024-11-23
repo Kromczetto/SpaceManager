@@ -12,6 +12,7 @@ struct ReadItemView: View {
     @StateObject var statsViewModel = StatsViewModel()
    // @EnvironmentObject var generatorViewModel: GeneratorViewModel
     @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
+    @StateObject var apiManagerViewModel = ApiManagerViewModel()
     var body: some View {
     VStack {
        if let item = readItemViewModel.item {
@@ -26,6 +27,18 @@ struct ReadItemView: View {
                    //.environmentObject(generatorViewModel)
                    .environmentObject(favouriteItemViewModel)
                    .environmentObject(statsViewModel)
+                   .environmentObject(apiManagerViewModel)
+                   .onAppear {
+                       Task {
+                           do {
+                               try await apiManagerViewModel.performAPICall()
+                              
+                               print("addd")
+                           } catch {
+                               print("Error:", error.localizedDescription)
+                           }
+                       }
+                   }
            } else {
                if (!readItemViewModel.isDeleted) {
                    EditField(messageFromQR: messageFromQR, itemName: item.name, amount: item.amount,

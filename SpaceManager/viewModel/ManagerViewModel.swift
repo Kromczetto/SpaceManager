@@ -98,7 +98,4 @@ class ManagerViewModel: ObservableObject {
             }
         }
     }
-    func changePassword() {
-        
-    }
 }

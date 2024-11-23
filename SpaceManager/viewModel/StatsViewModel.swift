@@ -10,6 +10,38 @@ import FirebaseAuth
 import FirebaseFirestore
 class StatsViewModel: ObservableObject {
     @Published var stats: User?
+    @Published var itemStat: [Stats] = []
+    private var items: [Item] = []
+    init() {
+        getItems()
+    }
+    func getItems() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let db = Firestore.firestore()
+        items.removeAll()
+        let docRef = db.collection("users")
+            .document(uid)
+            .collection("items")
+            .getDocuments { (snap, err) in
+                snap?.documents.forEach({doc in
+                    let dictionary = doc.data()
+                    if !dictionary.isEmpty {
+                        let item: Item = Item(id: dictionary["id"] as! String,
+                                              name: dictionary["name"] as! String,
+                                              amount: dictionary["amount"] as! String,
+                                              nameOfAdder: dictionary["nameOfAdder"] as! String,
+                                              commentsToItem: dictionary["commentsToItem"] as! String,
+                                              productWeight: dictionary["productWeight"] as! String,
+                                              addDate: Date(),
+                                              properties: []
+                        )
+                        self.items.append(item)
+                    } else {
+                        return
+                    }
+                })
+            }
+    }
     func readStats() {
         guard let uid = Auth.auth().currentUser?.uid else {
             return
@@ -88,6 +120,22 @@ class StatsViewModel: ObservableObject {
             db.collection("users")
                 .document(self.stats!.uid)
                 .setData(updatedUser.toDictionary())
+        }
+    }
+    func reverseIdToName() {
+        self.itemStat.removeAll()
+        if let stat = stats {
+            for item in items {
+                print("\(item)")
+                for (key, value) in stat.itemReads {
+                    print("\(key)")
+                    if item.id == key {
+//                        self.itemStat[item.name] = value
+                        let s = Stats(itemName: item.name, numberOfRead: value)
+                        self.itemStat.append(s)
+                    }
+                }
+            }
         }
     }
 }

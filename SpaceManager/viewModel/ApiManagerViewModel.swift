@@ -6,49 +6,37 @@
 //
 
 import Foundation
-
+import SwiftUI
 class ApiManagerViewModel: ObservableObject {
-    @Published var apiUrl: String = "https://jsonplaceholder.typicode.com/users"
-    @Published var value: Any = ""
-    @Published var jsonData: [String: Any]? = nil
-
-    func setUrl(url: String) {
-        apiUrl = url
-    }
-    func getData(key: String) {
+    @Published var apiUrl: String = "https://machineapi-fr80.onrender.com/machine/673a69193ea4092c2261aa65"
+    @Published var jsonData: [String: String]? = nil 
+    
+    func performAPICall() async throws {
         guard let url = URL(string: apiUrl) else {
-            print("Error with reading API")
+            print("Invalid URL")
             return
         }
-        let task = URLSession.shared.dataTask(with: url) { data, res, err in
-            if let err = err {
-                print(err.localizedDescription)
-                return
-            }
-            guard let data = data else {
-                print("No data")
-                return
-            }
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    print("Decding")
-                    self.jsonData = json
-                    self.getValue(key: key, from: self.jsonData)
-                }
-            } catch {
-                print("Decoding JSON error")
-            }
+        let (data, _) = try await URLSession.shared.data(from: url)
+  
+        if let jsonString = String(data: data, encoding: .utf8) {
+            print("API Response: \(jsonString)")
+        } else {
+            print("No response data")
         }
-        task.resume()
-    }
-    func getValue(key: String, from json: [String: Any]?) {
-        print("getting value")
-        guard let jsonWrapped = json else {
-            return
-        }
-        if let jsonValue = jsonWrapped[key] {
-            self.value = jsonValue
-            print("value: \(self.value)")
+        do {
+            let apiResponse = try JSONDecoder().decode(Api.self, from: data)
+            self.jsonData = [
+                "id": apiResponse.id,
+                "machineName": apiResponse.machineName,
+                "parm1": apiResponse.parm1,
+                "parm2": apiResponse.parm2,
+                "parm3": apiResponse.parm3,
+                "parm4": apiResponse.parm4
+            ]
+        } catch {
+            print("Decoding error: \(error)")
+            throw error
         }
     }
 }
+

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ReadItem: View {
     var messageFromQR: String
+//    @State var refresh: Bool = true
     @Binding var isEdit: Bool
     @Binding var isClick: Bool
     @Binding var adminChange: Bool
@@ -19,6 +20,7 @@ struct ReadItem: View {
     //@EnvironmentObject var generatorViewModel: GeneratorViewModel
     @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
     @EnvironmentObject var statsViewModel: StatsViewModel
+    @EnvironmentObject var apiManagerViewModel: ApiManagerViewModel
     var body: some View {
         VStack {
             List {
@@ -29,6 +31,13 @@ struct ReadItem: View {
                     Text("Uwagi: \(item.commentsToItem)")
                     Text("Dodane przez: \(item.nameOfAdder)")
                     Text("Dodano: \(readItemViewModel.prepairDate(input: item.addDate))")
+                    if let jsonData = apiManagerViewModel.jsonData {
+                        Text(jsonData["machineName"]!)
+                        Text(jsonData["parm1"]!)
+                        Text(jsonData["parm2"]!)
+                        Text(jsonData["parm3"]!)
+                        Text(jsonData["parm4"]!)
+                    }
                     ForEach(0..<item.properties.count, id: \.self) { index in
                         let dict = item.properties[index]
                         ForEach(dict.keys.sorted(), id: \.self) { key in
@@ -76,6 +85,10 @@ struct ReadItem: View {
                     }
                     .padding(.bottom)
             }
+//            if refresh {
+                
+            
+         
 //            if (generatorViewModel.num1 != 0) {
 //                Text("Liczba obrotów: \(generatorViewModel.num1)")
 //                    .onAppear {
