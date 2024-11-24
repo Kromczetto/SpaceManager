@@ -26,7 +26,7 @@ class AuthViewModel: ObservableObject {
         do {
             let res = try await Auth.auth().createUser(withEmail: email, password: password)
             self.userSession = res.user
-            let newUser = User(uid: res.user.uid, email: email, permission: Permission.Admin, itemReads: [["Prop":2]], numberOfAddedItem: 0, numberOfReadItem: 0)
+            let newUser = User(uid: res.user.uid, email: email, permission: Permission.Admin, itemReads: ["Prop":2], numberOfAddedItem: 0, numberOfReadItem: 0)
             let encodedUser = try Firestore.Encoder().encode(newUser)
             try await Firestore.firestore().collection("users")
                                             .document(newUser.uid)

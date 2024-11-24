@@ -13,6 +13,7 @@ struct FavouriteView: View {
     @State var uidFromAdmin: String = ""
     @State var readItemViewModel = ReadItemViewModel()
     @EnvironmentObject var favouriteItemViewModel : FavouriteItemViewModel
+    @StateObject var apiManagerViewModel = ApiManagerViewModel()
     @Environment(\.dismiss) var dismiss
     var body: some View {
         List {
@@ -27,6 +28,7 @@ struct FavouriteView: View {
                                     ReadItemView(messageFromQR: favouriteItemViewModel.arrayOfFid[index],
                                                  adminChange: true,
                                                  uidFromAdmin: Auth.auth().currentUser!.uid)
+                                        .environmentObject(apiManagerViewModel)
                                         .navigationBarBackButtonHidden(true)
                                         .environmentObject(favouriteItemViewModel)
                                         .navigationBarItems(leading: CustomBack(title:"Wróć"))) {

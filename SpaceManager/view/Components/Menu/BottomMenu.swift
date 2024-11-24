@@ -18,13 +18,14 @@ struct BottomMenu: View {
     @StateObject var managerViewModel = ManagerViewModel()
     @EnvironmentObject var staySignin: StaySigninViewModel
     @EnvironmentObject var permissionViewModel: PermissionViewModel
-   // @EnvironmentObject var storageManager: StorageManager
+    @EnvironmentObject var statsViewModel: StatsViewModel
     
     var body: some View {
         TabView(selection: $index) {
             NavigationView {
                 AddNewItemView()
                     .environmentObject(permissionViewModel)
+                    .environmentObject(statsViewModel)
                     .navigationBarBackButtonHidden(true)
             }
             .tabItem {

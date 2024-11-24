@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ReadItem: View {
     var messageFromQR: String
+//    @State var refresh: Bool = true
     @Binding var isEdit: Bool
     @Binding var isClick: Bool
     @Binding var adminChange: Bool
@@ -18,6 +19,8 @@ struct ReadItem: View {
     @EnvironmentObject var readActiveViewModel: ReadActiveViewModel
     //@EnvironmentObject var generatorViewModel: GeneratorViewModel
     @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
+    @EnvironmentObject var statsViewModel: StatsViewModel
+    @EnvironmentObject var apiManagerViewModel: ApiManagerViewModel
     var body: some View {
         VStack {
             List {
@@ -44,14 +47,25 @@ struct ReadItem: View {
                             isClick = favouriteItemViewModel.isOnList
                         }
                     }
+                    if let jsonData = apiManagerViewModel.jsonData {
+                        Text(jsonData["machineName"]!)
+                        Text(jsonData["parm1"]!)
+                        Text(jsonData["parm2"]!)
+                        Text(jsonData["parm3"]!)
+                        Text(jsonData["parm4"]!)
+                    }
                 }
+            }.onAppear {
+                statsViewModel.setReadItem(id: messageFromQR)
+                apiManagerViewModel.startTimer()
             }
-//            Text("\(favouriteItemViewModel.arrayOfFavourtieItem)")
+            .onDisappear {
+                apiManagerViewModel.stopTimer()
+            }
             if !adminChange {
                 HeartButton(isClick: $isClick)
                     .onAppear {
                         favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
-                        print("eee: \(favouriteItemViewModel.arrayOfFavourtieItem)")
                         if favouriteItemViewModel.isOnList {
                             isClick = true
                         } else {
@@ -71,43 +85,11 @@ struct ReadItem: View {
                                 
                                 favouriteItemViewModel.deleteFavouriteItem(itemID: itemID)
                             }
-                            
                         }
-                        
-                        
                     }
                     .padding(.bottom)
             }
-//            if (generatorViewModel.num1 != 0) {
-//                Text("Liczba obrotów: \(generatorViewModel.num1)")
-//                    .onAppear {
-//                    generatorViewModel.startGeneratingData()
-//                    generatorViewModel.storeData(itemID: messageFromQR)
-//                }
-//                .onDisappear {
-//                   generatorViewModel.stopGeneratingData()
-//                }
-//            }
-//            if (generatorViewModel.num2 != 0) {
-//                Text("Zużycie prądu: \(generatorViewModel.num2)")
-//                    .onAppear {
-//                    generatorViewModel.startGeneratingData()
-//                    generatorViewModel.storeData(itemID: messageFromQR)
-//                }
-//                .onDisappear {
-//                   generatorViewModel.stopGeneratingData()
-//                }
-//            }
-//            if (generatorViewModel.workTime != 0) {
-//                Text("Czas pracy: \(generatorViewModel.workTime)")
-//                    .onAppear {
-//                    generatorViewModel.startGeneratingData()
-//                    generatorViewModel.storeData(itemID: messageFromQR)
-//                }
-//                .onDisappear {
-//                   generatorViewModel.stopGeneratingData()
-//                }
-//            }
+
         }.onAppear {
             if adminChange {
                 readItemViewModel.fetchItemAsAdmin(with: messageFromQR, uid: uidFromAdmin)

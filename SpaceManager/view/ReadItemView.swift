@@ -9,9 +9,10 @@ struct ReadItemView: View {
     @State var uidFromAdmin: String = ""
     @StateObject var readItemViewModel = ReadItemViewModel()
     @StateObject var readActiveViewModel = ReadActiveViewModel()
-    
+    @StateObject var statsViewModel = StatsViewModel()
    // @EnvironmentObject var generatorViewModel: GeneratorViewModel
     @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
+    @StateObject var apiManagerViewModel = ApiManagerViewModel()
     var body: some View {
     VStack {
        if let item = readItemViewModel.item {
@@ -25,6 +26,38 @@ struct ReadItemView: View {
                    .environmentObject(readActiveViewModel)
                    //.environmentObject(generatorViewModel)
                    .environmentObject(favouriteItemViewModel)
+                   .environmentObject(statsViewModel)
+                   .environmentObject(apiManagerViewModel)
+                   .onAppear {
+                       Task {
+                           do {
+                               try await readActiveViewModel.fetchItem(with: messageFromQR)
+                               if let api = readActiveViewModel.activeItem?.connection["566C6A4B-E2B6-496D-BF57-F63CB0B618CE"] {
+                                   print(api)
+                                   await apiManagerViewModel.apiSetter(api: api)
+                                   try await apiManagerViewModel.performAPICall()
+                                   print("addd")
+                               }
+                           } catch {
+                               print("Error:", error.localizedDescription)
+                           }
+                       }
+                   }
+                   .onChange(of:  readActiveViewModel.activeItem?.connection["566C6A4B-E2B6-496D-BF57-F63CB0B618CE"]) {
+                       Task {
+                           do {
+                               if let api = readActiveViewModel.activeItem?.connection["566C6A4B-E2B6-496D-BF57-F63CB0B618CE"] {
+                                   print(api)
+                                   await apiManagerViewModel.apiSetter(api: api)
+                                   apiManagerViewModel.startTimer()
+                                   
+                                   print("addd")
+                               }
+                           } catch {
+                               print("Error:", error.localizedDescription)
+                           }
+                       }
+                   }
            } else {
                if (!readItemViewModel.isDeleted) {
                    EditField(messageFromQR: messageFromQR, itemName: item.name, amount: item.amount,
@@ -50,9 +83,11 @@ struct ReadItemView: View {
     .padding()
     .onAppear {
         if adminChange {
+            statsViewModel.readStats()
             readItemViewModel.fetchItemAsAdmin(with: messageFromQR, uid: uidFromAdmin)
             print("admin checking..")
         } else {
+            statsViewModel.readStats()
             readItemViewModel.fetchItem(with: messageFromQR)
         }
         //favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)

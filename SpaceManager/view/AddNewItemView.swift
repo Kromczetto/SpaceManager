@@ -16,11 +16,11 @@ struct AddNewItemView: View {
     @StateObject var dynamicItemViewModel = DynamicItemViewModel()
     @StateObject var activeHandlerViewModel = ActivevHandlerViewModel()
     @StateObject var templateViewModel = TemplateViewModel()
-    @EnvironmentObject var permissionViewModel: PermissionViewModel
     @StateObject var generatorViewModel = GeneratorViewModel()
+    @EnvironmentObject var permissionViewModel: PermissionViewModel
+    @EnvironmentObject var statsViewModel: StatsViewModel
     
     @State var productID: String = UUID().uuidString
-    
     @State private var isFirstCheck: Bool = false
     @State private var isSecondCheck: Bool = false
     @State private var isThirdCheck: Bool = false
@@ -61,6 +61,7 @@ struct AddNewItemView: View {
                         .environmentObject(permissionViewModel)
                         .environmentObject(templateViewModel)
                         .environmentObject(addNewItemViewModel)
+                        .environmentObject(statsViewModel)
                 } else {
                     //przekazad productID zeby potem przekazac w dynamic do static
                     DynamicItem(productID: productID)

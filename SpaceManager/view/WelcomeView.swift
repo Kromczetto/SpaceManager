@@ -8,20 +8,17 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    //@StateObject var profileViewModel = ProfileViewModel()
-//    @EnvironmentObject var permissionViewModel: PermissionViewModel
-    @EnvironmentObject var staySignin: StaySigninViewModel
     @StateObject var permissionViewModel = PermissionViewModel()
-
+    @StateObject var statsViewModel = StatsViewModel()
+    @EnvironmentObject var staySignin: StaySigninViewModel
     var body: some View {
         BottomMenu()
             .onAppear {
                 permissionViewModel.getPermission()
             }
-            //.environmentObject(generatorViewModel)
             .environmentObject(permissionViewModel)
             .environmentObject(staySignin)
-
+            .environmentObject(statsViewModel)
     }
 }
 

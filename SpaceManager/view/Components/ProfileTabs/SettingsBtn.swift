@@ -10,8 +10,8 @@ import SwiftUI
 struct SettingsBtn: View {
     @State var labelBtn: String = ""
     @State var colorBtn: Color = .red
+    @State var bg: Color = Color(red: 0, green: 0, blue: 0, opacity: 0.1)
     var action: () -> Void
-    private let bg: Color = Color(red: 0, green: 0, blue: 0, opacity: 0.1)
     var body: some View {
         Button {
             action()

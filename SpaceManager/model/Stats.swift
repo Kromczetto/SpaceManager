@@ -7,17 +7,8 @@
 
 import Foundation
 
-struct Stats: Codable {
-    let uid: String
-    let itemReads: [String: Int]
-    let numberOfAddedItem: Int
-    let numberOfReadItem: Int
-    func toDictionary() -> [String: Any] {
-        return ["uid": uid, 
-                "itemReads": itemReads,
-                "numberOfAddedItem": numberOfAddedItem, 
-                "numberOfReadItem": numberOfReadItem
-        ]
-    }
-    
+struct Stats: Identifiable, Codable {
+    var id = UUID().uuidString
+    let itemName: String
+    let numberOfRead: Int
 }

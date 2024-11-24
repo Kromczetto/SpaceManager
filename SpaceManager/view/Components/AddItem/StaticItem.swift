@@ -16,6 +16,7 @@ struct StaticItem: View {
     @EnvironmentObject var permissionViewModel: PermissionViewModel
     @EnvironmentObject var templateViewModel: TemplateViewModel
     @EnvironmentObject var addNewItemViewModel: AddNewItemViewModel
+    @EnvironmentObject var statsViewModel: StatsViewModel
     
     var body: some View {
         permissionViewModel.canUserAdd ? nil : Text("Nie posiadasz uprawnień, aby dodać przedmiot")
@@ -69,13 +70,16 @@ struct StaticItem: View {
                         addNewItemViewModel.propertyValue.removeAll()
                         templateViewModel.isDBReading = false
                         secondIteration = false
+                        statsViewModel.readStats()
                     }
                     }
                 }
                 
                 .alert("Dodano \($addNewItemViewModel.itemNameHolder.wrappedValue), kod QR został zapisany w galerii zdjęć",
                        isPresented: $addNewItemViewModel.isSuccess) {
-                               Button("OK", role: .cancel) { }
+                               Button("OK", role: .cancel) { 
+                                   statsViewModel.setNumberOfAddedItems()
+                               }
                 }
                 .alert("\($addNewItemViewModel.message.wrappedValue)",
                        isPresented: $addNewItemViewModel.isFail) {

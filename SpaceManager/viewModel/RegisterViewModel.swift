@@ -113,7 +113,7 @@ class RegisterViewModel : ObservableObject {
         }
     }
     private func addIntoDatabe(userID: String, email: String) {
-        let newUser = User(uid: userID, email: email, permission: Permission.Admin, itemReads: [["Prop":2]],
+        let newUser = User(uid: userID, email: email, permission: Permission.Admin, itemReads: ["Prop":2],
                            numberOfAddedItem: 0, numberOfReadItem: 0)
         let db = Firestore.firestore()
         db.collection("users")
