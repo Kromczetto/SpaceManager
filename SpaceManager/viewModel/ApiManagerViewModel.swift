@@ -7,13 +7,34 @@
 
 import Foundation
 import SwiftUI
+import Combine
 class ApiManagerViewModel: ObservableObject {
-    @Published var apiUrl: String = "https://machineapi-fr80.onrender.com/machine/673a69193ea4092c2261aa65"
-    @Published var jsonData: [String: String]? = nil 
-    
+    @Published var apiUrl: String = ""
+    @Published var jsonData: [String: String]? = nil
+    var cancellable: AnyCancellable?
+    var timer: Timer?
+    func startTimer() {
+        let timerPublisher = Timer.publish(every: 1.0, on: .main, in: .common)
+           cancellable = timerPublisher
+               .autoconnect()
+               .receive(on: DispatchQueue.main)
+               .sink { _ in
+                   Task {
+                       try await self.performAPICall()
+                   }
+               }
+    }
+    func stopTimer() {
+        cancellable?.cancel()
+        cancellable = nil
+    }
+
+    func apiSetter(api: String) async {
+        apiUrl = api
+    }
     func performAPICall() async throws {
         guard let url = URL(string: apiUrl) else {
-            print("Invalid URL")
+            print("Invalid URL: \(apiUrl)")
             return
         }
         let (data, _) = try await URLSession.shared.data(from: url)

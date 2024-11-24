@@ -30,7 +30,7 @@ struct DynamicItem: View {
 //                CustomProperties()
 //                    .environmentObject(addNewItemViewModel)
                 
-                DynamicApi()
+                DynamicApi(itemID: productID)
                     .environmentObject(dynamicItemViewModel)
                     .environmentObject(apiManagerViewModel)
                 

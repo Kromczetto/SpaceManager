@@ -84,6 +84,7 @@
 		4FD950D32C80CFC30075BF72 /* StaticItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950D22C80CFC30075BF72 /* StaticItem.swift */; };
 		4FD950D52C80D4190075BF72 /* DynamicItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950D42C80D4190075BF72 /* DynamicItem.swift */; };
 		4FD950D72C80D4420075BF72 /* DynamicItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD950D62C80D4420075BF72 /* DynamicItemViewModel.swift */; };
+		4FDDEE782CF3A27600CC9518 /* AddActiveItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDDEE772CF3A27600CC9518 /* AddActiveItemViewModel.swift */; };
 		4FDE85E12C7A36BF0002F656 /* CustomProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDE85E02C7A36BF0002F656 /* CustomProperties.swift */; };
 		4FEADE522BC74459009C31BD /* BtnUnderlineComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */; };
 		4FF426D22C47DD2E0096ED46 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF426D12C47DD2E0096ED46 /* Coordinator.swift */; };
@@ -167,6 +168,7 @@
 		4FD950D22C80CFC30075BF72 /* StaticItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticItem.swift; sourceTree = "<group>"; };
 		4FD950D42C80D4190075BF72 /* DynamicItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicItem.swift; sourceTree = "<group>"; };
 		4FD950D62C80D4420075BF72 /* DynamicItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicItemViewModel.swift; sourceTree = "<group>"; };
+		4FDDEE772CF3A27600CC9518 /* AddActiveItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActiveItemViewModel.swift; sourceTree = "<group>"; };
 		4FDE85E02C7A36BF0002F656 /* CustomProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProperties.swift; sourceTree = "<group>"; };
 		4FEADE512BC74459009C31BD /* BtnUnderlineComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BtnUnderlineComponent.swift; sourceTree = "<group>"; };
 		4FF426D12C47DD2E0096ED46 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				4F8839EB2CD3CBF000B2A7FE /* StatsViewModel.swift */,
 				4F14BA152CDA5C4C0091E1C5 /* AuthViewModel.swift */,
 				4F01AA622CE266AF00F471E6 /* SettingsViewModel.swift */,
+				4FDDEE772CF3A27600CC9518 /* AddActiveItemViewModel.swift */,
 			);
 			path = viewModel;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				4FD950C82C808F510075BF72 /* EditField.swift in Sources */,
 				4FD0D4A02CD1080C00604623 /* ManagerViewModel.swift in Sources */,
 				4F3363AA2BE51F750042D0AD /* RegisterViewModel.swift in Sources */,
+				4FDDEE782CF3A27600CC9518 /* AddActiveItemViewModel.swift in Sources */,
 				4FD950D32C80CFC30075BF72 /* StaticItem.swift in Sources */,
 				4FB76E192C9474E500D6DF80 /* TemplateViewModel.swift in Sources */,
 				4F01AA632CE266AF00F471E6 /* SettingsViewModel.swift in Sources */,

@@ -31,9 +31,28 @@ struct ReadItemView: View {
                    .onAppear {
                        Task {
                            do {
-                               try await apiManagerViewModel.performAPICall()
-                              
-                               print("addd")
+                               try await readActiveViewModel.fetchItem(with: messageFromQR)
+                               if let api = readActiveViewModel.activeItem?.connection["566C6A4B-E2B6-496D-BF57-F63CB0B618CE"] {
+                                   print(api)
+                                   await apiManagerViewModel.apiSetter(api: api)
+                                   try await apiManagerViewModel.performAPICall()
+                                   print("addd")
+                               }
+                           } catch {
+                               print("Error:", error.localizedDescription)
+                           }
+                       }
+                   }
+                   .onChange(of:  readActiveViewModel.activeItem?.connection["566C6A4B-E2B6-496D-BF57-F63CB0B618CE"]) {
+                       Task {
+                           do {
+                               if let api = readActiveViewModel.activeItem?.connection["566C6A4B-E2B6-496D-BF57-F63CB0B618CE"] {
+                                   print(api)
+                                   await apiManagerViewModel.apiSetter(api: api)
+                                   apiManagerViewModel.startTimer()
+                                   
+                                   print("addd")
+                               }
                            } catch {
                                print("Error:", error.localizedDescription)
                            }

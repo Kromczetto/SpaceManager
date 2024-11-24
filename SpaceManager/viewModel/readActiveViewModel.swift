@@ -9,12 +9,11 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 
-class ReadActiveViewModel: ObservableObject{
+class ReadActiveViewModel: ObservableObject {
     @Published var activeItem: ActiveItem?
-    func fetchItem(with id: String) {
+    func fetchItem(with id: String) async {
         let db = Firestore.firestore()
-       
-        guard let userID = Auth.auth().currentUser?.uid else{
+        guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
         let docRef = db.collection("users")
@@ -33,5 +32,7 @@ class ReadActiveViewModel: ObservableObject{
                 print("kolekcja nie istnije")
             }
         }
+        print("koniec")
     }
+    
 }

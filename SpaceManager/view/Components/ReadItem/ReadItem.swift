@@ -31,13 +31,6 @@ struct ReadItem: View {
                     Text("Uwagi: \(item.commentsToItem)")
                     Text("Dodane przez: \(item.nameOfAdder)")
                     Text("Dodano: \(readItemViewModel.prepairDate(input: item.addDate))")
-                    if let jsonData = apiManagerViewModel.jsonData {
-                        Text(jsonData["machineName"]!)
-                        Text(jsonData["parm1"]!)
-                        Text(jsonData["parm2"]!)
-                        Text(jsonData["parm3"]!)
-                        Text(jsonData["parm4"]!)
-                    }
                     ForEach(0..<item.properties.count, id: \.self) { index in
                         let dict = item.properties[index]
                         ForEach(dict.keys.sorted(), id: \.self) { key in
@@ -54,9 +47,20 @@ struct ReadItem: View {
                             isClick = favouriteItemViewModel.isOnList
                         }
                     }
+                    if let jsonData = apiManagerViewModel.jsonData {
+                        Text(jsonData["machineName"]!)
+                        Text(jsonData["parm1"]!)
+                        Text(jsonData["parm2"]!)
+                        Text(jsonData["parm3"]!)
+                        Text(jsonData["parm4"]!)
+                    }
                 }
             }.onAppear {
                 statsViewModel.setReadItem(id: messageFromQR)
+                apiManagerViewModel.startTimer()
+            }
+            .onDisappear {
+                apiManagerViewModel.stopTimer()
             }
             if !adminChange {
                 HeartButton(isClick: $isClick)
@@ -85,40 +89,7 @@ struct ReadItem: View {
                     }
                     .padding(.bottom)
             }
-//            if refresh {
-                
-            
-         
-//            if (generatorViewModel.num1 != 0) {
-//                Text("Liczba obrotów: \(generatorViewModel.num1)")
-//                    .onAppear {
-//                    generatorViewModel.startGeneratingData()
-//                    generatorViewModel.storeData(itemID: messageFromQR)
-//                }
-//                .onDisappear {
-//                   generatorViewModel.stopGeneratingData()
-//                }
-//            }
-//            if (generatorViewModel.num2 != 0) {
-//                Text("Zużycie prądu: \(generatorViewModel.num2)")
-//                    .onAppear {
-//                    generatorViewModel.startGeneratingData()
-//                    generatorViewModel.storeData(itemID: messageFromQR)
-//                }
-//                .onDisappear {
-//                   generatorViewModel.stopGeneratingData()
-//                }
-//            }
-//            if (generatorViewModel.workTime != 0) {
-//                Text("Czas pracy: \(generatorViewModel.workTime)")
-//                    .onAppear {
-//                    generatorViewModel.startGeneratingData()
-//                    generatorViewModel.storeData(itemID: messageFromQR)
-//                }
-//                .onDisappear {
-//                   generatorViewModel.stopGeneratingData()
-//                }
-//            }
+
         }.onAppear {
             if adminChange {
                 readItemViewModel.fetchItemAsAdmin(with: messageFromQR, uid: uidFromAdmin)

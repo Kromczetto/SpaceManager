@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct DynamicApi: View {
+    @State var itemID: String = ""
     @EnvironmentObject var dynamicItemViewModel: DynamicItemViewModel
     @EnvironmentObject var apiManagerViewModel: ApiManagerViewModel
+    @StateObject var addActiveItemViewModel = AddActiveItemViewModel()
+    @State var apiURL: String = ""
     var body: some View {
-        @State var click: Bool = false
+        TextField("Podaj link do api", text: $apiURL)
         Button {
-           
+            addActiveItemViewModel.addNewActiveItem(itemID: itemID, apiURL: apiURL)
+            print(apiURL)
         } label: {
             Text("Klik")
         }
-        if click {
-           
-        }
+
         
 //        List {
 //            ForEach(Array($dynamicItemViewModel.api.enumerated()), id: \.offset) { index, _ in
