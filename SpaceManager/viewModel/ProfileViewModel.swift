@@ -10,9 +10,7 @@ import Firebase
 import FirebaseAuth
 
 class ProfileViewModel: ObservableObject{
-    
     @Published var userEmail: String = ""
-    
     func whoAmI() {
         if let email = Auth.auth().currentUser?.email {
             userEmail = email

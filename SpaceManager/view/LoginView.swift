@@ -45,14 +45,6 @@ struct LoginView: View {
                     .scrollContentBackground(.hidden)
                     .padding(.top, 50)
                     Spacer()
-//                    HStack {
-//                        BtnUnderlineComponent(btnText: "Zapomniałem hasła",
-//                                              destinationView: AnyView(ForgotPasswordView()))
-//                                                .padding()
-//                        BtnUnderlineComponent(btnText: "Zarejestruj się",
-//                                              destinationView: AnyView(RegisterView()))
-//                    }.padding(.bottom, 140)
-                    Spacer()
                 }
             }
         }

@@ -41,25 +41,22 @@ class GeneratorViewModel: ObservableObject {
 
     private func generateData() {
         counter = counter + 1
-        if(num1 != 0){
+        if num1 != 0 {
             num1 = Int.random(in: 100 ..< 1000)
         }
-        if(num2 != 0){
+        if num2 != 0 {
             num2 = Int.random(in: 100 ..< 1000)
         }
-        if(counter == 100){
+        if counter == 100 {
             workTime = workTime + 1
             counter = 0
         }
     }
     
-    func storeData(itemID: String){
-        
+    func storeData(itemID: String) {
         guard let userID = Auth.auth().currentUser?.uid else{
             return
         }
-        
-  
         let newItem = (id: itemID,
                        numberOfSpins: num1,
                        electricityConsumpsion: num2,
@@ -77,13 +74,13 @@ class GeneratorViewModel: ObservableObject {
                    
             ])
     }
-    func setSpins(number: Int){
+    func setSpins(number: Int) {
         num1 = number
     }
-    func setConsumption(number: Int){
+    func setConsumption(number: Int) {
         num2 = number
     }
-    func setWorkTime(number: Int){
+    func setWorkTime(number: Int) {
         workTime = number
     }
 }

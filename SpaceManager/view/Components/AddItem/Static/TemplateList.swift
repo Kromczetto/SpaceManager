@@ -41,7 +41,6 @@ struct TemplateList: View {
             .onAppear {
                 templateViewModel.getTemplateFromDB() 
             }
-            
             if (selectedOption == templateViewModel.options[0]) {
                 TextField(templateViewModel.options[0], text: $editTemplate)
                     .multilineTextAlignment(.center)

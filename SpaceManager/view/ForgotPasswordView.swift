@@ -69,7 +69,6 @@ struct ForgotPasswordView: View {
                     isSignin = false
                 }
             }
-
     }
 }
 

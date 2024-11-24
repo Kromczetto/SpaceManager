@@ -113,7 +113,6 @@ class AddNewItemViewModel: ObservableObject {
         print(offsets.first!)
         propertyKey.remove(atOffsets: offsets)
         propertyValue.remove(atOffsets: offsets)
-//        properties.remove(atOffsets: offsets)
     }
     func canAddNewProperty() -> Bool {
         let propertyLenght: Int = propertyKey.count
@@ -130,13 +129,6 @@ class AddNewItemViewModel: ObservableObject {
         }
         return true
     }
-//    func splitArray() {
-//        if (properties.count > 0 || !properties.isEmpty) {
-//            propertyKey.removeFirst()
-//            propertyValue.removeFirst()
-//            properties.removeFirst()
-//        }
-//    }
     func fillArray(prop: [String]) {
         properties.removeAll()
         propertyKey.removeAll()

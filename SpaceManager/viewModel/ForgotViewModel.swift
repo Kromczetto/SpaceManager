@@ -14,13 +14,11 @@ class ForgotViewModel: ObservableObject{
     @Published var message: String = ""
     @Published var isSuccess: Bool = false
     @Published var isProblem: Bool = false
-    
-    func resetPassword(){
+    func resetPassword() {
         guard valid() else { return }
-        Auth.auth().sendPasswordReset(withEmail: email){
+        Auth.auth().sendPasswordReset(withEmail: email) {
             error in
-
-            if(error == nil){
+            if error == nil {
                 self.isSuccess = true
             } else {
                 self.isSuccess = false
@@ -37,12 +35,11 @@ class ForgotViewModel: ObservableObject{
         let regexPattern = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
         do {
             let regex = try NSRegularExpression(pattern: regexPattern)
-            
             let conditon =  regex.firstMatch(in: email, options: [], range: range) != nil
-            if(conditon){
+            if conditon {
                 isProblem = false
                 return true
-            }else{
+            } else {
                 message = "Niepoprawny format"
                 isProblem = true
                 return false
@@ -52,6 +49,6 @@ class ForgotViewModel: ObservableObject{
         }
     }
 
-    init(){
+    init() {
     }
 }

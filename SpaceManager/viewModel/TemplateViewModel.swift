@@ -12,7 +12,7 @@ import FirebaseFirestore
 
 class TemplateViewModel: ObservableObject {
     @Published var selectedItem: String = "Nowy szablon"
-    @Published var options: [String] = ["Nowy szablon"] //, "Opcja1", "Opcja2", "Opcja3"
+    @Published var options: [String] = ["Nowy szablon"]
     @Published var tids: [String] = [""]
     @Published var properties: [String] = [""]
     @Published var nameTid: [String: String] = [:]
@@ -50,7 +50,6 @@ class TemplateViewModel: ObservableObject {
             .setData(template.toDictionary()) { err in
                 print(err?.localizedDescription)
             }
-        print("Adding template... \(selectedItem) and we have a prop: \(propertyKey[0])")
     }
     func getTemplateFromDB() {
         options.removeAll()

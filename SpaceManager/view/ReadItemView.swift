@@ -10,7 +10,6 @@ struct ReadItemView: View {
     @StateObject var readItemViewModel = ReadItemViewModel()
     @StateObject var readActiveViewModel = ReadActiveViewModel()
     @StateObject var statsViewModel = StatsViewModel()
-   // @EnvironmentObject var generatorViewModel: GeneratorViewModel
     @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
     @StateObject var apiManagerViewModel = ApiManagerViewModel()
     var body: some View {
@@ -24,7 +23,6 @@ struct ReadItemView: View {
                         uidFromAdmin: $uidFromAdmin)
                    .environmentObject(readItemViewModel)
                    .environmentObject(readActiveViewModel)
-                   //.environmentObject(generatorViewModel)
                    .environmentObject(favouriteItemViewModel)
                    .environmentObject(statsViewModel)
                    .environmentObject(apiManagerViewModel)
@@ -32,25 +30,20 @@ struct ReadItemView: View {
                        Task {
                            do {
                                try await readActiveViewModel.fetchItem(with: messageFromQR)
-                               if let api = readActiveViewModel.activeItem?.connection["566C6A4B-E2B6-496D-BF57-F63CB0B618CE"] {
-                                   print(api)
-                                   await apiManagerViewModel.apiSetter(api: api)
-                                   try await apiManagerViewModel.performAPICall()
-                                   print("addd")
-                               }
                            } catch {
                                print("Error:", error.localizedDescription)
                            }
                        }
                    }
-                   .onChange(of:  readActiveViewModel.activeItem?.connection["566C6A4B-E2B6-496D-BF57-F63CB0B618CE"]) {
+                   .onChange(of:  readActiveViewModel.activeItem?.connection[messageFromQR]) {
                        Task {
                            do {
-                               if let api = readActiveViewModel.activeItem?.connection["566C6A4B-E2B6-496D-BF57-F63CB0B618CE"] {
+                               if let api = readActiveViewModel.activeItem?.connection[messageFromQR] {
                                    print(api)
                                    await apiManagerViewModel.apiSetter(api: api)
                                    apiManagerViewModel.startTimer()
-                                   
+                                   print("566C6A4B-E2B6-496D-BF57-F63CB0B618CE")
+                                   print(messageFromQR)
                                    print("addd")
                                }
                            } catch {
@@ -90,7 +83,6 @@ struct ReadItemView: View {
             statsViewModel.readStats()
             readItemViewModel.fetchItem(with: messageFromQR)
         }
-        //favouriteItemViewModel.isOnFavouriteList(id: messageFromQR)
     }
     }
 }

@@ -9,9 +9,9 @@ import Foundation
 import Firebase
 import FirebaseAuth
 
-class StaySigninViewModel: ObservableObject{
+class StaySigninViewModel: ObservableObject {
     @Published var idOfCurrentUser: String  = ""
-    private var handler = Auth.auth().addStateDidChangeListener{_,_ in}
+    private var handler = Auth.auth().addStateDidChangeListener{ _,_ in }
     init() {
         self.handler = Auth.auth().addStateDidChangeListener { auth, user in
             self.idOfCurrentUser = user?.uid ?? ""

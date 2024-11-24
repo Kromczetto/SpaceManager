@@ -64,8 +64,6 @@ struct BottomMenu: View {
             .tabItem {
                 Label("Profil", systemImage: "person.crop.circle.fill")
             }.tag(3)
-        }.onAppear {
-            //managerViewModel.getUsers()
         }
     }
 }

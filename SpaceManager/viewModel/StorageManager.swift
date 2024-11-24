@@ -15,8 +15,6 @@ class StorageManager: ObservableObject {
     @Published var image: UIImage?
     
     let storage = Storage.storage()
-    
-    //change to functuon handle front camera and create func handle back camera
     func uploadImage(img: UIImage) {
         guard let uid = Auth.auth().currentUser?.uid else {
             return

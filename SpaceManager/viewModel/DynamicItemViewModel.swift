@@ -17,7 +17,6 @@ class DynamicItemViewModel: ObservableObject {
     private var tempDictionary: [String: String] = [:]
     
     func createApiConnection() {
-//        if (listIndex == 0) {
             print(listIndex)
             tempDictionary[apiConnection[self.listIndex]] = valueName[self.listIndex]
             api.append(tempDictionary)
@@ -26,15 +25,6 @@ class DynamicItemViewModel: ObservableObject {
             valueName.append("")
             self.listIndex = listIndex + 1
             print(api)
-//        } else {
-//            print(listIndex)
-//            tempDictionary[apiConnection[self.listIndex - 1]] = valueName[self.listIndex - 1]
-//            api.append(tempDictionary)
-//            tempDictionary.removeAll()
-//            apiConnection.append("")
-//            valueName.append("")
-//            self.listIndex = listIndex + 1
-//        }
     }
     func removeItems(at offsets: IndexSet) {
         apiConnection.remove(atOffsets: offsets)
@@ -43,10 +33,10 @@ class DynamicItemViewModel: ObservableObject {
         self.listIndex = listIndex - 1
     }
     func canAddNewApi() -> Bool {
-        if (self.listIndex == 0) {
+        if self.listIndex == 0 {
             return false
         }
-        if (apiConnection[self.listIndex - 1].isEmpty || valueName[self.listIndex - 1].isEmpty) {
+        if apiConnection[self.listIndex - 1].isEmpty || valueName[self.listIndex - 1].isEmpty {
             return true
         }
         return false

@@ -29,7 +29,3 @@ struct ProfileListBtn: View {
         }
     }
 }
-
-//#Preview {
-//    ProfileListBtn(name: "favourtie")
-//}

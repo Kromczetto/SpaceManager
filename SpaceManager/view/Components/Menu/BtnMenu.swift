@@ -14,10 +14,9 @@ struct BtnMenu: View {
     
     @State var isActive: Bool = true
     var body: some View {
-        NavigationLink{
-            
+        NavigationLink {
             destinationView
-        }  label: {
+        } label: {
             ZStack {
                 Text("\(Image(systemName: btnIcon)) \(btnText)")
             }

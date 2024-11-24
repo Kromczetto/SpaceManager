@@ -17,7 +17,7 @@ class RegisterViewModel : ObservableObject {
     @Published var isFail: Bool = false
     @Published var message: String = ""
     func registerUser(completion: @escaping () -> Void) {
-        if(!validInput()){
+        if !validInput() {
             return
         }
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] res, err in
@@ -80,20 +80,6 @@ class RegisterViewModel : ObservableObject {
             isFail = true
             return false
         }
-//        let db = Firestore.firestore()
-//        let docRef = db.collection("users")
-//                        .document(email)
-//                      
-//        var user: User = User(uid:"123", email: email)
-//        docRef.getDocument { (document, error) in
-//            if let document = document, document.exists {
-//                do {
-//                    user = try document.data(as: User.self)
-//                } catch {
-//                    print("Problem z odczytaniem przedmiotu")
-//                }
-//            }
-        //valid mail
         let range = NSRange(location: 0, length: email.utf16.count)
         let regexPattern = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
         do {
