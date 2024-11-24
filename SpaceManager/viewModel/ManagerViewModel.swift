@@ -14,10 +14,8 @@ class ManagerViewModel: ObservableObject {
     @Published var publicUsers: [User] = []
     @Published var items: [Item] = []
     @Published var favourties: [Favourite] = []
-//    private let svm = StatsViewModel()
     private let db = Firestore.firestore()
     func getUsers() {
-        print("Getting users...")
         users.removeAll()
         publicUsers.removeAll()
         let docRef =  db.collection("users")
@@ -45,7 +43,6 @@ class ManagerViewModel: ObservableObject {
             .getDocuments { (snap, err) in
                 snap?.documents.forEach({doc in
                     let dictionary = doc.data()
-//                    print(dictionary)
                     if !dictionary.isEmpty {
                         var item: Item = Item(id: dictionary["id"] as! String,
                                               name: dictionary["name"] as! String,
@@ -69,7 +66,6 @@ class ManagerViewModel: ObservableObject {
             return
         }
         publicUsers.removeAll()
-//        var tempUser: String = ""
         for (index, user) in users.enumerated() {
             let mail = user.email.lowercased()
             if mail.contains(email.lowercased()) {

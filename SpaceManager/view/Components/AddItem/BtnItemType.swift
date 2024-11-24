@@ -32,7 +32,3 @@ struct BtnItemType: View {
         }.padding(.leading, -3)
     }
 }
-
-//#Preview {
-//    BtnItemType()
-//}

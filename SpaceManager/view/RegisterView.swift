@@ -38,7 +38,6 @@ struct RegisterView: View {
                         .multilineTextAlignment(.center)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                    
                     BtnClearComponet(btnText: "Zarejestruj się", btnRegister: true) {
                         registerViewModel.registerUser() {
                             print("Registered")
@@ -51,15 +50,6 @@ struct RegisterView: View {
                 .scrollContentBackground(.hidden)
                 .padding(.top, 50)
                 Spacer()
-//                Button {
-//                    self.presentationMode.wrappedValue.dismiss()
-//                } label: {
-//                    Text("Mam już konto")
-//                        .foregroundStyle(.gray)
-//                        .font(.system(size: 18))
-//                        .underline()
-//                }
-//                .padding(.bottom, 140)
             }
         }
     }

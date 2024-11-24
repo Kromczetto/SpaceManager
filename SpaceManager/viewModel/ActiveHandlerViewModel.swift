@@ -12,13 +12,13 @@ class ActivevHandlerViewModel: ObservableObject{
     @Published var secondCheck: Bool = false
     @Published var thirdCheck: Bool = false
     
-    func setFirst(state: Bool){
+    func setFirst(state: Bool) {
         firstCheck = state
     }
-    func setSecond(state: Bool){
+    func setSecond(state: Bool) {
         secondCheck = state
     }
-    func setThird(state: Bool){
+    func setThird(state: Bool) {
         thirdCheck = state
     }
 }

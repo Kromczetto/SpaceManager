@@ -19,9 +19,6 @@ class AuthViewModel: ObservableObject {
             await fetchData()
         }
     }
-    func signIn(email: String, password: String) async throws {
-        
-    }
     func register(email: String, password: String, repetedPassword: String) async throws {
         do {
             let res = try await Auth.auth().createUser(withEmail: email, password: password)

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ReadItem: View {
     var messageFromQR: String
-//    @State var refresh: Bool = true
     @Binding var isEdit: Bool
     @Binding var isClick: Bool
     @Binding var adminChange: Bool
@@ -17,7 +16,6 @@ struct ReadItem: View {
     @State private var isFirstClick: Bool = false
     @EnvironmentObject var readItemViewModel: ReadItemViewModel
     @EnvironmentObject var readActiveViewModel: ReadActiveViewModel
-    //@EnvironmentObject var generatorViewModel: GeneratorViewModel
     @EnvironmentObject var favouriteItemViewModel: FavouriteItemViewModel
     @EnvironmentObject var statsViewModel: StatsViewModel
     @EnvironmentObject var apiManagerViewModel: ApiManagerViewModel
@@ -89,14 +87,12 @@ struct ReadItem: View {
                     }
                     .padding(.bottom)
             }
-
-        }.onAppear {
+        } .onAppear {
             if adminChange {
                 readItemViewModel.fetchItemAsAdmin(with: messageFromQR, uid: uidFromAdmin)
             } else {
                 readItemViewModel.fetchItem(with: messageFromQR)
             }
-            //readActiveViewModel.fetchItem(with: messageFromQR)
         }
         HStack {
             BtnModifier(btnText: "Edytuj", btnIcon: "pencil") {

@@ -20,7 +20,6 @@ struct CustomProperties: View {
                         TextField("Wartość", text: $addNewItemViewModel.propertyValue[index])
                     }.onAppear { print("\(index)") }
                 }.onDelete(perform: addNewItemViewModel.removeItems)
-                    
             }
         }
         Button {
@@ -47,7 +46,3 @@ struct CustomProperties: View {
         }//.disabled(secondIteration ? addNewItemViewModel.canAddNewProperty() : false)
     }
 }
-
-//#Preview {
-//    CustomProperties()
-//}

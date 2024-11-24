@@ -90,7 +90,3 @@ struct StaticItem: View {
             .opacity(permissionViewModel.canUserAdd ? 1 : 0.4)
     }
 }
-
-//#Preview {
-//    StaticItem()
-//}

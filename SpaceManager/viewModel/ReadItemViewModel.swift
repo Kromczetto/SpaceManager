@@ -57,7 +57,6 @@ class ReadItemViewModel: ObservableObject {
             if let document = document, document.exists {
                 do {
                     self.item = try document.data(as: Item.self)
-                    
                 } catch {
                     print("Problem z odczytaniem przedmiotu")
                 }

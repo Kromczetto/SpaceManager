@@ -21,28 +21,20 @@ struct DynamicItem: View {
             Form {
                 QRCode(productID: productID)
                     .environmentObject(qrCodeGenerator)
-
                 BasicForm(itemName: $addNewItemViewModel.itemName,
                           numberOfItems: $addNewItemViewModel.numberOfItems,
                           weight: $addNewItemViewModel.weight,
                           comments: $addNewItemViewModel.comments)
-//                ODKOMENTOWAC GDY BEDZIEMY ROBILI CZYTANIE DLA AKTYTWNYCH
-//                CustomProperties()
-//                    .environmentObject(addNewItemViewModel)
-                
                 DynamicApi(itemID: productID)
                     .environmentObject(dynamicItemViewModel)
                     .environmentObject(apiManagerViewModel)
-                
                 BtnDatabase(btnLabel: "Dodaj") {
-                    //addNewItemViewModel.splitArray()
                     qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
                     UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
                     addNewItemViewModel.itemID = productID
                     addNewItemViewModel.addItemToDatabase()
                     productID = UUID().uuidString
                 }
-                
                 .alert("Dodano \($addNewItemViewModel.itemNameHolder.wrappedValue), kod QR został zapisany w galerii zdjęć",
                        isPresented: $addNewItemViewModel.isSuccess) {
                                Button("OK", role: .cancel) { }
@@ -54,7 +46,6 @@ struct DynamicItem: View {
             }
         }.disabled(!permissionViewModel.canUserAdd)
             .opacity(permissionViewModel.canUserAdd ? 1 : 0.4)
-       
     }
 }
 

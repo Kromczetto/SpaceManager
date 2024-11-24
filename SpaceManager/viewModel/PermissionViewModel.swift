@@ -23,10 +23,8 @@ class PermissionViewModel: ObservableObject {
           guard let userID = Auth.auth().currentUser?.uid else {
               return
           }
-          
           let db = Firestore.firestore()
           let userRef = db.collection("users").document(userID)
-          
           userRef.getDocument { (document, err) in
               if let document = document, document.exists {
                   do {
@@ -40,12 +38,9 @@ class PermissionViewModel: ObservableObject {
               } else {
                   print("No collection perm")
               }
-             
-             
           }
       }
     private func checkPermission(permission: Permission) {
-        print("Checking perm...")
         DispatchQueue.main.async {
             print(permission)
             if permission == .Adder || permission == .Full || permission == .Admin {

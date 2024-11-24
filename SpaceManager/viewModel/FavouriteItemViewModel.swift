@@ -23,7 +23,6 @@ class FavouriteItemViewModel: ObservableObject {
         guard let uid = Auth.auth().currentUser?.uid else {
             return
         }
-        //getFavouriteItems()
         favourite = Favourite(fid: itemID, favourites: newFavourite)
         let db = Firestore.firestore()
         let docRef = db.collection("users")

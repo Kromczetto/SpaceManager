@@ -74,7 +74,6 @@ class StatsViewModel: ObservableObject {
     func setReadItem(id: String) {
         var tempDictionary: [String: Int] = [:]
         if let userStats = stats {
-            print("read itme")
             let addAmount: Int = userStats.numberOfAddedItem
             var readAmount: Int = userStats.numberOfReadItem
             readAmount += 1
@@ -92,7 +91,6 @@ class StatsViewModel: ObservableObject {
     private func findItemById(id: String) -> Bool {
         for (key, _) in stats!.itemReads {
             if key == id {
-                print("jest")
                 return true
             }
         }
@@ -130,7 +128,6 @@ class StatsViewModel: ObservableObject {
                 for (key, value) in stat.itemReads {
                     print("\(key)")
                     if item.id == key {
-//                        self.itemStat[item.name] = value
                         let s = Stats(itemName: item.name, numberOfRead: value)
                         self.itemStat.append(s)
                     }

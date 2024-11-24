@@ -40,6 +40,3 @@ struct FavouriteView: View {
         }
     }
 }
-//#Preview {
-//    FavouriteView()
-//}

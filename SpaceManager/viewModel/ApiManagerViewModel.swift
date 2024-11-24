@@ -28,7 +28,6 @@ class ApiManagerViewModel: ObservableObject {
         cancellable?.cancel()
         cancellable = nil
     }
-
     func apiSetter(api: String) async {
         apiUrl = api
     }

@@ -20,7 +20,6 @@ class ReadActiveViewModel: ObservableObject {
                         .document(userID)
                         .collection("activeItems")
                         .document(id)
-        
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 do {
@@ -32,7 +31,5 @@ class ReadActiveViewModel: ObservableObject {
                 print("kolekcja nie istnije")
             }
         }
-        print("koniec")
     }
-    
 }
