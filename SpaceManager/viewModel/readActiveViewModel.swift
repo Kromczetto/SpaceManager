@@ -11,6 +11,8 @@ import FirebaseAuth
 
 class ReadActiveViewModel: ObservableObject {
     @Published var activeItem: ActiveItem?
+    @Published var isActiveItem: Bool = false
+
     func fetchItem(with id: String) async {
         let db = Firestore.firestore()
         guard let userID = Auth.auth().currentUser?.uid else {
@@ -23,11 +25,16 @@ class ReadActiveViewModel: ObservableObject {
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 do {
-                    self.activeItem = try document.data(as: ActiveItem.self)
+                   // DispatchQueue.main.async {
+                        self.isActiveItem = true
+                        self.activeItem = try document.data(as: ActiveItem.self)
+                  //  }
                 } catch {
+                    self.isActiveItem = false
                     print("Problem z odczytaniem przedmiotu")
                 }
             } else {
+                self.isActiveItem = false
                 print("kolekcja nie istnije")
             }
         }

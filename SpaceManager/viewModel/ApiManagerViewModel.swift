@@ -11,18 +11,19 @@ import Combine
 class ApiManagerViewModel: ObservableObject {
     @Published var apiUrl: String = ""
     @Published var jsonData: [String: String]? = nil
+    @Published var recivedData: Bool = false
     var cancellable: AnyCancellable?
     var timer: Timer?
     func startTimer() {
-        let timerPublisher = Timer.publish(every: 1.0, on: .main, in: .common)
-           cancellable = timerPublisher
-               .autoconnect()
-               .receive(on: DispatchQueue.main)
-               .sink { _ in
-                   Task {
-                       try await self.performAPICall()
-                   }
-               }
+        let timerPublisher = Timer.publish(every: 10.0, on: .main, in: .common)
+        cancellable = timerPublisher
+            .autoconnect()
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                Task {
+                    try await self.performAPICall()
+                }
+            }
     }
     func stopTimer() {
         cancellable?.cancel()
@@ -40,6 +41,7 @@ class ApiManagerViewModel: ObservableObject {
   
         if let jsonString = String(data: data, encoding: .utf8) {
             print("API Response: \(jsonString)")
+            self.recivedData = true
         } else {
             print("No response data")
         }
