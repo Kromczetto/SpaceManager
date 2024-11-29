@@ -7,8 +7,8 @@
 
 import SwiftUI
 struct CustomProperties: View {
-    @EnvironmentObject var addNewItemViewModel : AddNewItemViewModel
-    @EnvironmentObject var templateViewModel : TemplateViewModel
+    @EnvironmentObject var addNewItemViewModel: AddNewItemViewModel
+    @EnvironmentObject var templateViewModel: TemplateViewModel
     @Binding var isCustomProperty: Bool
     @Binding var secondIteration: Bool 
     var body: some View {

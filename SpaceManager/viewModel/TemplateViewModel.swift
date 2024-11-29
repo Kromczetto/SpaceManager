@@ -18,6 +18,7 @@ class TemplateViewModel: ObservableObject {
     @Published var nameTid: [String: String] = [:]
     @Published var template: Template?
     @Published var isDBReading: Bool = false
+    private var temp: [String: Any] = [:]
     func checkIsNameTaken(name: String) -> Bool{
         for (index, option) in options.enumerated() {
             if name == option {
@@ -43,13 +44,15 @@ class TemplateViewModel: ObservableObject {
                                 propertiesKey: propertyKey
         )
         let db = Firestore.firestore()
-        db.collection("users")
-            .document(uid)
-            .collection("templates")
-            .document(tid)
-            .setData(template.toDictionary()) { err in
-                print(err?.localizedDescription)
-            }
+            db.collection("users")
+                .document(uid)
+                .collection("templates")
+                .document(tid)
+                .setData(template.toDictionary()) { err in
+                    print(err?.localizedDescription)
+                }
+        self.template?.propertiesKey
+        self.getTemplateFromDB()
     }
     func getTemplateFromDB() {
         options.removeAll()

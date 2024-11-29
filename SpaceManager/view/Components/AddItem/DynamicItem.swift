@@ -10,11 +10,17 @@ import SwiftUI
 struct DynamicItem: View {
     @State var productID: String
     @State private var qrCodeToSave: UIImage? = nil
+    @State private var secondIteration: Bool = false
+    @State var apiURL: String = ""
+    @Binding var selectedOption: String
     @StateObject var apiManagerViewModel = ApiManagerViewModel()
+    @StateObject var addActiveItemViewModel = AddActiveItemViewModel()
     @EnvironmentObject var dynamicItemViewModel: DynamicItemViewModel
     @EnvironmentObject var addNewItemViewModel: AddNewItemViewModel
     @EnvironmentObject var permissionViewModel: PermissionViewModel
     @EnvironmentObject var qrCodeGenerator: QrCodeGenerator
+    @EnvironmentObject var templateViewModel: TemplateViewModel
+    @EnvironmentObject var statsViewModel: StatsViewModel
     var body: some View {
         permissionViewModel.canUserAdd ? nil : Text("Nie posiadasz uprawnień, aby dodać przedmiot")
         Group {
@@ -25,15 +31,56 @@ struct DynamicItem: View {
                           numberOfItems: $addNewItemViewModel.numberOfItems,
                           weight: $addNewItemViewModel.weight,
                           comments: $addNewItemViewModel.comments)
-                DynamicApi(itemID: productID)
-                    .environmentObject(dynamicItemViewModel)
-                    .environmentObject(apiManagerViewModel)
+                TextField("Podaj link do api", text: $apiURL)
+                CustomProperties(isCustomProperty: $templateViewModel.isDBReading,
+                                 secondIteration: $secondIteration)
                 BtnDatabase(btnLabel: "Dodaj") {
-                    qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
-                    UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
-                    addNewItemViewModel.itemID = productID
-                    addNewItemViewModel.addItemToDatabase()
-                    productID = UUID().uuidString
+                    addNewItemViewModel.isArrayEmpty()
+                    DispatchQueue.main.async {
+                        if let lastKey = addNewItemViewModel.propertyKey.last {
+                            if !templateViewModel.checkIsNameTaken(name: selectedOption) ||
+                                selectedOption == "Nowy szablon" {
+                                addNewItemViewModel.isFail = true
+                                addNewItemViewModel.message = "Ustaw nazwe szablonu"
+                                return
+                            }
+                            if !addNewItemViewModel.isFail {
+                                templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
+                                
+                                templateViewModel.options[0] = "Nowy szablon"
+                            }
+                            if lastKey.isEmpty {
+                                addNewItemViewModel.propertyKey.removeLast()
+                                addNewItemViewModel.propertyValue.removeLast()
+                            }
+                            addNewItemViewModel.createProperty()
+                            qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
+                            UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
+                            addNewItemViewModel.itemID = productID
+                            addNewItemViewModel.addItemToDatabase()
+                            addActiveItemViewModel.addNewActiveItem(itemID: productID, apiURL: apiURL)
+                            productID = UUID().uuidString
+                            addNewItemViewModel.properties.removeAll()
+                            addNewItemViewModel.propertyKey.removeAll()
+                            addNewItemViewModel.propertyValue.removeAll()
+                            templateViewModel.isDBReading = false
+                            secondIteration = false
+                            statsViewModel.readStats()
+                            selectedOption = "Nowy szablon"
+                            apiURL = ""
+                        } else {
+                            if addNewItemViewModel.propertyKey.isEmpty {
+                                qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
+                                UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
+                                addNewItemViewModel.itemID = productID
+                                addNewItemViewModel.addItemToDatabase()
+                                addActiveItemViewModel.addNewActiveItem(itemID: productID, apiURL: apiURL)
+                                productID = UUID().uuidString
+                                statsViewModel.readStats()
+                                apiURL = ""
+                            }
+                        }
+                    }
                 }
                 .alert("Dodano \($addNewItemViewModel.itemNameHolder.wrappedValue), kod QR został zapisany w galerii zdjęć",
                        isPresented: $addNewItemViewModel.isSuccess) {
@@ -49,6 +96,3 @@ struct DynamicItem: View {
     }
 }
 
-#Preview {
-    DynamicItem(productID: "ID")
-}

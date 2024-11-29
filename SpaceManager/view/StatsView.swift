@@ -16,14 +16,11 @@ struct StatsView: View {
             List {
                 Text("Liczba dodanych przez Ciebie przedmiotów: **\(stats.numberOfAddedItem)**")
                 Text("Liczba odczytanych przez Ciebie przedmiotów: **\(stats.numberOfReadItem)**")
-                HStack {
-                    Spacer()
-                    SettingsBtn(labelBtn: "Pokaż statystki przedmiotów",
-                                colorBtn: .white,
-                                bg: .gray) {
-                        itemStats.toggle()
-                    }
-                    Spacer()
+                Spacer()
+                SettingsBtn(labelBtn: "Pokaż statystki przedmiotów",
+                            colorBtn: .white,
+                            bg: .gray) {
+                    itemStats.toggle()
                 }
                 .onAppear {
                     statsViewModel.reverseIdToName()
@@ -33,36 +30,20 @@ struct StatsView: View {
                         Text("\(s.itemName): **\(s.numberOfRead)**")
                     }
                 }
-//                HStack {
-//                    Spacer()
-//                    SettingsBtn(labelBtn: "Pokaż statystki na wykresie",
-//                                colorBtn: .white,
-//                                bg: .gray) {
-//                        itemChart.toggle()
-//                    }
-//                    NavigationLink(destination: ChartView().navigationBarBackButtonHidden(true)
-//                                      .environmentObject(statsViewModel)
-//                                      .navigationBarItems(leading: CustomBack(title:"Wróć")),
-//                                   isActive: $itemChart) {
-//                        EmptyView()
-//                    }
-//                    Spacer()
-//                }
-                SettingsBtn(labelBtn: "Zmień hasło", colorBtn: .black) {
-                    itemChart = true
-                }
-                NavigationLink(destination: ChartView()
-                                                .environmentObject(statsViewModel)
-                                                .navigationBarBackButtonHidden(true)
-                                                .navigationBarItems(leading: CustomBack(title:"Wróć")),
-                                                isActive: $itemChart) {
-                                                    EmptyView()
-                }
             }
             
         } else {
             Text("Wystąpił błąd podczas łądowania statystyk")
                 .foregroundStyle(.orange)
+        }
+        SettingsBtn(labelBtn: "Pokaż statystki na wykresie", colorBtn: .white, bg: .gray) {
+            itemChart.toggle()
+        }
+        NavigationLink(destination: ChartView().navigationBarBackButtonHidden(true)
+                          .environmentObject(statsViewModel)
+                          .navigationBarItems(leading: CustomBack(title:"Wróć")),
+                       isActive: $itemChart) {
+            EmptyView()
         }
     }
 }

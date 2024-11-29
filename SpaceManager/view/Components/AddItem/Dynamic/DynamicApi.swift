@@ -15,11 +15,8 @@ struct DynamicApi: View {
     @State var apiURL: String = ""
     var body: some View {
         TextField("Podaj link do api", text: $apiURL)
-        Button {
+        SettingsBtn(labelBtn: "Połącz", colorBtn: .white, bg: .gray) {
             addActiveItemViewModel.addNewActiveItem(itemID: itemID, apiURL: apiURL)
-            print(apiURL)
-        } label: {
-            Text("Klik")
         }
     }
 }

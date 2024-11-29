@@ -32,12 +32,6 @@ struct StaticItem: View {
                 
                 CustomProperties(isCustomProperty: $templateViewModel.isDBReading, 
                                  secondIteration: $secondIteration)
-//                    .onAppear {
-//                        print(addNewItemViewModel.propertyKey)
-//                    }
-//                    .onChange(of: templateViewModel.isDBReading) {
-//                        print("zmienna \(templateViewModel.isDBReading)")
-//                    }
                     .environmentObject(addNewItemViewModel)
                     .environmentObject(templateViewModel)
                 

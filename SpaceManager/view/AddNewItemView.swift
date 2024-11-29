@@ -63,11 +63,13 @@ struct AddNewItemView: View {
                         .environmentObject(addNewItemViewModel)
                         .environmentObject(statsViewModel)
                 } else {
-                    DynamicItem(productID: productID)
+                    DynamicItem(productID: productID, selectedOption: $templateViewModel.selectedItem)
                         .environmentObject(permissionViewModel)
                         .environmentObject(qrCodeGenerator)
                         .environmentObject(addNewItemViewModel)
                         .environmentObject(dynamicItemViewModel)
+                        .environmentObject(templateViewModel)
+                        .environmentObject(statsViewModel)
                 }
             }
         }
