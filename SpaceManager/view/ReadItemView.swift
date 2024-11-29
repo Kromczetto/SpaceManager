@@ -7,6 +7,7 @@ struct ReadItemView: View {
     @State var isEdit: Bool = false
     @State var adminChange: Bool = false
     @State var uidFromAdmin: String = ""
+    @State var first: Bool = true
     @StateObject var readItemViewModel = ReadItemViewModel()
     @StateObject var readActiveViewModel = ReadActiveViewModel()
     @StateObject var statsViewModel = StatsViewModel()
@@ -41,10 +42,11 @@ struct ReadItemView: View {
                                if let api = readActiveViewModel.activeItem?.connection[messageFromQR] {
                                    print(api)
                                    await apiManagerViewModel.apiSetter(api: api)
-                                   apiManagerViewModel.startTimer()
-                                   print("566C6A4B-E2B6-496D-BF57-F63CB0B618CE")
-                                   print(messageFromQR)
-                                   print("addd")
+                                   if first {
+                                       try await apiManagerViewModel.performAPICall()
+                                   } else {
+                                       apiManagerViewModel.startTimer()
+                                   }
                                }
                            } catch {
                                print("Error:", error.localizedDescription)

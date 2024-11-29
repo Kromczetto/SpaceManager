@@ -23,13 +23,17 @@ struct TemplateList: View {
             }
             .pickerStyle(MenuPickerStyle())
             .onChange(of: selectedOption) {
+                if selectedOption == "Nowy szablon" {
+                    addNewItemViewModel.properties.removeAll()
+                    addNewItemViewModel.propertyKey.removeAll()
+                    addNewItemViewModel.propertyValue.removeAll()
+                }
                 editTemplate = ""
                 templateViewModel.isDBReading = true
                 if let tempNameTid = templateViewModel.nameTid[templateViewModel.selectedItem] {
                     if !tempNameTid.isEmpty {
                         DispatchQueue.main.async {
                             templateViewModel.getProperties(tid: templateViewModel.nameTid[templateViewModel.selectedItem]!) {
-                                print(templateViewModel.template?.propertiesKey)
                                 if let temp = templateViewModel.template?.propertiesKey {
                                     addNewItemViewModel.fillArray(prop: temp)
                                 }

@@ -32,46 +32,51 @@ struct StaticItem: View {
                 
                 CustomProperties(isCustomProperty: $templateViewModel.isDBReading, 
                                  secondIteration: $secondIteration)
-//                    .onAppear {
-//                        print(addNewItemViewModel.propertyKey)
-//                    }
-//                    .onChange(of: templateViewModel.isDBReading) {
-//                        print("zmienna \(templateViewModel.isDBReading)")
-//                    }
                     .environmentObject(addNewItemViewModel)
                     .environmentObject(templateViewModel)
                 
                 BtnDatabase(btnLabel: "Dodaj") {
                     addNewItemViewModel.isArrayEmpty()
                     DispatchQueue.main.async {
-                        
-                    if let lastKey = addNewItemViewModel.propertyKey.last {
-//                        if !templateViewModel.checkIsNameTaken(name: selectedOption) {
-//                            addNewItemViewModel.isFail = true
-//                            addNewItemViewModel.message = "Ustaw nazwe szablonu"
-//                        }
-                        if !addNewItemViewModel.isFail {
-                            templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
-                            
-                            templateViewModel.options[0] = "Nowy szablon"
+                        if let lastKey = addNewItemViewModel.propertyKey.last {
+                            if !templateViewModel.checkIsNameTaken(name: selectedOption) ||
+                                selectedOption == "Nowy szablon" {
+                                addNewItemViewModel.isFail = true
+                                addNewItemViewModel.message = "Ustaw nazwe szablonu"
+                                return
+                            }
+                            if !addNewItemViewModel.isFail {
+                                templateViewModel.addNewTemplate(selectedItem: selectedOption, propertyKey: addNewItemViewModel.propertyKey)
+                                
+                                templateViewModel.options[0] = "Nowy szablon"
+                            }
+                            if lastKey.isEmpty {
+                                addNewItemViewModel.propertyKey.removeLast()
+                                addNewItemViewModel.propertyValue.removeLast()
+                            }
+                            addNewItemViewModel.createProperty()
+                            qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
+                            UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
+                            addNewItemViewModel.itemID = productID
+                            addNewItemViewModel.addItemToDatabase()
+                            productID = UUID().uuidString
+                            addNewItemViewModel.properties.removeAll()
+                            addNewItemViewModel.propertyKey.removeAll()
+                            addNewItemViewModel.propertyValue.removeAll()
+                            templateViewModel.isDBReading = false
+                            secondIteration = false
+                            statsViewModel.readStats()
+                            selectedOption = "Nowy szablon"
+                        } else {
+                            if addNewItemViewModel.propertyKey.isEmpty {
+                                qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
+                                UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
+                                addNewItemViewModel.itemID = productID
+                                addNewItemViewModel.addItemToDatabase()
+                                productID = UUID().uuidString
+                                statsViewModel.readStats()
+                            }
                         }
-                        if lastKey.isEmpty {
-                            addNewItemViewModel.propertyKey.removeLast()
-                            addNewItemViewModel.propertyValue.removeLast()
-                        }
-                        addNewItemViewModel.createProperty()
-                        qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
-                        UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
-                        addNewItemViewModel.itemID = productID
-                        addNewItemViewModel.addItemToDatabase()
-                        productID = UUID().uuidString
-                        addNewItemViewModel.properties.removeAll()
-                        addNewItemViewModel.propertyKey.removeAll()
-                        addNewItemViewModel.propertyValue.removeAll()
-                        templateViewModel.isDBReading = false
-                        secondIteration = false
-                        statsViewModel.readStats()
-                    }
                     }
                 }
                 

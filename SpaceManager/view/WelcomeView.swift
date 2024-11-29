@@ -12,13 +12,17 @@ struct WelcomeView: View {
     @StateObject var statsViewModel = StatsViewModel()
     @EnvironmentObject var staySignin: StaySigninViewModel
     var body: some View {
-        BottomMenu()
-            .onAppear {
-                permissionViewModel.getPermission()
-            }
-            .environmentObject(permissionViewModel)
-            .environmentObject(staySignin)
-            .environmentObject(statsViewModel)
+        if permissionViewModel.userDetails == nil {
+            LoadingView()
+        } else {
+            BottomMenu()
+                .onAppear {
+                    permissionViewModel.getPermission()
+                }
+                .environmentObject(permissionViewModel)
+                .environmentObject(staySignin)
+                .environmentObject(statsViewModel)            
+        }
     }
 }
 
