@@ -16,4 +16,5 @@ struct Item: Codable, Identifiable {
     let productWeight: String
     let addDate: Date
     let properties: [[String: String]]
+    let did: String?
 }

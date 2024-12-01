@@ -51,7 +51,7 @@ class AddNewItemViewModel: ObservableObject {
         }
         return true
     }
-    func addItemToDatabase() {
+    func addItemToDatabase(did: String?) {
         if(!validItemField()) {
             self.isSuccess = false
             self.isFail = true
@@ -70,7 +70,8 @@ class AddNewItemViewModel: ObservableObject {
                            commentsToItem: comments,
                            productWeight: weight,
                            addDate: Date(),
-                           properties: properties
+                           properties: properties,
+                           did: did != nil ? did : nil
         )
     
         let db = Firestore.firestore()
@@ -85,7 +86,8 @@ class AddNewItemViewModel: ObservableObject {
                       "nameOfAdder": newItem.nameOfAdder,
                       "productWeight": newItem.productWeight,
                       "addDate": newItem.addDate,
-                      "properties": newItem.properties
+                      "properties": newItem.properties,
+                      "did": newItem.did
             ]){ error in
                 if let error = error {
                     self.isSuccess = false

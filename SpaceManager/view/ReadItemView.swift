@@ -17,48 +17,49 @@ struct ReadItemView: View {
     VStack {
        if let item = readItemViewModel.item {
            if (!isEdit && !readItemViewModel.isDeleted) {
-               ReadItem(messageFromQR: messageFromQR, 
-                        isEdit: $isEdit,
-                        isClick: $favouriteItemViewModel.isOnList,
-                        adminChange: $adminChange,
-                        uidFromAdmin: $uidFromAdmin)
-                   .environmentObject(readItemViewModel)
-                   .environmentObject(readActiveViewModel)
-                   .environmentObject(favouriteItemViewModel)
-                   .environmentObject(statsViewModel)
-                   .environmentObject(apiManagerViewModel)
-                   .onAppear {
-                       Task {
-                           do {
-                               try await readActiveViewModel.fetchItem(with: messageFromQR)
-                           } catch {
-                               print("Error:", error.localizedDescription)
-                           }
-                       }
-                   }
-                   .onChange(of:  readActiveViewModel.activeItem?.connection[messageFromQR]) {
-                       Task {
-                           do {
-                               if let api = readActiveViewModel.activeItem?.connection[messageFromQR] {
-                                   print(api)
-                                   await apiManagerViewModel.apiSetter(api: api)
-                                   if first {
-                                       try await apiManagerViewModel.performAPICall()
-                                   } else {
-                                       apiManagerViewModel.startTimer()
-                                   }
-                               }
-                           } catch {
-                               print("Error:", error.localizedDescription)
-                           }
-                       }
-                   }
+               LoadingItem(messageFromQR: messageFromQR,
+                           isEdit: $isEdit,
+                           isClick: $favouriteItemViewModel.isOnList,
+                           adminChange: $adminChange,
+                           uidFromAdmin: $uidFromAdmin)
+                      .environmentObject(readItemViewModel)
+                      .environmentObject(readActiveViewModel)
+                      .environmentObject(favouriteItemViewModel)
+                      .environmentObject(statsViewModel)
+                      .environmentObject(apiManagerViewModel)
+                      .onAppear {
+                          Task {
+                              do {
+                                  try await readActiveViewModel.fetchItem(with: messageFromQR)
+                              } catch {
+                                  print("Error:", error.localizedDescription)
+                              }
+                          }
+                      }
+                      .onChange(of:  readActiveViewModel.activeItem?.connection[messageFromQR]) {
+                          Task {
+                              do {
+                                  if let api = readActiveViewModel.activeItem?.connection[messageFromQR] {
+                                      print(api)
+                                      await apiManagerViewModel.apiSetter(api: api)
+                                      if first {
+                                          try await apiManagerViewModel.performAPICall()
+                                      } else {
+                                          apiManagerViewModel.startTimer()
+                                      }
+                                  }
+                              } catch {
+                                  print("Error:", error.localizedDescription)
+                              }
+                          }
+                      }
            } else {
                if (!readItemViewModel.isDeleted) {
                    EditField(messageFromQR: messageFromQR, itemName: item.name, amount: item.amount,
                              weight: item.productWeight, comment: item.commentsToItem, adminChange: adminChange, changeUid: uidFromAdmin, isEdit: $isEdit)
                        .environmentObject(readItemViewModel)
                        .environmentObject(favouriteItemViewModel)
+                       .environmentObject(readActiveViewModel)
                        
                } else {
                    Spacer()

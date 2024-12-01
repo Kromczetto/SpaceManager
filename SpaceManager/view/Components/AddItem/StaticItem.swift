@@ -58,7 +58,7 @@ struct StaticItem: View {
                             qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
                             UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
                             addNewItemViewModel.itemID = productID
-                            addNewItemViewModel.addItemToDatabase()
+                            addNewItemViewModel.addItemToDatabase(did: nil)
                             productID = UUID().uuidString
                             addNewItemViewModel.properties.removeAll()
                             addNewItemViewModel.propertyKey.removeAll()
@@ -72,7 +72,7 @@ struct StaticItem: View {
                                 qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
                                 UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
                                 addNewItemViewModel.itemID = productID
-                                addNewItemViewModel.addItemToDatabase()
+                                addNewItemViewModel.addItemToDatabase(did: nil)
                                 productID = UUID().uuidString
                                 statsViewModel.readStats()
                             }

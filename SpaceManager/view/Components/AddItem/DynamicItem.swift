@@ -57,8 +57,8 @@ struct DynamicItem: View {
                             qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
                             UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
                             addNewItemViewModel.itemID = productID
-                            addNewItemViewModel.addItemToDatabase()
-                            addActiveItemViewModel.addNewActiveItem(itemID: productID, apiURL: apiURL)
+                            addNewItemViewModel.addItemToDatabase(did: productID)
+                            addActiveItemViewModel.addNewActiveItem(itemID: productID, apiURL: apiURL, did: productID)
                             productID = UUID().uuidString
                             addNewItemViewModel.properties.removeAll()
                             addNewItemViewModel.propertyKey.removeAll()
@@ -73,8 +73,8 @@ struct DynamicItem: View {
                                 qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
                                 UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
                                 addNewItemViewModel.itemID = productID
-                                addNewItemViewModel.addItemToDatabase()
-                                addActiveItemViewModel.addNewActiveItem(itemID: productID, apiURL: apiURL)
+                                addNewItemViewModel.addItemToDatabase(did: productID)
+                                addActiveItemViewModel.addNewActiveItem(itemID: productID, apiURL: apiURL, did: productID)
                                 productID = UUID().uuidString
                                 statsViewModel.readStats()
                                 apiURL = ""

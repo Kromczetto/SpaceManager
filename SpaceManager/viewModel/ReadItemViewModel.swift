@@ -73,7 +73,7 @@ class ReadItemViewModel: ObservableObject {
         return formattedDate
     }
     func saveNewData(idOfItem: String, nameOfItem: String, amountOfItem: String,
-                     weigthOfItem: String, commentsToItem: String) {
+                     weigthOfItem: String, commentsToItem: String, did: String?) {
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
@@ -88,7 +88,8 @@ class ReadItemViewModel: ObservableObject {
                         commentsToItem: commentsToItem,
                         productWeight: weigthOfItem,
                         addDate: Date(),
-                        properties: self.tempProperties
+                        properties: self.tempProperties,
+                        did: did
         )
         DispatchQueue.main.async {
             let db = Firestore.firestore()
@@ -103,12 +104,13 @@ class ReadItemViewModel: ObservableObject {
                           "nameOfAdder": data.nameOfAdder,
                           "productWeight": data.productWeight,
                           "addDate": data.addDate,
-                          "properties": data.properties
+                          "properties": data.properties,
+                          "did": data.did
                 ])
         }
     }
     func saveNewDataFromAdmin(idOfItem: String, nameOfItem: String, amountOfItem: String,
-                     weigthOfItem: String, commentsToItem: String, changeUid: String) {
+                              weigthOfItem: String, commentsToItem: String, changeUid: String, did: String?) {
    
         guard let userName = Auth.auth().currentUser?.email else {
             return
@@ -121,7 +123,8 @@ class ReadItemViewModel: ObservableObject {
                         commentsToItem: commentsToItem,
                         productWeight: weigthOfItem,
                         addDate: Date(),
-                        properties: self.tempProperties
+                        properties: self.tempProperties,
+                        did: did
         )
         DispatchQueue.main.async {
             let db = Firestore.firestore()
