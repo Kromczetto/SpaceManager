@@ -18,7 +18,7 @@ struct ImagePopUpMenu: View {
     @State private var profile: UIImage? = nil
     @State private var selectedItem: PhotosPickerItem?
     
-    @StateObject var storageManager = StorageManager()
+    @EnvironmentObject var storageManager: StorageManager
     
     var body: some View {
         Menu {
