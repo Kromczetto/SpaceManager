@@ -11,9 +11,13 @@ struct AuthView: View {
     @State private var isLogin: Bool = true
     @State private var isForgetPassword: Bool = false
     @StateObject var authViewModel = AuthViewModel()
+    @EnvironmentObject var loginViewModel: LoginViewModel
+    @EnvironmentObject var registerViewModel: RegisterViewModel
     var body: some View {
         if isLogin && !isForgetPassword {
             LoginView()
+                .environmentObject(loginViewModel)
+                .environmentObject(registerViewModel)
             HStack {
                 Spacer()
                 BtnUnderlineComponent(btnText: "Nie mam konta") {
@@ -27,6 +31,8 @@ struct AuthView: View {
             }.padding([.top, .bottom], 15)
         } else if !isLogin && !isForgetPassword {
             RegisterView()
+                .environmentObject(loginViewModel)
+                .environmentObject(registerViewModel)
             BtnUnderlineComponent(btnText: "Mam juz konto") {
                 isLogin.toggle()
             }.padding([.top, .bottom], 15)

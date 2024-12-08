@@ -25,8 +25,11 @@ struct DynamicItem: View {
         permissionViewModel.canUserAdd ? nil : Text("Nie posiadasz uprawnień, aby dodać przedmiot")
         Group {
             Form {
-                QRCode(productID: productID)
+                QRCode(productID: $productID)
                     .environmentObject(qrCodeGenerator)
+                    .onAppear {
+                        productID = UUID().uuidString
+                    }
                 BasicForm(itemName: $addNewItemViewModel.itemName,
                           numberOfItems: $addNewItemViewModel.numberOfItems,
                           weight: $addNewItemViewModel.weight,
@@ -57,8 +60,8 @@ struct DynamicItem: View {
                             qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
                             UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
                             addNewItemViewModel.itemID = productID
-                            addNewItemViewModel.addItemToDatabase()
-                            addActiveItemViewModel.addNewActiveItem(itemID: productID, apiURL: apiURL)
+                            addNewItemViewModel.addItemToDatabase(did: productID)
+                            addActiveItemViewModel.addNewActiveItem(itemID: productID, apiURL: apiURL, did: productID)
                             productID = UUID().uuidString
                             addNewItemViewModel.properties.removeAll()
                             addNewItemViewModel.propertyKey.removeAll()
@@ -73,10 +76,10 @@ struct DynamicItem: View {
                                 qrCodeToSave = qrCodeGenerator.generatorQr(from: productID)
                                 UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
                                 addNewItemViewModel.itemID = productID
-                                addNewItemViewModel.addItemToDatabase()
-                                addActiveItemViewModel.addNewActiveItem(itemID: productID, apiURL: apiURL)
-                                productID = UUID().uuidString
+                                addNewItemViewModel.addItemToDatabase(did: productID)
+                                addActiveItemViewModel.addNewActiveItem(itemID: productID, apiURL: apiURL, did: productID)
                                 statsViewModel.readStats()
+                                productID = UUID().uuidString
                                 apiURL = ""
                             }
                         }
@@ -94,5 +97,6 @@ struct DynamicItem: View {
         }.disabled(!permissionViewModel.canUserAdd)
             .opacity(permissionViewModel.canUserAdd ? 1 : 0.4)
     }
+    
 }
 

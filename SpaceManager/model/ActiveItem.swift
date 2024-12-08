@@ -10,4 +10,8 @@ import Foundation
 struct ActiveItem: Codable, Identifiable {
     let id: String
     let connection: [String: String]
+    let parm1: String
+    let parm2: String
+    let parm3: String
+    let parm4: String
 }

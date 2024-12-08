@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QRCode: View {
-    @State var productID: String
+    @Binding var productID: String
     @EnvironmentObject var qrCodeGenerator: QrCodeGenerator
     var body: some View {
         GeometryReader { geometry in

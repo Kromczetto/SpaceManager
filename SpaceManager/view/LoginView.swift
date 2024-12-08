@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    @StateObject var loginViewModel = LoginViewModel()
-    @StateObject var registerViewModel = RegisterViewModel()
+    @EnvironmentObject var loginViewModel: LoginViewModel
+    @EnvironmentObject var registerViewModel: RegisterViewModel
     var body: some View {
         NavigationView {
             ZStack {

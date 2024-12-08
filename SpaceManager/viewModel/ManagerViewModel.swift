@@ -51,7 +51,8 @@ class ManagerViewModel: ObservableObject {
                                               commentsToItem: dictionary["commentsToItem"] as! String,
                                               productWeight: dictionary["productWeight"] as! String,
                                               addDate: Date(),
-                                              properties: []
+                                              properties: [],
+                                              did: dictionary["did"] as? String
                         )
                         self.items.append(item)
                     } else {

@@ -18,7 +18,7 @@ struct ProfileView: View {
     @State var statsBool: Bool = false
     @State var settingsBool: Bool = false
     var body: some View {
-        if storageManager.image == nil {
+        if storageManager.image == nil && storageManager.hasPhoto {
             LoadingView()
         } else {
             VStack {

@@ -15,6 +15,7 @@ class StorageManager: ObservableObject {
     @Published var image: UIImage?
     
     let storage = Storage.storage()
+    var hasPhoto: Bool = false
     func uploadImage(img: UIImage) {
         guard let uid = Auth.auth().currentUser?.uid else {
             return
@@ -48,10 +49,12 @@ class StorageManager: ObservableObject {
         ref.getData(maxSize: 2048 * 2048) { data, err in
             if let err = err {
                 print("Problem with reading photo: \(err.localizedDescription)")
+                self.hasPhoto = false
                 return
             } else {
                 self.image = UIImage(data: data!)
                 print(data!)
+                self.hasPhoto = true
             }
         }
     }

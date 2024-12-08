@@ -15,6 +15,7 @@ class LoginViewModel : ObservableObject {
     @Published var isFail: Bool = false
     @Published var message: String = ""
     @Published var loginSucces: Bool = false
+    @Published var log: Bool = false
     func inputValid() -> Bool {
         if(email.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ||
            password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {

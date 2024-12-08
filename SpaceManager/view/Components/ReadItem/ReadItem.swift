@@ -20,12 +20,6 @@ struct ReadItem: View {
     @EnvironmentObject var statsViewModel: StatsViewModel
     @EnvironmentObject var apiManagerViewModel: ApiManagerViewModel
     var body: some View {
-        if ((readItemViewModel.item == nil && !readActiveViewModel.isActiveItem) ||
-            readActiveViewModel.isActiveItem && !apiManagerViewModel.recivedData) {
-            LoadingView()
-        } else {
-            Text("").onAppear {print("\(readActiveViewModel.isActiveItem)   \(readActiveViewModel.activeItem)")}
-                 
             VStack {
                 List {
                     if let item = readItemViewModel.item {
@@ -52,11 +46,33 @@ struct ReadItem: View {
                             }
                         }
                         if let jsonData = apiManagerViewModel.jsonData {
-                            Text(jsonData["machineName"]!)
-                            Text(jsonData["parm1"]!)
-                            Text(jsonData["parm2"]!)
-                            Text(jsonData["parm3"]!)
-                            Text(jsonData["parm4"]!)
+                            if let acItem = readActiveViewModel.activeItem {
+                                Group {
+                                    HStack {
+                                        Text("\(acItem.parm1):")
+                                        Text(jsonData["parm1"]!)
+                                    }
+                                    HStack {
+                                        Text("\(acItem.parm2):")
+                                        Text(jsonData["parm2"]!)
+                                    }
+                                    HStack {
+                                        Text("\(acItem.parm3):")
+                                        Text(jsonData["parm3"]!)
+                                    }
+                                    HStack {
+                                        Text("\(acItem.parm4):")
+                                        Text(jsonData["parm4"]!)
+                                    }
+                                }.onAppear {
+                                    Task {
+                                        try await readActiveViewModel.fetchItem(with: messageFromQR)
+                                    }
+                                }
+                            } else {
+                                Text("Problem z odczytaniem parametrów urządzenia")
+                                    .foregroundStyle(.orange)
+                            }
                         }
                     }
                 }.onAppear {
@@ -119,7 +135,5 @@ struct ReadItem: View {
                 }
             }
         }
-        
-    }
 }
 

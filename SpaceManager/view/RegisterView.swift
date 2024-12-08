@@ -9,8 +9,9 @@ import SwiftUI
 
 struct RegisterView: View {
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var loginViewModel = LoginViewModel()
-    @StateObject var registerViewModel = RegisterViewModel()
+    @EnvironmentObject var loginViewModel: LoginViewModel
+    @EnvironmentObject var registerViewModel: RegisterViewModel
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color("ligtherGray"),Color("deepGray")],

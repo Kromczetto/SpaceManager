@@ -12,14 +12,11 @@ class CameraService {
     var session: AVCaptureSession?
     var delegate: AVCapturePhotoCaptureDelegate?
     var cameraSite: AVCaptureDevice?
-    
     let output = AVCapturePhotoOutput()
     let previewLayer = AVCaptureVideoPreviewLayer()
-    
     init(siteOfCamera: AVCaptureDevice.Position){
         cameraSite = getCamera(site: siteOfCamera)
     }
-    
     func start(delegate: AVCapturePhotoCaptureDelegate, completion: @escaping (Error?) -> ()) {
         self.delegate = delegate
         checkPrermissions(completion: completion)
