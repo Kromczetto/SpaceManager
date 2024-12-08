@@ -11,8 +11,10 @@ struct WelcomeView: View {
     @StateObject var permissionViewModel = PermissionViewModel()
     @StateObject var statsViewModel = StatsViewModel()
     @EnvironmentObject var staySignin: StaySigninViewModel
+    @EnvironmentObject var loginViewModel: LoginViewModel
+    @EnvironmentObject var registerViewModel: RegisterViewModel
     var body: some View {
-        if permissionViewModel.userDetails == nil {
+        if permissionViewModel.userDetails == nil && loginViewModel.loginSucces {
             LoadingView()
         } else {
             BottomMenu()

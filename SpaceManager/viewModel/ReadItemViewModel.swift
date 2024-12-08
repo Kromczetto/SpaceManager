@@ -38,7 +38,7 @@ class ReadItemViewModel: ObservableObject {
                     print("Problem z odczytaniem przedmiotu")
                 }
             } else {
-                print("kolekcja nie istnije")
+                print("Kolekcja nie istnije")
             }
         }
     }

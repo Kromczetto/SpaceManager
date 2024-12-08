@@ -22,9 +22,11 @@ struct StaticItem: View {
         permissionViewModel.canUserAdd ? nil : Text("Nie posiadasz uprawnień, aby dodać przedmiot")
         Group {
             Form {
-                QRCode(productID: productID)
+                QRCode(productID: $productID)
                     .environmentObject(qrCodeGenerator)
-
+                    .onAppear {
+                        productID = UUID().uuidString
+                    }
                 BasicForm(itemName: $addNewItemViewModel.itemName,
                           numberOfItems: $addNewItemViewModel.numberOfItems,
                           weight: $addNewItemViewModel.weight,
@@ -73,8 +75,8 @@ struct StaticItem: View {
                                 UIImageWriteToSavedPhotosAlbum(qrCodeToSave!, nil, nil, nil)
                                 addNewItemViewModel.itemID = productID
                                 addNewItemViewModel.addItemToDatabase(did: nil)
-                                productID = UUID().uuidString
                                 statsViewModel.readStats()
+                                productID = UUID().uuidString
                             }
                         }
                     }
@@ -84,6 +86,7 @@ struct StaticItem: View {
                        isPresented: $addNewItemViewModel.isSuccess) {
                                Button("OK", role: .cancel) { 
                                    statsViewModel.setNumberOfAddedItems()
+                                   productID = UUID().uuidString
                                }
                 }
                 .alert("\($addNewItemViewModel.message.wrappedValue)",

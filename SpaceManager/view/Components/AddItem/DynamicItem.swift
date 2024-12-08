@@ -25,8 +25,11 @@ struct DynamicItem: View {
         permissionViewModel.canUserAdd ? nil : Text("Nie posiadasz uprawnień, aby dodać przedmiot")
         Group {
             Form {
-                QRCode(productID: productID)
+                QRCode(productID: $productID)
                     .environmentObject(qrCodeGenerator)
+                    .onAppear {
+                        productID = UUID().uuidString
+                    }
                 BasicForm(itemName: $addNewItemViewModel.itemName,
                           numberOfItems: $addNewItemViewModel.numberOfItems,
                           weight: $addNewItemViewModel.weight,
@@ -75,8 +78,8 @@ struct DynamicItem: View {
                                 addNewItemViewModel.itemID = productID
                                 addNewItemViewModel.addItemToDatabase(did: productID)
                                 addActiveItemViewModel.addNewActiveItem(itemID: productID, apiURL: apiURL, did: productID)
-                                productID = UUID().uuidString
                                 statsViewModel.readStats()
+                                productID = UUID().uuidString
                                 apiURL = ""
                             }
                         }
@@ -94,5 +97,6 @@ struct DynamicItem: View {
         }.disabled(!permissionViewModel.canUserAdd)
             .opacity(permissionViewModel.canUserAdd ? 1 : 0.4)
     }
+    
 }
 
